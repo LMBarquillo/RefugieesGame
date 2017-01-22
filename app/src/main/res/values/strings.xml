@@ -1,0 +1,20 @@
+<resources>
+    <!-- RECORDATORIO: LOS TEXTOS VAN EN INGLÉS -->
+    <string name="app_name">RefugiadosGame</string>
+
+    <!-- Madrid-Milán -->
+    <string name="route1">Madrid-Milan</string>
+
+    <!-- Milán-Sarajevo -->
+    <string name="route2">Milan-Sarajevo</string>
+
+    <!-- Sarajevo-Estambul -->
+    <string name="route3">Sarajevo-Istanbul</string>
+
+    <!-- Estambul-Teherán -->
+    <string name="route4">Istanbul-Tehran</string>
+
+    <!-- Teherán-Bombai -->
+    <string name="route5">Tehran-Mumbai</string>
+
+</resources>
