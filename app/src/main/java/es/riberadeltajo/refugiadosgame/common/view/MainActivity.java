@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private final int RUTA3 = 3;
     private final int RUTA4 = 4;
     private final int RUTA5 = 5;
-
     private PlayerStatus status;
 
 
