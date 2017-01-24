@@ -10,6 +10,7 @@
 
     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
+    <string name="hola">Prueba</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>
