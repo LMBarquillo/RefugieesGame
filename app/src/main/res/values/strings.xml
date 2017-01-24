@@ -1,6 +1,6 @@
 <resources>
     <!-- RECORDATORIO: LOS TEXTOS VAN EN INGLÉS -->
-    <string name="app_name">RefugiadosGame</string>
+    <string name="app_name">RefugeeGame</string>
 
     <!-- Madrid-Milán -->
     <string name="route1">Madrid-Milan</string>
