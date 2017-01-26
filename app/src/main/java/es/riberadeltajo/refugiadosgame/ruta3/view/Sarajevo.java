@@ -7,10 +7,10 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class Sarajevo extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(new GameView(this));
     }
+
 }

@@ -1,6 +1,8 @@
 package es.riberadeltajo.refugiadosgame.ruta3.view;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 /**
  * Created by Profesor on 26/01/2017.
@@ -23,7 +25,11 @@ public class Juego {
     }
 
     public void draw(Canvas canvas) {
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
 
+        canvas.drawColor(Color.CYAN);
+        canvas.drawText("PRUEBA", canvas.getWidth()* 0.4f, canvas.getHeight() * 0.4f, paint);
     }
 
     public void touch(int x, int y) {
