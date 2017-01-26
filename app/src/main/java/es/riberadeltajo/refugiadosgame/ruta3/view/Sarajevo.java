@@ -10,6 +10,6 @@ public class Sarajevo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sarajevo);
+        setContentView(new GameView(this));
     }
 }
