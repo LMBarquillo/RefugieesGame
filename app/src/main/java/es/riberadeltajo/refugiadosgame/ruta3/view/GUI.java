@@ -14,17 +14,21 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class GUI {
 
+    private GameView gameView;
+
     private Bitmap arriba;
     private Bitmap abajo;
-
-    private GameView gameView;
+    private float scaleX = .15f;
+    private float scaleY = .08f;
+    private float ratioX = .0f;
+    private float ratioY = .0f;
 
     public GUI(GameView gameView) {
         setGameView(gameView);
         arriba = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoarrowup);
-        arriba = Bitmap.createScaledBitmap(arriba, (int)(getGameView().getWidth() * 0.15), (int)(getGameView().getHeight() * 0.08), false);
+        arriba = Bitmap.createScaledBitmap(arriba, (int)(getGameView().getWidth() * scaleX), (int)(getGameView().getHeight() * scaleY), false);
         abajo = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoarrowdown);
-        abajo = Bitmap.createScaledBitmap(abajo, (int)(getGameView().getWidth() * 0.15), (int)(getGameView().getHeight() * 0.08), false);
+        abajo = Bitmap.createScaledBitmap(abajo, (int)(getGameView().getWidth() * scaleX), (int)(getGameView().getHeight() * scaleY), false);
     }
 
     public GameView getGameView() {
