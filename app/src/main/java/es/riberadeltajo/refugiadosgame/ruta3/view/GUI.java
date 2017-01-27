@@ -22,9 +22,9 @@ public class GUI {
     public GUI(GameView gameView) {
         setGameView(gameView);
         arriba = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoarrowup);
-        arriba = Bitmap.createScaledBitmap(arriba, getGameView().getWidth() - 920, getGameView().getHeight()- 1760, false);
+        arriba = Bitmap.createScaledBitmap(arriba, (int)(getGameView().getWidth() * 0.15), (int)(getGameView().getHeight() * 0.08), false);
         abajo = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoarrowdown);
-        abajo = Bitmap.createScaledBitmap(abajo, getGameView().getWidth() - 920, getGameView().getHeight()- 1760, false);
+        abajo = Bitmap.createScaledBitmap(abajo, (int)(getGameView().getWidth() * 0.15), (int)(getGameView().getHeight() * 0.08), false);
     }
 
     public GameView getGameView() {
