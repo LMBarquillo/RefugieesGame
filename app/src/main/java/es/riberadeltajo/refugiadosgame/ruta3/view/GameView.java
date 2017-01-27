@@ -77,4 +77,8 @@ public class GameView extends SurfaceView {
         setJuego(new Juego(this));
         getLoop().setRunning(true);
     }
+
+    public void finish() {
+        getLoop().setRunning(false);
+    }
 }
