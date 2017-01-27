@@ -3,8 +3,11 @@ package es.riberadeltajo.refugiadosgame.ruta5.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Profesor on 26/01/2017.
@@ -14,23 +17,25 @@ public class GameView extends SurfaceView {
 
     private SurfaceHolder holder;
     private int corx,cory;
-    private int xSpeed,ySpeed;
+    private int ySpeed;
     private Bitmap fondo;
-    private Bitmap cesta;
-    private Bitmap explosion;
-    private Bitmap bomba;
+    private Bitmap cesta;       //O el objeto con el que chocan/recoje
+    //private Bitmap explosion;
+    //private Bitmap bomba;
+    private ArrayList<Objetos> objetos;
 
 
     public GameView(Context context) {
         super(context);
         holder=getHolder();
+        objetos=new ArrayList<Objetos>();
 
         holder.addCallback(new SurfaceHolder.Callback() {
 
             @SuppressLint("WrongCall")
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-
+                //crearObjetos();
             }
 
             @Override
@@ -47,6 +52,12 @@ public class GameView extends SurfaceView {
 
 
     }
+
+
+    public void draw(Canvas canvas){
+
+    }
+
 
     @Override
     public SurfaceHolder getHolder() {
@@ -73,14 +84,6 @@ public class GameView extends SurfaceView {
         this.cory = cory;
     }
 
-    public int getxSpeed() {
-        return xSpeed;
-    }
-
-    public void setxSpeed(int xSpeed) {
-        this.xSpeed = xSpeed;
-    }
-
     public int getySpeed() {
         return ySpeed;
     }
@@ -105,11 +108,11 @@ public class GameView extends SurfaceView {
         this.cesta = cesta;
     }
 
-    public Bitmap getExplosion() {
-        return explosion;
-    }
+    //public Bitmap getExplosion() {
+    //    return explosion;
+    //}
 
-    public void setExplosion(Bitmap explosion) {
-        this.explosion = explosion;
-    }
+    //public void setExplosion(Bitmap explosion) {
+    //    this.explosion = explosion;
+   // }
 }
