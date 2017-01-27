@@ -27,6 +27,7 @@ public class Juego {
     public void draw(Canvas canvas) {
         Paint paint = new Paint();
         paint.setColor(Color.RED);
+        paint.setTextSize(80);
 
         canvas.drawColor(Color.CYAN);
         canvas.drawText("PRUEBA", canvas.getWidth()* 0.4f, canvas.getHeight() * 0.4f, paint);
