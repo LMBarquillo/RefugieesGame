@@ -20,8 +20,8 @@ public class GUI {
     private Bitmap abajo;
     private float scaleX = .15f;
     private float scaleY = .08f;
-    private float ratioX = .0f;
-    private float ratioY = .0f;
+    private float ratioX = .045f;
+    private float ratioY = .025f;
 
     public GUI(GameView gameView) {
         setGameView(gameView);
@@ -40,12 +40,22 @@ public class GUI {
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(arriba, getGameView().getWidth() - arriba.getWidth() - 50, getGameView().getHeight() - arriba.getHeight() - 50, null);
-        canvas.drawBitmap(abajo, 50, getGameView().getHeight() - abajo.getHeight() - 50, null);
-        Paint paint = new Paint();
+        canvas.drawBitmap(
+                arriba,
+                getGameView().getWidth() - arriba.getWidth() - getGameView().getWidth() * ratioX,
+                getGameView().getHeight() - arriba.getHeight() - getGameView().getHeight() * ratioY,
+                null
+        );
+        canvas.drawBitmap(
+                abajo,
+                getGameView().getWidth() * ratioX,
+                getGameView().getHeight() - abajo.getHeight() - getGameView().getHeight() * ratioY,
+                null
+        );
+        /*Paint paint = new Paint();
         paint.setTextSize(50);
         paint.setColor(Color.RED);
-        canvas.drawText(String.format("%d x %d", getGameView().getWidth(), getGameView().getHeight()), 200, 200, paint);
+        canvas.drawText(String.format("%d x %d", getGameView().getWidth(), getGameView().getHeight()), 200, 200, paint);*/
     }
 
     public void touch(int x, int y) {
