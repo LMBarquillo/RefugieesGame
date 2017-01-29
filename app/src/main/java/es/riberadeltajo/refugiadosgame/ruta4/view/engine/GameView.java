@@ -6,26 +6,28 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import es.riberadeltajo.refugiadosgame.R;
-import es.riberadeltajo.refugiadosgame.ruta4.view.models.Notas;
+import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteNotas;
 
 public class GameView extends SurfaceView {
-    private ArrayList<Notas> notas;
+    private NoteGenerator generador;
+    private ArrayList<SpriteNotas> notas;
     private GameLoopThread loop;
     private SurfaceHolder holder;
 
     public GameView(Context context) {
         super(context);
         loop=new GameLoopThread(this);
-        notas = new ArrayList<Notas>();
+        notas = new ArrayList<SpriteNotas>();
+        generador = new NoteGenerator(context,this,"songfiles/sweetchildofmine.txt",notas);
 
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -35,6 +37,7 @@ public class GameView extends SurfaceView {
             public void surfaceCreated(SurfaceHolder holder) {
                 loop.setRunning(true);
                 loop.start();
+                generador.start();  // Este se encargará de ir añadiendo las notas al arraylist
             }
 
             @Override
@@ -46,6 +49,7 @@ public class GameView extends SurfaceView {
             public void surfaceDestroyed(SurfaceHolder holder) {
                 boolean volver=true;
                 loop.setRunning(false);
+                generador.setRunning(false);
                 while(volver){
                     try{
                         loop.join();
@@ -56,29 +60,27 @@ public class GameView extends SurfaceView {
         });
     }
 
-    private void addNote() {
-
-
-    }
-
     public void draw(Canvas canvas){
+        Paint paint = new Paint();  // información en pantalla
         // Dibujamos fondo
         canvas.drawColor(Color.YELLOW);
         Bitmap fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
         canvas.drawBitmap(fondo, null, new RectF(0, 0, canvas.getWidth(), canvas.getHeight()), null);
-
         // Dibujamos cada nota que tengamos en pantalla
-        for(Notas n : notas) {
+        for(SpriteNotas n : notas) {
             n.draw(canvas);
         }
-
+        paint.setColor(Color.YELLOW);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setTextSize(60);
+        canvas.drawText(String.valueOf(notas.size()),50,100,paint);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction()==MotionEvent.ACTION_DOWN){
             synchronized(getHolder()){
-                for(Notas n : notas){
+                for(SpriteNotas n : notas){
                     /*if(miSprite.isCollition(event.getX(),event.getY())){
                         sprites.remove(miSprite);
                         temps.add(new SpriteTemp(temps,this,event.getX(),event.getY(),sangre));
@@ -102,16 +104,20 @@ public class GameView extends SurfaceView {
         this.loop = loop;
     }
 
-    public ArrayList<Notas> getNotas() {
+    public ArrayList<SpriteNotas> getNotas() {
         return notas;
     }
 
-    public void setNotas(ArrayList<Notas> notas) {
+    public void setNotas(ArrayList<SpriteNotas> notas) {
         this.notas = notas;
     }
 
+    public double getTPS() {
+        return generador.getTps();
+    }
+
     /*private Bitmap player;
-    private ArrayList<Notas> sprites;
+    private ArrayList<SpriteNotas> sprites;
     private List<SpriteTemp> temps;
     private SurfaceHolder holder;
     private GameLoopThread loop;
@@ -161,7 +167,7 @@ public class GameView extends SurfaceView {
 
     private void createSprite(){
         player= BitmapFactory.decodeResource(getResources(),R.drawable.darthvader);
-        sprites.add(new Notas(this,player));
+        sprites.add(new SpriteNotas(this,player));
     }
 
     public void draw(Canvas canvas){
