@@ -1,6 +1,6 @@
 <resources>
     <!-- RECORDATORIO: LOS TEXTOS VAN EN INGLÉS -->
-    <string name="app_name">RefugiadosGame</string>
+    <string name="app_name">RefugeeGame</string>
 
     <!-- Madrid-Milán -->
     <string name="route1">Madrid-Milan</string>
@@ -10,7 +10,6 @@
 
     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
-    <string name="hola">Prueba</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>
