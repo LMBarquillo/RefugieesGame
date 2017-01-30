@@ -18,13 +18,11 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context) {
         super(context);
-        setGui(new GUI(this));
-        setJuego(new Juego(this));
         setLoop(new GameLoop(this));
         getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                getLoop().setRunning(true);
+                start();
             }
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
@@ -59,18 +57,28 @@ public class GameView extends SurfaceView {
 
     @Override
     public void draw(Canvas canvas) {
-        getGui().draw(canvas);
         getJuego().draw(canvas);
+        getGui().draw(canvas);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN) {
             synchronized (getHolder()) {
-                getGui().touch((int)event.getX(), (int)event.getY());
                 getJuego().touch((int)event.getX(), (int)event.getY());
+                getGui().touch((int)event.getX(), (int)event.getY());
             }
         }
         return true;
+    }
+
+    private void start() {
+        setGui(new GUI(this));
+        setJuego(new Juego(this));
+        getLoop().setRunning(true);
+    }
+
+    public void finish() {
+        getLoop().setRunning(false);
     }
 }
