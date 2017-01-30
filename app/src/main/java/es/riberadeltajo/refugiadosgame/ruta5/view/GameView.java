@@ -3,11 +3,16 @@ package es.riberadeltajo.refugiadosgame.ruta5.view;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+
+import es.riberadeltajo.refugiadosgame.R;
 
 /**
  * Created by Profesor on 26/01/2017.
@@ -23,12 +28,14 @@ public class GameView extends SurfaceView {
     //private Bitmap explosion;
     //private Bitmap bomba;
     private ArrayList<Objetos> objetos;
+    private GameLoop loop;
 
 
     public GameView(Context context) {
         super(context);
         holder=getHolder();
         objetos=new ArrayList<Objetos>();
+        loop=new GameLoop(this);
 
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -36,6 +43,8 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 //crearObjetos();
+                loop.setRunning(true);
+                loop.start();
             }
 
             @Override
@@ -49,13 +58,15 @@ public class GameView extends SurfaceView {
             }
         });
 
-
+        fondo= BitmapFactory.decodeResource(getResources(), R.drawable.fondoteheran);
 
     }
 
 
     public void draw(Canvas canvas){
-
+        Paint paint=new Paint();
+        canvas.drawColor(Color.WHITE);
+        canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);
     }
 
 
