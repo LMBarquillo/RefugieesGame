@@ -26,7 +26,7 @@ public class Milan extends AppCompatActivity {
             if(resultCode==RESULT_OK){
                 Bundle bundle=data.getExtras();
                 boolean resultado=bundle.getBoolean("resultado");
-                texto.setText("Devuelto el juego");
+                texto.setText("Devuelto el juego "+resultado);
 
             }
         }
