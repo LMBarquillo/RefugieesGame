@@ -36,7 +36,6 @@ public class GameView extends SurfaceView {
         holder=getHolder();
         objetos=new ArrayList<Objetos>();
         loop=new GameLoop(this);
-
         holder.addCallback(new SurfaceHolder.Callback() {
 
             @SuppressLint("WrongCall")
@@ -54,7 +53,7 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-
+                loop.setRunning(false);
             }
         });
 
@@ -70,10 +69,10 @@ public class GameView extends SurfaceView {
     }
 
 
-    @Override
-    public SurfaceHolder getHolder() {
-        return holder;
-    }
+    //@Override
+    //public SurfaceHolder getHolder() {
+    //    return holder;
+    //}
 
     public void setHolder(SurfaceHolder holder) {
         this.holder = holder;
