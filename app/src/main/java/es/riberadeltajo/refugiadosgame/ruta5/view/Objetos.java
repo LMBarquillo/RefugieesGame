@@ -3,6 +3,8 @@ package es.riberadeltajo.refugiadosgame.ruta5.view;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
+import java.util.ArrayList;
+
 /**
  * Created by Profesor on 26/01/2017.
  */
@@ -14,8 +16,8 @@ public class Objetos {
     private int valor;          //Puntos de la moneda. +1, +5, o -1...
     private GameView gameView;
     private Bitmap bmp;
-    private int width;          //Ancho de la moneda
-    private int height;         //Alto de la moneda
+    private int width;          //Ancho de los objetos
+    private int height;         //Alto de los objetos
 
     public Objetos(GameView gameView, Bitmap bmp, int valor){
         setWidth(bmp.getWidth());
@@ -28,7 +30,9 @@ public class Objetos {
     }
 
     private void update(){      //Movimiento
-
+        if(cory>=getGameView().getHeight()-height-ySpeed || cory+ySpeed<=0){
+            ySpeed=-ySpeed;
+        }
     }
 
     public void draw(Canvas canvas){    //Dibujar
