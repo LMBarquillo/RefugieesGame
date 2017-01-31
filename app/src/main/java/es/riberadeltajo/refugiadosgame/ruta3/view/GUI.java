@@ -15,6 +15,7 @@ import es.riberadeltajo.refugiadosgame.R;
 public class GUI {
 
     private GameView gameView;
+    private Juego juego;
 
     private Bitmap arriba;
     private Bitmap abajo;
@@ -23,12 +24,33 @@ public class GUI {
     private float ratioX = .045f;
     private float ratioY = .025f;
 
-    public GUI(GameView gameView) {
+    private int arribaPosX;
+    private int arribaPosY;
+    private int arribaWidth;
+    private int arribaHeight;
+    private int abajoPosX;
+    private int abajoPosY;
+    private int abajoWidth;
+    private int abajoHeight;
+
+    public GUI(GameView gameView, Juego juego) {
         setGameView(gameView);
+        setJuego(juego);
+
+        arribaWidth = (int)(getGameView().getWidth() * scaleX);
+        arribaHeight = (int)(getGameView().getHeight() * scaleY);
+        abajoWidth = (int)(getGameView().getWidth() * scaleX);
+        abajoHeight = (int)(getGameView().getHeight() * scaleY);
+
         arriba = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoarrowup);
-        arriba = Bitmap.createScaledBitmap(arriba, (int)(getGameView().getWidth() * scaleX), (int)(getGameView().getHeight() * scaleY), false);
+        arriba = Bitmap.createScaledBitmap(arriba, arribaWidth, arribaHeight, false);
         abajo = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoarrowdown);
-        abajo = Bitmap.createScaledBitmap(abajo, (int)(getGameView().getWidth() * scaleX), (int)(getGameView().getHeight() * scaleY), false);
+        abajo = Bitmap.createScaledBitmap(abajo, abajoWidth, abajoHeight, false);
+
+        arribaPosX = (int)(getGameView().getWidth() - arriba.getWidth() - getGameView().getWidth() * ratioX);
+        arribaPosY = (int)(getGameView().getHeight() - arriba.getHeight() - getGameView().getHeight() * ratioY);
+        abajoPosX = (int)(getGameView().getWidth() * ratioX);
+        abajoPosY = (int)(getGameView().getHeight() - abajo.getHeight() - getGameView().getHeight() * ratioY);
     }
 
     public GameView getGameView() {
@@ -39,17 +61,25 @@ public class GUI {
         this.gameView = gameView;
     }
 
+    public Juego getJuego() {
+        return juego;
+    }
+
+    public void setJuego(Juego juego) {
+        this.juego = juego;
+    }
+
     public void draw(Canvas canvas) {
         canvas.drawBitmap(
                 arriba,
-                getGameView().getWidth() - arriba.getWidth() - getGameView().getWidth() * ratioX,
-                getGameView().getHeight() - arriba.getHeight() - getGameView().getHeight() * ratioY,
+                arribaPosX,
+                arribaPosY,
                 null
         );
         canvas.drawBitmap(
                 abajo,
-                getGameView().getWidth() * ratioX,
-                getGameView().getHeight() - abajo.getHeight() - getGameView().getHeight() * ratioY,
+                abajoPosX,
+                abajoPosY,
                 null
         );
         /*Paint paint = new Paint();
@@ -59,7 +89,12 @@ public class GUI {
     }
 
     public void touch(int x, int y) {
-
+        if(x >= arribaPosX && x <= arribaPosX + arribaWidth && y >= arribaPosY && y <= arribaPosY + arribaHeight) {
+            getJuego().getPlayer().setSpeedY(-8);
+        } else
+        if(x >= abajoPosX && x <= abajoPosX + abajoWidth && y >= abajoPosY && y <= abajoPosY + abajoHeight) {
+            getJuego().getPlayer().setSpeedY(8);
+        }
     }
 
 }
