@@ -25,8 +25,6 @@ public class GameView extends SurfaceView {
     private int ySpeed;
     private Bitmap fondo;
     private Bitmap cesta;       //O el objeto con el que chocan/recoje
-    //private Bitmap explosion;
-    //private Bitmap bomba;
     private ArrayList<Objetos> objetos;
     private GameLoop loop;
 
@@ -41,9 +39,9 @@ public class GameView extends SurfaceView {
             @SuppressLint("WrongCall")
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                //crearObjetos();
-                loop.setRunning(true);
-                loop.start();
+                cargarObjetos();
+                getLoop().setRunning(true);
+                getLoop().start();
             }
 
             @Override
@@ -53,25 +51,40 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-                loop.setRunning(false);
+                getLoop().setRunning(false);
             }
         });
 
-        fondo= BitmapFactory.decodeResource(getResources(), R.drawable.fondoteheran);
+        setFondo(BitmapFactory.decodeResource(getResources(), R.drawable.fondoteheran));
 
+    }
+
+    private void cargarObjetos(){
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarra),(int)(Math.random()*20)+10));
     }
 
 
     public void draw(Canvas canvas){
         Paint paint=new Paint();
-        canvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);
+        canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
+        canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
+        for(int i=0;i<objetos.size();i++){
+            objetos.get(i).draw(canvas);
+        }
     }
 
 
+    public GameLoop getLoop() {
+        return loop;
+    }
+
+    public void setLoop(GameLoop loop) {
+        this.loop = loop;
+    }
+
     //@Override
-    //public SurfaceHolder getHolder() {
-    //    return holder;
+   // public SurfaceHolder getHolder() {
+   //     return holder;
     //}
 
     public void setHolder(SurfaceHolder holder) {
@@ -118,11 +131,5 @@ public class GameView extends SurfaceView {
         this.cesta = cesta;
     }
 
-    //public Bitmap getExplosion() {
-    //    return explosion;
-    //}
 
-    //public void setExplosion(Bitmap explosion) {
-    //    this.explosion = explosion;
-   // }
 }
