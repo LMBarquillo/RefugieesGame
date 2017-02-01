@@ -23,7 +23,6 @@ public class GUI {
     private float scaleY = .08f;
     private float ratioX = .045f;
     private float ratioY = .025f;
-
     private int arribaPosX;
     private int arribaPosY;
     private int arribaWidth;
@@ -32,6 +31,13 @@ public class GUI {
     private int abajoPosY;
     private int abajoWidth;
     private int abajoHeight;
+
+    private Paint txtPaint;
+    private Paint borderPaint;
+    private int intervalo;
+    private int contador;
+    private int minutos;
+    private int segundos;
 
     public GUI(GameView gameView, Juego juego) {
         setGameView(gameView);
@@ -51,6 +57,16 @@ public class GUI {
         arribaPosY = (int)(getGameView().getHeight() - arriba.getHeight() - getGameView().getHeight() * ratioY);
         abajoPosX = (int)(getGameView().getWidth() * ratioX);
         abajoPosY = (int)(getGameView().getHeight() - abajo.getHeight() - getGameView().getHeight() * ratioY);
+
+        txtPaint = new Paint();
+        txtPaint.setColor(Color.GREEN);
+        txtPaint.setTextSize(120);
+        borderPaint = new Paint();
+        borderPaint.setColor(Color.WHITE);
+        borderPaint.setTextSize(120);
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(15);
+        intervalo = 1000 / GameLoop.FPS;
     }
 
     public GameView getGameView() {
@@ -70,6 +86,9 @@ public class GUI {
     }
 
     public void draw(Canvas canvas) {
+        update();
+        canvas.drawText(String.format("%02d:%02d", minutos, segundos), 100, 100, borderPaint);
+        canvas.drawText(String.format("%02d:%02d", minutos, segundos), 100, 100, txtPaint);
         canvas.drawBitmap(
                 arriba,
                 arribaPosX,
@@ -86,6 +105,25 @@ public class GUI {
         paint.setTextSize(50);
         paint.setColor(Color.RED);
         canvas.drawText(String.format("%d x %d", getGameView().getWidth(), getGameView().getHeight()), 200, 200, paint);*/
+    }
+
+    private void update() {
+        if(++contador == intervalo) {
+            contador = 0;
+            if(--segundos < 0) {
+                segundos = 59;
+                minutos--;
+            }
+        }
+        if(minutos == 0 && segundos == 0) {
+            getGameView().stop();
+        }
+    }
+
+    public void start() {
+        contador = 0;
+        minutos = 1;
+        segundos = 0;
     }
 
     public void touch(int x, int y) {

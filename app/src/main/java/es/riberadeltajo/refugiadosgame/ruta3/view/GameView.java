@@ -27,7 +27,9 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
             @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {}
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                stop();
+            }
         });
     }
 
@@ -81,10 +83,11 @@ public class GameView extends SurfaceView {
     private void start() {
         setJuego(new Juego(this));
         setGui(new GUI(this, getJuego()));
+        getGui().start();
         getLoop().setRunning(true);
     }
 
-    public void finish() {
+    public void stop() {
         getLoop().setRunning(false);
     }
 }

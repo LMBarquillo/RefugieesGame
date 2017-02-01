@@ -162,11 +162,17 @@ public class Sprite {
         } else {
             setPosY(getPosY() + getSpeedY());
         }*/
+
+        if(getSpeedX() != 0 || getSpeedY() != 0) {
+            if(getPosY() + getSpeedY() < 0 || getPosY() + getHeight() + getSpeedY() > getGameView().getHeight()) {
+                setSpeedX(0);
+                setSpeedY(0);
+            } else {
+                setCurrentFrame(++currentFrame % getColumnas());
+            }
+        }
         setPosX(getPosX() + getSpeedX());
         setPosY(getPosY() + getSpeedY());
-        if(getSpeedX() != 0 || getSpeedY() != 0) {
-            setCurrentFrame(++currentFrame % getColumnas());
-        }
 
     }
 
