@@ -2,6 +2,8 @@ package es.riberadeltajo.refugiadosgame.ruta3.view;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 
 import es.riberadeltajo.refugiadosgame.R;
 
@@ -11,9 +13,12 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class Sprite {
 
+    private final int[] DIRECCION = {3, 1, 0, 2};
+
     private GameView gameView;
     private Bitmap sprite;
-    private Bitmap frame;
+    private int currentFrame;
+    private int direccion;
     private int filas;
     private int columnas;
     private int width;
@@ -53,12 +58,26 @@ public class Sprite {
         this.sprite = Bitmap.createScaledBitmap(bm, getWidth() * getColumnas(), getHeight() * getFilas(), false);
     }
 
-    public Bitmap getFrame() {
-        return frame;
+    public void setSprite(Bitmap sprite) {
+        this.sprite = sprite;
     }
 
-    private void setFrame(Bitmap frame) {
-        this.frame = frame;
+    public int getCurrentFrame() {
+        return currentFrame;
+    }
+
+    public void setCurrentFrame(int currentframe) {
+        this.currentFrame = currentframe;
+    }
+
+    public int getDireccion() {
+        double dir = Math.atan2(getSpeedX(), getSpeedY()) / (Math.PI / 2) + 2;
+        int direccion = (int) Math.round(dir) % getColumnas();
+        return DIRECCION[direccion];
+    }
+
+    public void setDireccion(int direccion) {
+        this.direccion = direccion;
     }
 
     public int getFilas() {
@@ -123,6 +142,38 @@ public class Sprite {
 
     public void setSpeedY(int speedY) {
         this.speedY = speedY;
+    }
+
+    public void draw(Canvas canvas) {
+        update();
+        Rect src = new Rect(getCurrentFrame() * getWidth(), getDireccion() * getHeight(), (getCurrentFrame() * getWidth()) + getWidth(), (getDireccion() * getHeight() + getHeight()));
+        Rect dst = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
+        canvas.drawBitmap(getSprite(), src, dst, null);
+    }
+
+    private void update() {
+        /*if(getPosX() >= getGameView().getWidth() - getWidth() - getSpeedX() || getPosX() + getSpeedX() <= 0) {
+            setSpeedX(-getSpeedX());
+        } else {
+            setPosX(getPosX() + getSpeedX());
+        }
+        if(getPosY() >= getGameView().getHeight() - getHeight() - getSpeedY() || getPosY() + getSpeedY() <= 0) {
+            setSpeedY(-getSpeedY());
+        } else {
+            setPosY(getPosY() + getSpeedY());
+        }*/
+
+        if(getSpeedX() != 0 || getSpeedY() != 0) {
+            if(getPosY() + getSpeedY() < 0 || getPosY() + getHeight() + getSpeedY() > getGameView().getHeight()) {
+                setSpeedX(0);
+                setSpeedY(0);
+            } else {
+                setCurrentFrame(++currentFrame % getColumnas());
+            }
+        }
+        setPosX(getPosX() + getSpeedX());
+        setPosY(getPosY() + getSpeedY());
+
     }
 
 }

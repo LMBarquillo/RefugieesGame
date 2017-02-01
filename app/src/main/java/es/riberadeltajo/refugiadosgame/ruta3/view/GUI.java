@@ -15,6 +15,7 @@ import es.riberadeltajo.refugiadosgame.R;
 public class GUI {
 
     private GameView gameView;
+    private Juego juego;
 
     private Bitmap arriba;
     private Bitmap abajo;
@@ -22,13 +23,50 @@ public class GUI {
     private float scaleY = .08f;
     private float ratioX = .045f;
     private float ratioY = .025f;
+    private int arribaPosX;
+    private int arribaPosY;
+    private int arribaWidth;
+    private int arribaHeight;
+    private int abajoPosX;
+    private int abajoPosY;
+    private int abajoWidth;
+    private int abajoHeight;
 
-    public GUI(GameView gameView) {
+    private Paint txtPaint;
+    private Paint borderPaint;
+    private int intervalo;
+    private int contador;
+    private int minutos;
+    private int segundos;
+
+    public GUI(GameView gameView, Juego juego) {
         setGameView(gameView);
+        setJuego(juego);
+
+        arribaWidth = (int)(getGameView().getWidth() * scaleX);
+        arribaHeight = (int)(getGameView().getHeight() * scaleY);
+        abajoWidth = (int)(getGameView().getWidth() * scaleX);
+        abajoHeight = (int)(getGameView().getHeight() * scaleY);
+
         arriba = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoarrowup);
-        arriba = Bitmap.createScaledBitmap(arriba, (int)(getGameView().getWidth() * scaleX), (int)(getGameView().getHeight() * scaleY), false);
+        arriba = Bitmap.createScaledBitmap(arriba, arribaWidth, arribaHeight, false);
         abajo = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoarrowdown);
-        abajo = Bitmap.createScaledBitmap(abajo, (int)(getGameView().getWidth() * scaleX), (int)(getGameView().getHeight() * scaleY), false);
+        abajo = Bitmap.createScaledBitmap(abajo, abajoWidth, abajoHeight, false);
+
+        arribaPosX = (int)(getGameView().getWidth() - arriba.getWidth() - getGameView().getWidth() * ratioX);
+        arribaPosY = (int)(getGameView().getHeight() - arriba.getHeight() - getGameView().getHeight() * ratioY);
+        abajoPosX = (int)(getGameView().getWidth() * ratioX);
+        abajoPosY = (int)(getGameView().getHeight() - abajo.getHeight() - getGameView().getHeight() * ratioY);
+
+        txtPaint = new Paint();
+        txtPaint.setColor(Color.GREEN);
+        txtPaint.setTextSize(120);
+        borderPaint = new Paint();
+        borderPaint.setColor(Color.WHITE);
+        borderPaint.setTextSize(120);
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setStrokeWidth(15);
+        intervalo = 1000 / GameLoop.FPS;
     }
 
     public GameView getGameView() {
@@ -39,17 +77,28 @@ public class GUI {
         this.gameView = gameView;
     }
 
+    public Juego getJuego() {
+        return juego;
+    }
+
+    public void setJuego(Juego juego) {
+        this.juego = juego;
+    }
+
     public void draw(Canvas canvas) {
+        update();
+        canvas.drawText(String.format("%02d:%02d", minutos, segundos), 100, 100, borderPaint);
+        canvas.drawText(String.format("%02d:%02d", minutos, segundos), 100, 100, txtPaint);
         canvas.drawBitmap(
                 arriba,
-                getGameView().getWidth() - arriba.getWidth() - getGameView().getWidth() * ratioX,
-                getGameView().getHeight() - arriba.getHeight() - getGameView().getHeight() * ratioY,
+                arribaPosX,
+                arribaPosY,
                 null
         );
         canvas.drawBitmap(
                 abajo,
-                getGameView().getWidth() * ratioX,
-                getGameView().getHeight() - abajo.getHeight() - getGameView().getHeight() * ratioY,
+                abajoPosX,
+                abajoPosY,
                 null
         );
         /*Paint paint = new Paint();
@@ -58,8 +107,36 @@ public class GUI {
         canvas.drawText(String.format("%d x %d", getGameView().getWidth(), getGameView().getHeight()), 200, 200, paint);*/
     }
 
-    public void touch(int x, int y) {
+    private void update() {
+        if(++contador == intervalo) {
+            contador = 0;
+            if(--segundos < 0) {
+                segundos = 59;
+                minutos--;
+            }
+        }
+        if(minutos == 0 && segundos == 0) {
+            getGameView().stop();
+        }
+    }
 
+    public void start() {
+        contador = 0;
+        minutos = 1;
+        segundos = 0;
+    }
+
+    public void touch(int x, int y) {
+        if(x >= arribaPosX && x <= arribaPosX + arribaWidth && y >= arribaPosY && y <= arribaPosY + arribaHeight) {
+            getJuego().getPlayer().setSpeedY(-8);
+        } else
+        if(x >= abajoPosX && x <= abajoPosX + abajoWidth && y >= abajoPosY && y <= abajoPosY + abajoHeight) {
+            getJuego().getPlayer().setSpeedY(8);
+        }
+    }
+
+    public void unTouch(int x, int y) {
+        getJuego().getPlayer().setSpeedY(0);
     }
 
 }
