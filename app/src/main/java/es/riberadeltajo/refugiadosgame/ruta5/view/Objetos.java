@@ -40,7 +40,7 @@ public class Objetos {
         return getCory()>=getGameView().getHeight();//+getHeight();
     }
 
-    //NO FUNCIONA------------------------------------------
+
     public void draw(Canvas canvas){    //Dibujar
         update();
         canvas.drawBitmap(getBmp(),getCorx(),getCory(),null);

@@ -61,6 +61,7 @@ public class GameView extends SurfaceView {
 
     private void cargarObjetos(){
         objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarra),(int)(Math.random()*20)+10));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizza),(int)(Math.random()*20)+10));
     }
 
 
@@ -70,6 +71,8 @@ public class GameView extends SurfaceView {
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
         for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
             objetos.get(i).draw(canvas);
+        }
+        for(int i=0;i<objetos.size();i++){
             if(objetos.get(i).finalPantalla()){       //Si el objeto llega al final de pantalla lo destruye
                 objetos.remove(i);                          //COMPROBAR QUE NO SEA UN OBJETO DE LOS QUE HAY QUE COJER, SINO GAME OVER
             }
