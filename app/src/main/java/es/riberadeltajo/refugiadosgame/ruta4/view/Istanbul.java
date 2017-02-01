@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta4.view.engine.GameView;
 
 public class Istanbul extends AppCompatActivity {

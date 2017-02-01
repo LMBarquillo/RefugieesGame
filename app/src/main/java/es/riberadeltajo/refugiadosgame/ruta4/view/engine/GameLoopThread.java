@@ -3,7 +3,7 @@ package es.riberadeltajo.refugiadosgame.ruta4.view.engine;
 import android.graphics.Canvas;
 
 /**
- * Created by Profesor on 12/01/2017.
+ * @author Luismi
  */
 
 public class GameLoopThread extends Thread {

@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta4.view.models;
 
 /**
+ * Objeto Nota. Almacena la información de cada nota musical.
  * Created by Luismi on 29/01/2017.
  */
 

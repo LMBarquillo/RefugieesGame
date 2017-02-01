@@ -14,8 +14,7 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.models.Nota;
 import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteNotas;
 
 /**
- * Esta clase recibe el nombre del archivo con la canción, lo lee, lo descompone y va
- * añadiendo las notas al arraylist de sprites a su debido momento.
+ * Esta clase recibe el nombre del archivo con la canción, lo lee, lo descompone y va añadiendo las notas al arraylist de sprites a su debido momento.
  * Created by Luismi on 29/01/2017.
  */
 

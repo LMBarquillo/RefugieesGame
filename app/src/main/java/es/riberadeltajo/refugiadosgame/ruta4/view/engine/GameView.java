@@ -17,6 +17,9 @@ import java.util.ArrayList;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteNotas;
 
+/**
+ * Gameview
+ */
 public class GameView extends SurfaceView {
     private NoteGenerator generador;
     private ArrayList<SpriteNotas> notas;
