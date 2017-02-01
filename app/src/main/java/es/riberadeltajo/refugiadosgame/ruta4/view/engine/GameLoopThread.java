@@ -3,6 +3,7 @@ package es.riberadeltajo.refugiadosgame.ruta4.view.engine;
 import android.graphics.Canvas;
 
 /**
+ * Game Loop Thread
  * @author Luismi
  */
 

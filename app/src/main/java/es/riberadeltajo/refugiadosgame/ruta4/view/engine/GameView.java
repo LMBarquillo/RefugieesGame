@@ -18,7 +18,7 @@ import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteNotas;
 
 /**
- * Gameview
+ * Gameview.
  */
 public class GameView extends SurfaceView {
     private NoteGenerator generador;

@@ -7,7 +7,7 @@ import android.graphics.Rect;
 import es.riberadeltajo.refugiadosgame.ruta4.view.engine.GameView;
 
 /**
- * Sprite de las notas musicales
+ * Sprite de las notas musicales.
  * Created by Profesor on 18/01/2017.
  */
 
