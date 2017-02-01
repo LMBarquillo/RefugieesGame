@@ -68,6 +68,12 @@ public class GameView extends SurfaceView {
                 getJuego().touch((int)event.getX(), (int)event.getY());
                 getGui().touch((int)event.getX(), (int)event.getY());
             }
+        } else
+        if(event.getAction() == MotionEvent.ACTION_UP) {
+            synchronized (getHolder()) {
+                getJuego().unTouch((int)event.getX(), (int)event.getY());
+                getGui().unTouch((int)event.getX(), (int)event.getY());
+            }
         }
         return true;
     }

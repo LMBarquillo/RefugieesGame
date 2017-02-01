@@ -164,7 +164,9 @@ public class Sprite {
         }*/
         setPosX(getPosX() + getSpeedX());
         setPosY(getPosY() + getSpeedY());
-        setCurrentFrame(++currentFrame%getColumnas());
+        if(getSpeedX() != 0 || getSpeedY() != 0) {
+            setCurrentFrame(++currentFrame % getColumnas());
+        }
 
     }
 

@@ -29,7 +29,7 @@ public class Juego {
         agua = Bitmap.createScaledBitmap(agua, getGameView().getWidth(), getGameView().getHeight(), false);
         terreno = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoterreno);
         terreno = Bitmap.createScaledBitmap(terreno, getGameView().getWidth(), getGameView().getHeight(), false);
-        player = new Sprite(getGameView(), R.drawable.sarajevodarthvader, 4, 4, 100, 200, 0, 0, 0, 0);
+        player = new Sprite(getGameView(), R.drawable.sarajevodarthvader, 4, 4, 100, 200, (getGameView().getWidth() - 100) / 2, getGameView().getHeight() - 200, 0, 0);
     }
 
     public GameView getGameView() {
@@ -55,6 +55,10 @@ public class Juego {
     }
 
     public void touch(int x, int y) {
+
+    }
+
+    public void unTouch(int x, int y) {
 
     }
 

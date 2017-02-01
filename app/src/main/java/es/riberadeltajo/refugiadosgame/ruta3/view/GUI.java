@@ -97,4 +97,8 @@ public class GUI {
         }
     }
 
+    public void unTouch(int x, int y) {
+        getJuego().getPlayer().setSpeedY(0);
+    }
+
 }
