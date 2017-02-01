@@ -68,8 +68,11 @@ public class GameView extends SurfaceView {
         Paint paint=new Paint();
         canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
-        for(int i=0;i<objetos.size();i++){
+        for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
             objetos.get(i).draw(canvas);
+            if(objetos.get(i).finalPantalla()){       //Si el objeto llega al final de pantalla lo destruye
+                objetos.remove(i);                          //COMPROBAR QUE NO SEA UN OBJETO DE LOS QUE HAY QUE COJER, SINO GAME OVER
+            }
         }
     }
 

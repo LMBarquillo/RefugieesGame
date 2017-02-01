@@ -30,9 +30,14 @@ public class Objetos {
     }
 
     private void update(){      //Movimiento
-        setCory(getCory()+getySpeed());
+        if(getCory()<getGameView().getHeight()){       //+getHeight()
+            setCory(getCory()+getySpeed());
+        }
 
+    }
 
+    public boolean finalPantalla(){    //Comprueba si el objeto ha llegado al final de la pantalla(abajo)
+        return getCory()>=getGameView().getHeight();//+getHeight();
     }
 
     //NO FUNCIONA------------------------------------------
