@@ -23,7 +23,7 @@ public class Objetos {
         setWidth(bmp.getWidth());
         setHeight(bmp.getHeight());
         setGameView(gameView);
-        setCorx((int)(Math.random()*getGameView().getWidth()-getWidth())+1);
+        setCorx((int)(Math.random()*(getGameView().getWidth()-getWidth())));
         setCory(0-getHeight());
         setBmp(bmp);
         setVelocidad(velocidad);

@@ -20,6 +20,7 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class GameView extends SurfaceView {
 
+    private Tehran principal;
     private SurfaceHolder holder;
     private int corx,cory;
     private int ySpeed;
@@ -33,6 +34,7 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context) {
         super(context);
+        principal=(Tehran)context;
         holder=getHolder();
         objetos=new ArrayList<Objetos>();
         setPasaObjeto(false);
@@ -63,15 +65,19 @@ public class GameView extends SurfaceView {
     }
 
     private void cargarObjetos(){
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarra),(int)(Math.random()*20)+10,false));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizza),(int)(Math.random()*20)+10,true));
+        //objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarra),(int)(Math.random()*20)+10,false));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizza),(int)(Math.random()*20)+10,false));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*20)+10,true));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*20)+10,true));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*20)+10,true));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*20)+10,true));
     }
 
 
     public void draw(Canvas canvas){
         Paint paint=new Paint();
         paint.setColor(Color.RED);
-        paint.setTextSize(60);
+        paint.setTextSize(70);
         //canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
         if(!isPasaObjeto()){
@@ -88,7 +94,7 @@ public class GameView extends SurfaceView {
             }
         }
         else{
-            canvas.drawText(String.format("GAME OVER"),(float)(getWidth()*0.4),(float)(getHeight()*0.49),paint);
+            canvas.drawText(String.format("GAME OVER"),(float)(getWidth()*0.35),(float)(getHeight()*0.5),paint);
             finalizar();
         }
 
@@ -112,12 +118,12 @@ public class GameView extends SurfaceView {
         loop.setRunning(false);
 
         try{
-            Thread.sleep(1500);
+            Thread.sleep(2000);
         }
         catch(InterruptedException ie){
 
         }
-        //actividad.fin();
+        principal.fin();
     }
 
     public void setHolder(SurfaceHolder holder) {
