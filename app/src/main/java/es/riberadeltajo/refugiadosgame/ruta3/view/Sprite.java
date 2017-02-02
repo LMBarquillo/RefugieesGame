@@ -28,6 +28,19 @@ public class Sprite {
     private int speedX;
     private int speedY;
 
+    public Sprite(GameView gameView, Bitmap bitmap, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
+        setGameView(gameView);
+        setFilas(filas);
+        setColumnas(columnas);
+        setWidth(width);
+        setHeight(height);
+        setPosX(posX);
+        setPosY(posY);
+        setSpeedX(speedX);
+        setSpeedY(speedY);
+        setSprite(bitmap);
+    }
+
     public Sprite(GameView gameView, int spriteRes, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
         setGameView(gameView);
         setFilas(filas);
@@ -58,8 +71,8 @@ public class Sprite {
         this.sprite = Bitmap.createScaledBitmap(bm, getWidth() * getColumnas(), getHeight() * getFilas(), false);
     }
 
-    public void setSprite(Bitmap sprite) {
-        this.sprite = sprite;
+    public void setSprite(Bitmap bm) {
+        this.sprite = Bitmap.createScaledBitmap(bm, getWidth() * getColumnas(), getHeight() * getFilas(), false);
     }
 
     public int getCurrentFrame() {
@@ -146,9 +159,13 @@ public class Sprite {
 
     public void draw(Canvas canvas) {
         update();
-        Rect src = new Rect(getCurrentFrame() * getWidth(), getDireccion() * getHeight(), (getCurrentFrame() * getWidth()) + getWidth(), (getDireccion() * getHeight() + getHeight()));
-        Rect dst = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
-        canvas.drawBitmap(getSprite(), src, dst, null);
+        if (getFilas() > 1 && getColumnas() > 1) {
+            Rect src = new Rect(getCurrentFrame() * getWidth(), getDireccion() * getHeight(), (getCurrentFrame() * getWidth()) + getWidth(), (getDireccion() * getHeight() + getHeight()));
+            Rect dst = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
+            canvas.drawBitmap(getSprite(), src, dst, null);
+        } else {
+            canvas.drawBitmap(getSprite(), (float)getPosX(), (float)getPosY(), null);
+        }
     }
 
     private void update() {

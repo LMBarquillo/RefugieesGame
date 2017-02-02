@@ -34,7 +34,6 @@ public class GUI {
 
     private Paint txtPaint;
     private Paint borderPaint;
-    private int intervalo;
     private int contador;
     private int minutos;
     private int segundos;
@@ -66,7 +65,6 @@ public class GUI {
         borderPaint.setTextSize(120);
         borderPaint.setStyle(Paint.Style.STROKE);
         borderPaint.setStrokeWidth(15);
-        intervalo = 1000 / GameLoop.FPS;
     }
 
     public GameView getGameView() {
@@ -108,7 +106,7 @@ public class GUI {
     }
 
     private void update() {
-        if(++contador == intervalo) {
+        if(++contador == GameLoop.FPS) {
             contador = 0;
             if(--segundos < 0) {
                 segundos = 59;

@@ -21,7 +21,14 @@ public class Juego {
     private Bitmap agua;
     private Bitmap terreno;
 
+    private float playerWidthRatio = .092f;
+    private float playerHeightRatio = .104f;
+    private float nenufarWidthRatio = .111f;
+    private float nenufarHeightRatio = .063f;
+
     private Sprite player;
+    private Bitmap bmpNenufar;
+    private ArrayList<Sprite> nenufares;
 
     public Juego(GameView gameView) {
         setGameView(gameView);
@@ -29,7 +36,28 @@ public class Juego {
         agua = Bitmap.createScaledBitmap(agua, getGameView().getWidth(), getGameView().getHeight(), false);
         terreno = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevoterreno);
         terreno = Bitmap.createScaledBitmap(terreno, getGameView().getWidth(), getGameView().getHeight(), false);
-        player = new Sprite(getGameView(), R.drawable.sarajevodarthvader, 4, 4, 100, 200, (getGameView().getWidth() - 100) / 2, getGameView().getHeight() - 200, 0, 0);
+        player = new Sprite(getGameView(), R.drawable.sarajevodarthvader, 4, 4, (int)(getGameView().getWidth() * playerWidthRatio), (int)(getGameView().getHeight() * playerHeightRatio), (getGameView().getWidth() - 100) / 2, getGameView().getHeight() - 200, 0, 0);
+        bmpNenufar = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevonenufar);
+        nenufares = new ArrayList<Sprite>();
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+        nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, (int)(getGameView().getWidth() * nenufarWidthRatio), (int)(getGameView().getHeight() * nenufarHeightRatio), 0, 0, 0, 0));
+
     }
 
     public GameView getGameView() {
@@ -51,6 +79,9 @@ public class Juego {
     public void draw(Canvas canvas) {
         canvas.drawBitmap(agua, 0, 0, null);
         canvas.drawBitmap(terreno, 0, 0, null);
+        for(Sprite s : nenufares) {
+            s.draw(canvas);
+        }
         player.draw(canvas);
     }
 
