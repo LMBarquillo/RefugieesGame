@@ -28,7 +28,8 @@ public class SpriteNotas {
 
 
     private void update(){
-        setAltura(getAltura() + 40 );   // temporalmente, hasta hacer los cálculos para ajustar la velocidad
+        setAltura(getAltura() + 10 );   // temporalmente, hasta hacer los cálculos para ajustar la velocidad
+
     }
 
     public void draw(Canvas canvas){

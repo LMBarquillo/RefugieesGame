@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -29,12 +31,12 @@ public class NoteGenerator extends Thread {
     private boolean running;
 
     public NoteGenerator(Context context, GameView gameview, String cancion, ArrayList<SpriteNotas> sprites) {
+        notas = new ArrayList<Nota>();
         setContext(context);
         setGameview(gameview);
         setCancion(cancion);
         setSprites(sprites);
         setRunning(true);
-        notas = new ArrayList<Nota>();
         crearNotas();
     }
 
@@ -51,7 +53,9 @@ public class NoteGenerator extends Thread {
                 String splitted[] = line.split(" ");
                 getNotas().add(new Nota(Float.parseFloat(splitted[0]),Integer.parseInt(splitted[1]),Float.parseFloat(splitted[2])));
             }
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
             Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
@@ -63,27 +67,29 @@ public class NoteGenerator extends Thread {
 
         while(isRunning()) {
             Nota n;
-            while((n = getNotas().get(nota)).getPosicion() == traste) {
-                switch (n.getPosicion()) {
-                    case 1:
-                        bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notegreen);
-                        break;
-                    case 2:
-                        bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notered);
-                        break;
-                    case 3:
-                        bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteyellow);
-                        break;
-                    default:
-                        bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteblue);
+            if(getNotas().size()>0) {
+                while((n = getNotas().get(nota)).getPosicion() == traste) {
+                    switch (n.getPosicion()) {
+                        case 1:
+                            bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notegreen);
+                            break;
+                        case 2:
+                            bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notered);
+                            break;
+                        case 3:
+                            bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteyellow);
+                            break;
+                        default:
+                            bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteblue);
+                    }
+                    getSprites().add(new SpriteNotas(getGameview(),bmp,n.getPosicion(),n.getDuracion()));
+                    nota++;
                 }
-                getSprites().add(new SpriteNotas(getGameview(),bmp,n.getPosicion(),n.getDuracion()));
-                nota++;
             }
 
             try {
                 // Esperamos 1 traste (1 segundo / trastes por segundo)
-                Thread.sleep((long) (1000/getTps()));
+                Thread.sleep((long) (100/getTps()));
                 traste++;
             } catch (InterruptedException e) {
                 e.printStackTrace();

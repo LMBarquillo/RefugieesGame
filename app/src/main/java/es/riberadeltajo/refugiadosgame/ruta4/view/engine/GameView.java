@@ -30,7 +30,7 @@ public class GameView extends SurfaceView {
         super(context);
         loop=new GameLoopThread(this);
         notas = new ArrayList<SpriteNotas>();
-        generador = new NoteGenerator(context,this,"songfiles/sweetchildofmine.txt",notas);
+        generador = new NoteGenerator(context,this,"songs/sweetchildofmine.txt",notas);
 
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -69,10 +69,18 @@ public class GameView extends SurfaceView {
         canvas.drawColor(Color.YELLOW);
         Bitmap fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
         canvas.drawBitmap(fondo, null, new RectF(0, 0, canvas.getWidth(), canvas.getHeight()), null);
+        // Cuerdas
+        Bitmap cuerda = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.guitarstring);
+        for(int pos=1; pos<=4; pos++) {
+            int cx = (canvas.getWidth()/5*pos) - (cuerda.getWidth()/2);
+            canvas.drawBitmap(cuerda,null, new RectF(cx,0,cx+cuerda.getWidth(),canvas.getHeight()),null);
+        }
+        //canvas.drawBitmap(cuerda,null, new RectF(270,0,1000,canvas.getHeight()),null);
         // Dibujamos cada nota que tengamos en pantalla
         for(SpriteNotas n : notas) {
             n.draw(canvas);
         }
+        //if(notas.size()>0) notas.get(0).draw(canvas);
         paint.setColor(Color.YELLOW);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(60);
