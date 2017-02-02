@@ -20,6 +20,7 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class GameView extends SurfaceView {
 
+    private Tehran principal;
     private SurfaceHolder holder;
     private int corx,cory;
     private int ySpeed;
@@ -27,12 +28,16 @@ public class GameView extends SurfaceView {
     private Bitmap cesta;       //O el objeto con el que chocan/recoje
     private ArrayList<Objetos> objetos;
     private GameLoop loop;
+    private boolean pasaObjeto;
+
 
 
     public GameView(Context context) {
         super(context);
+        principal=(Tehran)context;
         holder=getHolder();
         objetos=new ArrayList<Objetos>();
+        setPasaObjeto(false);
         loop=new GameLoop(this);
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -60,23 +65,39 @@ public class GameView extends SurfaceView {
     }
 
     private void cargarObjetos(){
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarra),(int)(Math.random()*20)+10));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizza),(int)(Math.random()*20)+10));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*20)+10,false));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*20)+10,false));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*20)+10,true));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*20)+10,true));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*20)+10,true));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*20)+10,true));
     }
 
 
     public void draw(Canvas canvas){
         Paint paint=new Paint();
-        canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
+        paint.setColor(Color.RED);
+        paint.setTextSize(70);
+        //canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
-        for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
-            objetos.get(i).draw(canvas);
-        }
-        for(int i=0;i<objetos.size();i++){
-            if(objetos.get(i).finalPantalla()){       //Si el objeto llega al final de pantalla lo destruye
-                objetos.remove(i);                          //COMPROBAR QUE NO SEA UN OBJETO DE LOS QUE HAY QUE COJER, SINO GAME OVER
+        if(!isPasaObjeto()){
+            for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
+                objetos.get(i).draw(canvas);
+            }
+            for(int i=0;i<objetos.size();i++){
+                if(objetos.get(i).finalPantalla()){       //Si el objeto llega al final de pantalla lo destruye
+                    if(objetos.get(i).isCoger()){
+                        setPasaObjeto(true);            //COMPRUEBA QUE NO SEA UN OBJETO DE LOS QUE HAY QUE COJER, SINO GAME OVER
+                    }
+                    objetos.remove(i);
+                }
             }
         }
+        else{
+            canvas.drawText(String.format("GAME OVER"),(float)(getWidth()*0.35),(float)(getHeight()*0.5),paint);
+            finalizar();
+        }
+
     }
 
 
@@ -92,6 +113,18 @@ public class GameView extends SurfaceView {
    // public SurfaceHolder getHolder() {
    //     return holder;
     //}
+
+    public void finalizar(){
+        loop.setRunning(false);
+
+        try{
+            Thread.sleep(2000);
+        }
+        catch(InterruptedException ie){
+
+        }
+        principal.fin();
+    }
 
     public void setHolder(SurfaceHolder holder) {
         this.holder = holder;
@@ -137,5 +170,11 @@ public class GameView extends SurfaceView {
         this.cesta = cesta;
     }
 
+    public boolean isPasaObjeto() {
+        return pasaObjeto;
+    }
 
+    public void setPasaObjeto(boolean pasaObjeto) {
+        this.pasaObjeto = pasaObjeto;
+    }
 }

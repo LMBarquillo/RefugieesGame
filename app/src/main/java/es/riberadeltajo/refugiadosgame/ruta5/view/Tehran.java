@@ -13,4 +13,8 @@ public class Tehran extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(new GameView(this));
     }
+
+    public void fin(){
+        finish();
+    }
 }

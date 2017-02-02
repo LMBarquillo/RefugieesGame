@@ -17,27 +17,36 @@ public class Objetos {
     private Bitmap bmp;
     private int width;          //Ancho de los objetos
     private int height;         //Alto de los objetos
+    private boolean coger;
 
-    public Objetos(GameView gameView, Bitmap bmp, int velocidad){
+    public Objetos(GameView gameView, Bitmap bmp, int velocidad, boolean coger){
         setWidth(bmp.getWidth());
         setHeight(bmp.getHeight());
         setGameView(gameView);
-        setCorx((int)(Math.random()*getGameView().getWidth()-getWidth()));
+        setCorx((int)(Math.random()*(getGameView().getWidth()-getWidth())));
         setCory(0-getHeight());
         setBmp(bmp);
         setVelocidad(velocidad);
         setySpeed(velocidad);
+        setCoger(coger);
     }
 
     private void update(){      //Movimiento
-        if(getCory()<getGameView().getHeight()){       //+getHeight()
+        if(getCory()<getGameView().getHeight()+getHeight()){       //+getHeight()
             setCory(getCory()+getySpeed());
+        }
+        else{
+            setySpeed(0);
         }
 
     }
 
     public boolean finalPantalla(){    //Comprueba si el objeto ha llegado al final de la pantalla(abajo)
-        return getCory()>=getGameView().getHeight();//+getHeight();
+        boolean llega=false;
+        if(getCory()>=getGameView().getHeight()){
+            llega=true;
+        }
+        return llega;
     }
 
 
@@ -49,6 +58,14 @@ public class Objetos {
     //FALTA HACERLO CON EL MUÑECO PRINCIPAL
     public boolean isCollition(){
         return true;
+    }
+
+    public boolean isCoger() {
+        return coger;
+    }
+
+    public void setCoger(boolean coger) {
+        this.coger = coger;
     }
 
     public int getWidth() {
