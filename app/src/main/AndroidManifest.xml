@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ruta1.view.Madrid" />
+        <activity android:name=".ruta1.view.Madrid"
+            android:screenOrientation="portrait"/>
         <activity android:name=".ruta2.view.Milan" />
         <activity android:name=".ruta3.view.Sarajevo"
             android:screenOrientation="portrait"/>
