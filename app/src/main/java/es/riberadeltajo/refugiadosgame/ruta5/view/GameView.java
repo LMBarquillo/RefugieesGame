@@ -11,6 +11,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import es.riberadeltajo.refugiadosgame.R;
 
@@ -18,7 +20,7 @@ import es.riberadeltajo.refugiadosgame.R;
  * Created by Profesor on 26/01/2017.
  */
 
-public class GameView extends SurfaceView {
+public class GameView extends SurfaceView implements Observer {
 
     private Tehran principal;
     private SurfaceHolder holder;
@@ -29,15 +31,21 @@ public class GameView extends SurfaceView {
     private ArrayList<Objetos> objetos;
     private GameLoop loop;
     private boolean pasaObjeto;
+    private Cronometro cronometro;
+    private int segundos;
 
 
 
     public GameView(Context context) {
         super(context);
         principal=(Tehran)context;
+        cronometro=new Cronometro();
+        cronometro.addObserver(this);
+        new Thread(cronometro).start();
         holder=getHolder();
         objetos=new ArrayList<Objetos>();
         setPasaObjeto(false);
+        setSegundos(0);
         loop=new GameLoop(this);
         holder.addCallback(new SurfaceHolder.Callback() {
 
@@ -65,12 +73,12 @@ public class GameView extends SurfaceView {
     }
 
     private void cargarObjetos(){
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*20)+10,false));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*20)+10,false));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*20)+10,true));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*20)+10,true));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*20)+10,true));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*20)+10,true));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*20)+10,false,(int)Math.random()*5));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*20)+10,false,(int)Math.random()*6));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*20)+10,true,(int)Math.random()*7));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*20)+10,true,(int)(Math.random()*5)+5));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*20)+10,true,(int)(Math.random()*5)+6));
+        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*20)+10,true,(int)(Math.random()*5)+7));
     }
 
 
@@ -80,9 +88,15 @@ public class GameView extends SurfaceView {
         paint.setTextSize(70);
         //canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
-        if(!isPasaObjeto()){
+        canvas.drawText(String.format("%d",getSegundos()),(float)(getWidth()*0.05),(float)(getHeight()*0.05),paint);
+        if(!isPasaObjeto() || objetos.size()==0){
             for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
-                objetos.get(i).draw(canvas);
+                if(objetos.get(i).getSegundo()<getSegundos()){          //Si el segundo de aparicion es menor, los sigue dibujando
+                    objetos.get(i).draw(canvas);
+                }
+                else if(objetos.get(i).getSegundo()==getSegundos()){     //Si coinciden los segundos lo dibuja  //NO FUNCIONA
+                    objetos.get(i).draw(canvas);
+                }
             }
             for(int i=0;i<objetos.size();i++){
                 if(objetos.get(i).finalPantalla()){       //Si el objeto llega al final de pantalla lo destruye
@@ -124,6 +138,11 @@ public class GameView extends SurfaceView {
 
         }
         principal.fin();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        setSegundos(cronometro.getSegundos());
     }
 
     public void setHolder(SurfaceHolder holder) {
@@ -176,5 +195,13 @@ public class GameView extends SurfaceView {
 
     public void setPasaObjeto(boolean pasaObjeto) {
         this.pasaObjeto = pasaObjeto;
+    }
+
+    public int getSegundos() {
+        return segundos;
+    }
+
+    public void setSegundos(int segundos) {
+        this.segundos = segundos;
     }
 }

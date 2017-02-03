@@ -18,8 +18,9 @@ public class Objetos {
     private int width;          //Ancho de los objetos
     private int height;         //Alto de los objetos
     private boolean coger;
+    private int segundo;
 
-    public Objetos(GameView gameView, Bitmap bmp, int velocidad, boolean coger){
+    public Objetos(GameView gameView, Bitmap bmp, int velocidad, boolean coger, int seg){
         setWidth(bmp.getWidth());
         setHeight(bmp.getHeight());
         setGameView(gameView);
@@ -29,6 +30,7 @@ public class Objetos {
         setVelocidad(velocidad);
         setySpeed(velocidad);
         setCoger(coger);
+        setSegundo(seg);
     }
 
     private void update(){      //Movimiento
@@ -58,6 +60,14 @@ public class Objetos {
     //FALTA HACERLO CON EL MUÑECO PRINCIPAL
     public boolean isCollition(){
         return true;
+    }
+
+    public int getSegundo() {
+        return segundo;
+    }
+
+    public void setSegundo(int segundo) {
+        this.segundo = segundo;
     }
 
     public boolean isCoger() {
