@@ -193,4 +193,8 @@ public class Sprite {
 
     }
 
+    public boolean isCollition(Sprite s) {
+        return s.getPosX() > getPosX() && s.getPosX() < getPosX() + getWidth() && s.getPosY() > getPosY() && s.getPosY() < getPosY() + getHeight();
+    }
+
 }
