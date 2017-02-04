@@ -24,7 +24,6 @@ public class GameView2 extends SurfaceView {
     private Bitmap player;
     private SurfaceHolder holder;
     private GameLoopThread2 loop;
-    private Bitmap fondo;
     private int puntuacion;
     private Activity actividad;
     private long crono;
@@ -32,6 +31,7 @@ public class GameView2 extends SurfaceView {
     private Jugador jugador;
     private ArrayList<Boton> botones;
     private boolean enMarcha;
+    private ScrollingBackground fondo;
 
 
     public GameView2(Context context) {
@@ -44,15 +44,17 @@ public class GameView2 extends SurfaceView {
 
 
 
+
         holder = getHolder();
 
         holder.addCallback(new SurfaceHolder.Callback() {
 
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
+                crear();
                 loop.setRunning(true);
                 loop.start();
-                crear();
+
 
 
             }
@@ -81,6 +83,14 @@ public class GameView2 extends SurfaceView {
 
     }
 
+    public ScrollingBackground getFondo() {
+        return fondo;
+    }
+
+    public void setFondo(ScrollingBackground fondo) {
+        this.fondo = fondo;
+    }
+
     public Activity getActividad() {
         return actividad;
     }
@@ -107,16 +117,15 @@ public class GameView2 extends SurfaceView {
         Paint paint = new Paint();
         long actual;
         float trans;
-        canvas.drawColor(Color.DKGRAY);
         paint.setColor(Color.RED);
         paint.setTextSize(60);
-
+        canvas.drawText(String.valueOf(getFondo().getTopealto()), 300, 300, paint);
+        getFondo().onDraw(canvas);
         for (Boton p : botones) {
             p.onDraw(canvas);
         }
 
             jugador.onDraw(canvas);
-
 
         // canvas.drawText(String.valueOf(jugador.getWidth()+" "+jugador.getHeight()), 300, 300, paint);
 
@@ -157,19 +166,27 @@ public class GameView2 extends SurfaceView {
         Bitmap redimension = Bitmap.createScaledBitmap(imagen, (getWidth()), (getHeight()), false);
         int alto = redimension.getHeight() / 4;
         int ancho = redimension.getWidth() / 4;
-        setJugador(new Jugador(this, imagen, getHeight() - alto, (int) ((getWidth() * 0.5) - (ancho * 0.5))));
+        setJugador(new Jugador(this, redimension, getHeight() - alto*2, (int) ((getWidth() * 0.5) - (ancho * 0.5))));
         getJugador().setEnMarcha(false);
         Bitmap bot = BitmapFactory.decodeResource(getResources(), R.drawable.milan_flecha_delante);
         double alt = getHeight() * 0.10;
         double anch = getWidth() * 0.20;
-        Boton boton = new Boton(null, bot, Boton.ACTION_AVANCE, (int) (getWidth() - anch), (int) (getHeight() - alt), (int) alt, (int) anch);
+        Boton boton = new Boton( bot, Boton.ACTION_AVANCE, (int) (getWidth() - anch), (int) (getHeight() - alt), (int) alt, (int) anch);
         botones.add(boton);
         bot = BitmapFactory.decodeResource(getResources(), R.drawable.milan_flecha_atras);
-        boton = new Boton(null, bot, Boton.ACTION_ATRAS, 0, (int) (getHeight() - alt), (int) alt, (int) anch);
+        boton = new Boton( bot, Boton.ACTION_ATRAS, 0, (int) (getHeight() - alt), (int) alt, (int) anch);
         botones.add(boton);
         bot = BitmapFactory.decodeResource(getResources(), R.drawable.milan_flecha_arriba);
-        boton = new Boton(null, bot, Boton.ACTION_UP, (int) ((getWidth() * 0.5) - (anch * 0.5)), (int) (getHeight() - alt), (int) alt, (int) anch);
+        boton = new Boton(bot, Boton.ACTION_UP, (int) ((getWidth() * 0.5) - (anch * 0.5)), (int) (getHeight() - alt), (int) alt, (int) anch);
         botones.add(boton);
+        Bitmap fon=BitmapFactory.decodeResource(getResources(), R.drawable.milan_fondo);
+      //  int anchoactual=fon.getWidth();
+       // int altoactual=fon.getHeight();
+       // int altonuevo=getHeight();
+        int anchonuevo=(fon.getHeight()*getWidth())/getHeight();
+
+
+        setFondo(new ScrollingBackground(fon, anchonuevo, fon.getHeight(), getJugador(), getWidth(), getHeight()));
     }
 
     @Override
@@ -184,12 +201,14 @@ public class GameView2 extends SurfaceView {
                         }
                         else if(p.getAccion().equals(Boton.ACTION_AVANCE)){
                             getJugador().avanzar();
+                            getFondo().avanzarX();
 
 
 
                         }
                         else if(p.getAccion().equals(Boton.ACTION_ATRAS)){
                             getJugador().atras();
+                            getFondo().retrocederX();
 
 
                         }

@@ -12,8 +12,8 @@ import android.graphics.Rect;
 
 public class Jugador {
 
-    private final int VELOCIDAD_SALTO=10;
-    private final int VELOCIDAD_AVANCE=10;
+    private final int VELOCIDAD_SALTO=100;
+    private final int VELOCIDAD_AVANCE=20;
     private final int[] DIRECCION={3,1,0,2}; //Para saber en qué dirección tiene que pintar
     private final int  BMP_COLUMNS=4; //Cantidad de columnas de movimiento
     private final int BMP_ROWS=4; //Cantidad de filas de movimiento
@@ -29,6 +29,9 @@ public class Jugador {
     private boolean enMarcha;
     private boolean delante;
     private boolean detras;
+    private boolean saltando;
+    private int corxinicio, coryinicio;
+
 
 
     public Jugador(GameView2 gameview2, Bitmap bmp, int cory, int corx) {
@@ -36,21 +39,21 @@ public class Jugador {
 
         setWidth(bmp.getWidth()/BMP_COLUMNS);
         setHeight(bmp.getHeight()/BMP_ROWS);
-
         setGameview2(gameview2);
         setBmp(bmp);
         setCurrentFrame(0);
         setxSpeed(VELOCIDAD_AVANCE);
         setySpeed(VELOCIDAD_SALTO);
         setCorx(corx);
+        setCorxinicio(corx);
         setCory(cory);
-        //setCorx((int)(getGameview2().getWidth()*0.50));
-        //setCory((getGameview2().getHeight()-height)+20);
+        setCoryinicio(cory);
         setPuntos(0);
-        setSalto(getHeight()*3);
+        setSalto(getHeight());
         setEnMarcha(false);
         setDelante(true);
         setDetras(false);
+        setSaltando(false);
 
 
     }
@@ -166,6 +169,30 @@ public class Jugador {
         this.puntos = puntos;
     }
 
+    public int getCorxinicio() {
+        return corxinicio;
+    }
+
+    public void setCorxinicio(int corxinicio) {
+        this.corxinicio = corxinicio;
+    }
+
+    public int getCoryinicio() {
+        return coryinicio;
+    }
+
+    public void setCoryinicio(int coryinicio) {
+        this.coryinicio = coryinicio;
+    }
+
+    public boolean isSaltando() {
+        return saltando;
+    }
+
+    public void setSaltando(boolean saltando) {
+        this.saltando = saltando;
+    }
+
     //Actualiza a la siguiente posición en la que va a aparecer
     public void update(){
 
@@ -187,11 +214,12 @@ public class Jugador {
 
 
 
+
     }
     private int getDirection(){
 
-        if(isDelante()) return DIRECCION[3];
-        else return DIRECCION[1];
+        if(!isDelante()) return DIRECCION[1];
+        else return DIRECCION[3];
 
     }
 
@@ -202,14 +230,19 @@ public class Jugador {
         paint.setColor(Color.RED);
         paint.setTextSize(60);
         int srcx, srcy;
+        srcx = currentFrame * width;
+        srcy = getDirection() * height;
 
-    if(isEnMarcha()) {
-         srcx = currentFrame * width;
-         srcy = getDirection() * height;
-    }else{
-         srcx=0;
-         srcy=DIRECCION[3]*height;
-    }
+        if(isSaltando()){
+            setCory(getCory()-VELOCIDAD_SALTO);
+            if(getCory()<=getSalto()){
+                setSaltando(false);
+                colocar();
+            }
+        }
+        if(isEnMarcha() && !isSaltando()) {
+        update();
+        }
 
     Rect src = new Rect(srcx, srcy, srcx + width, srcy + height);
     Rect dst = new Rect(corx, cory, corx + width, cory + height);
@@ -233,7 +266,6 @@ public class Jugador {
 
     }
     public void avanzar(){
-        update();
         setEnMarcha(true);
         setDelante(true);
         setDetras(false);
@@ -242,17 +274,23 @@ public class Jugador {
 
     }
     public void saltar(){
-        update();
+        setEnMarcha(true);
+        setSaltando(true);
+
+
 
     }
     public void atras(){
-        update();
         setEnMarcha(true);
         setDelante(false);
         setDetras(true);
 
 
 
+    }
+    public void colocar(){
+        setCorx(getCorxinicio());
+        setCory(getCoryinicio());
     }
     public void parar(){
         setEnMarcha(false);

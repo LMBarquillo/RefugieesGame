@@ -27,15 +27,15 @@ public class GameView extends SurfaceView {
     private Boton boton;
     private ArrayList<Boton> botones;
     private Bitmap fondo;
-    private Activity actividad;
+    private milan_juego actividad;
 
 
     public GameView(Context context) {
         super(context);
-        botones=new ArrayList<Boton>();
-        loop=new GameLoopThread(this);
-        fondo= BitmapFactory.decodeResource(getResources(), R.drawable.milan_primerfondo);
-        actividad=(Activity)context;
+        setBotones(new ArrayList<Boton>());
+        setLoop(new GameLoopThread(this));
+        setFondo(BitmapFactory.decodeResource(getResources(), R.drawable.milan_primerfondo));
+        setActividad((milan_juego)context);
 
 
         holder=getHolder();
@@ -44,9 +44,10 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
+                createBotones();
                 loop.setRunning(true);
                 loop.start();
-                createBotones();
+
 
 
 
@@ -81,8 +82,40 @@ public class GameView extends SurfaceView {
         return actividad;
     }
 
-    public void setActividad(Activity actividad) {
+    public void setActividad(milan_juego actividad) {
         this.actividad = actividad;
+    }
+
+    public Boton getBoton() {
+        return boton;
+    }
+
+    public void setBoton(Boton boton) {
+        this.boton = boton;
+    }
+
+    public ArrayList<Boton> getBotones() {
+        return botones;
+    }
+
+    public void setBotones(ArrayList<Boton> botones) {
+        this.botones = botones;
+    }
+
+    public Bitmap getFondo() {
+        return fondo;
+    }
+
+    public void setFondo(Bitmap fondo) {
+        this.fondo = fondo;
+    }
+
+    public GameLoopThread getLoop() {
+        return loop;
+    }
+
+    public void setLoop(GameLoopThread loop) {
+        this.loop = loop;
     }
 
     @Override
@@ -133,14 +166,14 @@ public class GameView extends SurfaceView {
 
     public void draw(Canvas canvas){
 
-        Bitmap nuevoFondo= Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
+        Bitmap nuevoFondo= Bitmap.createScaledBitmap(getFondo(), getWidth(), getHeight(), false);
 
 
         canvas.drawBitmap(nuevoFondo, 0, 0, null);
 
 
 
-            for (Boton p : botones)
+            for (Boton p : getBotones())
                 p.onDraw(canvas);
 
 
@@ -156,13 +189,13 @@ public class GameView extends SurfaceView {
 
     public void createBotones(){
         Bitmap imagen=BitmapFactory.decodeResource(getResources(), R.drawable.milan_button_play);
-        boton=new Boton(this, imagen, Boton.ACTION_PLAY, (int)(getWidth()*0.20),(int) (getHeight()*0.2),(int)(getHeight()*0.15),(int) (getWidth()*0.6) );
+        boton=new Boton(imagen, Boton.ACTION_PLAY, (int)(getWidth()*0.20),(int) (getHeight()*0.2),(int)(getHeight()*0.15),(int) (getWidth()*0.6) );
         botones.add(boton);
         imagen=BitmapFactory.decodeResource(getResources(), R.drawable.milan_button_help);
-        boton=new Boton(this, imagen, Boton.ACTION_HELP, (int)(getWidth()*0.20),(int) (getHeight()*0.5), (int)(getHeight()*0.15),(int) (getWidth()*0.6));
+        boton=new Boton(imagen, Boton.ACTION_HELP, (int)(getWidth()*0.20),(int) (getHeight()*0.5), (int)(getHeight()*0.15),(int) (getWidth()*0.6));
         botones.add(boton);
         imagen=BitmapFactory.decodeResource(getResources(), R.drawable.milan_button_exit);
-        boton=new Boton(this, imagen, Boton.ACTION_EXIT, (int)(getWidth()*0.20),(int) (getHeight()*0.8), (int)(getHeight()*0.15),(int) (getWidth()*0.6));
+        boton=new Boton( imagen, Boton.ACTION_EXIT, (int)(getWidth()*0.20),(int) (getHeight()*0.8), (int)(getHeight()*0.15),(int) (getWidth()*0.6));
         botones.add(boton);
 
 

@@ -23,9 +23,9 @@ public class Boton {
 
 
 
-    public Boton(GameView gameview, Bitmap bmp, String accion, int corx, int cory, int height, int width) {
+    public Boton( Bitmap bmp, String accion, int corx, int cory, int height, int width) {
 
-        this.gameview = gameview;
+
         setCory(cory);
         setCorx(corx);
         setAccion(accion);
@@ -53,13 +53,7 @@ public class Boton {
         this.cory = cory;
     }
 
-    public GameView getGameview() {
-        return gameview;
-    }
 
-    public void setGameview(GameView gameview) {
-        this.gameview = gameview;
-    }
 
     public Bitmap getBmp() {
         return bmp;
