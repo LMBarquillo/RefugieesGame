@@ -27,7 +27,9 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
             @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {}
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                stop();
+            }
         });
     }
 
@@ -68,17 +70,24 @@ public class GameView extends SurfaceView {
                 getJuego().touch((int)event.getX(), (int)event.getY());
                 getGui().touch((int)event.getX(), (int)event.getY());
             }
+        } else
+        if(event.getAction() == MotionEvent.ACTION_UP) {
+            synchronized (getHolder()) {
+                getJuego().unTouch((int)event.getX(), (int)event.getY());
+                getGui().unTouch((int)event.getX(), (int)event.getY());
+            }
         }
         return true;
     }
 
     private void start() {
-        setGui(new GUI(this));
         setJuego(new Juego(this));
+        setGui(new GUI(this, getJuego()));
+        getGui().start();
         getLoop().setRunning(true);
     }
 
-    public void finish() {
+    public void stop() {
         getLoop().setRunning(false);
     }
 }

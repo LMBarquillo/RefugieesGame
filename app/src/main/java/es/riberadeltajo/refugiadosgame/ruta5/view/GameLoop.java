@@ -1,18 +1,18 @@
-package es.riberadeltajo.refugiadosgame.ruta4.view.engine;
+package es.riberadeltajo.refugiadosgame.ruta5.view;
 
 import android.graphics.Canvas;
 
 /**
- * Game Loop Thread
- * @author Luismi
+ * Created by Profesor on 27/01/2017.
  */
 
-public class GameLoopThread extends Thread {
-    private final long FPS=60;
+public class GameLoop extends Thread{
+
+    private final long FPS=10;
     private GameView gameView;
     private boolean running;
 
-    public GameLoopThread(GameView gameView){
+    public GameLoop(GameView gameView){
         setGameView(gameView);
         setRunning(false);
     }
@@ -38,7 +38,6 @@ public class GameLoopThread extends Thread {
         long tick=1000/FPS;
         long startTime;
         long sleepTime;
-
         while(isRunning()){
             Canvas canvas=null;
             startTime=System.currentTimeMillis();
