@@ -20,7 +20,8 @@
         <activity android:name=".ruta3.view.Sarajevo" />
         <activity android:name=".ruta4.view.Istanbul" />
         <activity android:name=".ruta5.view.Tehran" />
-        <activity android:name=".ruta2.view.juego.milan_juego"></activity>
+        <activity android:name=".ruta2.view.juego.milan_juego" />
+        <activity android:name=".ruta2.view.juego.milan_juego2"></activity>
     </application>
 
 </manifest>

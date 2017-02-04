@@ -19,6 +19,8 @@ import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 
 public class GameView extends SurfaceView {
 
+    private int requescode=1;
+
 
     private SurfaceHolder holder;
     private GameLoopThread loop;
@@ -75,6 +77,14 @@ public class GameView extends SurfaceView {
 
     }
 
+    public Activity getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(Activity actividad) {
+        this.actividad = actividad;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction()== MotionEvent.ACTION_DOWN){
@@ -111,6 +121,11 @@ public class GameView extends SurfaceView {
     }
     public void jugar(){
 
+        Intent i=new Intent(getActividad(),milan_juego2.class);
+        getActividad().startActivityForResult(i, requescode);
+
+
+
     }
 
 
@@ -141,13 +156,13 @@ public class GameView extends SurfaceView {
 
     public void createBotones(){
         Bitmap imagen=BitmapFactory.decodeResource(getResources(), R.drawable.milan_button_play);
-        boton=new Boton(this, imagen, Boton.ACTION_PLAY, (int)(getWidth()*0.35),(int) (getHeight()*0.2));
+        boton=new Boton(this, imagen, Boton.ACTION_PLAY, (int)(getWidth()*0.20),(int) (getHeight()*0.2),(int)(getHeight()*0.15),(int) (getWidth()*0.6) );
         botones.add(boton);
         imagen=BitmapFactory.decodeResource(getResources(), R.drawable.milan_button_help);
-        boton=new Boton(this, imagen, Boton.ACTION_HELP, (int)(getWidth()*0.35),(int) (getHeight()*0.5));
+        boton=new Boton(this, imagen, Boton.ACTION_HELP, (int)(getWidth()*0.20),(int) (getHeight()*0.5), (int)(getHeight()*0.15),(int) (getWidth()*0.6));
         botones.add(boton);
         imagen=BitmapFactory.decodeResource(getResources(), R.drawable.milan_button_exit);
-        boton=new Boton(this, imagen, Boton.ACTION_EXIT, (int)(getWidth()*0.35),(int) (getHeight()*0.8));
+        boton=new Boton(this, imagen, Boton.ACTION_EXIT, (int)(getWidth()*0.20),(int) (getHeight()*0.8), (int)(getHeight()*0.15),(int) (getWidth()*0.6));
         botones.add(boton);
 
 

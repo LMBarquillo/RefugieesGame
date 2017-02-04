@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta2.view.juego;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 
 public class Boton {
@@ -8,6 +9,9 @@ public class Boton {
     public static final String ACTION_HELP="HELP";
     public static final String ACTION_EXIT="EXIT";
     public static final String ACTION_PLAY="PLAY";
+    public static final String ACTION_UP="ARRIBA";
+    public static final String ACTION_AVANCE="ADELANTE";
+    public static final String ACTION_ATRAS="ATRAS";
 
 
 
@@ -19,15 +23,50 @@ public class Boton {
 
 
 
-    public Boton(GameView gameview, Bitmap bmp, String accion, int corx, int cory) {
+    public Boton(GameView gameview, Bitmap bmp, String accion, int corx, int cory, int height, int width) {
 
         this.gameview = gameview;
-        this.bmp = bmp;
-        this.corx = corx;
-        this.cory = cory;
+        setCory(cory);
+        setCorx(corx);
         setAccion(accion);
+        Bitmap imagen= Bitmap.createScaledBitmap(bmp, width, height, false);
+        setBmp(imagen);
 
 
+
+
+    }
+
+    public int getCorx() {
+        return corx;
+    }
+
+    public void setCorx(int corx) {
+        this.corx = corx;
+    }
+
+    public int getCory() {
+        return cory;
+    }
+
+    public void setCory(int cory) {
+        this.cory = cory;
+    }
+
+    public GameView getGameview() {
+        return gameview;
+    }
+
+    public void setGameview(GameView gameview) {
+        this.gameview = gameview;
+    }
+
+    public Bitmap getBmp() {
+        return bmp;
+    }
+
+    public void setBmp(Bitmap bmp) {
+        this.bmp = bmp;
     }
 
     public String getAccion() {
