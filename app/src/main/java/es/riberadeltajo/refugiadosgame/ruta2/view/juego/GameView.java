@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -34,7 +35,9 @@ public class GameView extends SurfaceView {
         super(context);
         setBotones(new ArrayList<Boton>());
         setLoop(new GameLoopThread(this));
-        setFondo(BitmapFactory.decodeResource(getResources(), R.drawable.milan_primerfondo));
+        Bitmap resource=BitmapFactory.decodeResource(getResources(), R.drawable.milan_primerfondo);
+
+        setFondo(resource);
         setActividad((milan_juego)context);
 
 
@@ -156,6 +159,7 @@ public class GameView extends SurfaceView {
 
         Intent i=new Intent(getActividad(),milan_juego2.class);
         getActividad().startActivityForResult(i, requescode);
+        getLoop().setRunning(false);
 
 
 
@@ -166,22 +170,12 @@ public class GameView extends SurfaceView {
 
     public void draw(Canvas canvas){
 
-        Bitmap nuevoFondo= Bitmap.createScaledBitmap(getFondo(), getWidth(), getHeight(), false);
+        Rect imagenfondoactual = new Rect(0, 0, getFondo().getWidth(),getFondo().getHeight());
+        Rect imagenenpantalla = new Rect(0, 0, canvas.getWidth(), canvas.getHeight());
+        canvas.drawBitmap(getFondo(),imagenfondoactual,imagenenpantalla, null);
 
-
-        canvas.drawBitmap(nuevoFondo, 0, 0, null);
-
-
-
-            for (Boton p : getBotones())
+        for (Boton p : getBotones())
                 p.onDraw(canvas);
-
-
-
-
-
-
-
 
     }
 
