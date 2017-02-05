@@ -8,13 +8,14 @@ import android.graphics.Canvas;
  */
 
 public class GameLoopThread extends Thread {
-    private final long FPS=60;
+    private int fps;
     private GameView gameView;
     private boolean running;
 
     public GameLoopThread(GameView gameView){
         setGameView(gameView);
         setRunning(false);
+        setFps(gameView.getFPS());  // Nos traemos los FPS del GameView. Los tenemos ahí porque los necesitaremos en otras clases para conseguir el sincronismo de la música.
     }
 
     public void setGameView(GameView gameView) {
@@ -25,8 +26,15 @@ public class GameLoopThread extends Thread {
         this.running = running;
     }
 
-    public GameView getGameView() {
+    public int getFps() {
+        return fps;
+    }
 
+    public void setFps(int fps) {
+        this.fps = fps;
+    }
+
+    public GameView getGameView() {
         return gameView;
     }
 
@@ -35,7 +43,7 @@ public class GameLoopThread extends Thread {
     }
 
     public void run(){
-        long tick=1000/FPS;
+        long tick=1000/getFps();
         long startTime;
         long sleepTime;
 

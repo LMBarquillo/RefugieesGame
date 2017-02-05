@@ -15,6 +15,11 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.engine.GameView;
  */
 
 public class SpriteNotas {
+    /**
+     * La dificultad sólo hace que las notas salgan más separadas entre sí y la velocidad sea mayor
+     * pero la velocidad de la canción sigue siendo la misma, por lo que el sincronismo se mantiene
+     */
+    private final int DIFICULTAD = 4;
     private GameView gameView;
     private Bitmap bmp;
     private int posx;
@@ -30,7 +35,8 @@ public class SpriteNotas {
         setPosx((getSizeNota() * posicion - getSizeNota()) + (getSizeNota()/2));
         setDuracion(duracion);
         setAltura(-getSizeNota());
-        setAvance(getSizeNota() / 60 * 4);  // avance = tamaño traste / FPS / trastes por segundo  ???
+        // avance = tamaño traste / FPS * trastes por segundo * modificador dificultad (separación de notas)
+        setAvance((int)(getSizeNota() / 60 * getGameView().getTPS() * DIFICULTAD));
     }
 
     private void update(){
