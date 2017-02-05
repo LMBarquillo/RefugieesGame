@@ -30,7 +30,7 @@ public class GameView extends SurfaceView {
         super(context);
         loop=new GameLoopThread(this);
         notas = new ArrayList<SpriteNotas>();
-        generador = new NoteGenerator(context,this,"songs/sweetchildofmine.txt",notas);
+        generador = new NoteGenerator(context,this,"songs/sweetchildofmine.txt");
 
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -66,7 +66,6 @@ public class GameView extends SurfaceView {
     public void draw(Canvas canvas){
         Paint paint = new Paint();  // información en pantalla
         // Dibujamos fondo
-        canvas.drawColor(Color.YELLOW);
         Bitmap fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
         canvas.drawBitmap(fondo, null, new RectF(0, 0, canvas.getWidth(), canvas.getHeight()), null);
         // Cuerdas
@@ -75,12 +74,11 @@ public class GameView extends SurfaceView {
             int cx = (canvas.getWidth()/5*pos) - (cuerda.getWidth()/2);
             canvas.drawBitmap(cuerda,null, new RectF(cx,0,cx+cuerda.getWidth(),canvas.getHeight()),null);
         }
-        //canvas.drawBitmap(cuerda,null, new RectF(270,0,1000,canvas.getHeight()),null);
         // Dibujamos cada nota que tengamos en pantalla
-        for(SpriteNotas n : notas) {
+        for(SpriteNotas n : getNotas()) {
             n.draw(canvas);
         }
-        //if(notas.size()>0) notas.get(0).draw(canvas);
+        // Monitores y/o contadores
         paint.setColor(Color.YELLOW);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(60);
@@ -103,6 +101,10 @@ public class GameView extends SurfaceView {
         return true;
     }
 
+    public synchronized void deleteFirstNote() {
+        getNotas().remove(0);
+    }
+
     public void finish() {
         getLoop().setRunning(false);
     }
@@ -115,7 +117,7 @@ public class GameView extends SurfaceView {
         this.loop = loop;
     }
 
-    public ArrayList<SpriteNotas> getNotas() {
+    public synchronized ArrayList<SpriteNotas> getNotas() {
         return notas;
     }
 

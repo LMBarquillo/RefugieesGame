@@ -27,15 +27,13 @@ public class NoteGenerator extends Thread {
     private double tps;     // trastes por segundo
     private String cancion;
     private ArrayList<Nota> notas;
-    private ArrayList<SpriteNotas> sprites;
     private boolean running;
 
-    public NoteGenerator(Context context, GameView gameview, String cancion, ArrayList<SpriteNotas> sprites) {
-        notas = new ArrayList<Nota>();
+    public NoteGenerator(Context context, GameView gameview, String cancion) {
+        setNotas(new ArrayList<Nota>());
         setContext(context);
         setGameview(gameview);
         setCancion(cancion);
-        setSprites(sprites);
         setRunning(true);
         crearNotas();
     }
@@ -67,8 +65,32 @@ public class NoteGenerator extends Thread {
 
         while(isRunning()) {
             Nota n;
-            if(getNotas().size()>0) {
-                while((n = getNotas().get(nota)).getPosicion() == traste) {
+
+            /*while((n = getNotas().get(nota)).getPosicion() == traste) {
+                switch (n.getPosicion()) {
+                    case 1:
+                        bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notegreen);
+                        break;
+                    case 2:
+                        bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notered);
+                        break;
+                    case 3:
+                        bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteyellow);
+                        break;
+                    default:
+                        bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteblue);
+                }
+                getGameview().getNotas().add(new SpriteNotas(getGameview(),bmp,n.getPosicion(),n.getDuracion()));
+                nota++;
+            }*/
+
+            try {
+                // Esperamos 1 traste (1 segundo / trastes por segundo)
+                Thread.sleep((long) (1000/getTps()));
+                traste++;
+
+                if(traste == getNotas().get(nota).getTraste()) {
+                    n = getNotas().get(nota);
                     switch (n.getPosicion()) {
                         case 1:
                             bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notegreen);
@@ -82,15 +104,9 @@ public class NoteGenerator extends Thread {
                         default:
                             bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteblue);
                     }
-                    getSprites().add(new SpriteNotas(getGameview(),bmp,n.getPosicion(),n.getDuracion()));
+                    getGameview().getNotas().add(new SpriteNotas(getGameview(),bmp,n.getPosicion(),n.getDuracion()));
                     nota++;
                 }
-            }
-
-            try {
-                // Esperamos 1 traste (1 segundo / trastes por segundo)
-                Thread.sleep((long) (100/getTps()));
-                traste++;
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -135,14 +151,6 @@ public class NoteGenerator extends Thread {
 
     public void setNotas(ArrayList<Nota> notas) {
         this.notas = notas;
-    }
-
-    public ArrayList<SpriteNotas> getSprites() {
-        return sprites;
-    }
-
-    public void setSprites(ArrayList<SpriteNotas> sprites) {
-        this.sprites = sprites;
     }
 
     public boolean isRunning() {
