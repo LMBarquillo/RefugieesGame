@@ -12,7 +12,7 @@ import android.graphics.Rect;
 
 public class Jugador {
 
-    private final int VELOCIDAD_SALTO=100;
+    private final int VELOCIDAD_SALTO=70;
     private final int VELOCIDAD_AVANCE=20;
     private final int[] DIRECCION={3,1,0,2}; //Para saber en qué dirección tiene que pintar
     private final int  BMP_COLUMNS=4; //Cantidad de columnas de movimiento
@@ -30,6 +30,7 @@ public class Jugador {
     private boolean delante;
     private boolean detras;
     private boolean saltando;
+    private boolean descendiendo;
     private int corxinicio, coryinicio;
 
 
@@ -54,6 +55,7 @@ public class Jugador {
         setDelante(true);
         setDetras(false);
         setSaltando(false);
+        setDescendiendo(false);
 
 
     }
@@ -193,21 +195,17 @@ public class Jugador {
         this.saltando = saltando;
     }
 
+    public boolean isDescendiendo() {
+        return descendiendo;
+    }
+
+    public void setDescendiendo(boolean descendiendo) {
+        this.descendiendo = descendiendo;
+    }
+
     //Actualiza a la siguiente posición en la que va a aparecer
     public void update(){
 
-       /*if(corx>=gameview2.getWidth()-width-xSpeed || corx+xSpeed<=0){
-            xSpeed=-xSpeed; //Se le cambia la dirección
-        }
-        else {
-            corx+=xSpeed; //Se le incrementa la dirección
-        }
-        if(cory>=gameview2.getHeight()-height-ySpeed || cory+ySpeed<=0){
-            ySpeed=-ySpeed; //Se le cambia la dirección
-        }
-        else {
-            cory+=ySpeed; //Se le incrementa la dirección a las coordenadas
-        }*/
 
     currentFrame = ++currentFrame % BMP_COLUMNS;
 
@@ -234,19 +232,31 @@ public class Jugador {
         srcy = getDirection() * height;
 
         if(isSaltando()){
-            setCory(getCory()-VELOCIDAD_SALTO);
+            if (isDescendiendo())
+                setCory(getCory()+VELOCIDAD_SALTO);
+            else
+                setCory(getCory()-VELOCIDAD_SALTO);
             if(getCory()<=getSalto()){
-                setSaltando(false);
-                colocar();
+                setDescendiendo(true);
+
             }
+            if(getCory()>=getCoryinicio()){
+                setDescendiendo(false);
+                setSaltando(false);
+                setEnMarcha(false);
+
+            }
+
         }
         if(isEnMarcha() && !isSaltando()) {
+
         update();
+
         }
 
-    Rect src = new Rect(srcx, srcy, srcx + width, srcy + height);
-    Rect dst = new Rect(corx, cory, corx + width, cory + height);
-    canvas.drawBitmap(bmp, src, dst, null);
+        Rect src = new Rect(srcx, srcy, srcx + width, srcy + height);
+        Rect dst = new Rect(corx, cory, corx + width, cory + height);
+        canvas.drawBitmap(bmp, src, dst, null);
 
 
 
@@ -291,6 +301,7 @@ public class Jugador {
     public void colocar(){
         setCorx(getCorxinicio());
         setCory(getCoryinicio());
+        setEnMarcha(false);
     }
     public void parar(){
         setEnMarcha(false);
