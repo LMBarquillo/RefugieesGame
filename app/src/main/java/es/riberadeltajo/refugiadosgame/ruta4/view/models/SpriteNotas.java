@@ -48,16 +48,16 @@ public class SpriteNotas {
 
     public void draw(Canvas canvas){
         update();
-        canvas.drawBitmap(getBmp(),getPosx(),getAltura(),null);
 
+        Rect src = new Rect(0,0,getBmp().getWidth(),getBmp().getHeight());
+        Rect dst = new Rect(getPosx(),getAltura(),getSizeNota()+getPosx(),getSizeNota()+getAltura());
+        canvas.drawBitmap(getBmp(),src,dst,null);
 
         // Monitores y/o contadores
         Paint paint = new Paint();
         paint.setColor(Color.YELLOW);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(60);
-        //canvas.drawText(String.valueOf(getPosAL()),getPosx()-50,getAltura(),paint);
-        //canvas.drawText(String.valueOf(getAltura()),getPosx(),getGameView().getHeight()-200,paint);
     }
 
     public int getPosx() {

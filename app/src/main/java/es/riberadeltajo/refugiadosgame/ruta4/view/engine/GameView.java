@@ -69,6 +69,8 @@ public class GameView extends SurfaceView {
         });
     }
 
+    // MIRAR LA LETRA STREET GATHERING
+
     public void draw(Canvas canvas){
         Paint paint = new Paint();  // información en pantalla
         // Dibujamos fondo

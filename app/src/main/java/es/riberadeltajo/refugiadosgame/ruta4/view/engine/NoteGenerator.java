@@ -71,29 +71,30 @@ public class NoteGenerator extends Thread {
                 Thread.sleep((long) (1000/getTps()));
                 traste++;
 
-                do {
-                    n = getNotas().get(nota);
-
-                    if(traste == n.getTraste()) {
+                if(getNotas().size() > nota) {      // Toca hasta que se acaban las notas
+                    do {
                         n = getNotas().get(nota);
-                        switch (n.getPosicion()) {
-                            case 1:
-                                bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notegreen);
-                                break;
-                            case 2:
-                                bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notered);
-                                break;
-                            case 3:
-                                bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteyellow);
-                                break;
-                            default:
-                                bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteblue);
-                        }
-                        getGameview().getNotas().add(new SpriteNotas(getGameview(),bmp,n.getPosicion(),n.getDuracion()));
-                        nota++;
-                    }
-                } while(traste == n.getTraste());
 
+                        if (traste == n.getTraste()) {
+                            n = getNotas().get(nota);
+                            switch (n.getPosicion()) {
+                                case 1:
+                                    bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notegreen);
+                                    break;
+                                case 2:
+                                    bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.notered);
+                                    break;
+                                case 3:
+                                    bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteyellow);
+                                    break;
+                                default:
+                                    bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteblue);
+                            }
+                            getGameview().getNotas().add(new SpriteNotas(getGameview(), bmp, n.getPosicion(), n.getDuracion()));
+                            nota++;
+                        }
+                    } while (traste == n.getTraste());
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
