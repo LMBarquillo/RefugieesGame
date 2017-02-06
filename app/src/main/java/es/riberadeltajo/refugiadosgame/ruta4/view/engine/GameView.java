@@ -99,7 +99,7 @@ public class GameView extends SurfaceView {
     }
 
     private void controlMusic(int posicionPickups) {
-        int retrasoCancion = 640;
+        int retrasoCancion = 430;
         // cuando la primera nota pasa por el traste, arrancamos la música
         if(!musica.isPlaying() && notas.size() > 0) {
             if(notas.get(0).getAltura() >= posicionPickups - retrasoCancion) {
