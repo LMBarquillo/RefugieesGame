@@ -64,7 +64,7 @@ public class Juego {
         int y = (int)(getGameView().getHeight() * nenufarPosYRatio);
         bmpNenufar = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevonenufar);
         for(int i = 1; i < 10; i++) {
-            nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, width, height, (i%2==0?-150:1080), y+(width*(i-1)), (i%2==0?2:-2), 0));
+            nenufares.add(new Sprite(getGameView(), bmpNenufar, 1, 1, width, height, (i%2==0?-150:1080), y+(width*(i-1)), (i%2==0?1:-1), 0));
         }
     }
 
@@ -72,7 +72,7 @@ public class Juego {
         canvas.drawBitmap(agua, 0, 0, null);
         player.setSpeedX(0);
         for(Sprite s : nenufares) {
-            if(player.isCollition(s)) {
+            if(s.isCollition(player)) {
                 player.setSpeedX(s.getSpeedX());
             }
             s.draw(canvas);
