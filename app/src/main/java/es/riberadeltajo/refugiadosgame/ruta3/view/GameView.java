@@ -15,10 +15,12 @@ public class GameView extends SurfaceView {
     private GUI gui;
     private Juego juego;
     private GameLoop loop;
+    private boolean fin;
 
     public GameView(Context context) {
         super(context);
         setLoop(new GameLoop(this));
+        setFin(false);
         getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
@@ -57,8 +59,19 @@ public class GameView extends SurfaceView {
         this.loop = loop;
     }
 
+    public boolean isFin() {
+        return fin;
+    }
+
+    public void setFin(boolean fin) {
+        this.fin = fin;
+    }
+
     @Override
     public void draw(Canvas canvas) {
+        if(fin) {
+            stop();
+        }
         getJuego().draw(canvas);
         getGui().draw(canvas);
     }
@@ -89,5 +102,6 @@ public class GameView extends SurfaceView {
 
     public void stop() {
         getLoop().setRunning(false);
+        getJuego().stopMusica();
     }
 }

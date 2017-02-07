@@ -27,4 +27,9 @@ public class Sarajevo extends Activity {
         setContentView(gameView);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameView.getJuego().stopMusica();
+    }
 }

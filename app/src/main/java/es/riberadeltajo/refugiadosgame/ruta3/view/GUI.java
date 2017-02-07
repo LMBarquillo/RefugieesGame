@@ -99,6 +99,9 @@ public class GUI {
                 abajoPosY,
                 null
         );
+        if(getGameView().isFin()) {
+            canvas.drawText("You Lose", getGameView().getWidth() / 2, getGameView().getHeight() / 2, txtPaint);
+        }
         /*Paint paint = new Paint();
         paint.setTextSize(50);
         paint.setColor(Color.RED);
