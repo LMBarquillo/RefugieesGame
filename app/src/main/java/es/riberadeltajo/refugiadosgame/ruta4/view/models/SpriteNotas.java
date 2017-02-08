@@ -60,6 +60,10 @@ public class SpriteNotas {
         paint.setTextSize(60);
     }
 
+    public boolean isCollition(float x, float y) {
+         return getPosx() <= x && getAltura() <= y && (getSizeNota()+getPosx()) >= x && (getSizeNota()+getAltura()) >= y;
+    }
+
     public int getPosx() {
         return posx;
     }
