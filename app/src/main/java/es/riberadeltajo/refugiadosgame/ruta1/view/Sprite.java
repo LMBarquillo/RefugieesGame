@@ -173,10 +173,23 @@ public class Sprite {//0-1-2-3-4-5-6-7 //1,3,0,2,4,5,6,7
         }
         return DIRECCION[direccion];
     }
-
+    //Movimiento del sprite
     private void update(){
             if (getCorx() >= getGameView().getWidth() - getWidth() - getxSpeed() || getCorx() + getxSpeed() <= 0) {
-                setPintar(false);
+                if (getCorx() < getPosX()) {
+                    setCorx(getCorx() + getxSpeed());
+                    if(getCorx()>=getGameView().getWidth()-getWidth()-getxSpeed()){
+                        setCorx(getGameView().getWidth()-getWidth()-getxSpeed());
+                        setPosX(getCorx()+getxSpeed());
+                    }
+                }else if (getCorx() > getPosX()){
+                    setCorx(getCorx() - getxSpeed());
+                    if(getCorx()-getPosX()<50){
+                        setCorx(getPosX());
+                    }
+                } else if (getCorx() == getPosX()) {
+                    setCorx(getPosX());
+                }
             } else {
                 if (getCorx() < getPosX()) {
                     setCorx(getCorx() + getxSpeed());
@@ -193,7 +206,20 @@ public class Sprite {//0-1-2-3-4-5-6-7 //1,3,0,2,4,5,6,7
                 }
             }
             if (getCory() >= getGameView().getHeight() - getHeight() - getySpeed() || getCory() + getySpeed() <= 0) {
-                setPintar(false);
+                if (getCory() < getPosY()) {
+                    setCory(getCory() + getySpeed());
+                    if(getCory()>=getGameView().getHeight()-getHeight()-getySpeed()){
+                        setCory(getGameView().getHeight()-getHeight()-getySpeed());
+                        setPosY(getCory()+getySpeed());
+                    }
+                } else if (getCory() > getPosY()) {
+                    setCory(getCory() - getySpeed());
+                    if(getCory()-getPosY()<10){
+                        setCory(getPosY());
+                    }
+                } else if (getCory() == getPosY()) {
+                    setCory(getPosY());
+                }
             } else {
                 if (getCory() < getPosY()) {
                     setCory(getCory() + getySpeed());
@@ -215,7 +241,7 @@ public class Sprite {//0-1-2-3-4-5-6-7 //1,3,0,2,4,5,6,7
 
         setCurrentFrame(++currentFrame % BMP_COLUMS);
     }
-
+    //Dibujo el rectangulo y actualizo si tengo el touch es verdadero
     public void draw(Canvas canvas){
         getDireccion();
         if(isPintar()) {
@@ -227,6 +253,7 @@ public class Sprite {//0-1-2-3-4-5-6-7 //1,3,0,2,4,5,6,7
         Rect dst=new Rect(getCorx(),getCory(),getCorx()+getWidth(),getCory()+getHeight());
         canvas.drawBitmap(getBmp(),src,dst,null);
 
+        //Temporal para ver la velocidad y la pos en pantalla
         Paint paint = new Paint();
         paint.setColor(Color.YELLOW);
         paint.setStyle(Paint.Style.FILL);
