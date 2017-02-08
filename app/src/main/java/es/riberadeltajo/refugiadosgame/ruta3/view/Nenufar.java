@@ -5,13 +5,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import es.riberadeltajo.refugiadosgame.R;
-
 /**
- * Created by Alex on 28/01/2017.
+ * Created by Alex on 07/02/2017.
  */
 
-public class Sprite {
+public class Nenufar {
 
     private final int[] DIRECCION = {3, 1, 0, 2};
 
@@ -27,9 +25,8 @@ public class Sprite {
     private int posY;
     private int speedX;
     private int speedY;
-    private boolean safe;
 
-    public Sprite(GameView gameView, Bitmap bitmap, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
+    public Nenufar(GameView gameView, Bitmap bitmap, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
         setGameView(gameView);
         setFilas(filas);
         setColumnas(columnas);
@@ -40,10 +37,9 @@ public class Sprite {
         setSpeedX(speedX);
         setSpeedY(speedY);
         setSprite(bitmap);
-        setSafe(true);
     }
 
-    public Sprite(GameView gameView, int spriteRes, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
+    public Nenufar(GameView gameView, int spriteRes, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
         setGameView(gameView);
         setFilas(filas);
         setColumnas(columnas);
@@ -54,7 +50,6 @@ public class Sprite {
         setSpeedX(speedX);
         setSpeedY(speedY);
         setSprite(spriteRes);
-        setSafe(true);
     }
 
     public GameView getGameView() {
@@ -160,14 +155,6 @@ public class Sprite {
         this.speedY = speedY;
     }
 
-    public boolean isSafe() {
-        return safe;
-    }
-
-    public void setSafe(boolean safe) {
-        this.safe = safe;
-    }
-
     public void draw(Canvas canvas) {
         update();
         if (getFilas() > 1 && getColumnas() > 1) {
@@ -176,9 +163,6 @@ public class Sprite {
             canvas.drawBitmap(getSprite(), src, dst, null);
         } else {
             canvas.drawBitmap(getSprite(), (float)getPosX(), (float)getPosY(), null);
-        }
-        if(!isSafe()) {
-            getGameView().setFin(true);
         }
     }
 
@@ -213,15 +197,6 @@ public class Sprite {
         int y2 = s.getPosY() + s.getHeight();
         Rect r1 = new Rect(x, y1, x, y2);
         Rect r2 = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
-        return r1.intersect(r2);
-    }
-
-    public boolean isWatterCollition(int y, int height) {
-        int x = getPosX() + (getWidth() / 2);
-        int y1 = (getPosY() + getHeight()) - (getHeight() / 10);
-        int y2 = getPosY() + getHeight();
-        Rect r1 = new Rect(x, y1, x, y2);
-        Rect r2 = new Rect(0, y, getGameView().getWidth(), y + height);
         return r1.intersect(r2);
     }
 
