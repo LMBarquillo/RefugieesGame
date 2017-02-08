@@ -20,7 +20,7 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class GameView extends SurfaceView {
     private final int TIEMPO_MAX=300;
-    private Bitmap player;
+    private Bitmap player,fondo;
     private SurfaceHolder holder;
     private GameLoop loop;
     private int corx,cory;
@@ -71,11 +71,9 @@ public class GameView extends SurfaceView {
                 }
             }
         });
-        /*
-        fondo=BitmapFactory.decodeResource(getResources(), R.drawable.frame1);
-        fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);*/
     }
 
+    //Prueba fondo animado. Cambio el fondo añadiendo al array, ya vacío, el siguiente
     public Bitmap cambiarFondo(int cont){
         Bitmap background=null;
         if(cont==0){
@@ -226,13 +224,17 @@ public class GameView extends SurfaceView {
         this.inicio = inicio;
     }
 
+    //Creo el Sprite y le hago un setJug() para pasarle después la posición en el onTouchEvent
+    //Inicializo el fondo temporalmente aquí porque daba Null en el constructor
     public void createSprite(){
         player= BitmapFactory.decodeResource(getResources(),R.drawable.pruebamadrid);
         setJug(new Sprite(this,player,10));
         sprites.add(getJug());
-
+        fondo=BitmapFactory.decodeResource(getResources(), R.drawable.frame1);
+        fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
     }
 
+    //Prueba fondo animado. Crea el fondo antes de ponerle
     public void createFondo(int cont){
         Bitmap fond;
         if (cont == 0) {
@@ -362,7 +364,8 @@ public class GameView extends SurfaceView {
         long actual;
         paint.setColor(Color.RED);
         paint.setTextSize((float) (getWidth() * 0.1));
-        createFondo(cont);
+        canvas.drawBitmap(fondo,0,0,null);
+        /*createFondo(cont); //Creo el fondo, le guardo para luego borrarle y le pongo
         Bitmap temp;
         temp=cambiarFondo(cont);
         canvas.drawBitmap(temp, 0, 0, null);
@@ -373,7 +376,7 @@ public class GameView extends SurfaceView {
         else{
             cont=0;
             drawgif.remove(temp);
-        }
+        }*/
         if((sprites.size()!=0) && getCrono()<TIEMPO_MAX) {
             actual=System.currentTimeMillis();
             for (Sprite miSprite : sprites) {
@@ -398,6 +401,7 @@ public class GameView extends SurfaceView {
         }
     }
 
+    //Pasar a segundos el tiempo
     private String pasarSeg(float time){
         String cad="";
         String txt=String.valueOf(time);
