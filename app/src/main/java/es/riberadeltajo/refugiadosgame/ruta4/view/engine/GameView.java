@@ -29,12 +29,18 @@ public class GameView extends SurfaceView {
     private GameLoopThread loop;
     private SurfaceHolder holder;
     private MediaPlayer musica;
+    private Bitmap fondo, pickups, cuerda;
 
     public GameView(Context context) {
         super(context);
         loop=new GameLoopThread(this);
         notas = new ArrayList<SpriteNotas>();
         generador = new NoteGenerator(context,this,"songs/sweetchildofmine.txt");
+        // Inicializamos bitmaps
+        fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
+        pickups = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.whitepickups);
+        cuerda = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.guitarstring);
+
         setMusica(new MediaPlayer().create(context,R.raw.sweetchildofmine));
 
         holder=getHolder();
@@ -72,23 +78,27 @@ public class GameView extends SurfaceView {
     // MIRAR LA LETRA STREET GATHERING
 
     public void draw(Canvas canvas){
-        Paint paint = new Paint();  // información en pantalla
         // Dibujamos fondo
-        Bitmap fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
         canvas.drawBitmap(fondo, null, new RectF(0, 0, canvas.getWidth(), canvas.getHeight()), null);
+
         // Pastillas
-        Bitmap pickups = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.whitepickups);
-        canvas.drawBitmap(pickups, new Rect(0,0,pickups.getWidth(),pickups.getHeight()), new RectF(0, canvas.getHeight()-pickups.getHeight(), canvas.getWidth(), canvas.getHeight()), null);
+        canvas.drawBitmap(pickups,
+                new Rect(0,0,pickups.getWidth(),pickups.getHeight()),
+                new RectF(0, canvas.getHeight()-pickups.getHeight(), canvas.getWidth(), canvas.getHeight()),
+                null);
+
         // Cuerdas
-        Bitmap cuerda = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.guitarstring);
         for(int pos=1; pos<=4; pos++) {
             int cx = (canvas.getWidth()/5*pos) - (cuerda.getWidth()/2);
             canvas.drawBitmap(cuerda,null, new RectF(cx,0,cx+cuerda.getWidth(),canvas.getHeight()),null);
         }
+
         // Dibujamos cada nota que tengamos en pantalla
         for(SpriteNotas n : getNotas()) {
             n.draw(canvas);
         }
+
+        Paint paint = new Paint();  // información en pantalla
         // Monitores y/o contadores
         paint.setColor(Color.YELLOW);
         paint.setStyle(Paint.Style.FILL);
@@ -125,6 +135,18 @@ public class GameView extends SurfaceView {
         if(event.getAction()==MotionEvent.ACTION_DOWN){
             synchronized(getHolder()){
                 for(SpriteNotas n : notas){
+                    // Si pulsamos una nota...
+                    if(n.isCollition(event.getX(),event.getY())) {
+                        // Comprobamos si está dentro del traste
+                        if(event.getY() > (getHeight()-pickups.getHeight()) && event.getY() < getHeight()) {
+                            // Está dentro (mola)
+
+                        } else {
+                            // Está fuera (la cagaste)
+
+                        }
+                        break;
+                    }
                     /*if(miSprite.isCollition(event.getX(),event.getY())){
                         sprites.remove(miSprite);
                         temps.add(new SpriteTemp(temps,this,event.getX(),event.getY(),sangre));
