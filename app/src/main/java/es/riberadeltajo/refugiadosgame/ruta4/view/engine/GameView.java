@@ -9,11 +9,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import es.riberadeltajo.refugiadosgame.R;
@@ -30,16 +32,19 @@ public class GameView extends SurfaceView {
     private SurfaceHolder holder;
     private MediaPlayer musica;
     private Bitmap fondo, pickups, cuerda;
+    private Typeface tipografia;
 
     public GameView(Context context) {
         super(context);
         loop=new GameLoopThread(this);
         notas = new ArrayList<SpriteNotas>();
-        generador = new NoteGenerator(context,this,"songs/sweetchildofmine.txt");
+        generador = new NoteGenerator(context,this,"songs/smokeonthewater.txt");
         // Inicializamos bitmaps
         fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
         pickups = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.whitepickups);
         cuerda = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.guitarstring);
+        // Fuentes
+        tipografia = Typeface.createFromAsset(context.getAssets(),"tipografias/aaaiight.ttf");
 
         setMusica(new MediaPlayer().create(context,R.raw.sweetchildofmine));
 
@@ -98,12 +103,8 @@ public class GameView extends SurfaceView {
             n.draw(canvas);
         }
 
-        Paint paint = new Paint();  // información en pantalla
         // Monitores y/o contadores
-        paint.setColor(Color.YELLOW);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setTextSize(60);
-        canvas.drawText("Notas en pantalla: "+String.valueOf(notas.size()),50,100,paint);
+        escribeTexto(canvas,String.valueOf(notas.size()),50,100,80,Color.WHITE,Color.BLACK,tipografia);
 
         // Eliminamos las notas que salieron fuera
         deleteOutNotes();
@@ -156,6 +157,32 @@ public class GameView extends SurfaceView {
             }
         }
         return true;
+    }
+
+    /* Texto con sombra */
+    private void escribeTexto(Canvas canvas, String texto, float x, float y, float size, int color, int sombra, Typeface fuente) {
+        Paint paint = new Paint();
+        paint.setColor(sombra);
+        paint.setStrokeWidth(size/8);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setTextSize(size);
+        if(fuente != null) paint.setTypeface(fuente);
+        canvas.drawText(texto,x,y,paint);
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawText(texto,x,y,paint);
+
+    }
+
+    /* Sin sombra */
+    private void escribeTexto(Canvas canvas, String texto, float x, float y, float size, int color, Typeface fuente) {
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setTextSize(size);
+        if(fuente != null) paint.setTypeface(fuente);
+        paint.setColor(color);
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawText(texto,x,y,paint);
     }
 
     public synchronized void deleteFirstNote() {
