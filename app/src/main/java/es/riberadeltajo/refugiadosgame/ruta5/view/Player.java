@@ -100,7 +100,7 @@ public class Player {
     }
 
     public void touch(int cx,boolean mov){
-        setPosx(cx);
+        setPosx((int) (cx-(getWidth()*0.5)));
         setMover(mov);
     }
 

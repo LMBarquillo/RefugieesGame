@@ -45,16 +45,19 @@ public class Objetos {
 
     public boolean choqueJugador(Player p){
         boolean chocan=false;
-        //if(getCory()==posjugy && getCorx()==posjugx){
-         //   chocan=true;
-        //}
-
-        if (p.getCory() <= getCory() + getHeight() &&
-                p.getCory() + p.getHeight() >= getCory()    &&
-                p.getCorx() + p.getWidth() >= getCorx() &&
-                p.getCorx() <= getCorx() + getWidth()){
+        if (p.getCory() <= getCory() + getHeight()/2 &&
+                p.getCory() + p.getHeight()/2 >= getCory() &&
+                p.getCorx() + p.getWidth()/2 >= getCorx() &&
+                p.getCorx() <= getCorx() + getWidth()/2){
             chocan= true;
         }
+
+        //if (p.getCory() <= getCory() + getHeight() &&
+        //        p.getCory() + p.getHeight() >= getCory()    &&
+        //        p.getCorx() + p.getWidth() >= getCorx() &&
+        //        p.getCorx() <= getCorx() + getWidth()){
+        //    chocan= true;
+        //}
 
         return chocan;
     }
@@ -73,10 +76,6 @@ public class Objetos {
         canvas.drawBitmap(getBmp(),getCorx(),getCory(),null);
     }
 
-    //FALTA HACERLO CON EL MUÑECO PRINCIPAL
-    public boolean isCollition(){
-        return true;
-    }
 
     public int getSegundo() {
         return segundo;
