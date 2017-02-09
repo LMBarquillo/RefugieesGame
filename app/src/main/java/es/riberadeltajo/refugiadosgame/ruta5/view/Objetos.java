@@ -43,6 +43,22 @@ public class Objetos {
 
     }
 
+    public boolean choqueJugador(Player p){
+        boolean chocan=false;
+        //if(getCory()==posjugy && getCorx()==posjugx){
+         //   chocan=true;
+        //}
+
+        if (p.getCory() <= getCory() + getHeight() &&
+                p.getCory() + p.getHeight() >= getCory()    &&
+                p.getCorx() + p.getWidth() >= getCorx() &&
+                p.getCorx() <= getCorx() + getWidth()){
+            chocan= true;
+        }
+
+        return chocan;
+    }
+
     public boolean finalPantalla(){    //Comprueba si el objeto ha llegado al final de la pantalla(abajo)
         boolean llega=false;
         if(getCory()>=getGameView().getHeight()){

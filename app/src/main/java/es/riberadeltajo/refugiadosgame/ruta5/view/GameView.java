@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -27,7 +28,8 @@ public class GameView extends SurfaceView implements Observer {
     private int corx,cory;
     private int ySpeed;
     private Bitmap fondo;
-    private Bitmap cesta;       //O el objeto con el que chocan/recoje
+    private Bitmap jugbmp;
+    private Player jugador;
     private ArrayList<Objetos> objetos;
     private GameLoop loop;
     private boolean pasaObjeto;
@@ -47,6 +49,7 @@ public class GameView extends SurfaceView implements Observer {
         setPasaObjeto(false);
         setSegundos(0);
         loop=new GameLoop(this);
+        jugbmp=BitmapFactory.decodeResource(getResources(), R.drawable.playertehran);
         holder.addCallback(new SurfaceHolder.Callback() {
 
             @SuppressLint("WrongCall")
@@ -73,6 +76,7 @@ public class GameView extends SurfaceView implements Observer {
     }
 
     private void cargarObjetos(){
+        jugador=new Player(this,Bitmap.createScaledBitmap(jugbmp,(int)(jugbmp.getWidth()*1.7),(int)(jugbmp.getHeight()*1.5),false));
         objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*20)+10,false,(int)(Math.random()*5)+1));
         objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*20)+10,false,(int)(Math.random()*6)+2));
         objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*20)+10,true,(int)(Math.random()*7)+3));
@@ -91,6 +95,7 @@ public class GameView extends SurfaceView implements Observer {
         //canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
         canvas.drawText(String.format("%d",getSegundos()),(float)(getWidth()*0.05),(float)(getHeight()*0.05),paint);
+        jugador.draw(canvas);
         if(!isPasaObjeto() || objetos.size()==0){
             for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
                 if(objetos.get(i).getSegundo()<getSegundos()){          //Si el segundo de aparicion es menor, los sigue dibujando
@@ -106,6 +111,15 @@ public class GameView extends SurfaceView implements Observer {
                         setPasaObjeto(true);            //COMPRUEBA QUE NO SEA UN OBJETO DE LOS QUE HAY QUE COJER, SINO GAME OVER
                     }
                     objetos.remove(i);
+                }
+                else if(objetos.get(i).choqueJugador(jugador)){     //COMPRUEBA SI EL OBJETO CHOCA CON EL JUGADOR
+                    if(objetos.get(i).isCoger()){
+                        objetos.remove(i);
+                    }
+                    else{
+                        setPasaObjeto(true);
+                    }
+
                 }
             }
         }
@@ -140,6 +154,21 @@ public class GameView extends SurfaceView implements Observer {
 
         }
         principal.fin();
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction()== MotionEvent.ACTION_MOVE){
+            jugador.touch((int) event.getRawX(),true);
+        }
+        else if(event.getAction()==MotionEvent.ACTION_UP){
+            jugador.touch((int) event.getRawX(),false);
+        }
+        else if(event.getAction()==MotionEvent.ACTION_DOWN){
+            jugador.touch((int) event.getRawX(),true);
+        }
+        return true;
     }
 
     @Override
@@ -181,14 +210,6 @@ public class GameView extends SurfaceView implements Observer {
 
     public void setFondo(Bitmap fondo) {
         this.fondo = fondo;
-    }
-
-    public Bitmap getCesta() {
-        return cesta;
-    }
-
-    public void setCesta(Bitmap cesta) {
-        this.cesta = cesta;
     }
 
     public boolean isPasaObjeto() {
