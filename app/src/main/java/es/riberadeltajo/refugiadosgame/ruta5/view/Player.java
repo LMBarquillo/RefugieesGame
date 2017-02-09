@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 /**
- * Created by Profesor on 08/02/2017.
+ * Created by Profesor on 09/02/2017.
  */
 
 public class Player {
@@ -29,16 +29,16 @@ public class Player {
         setHeight(bmp.getHeight()/BMP_ROWS);
         setGameView(gameView);
         currentFrame=0;
-        setxSpeed(50);
-        setCorx(getGameView().getWidth());
-        setCory(1000);
+        setxSpeed(60);
+        setCorx((int) (getGameView().getWidth()*0.45));
+        setCory((int) (getGameView().getHeight()-(getHeight()*1.2)));
         setMover(false);
     }
 
     private int getDireccion(){
         int direccion=3;
         if(getPosx()<getCorx()){
-           direccion=1;
+            direccion=1;
         }
         else if(getPosx()>getCorx()){
             direccion=2;
@@ -51,7 +51,22 @@ public class Player {
 
     private void update(){
         if(getCorx()>=getGameView().getWidth()-getWidth()-getxSpeed() || getCorx()+getxSpeed()<=0){
-            setCorx(getPosx()-getWidth()+getxSpeed());
+            if(getCorx()<getPosx()){
+                setCorx(getCorx()+getxSpeed());
+                if(getCorx()>=getGameView().getWidth()-getWidth()-getxSpeed()){
+                    setCorx(getGameView().getWidth()-getWidth()-getxSpeed());
+                    setPosx(getCorx()+getxSpeed());
+                }
+            }
+            else if(getCorx()>getPosx()){
+                setCorx(getCorx()-getxSpeed());
+                if(getCorx()-getPosx()<60){
+                    setCorx(getPosx());
+                }
+            }
+            else if(getCorx()==getPosx()){
+                setCorx(getPosx());
+            }
         }
         else{
             if(getCorx()<getPosx()){
@@ -89,9 +104,14 @@ public class Player {
         setMover(mov);
     }
 
-    //public boolean isCollition(float x2,float y2){
-     //   return x2>corx && x2<corx+width && y2>cory && y2<cory+getHeight();
-    //
+
+    public boolean isMover() {
+        return mover;
+    }
+
+    public void setMover(boolean mover) {
+        this.mover = mover;
+    }
 
     public int getCorx() {
         return corx;
@@ -117,14 +137,6 @@ public class Player {
         this.xSpeed = xSpeed;
     }
 
-    public Bitmap getBmp() {
-        return bmp;
-    }
-
-    public void setBmp(Bitmap bmp) {
-        this.bmp = bmp;
-    }
-
     public GameView getGameView() {
         return gameView;
     }
@@ -133,20 +145,20 @@ public class Player {
         this.gameView = gameView;
     }
 
+    public Bitmap getBmp() {
+        return bmp;
+    }
+
+    public void setBmp(Bitmap bmp) {
+        this.bmp = bmp;
+    }
+
     public int getWidth() {
         return width;
     }
 
     public void setWidth(int width) {
         this.width = width;
-    }
-
-    public boolean isMover() {
-        return mover;
-    }
-
-    public void setMover(boolean mover) {
-        this.mover = mover;
     }
 
     public int getHeight() {

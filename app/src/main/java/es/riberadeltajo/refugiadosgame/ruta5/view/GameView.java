@@ -28,6 +28,7 @@ public class GameView extends SurfaceView implements Observer {
     private int corx,cory;
     private int ySpeed;
     private Bitmap fondo;
+    private Bitmap jugbmp;
     private Player jugador;
     private ArrayList<Objetos> objetos;
     private GameLoop loop;
@@ -48,6 +49,7 @@ public class GameView extends SurfaceView implements Observer {
         setPasaObjeto(false);
         setSegundos(0);
         loop=new GameLoop(this);
+        jugbmp=BitmapFactory.decodeResource(getResources(), R.drawable.playertehran);
         holder.addCallback(new SurfaceHolder.Callback() {
 
             @SuppressLint("WrongCall")
@@ -74,7 +76,7 @@ public class GameView extends SurfaceView implements Observer {
     }
 
     private void cargarObjetos(){
-        jugador=new Player(this,BitmapFactory.decodeResource(getResources(), R.drawable.playertehran));
+        jugador=new Player(this,Bitmap.createScaledBitmap(jugbmp,(int)(jugbmp.getWidth()*1.7),(int)(jugbmp.getHeight()*1.5),false));
         objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*20)+10,false,(int)(Math.random()*5)+1));
         objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*20)+10,false,(int)(Math.random()*6)+2));
         objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*20)+10,true,(int)(Math.random()*7)+3));
@@ -93,7 +95,7 @@ public class GameView extends SurfaceView implements Observer {
         //canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
         canvas.drawText(String.format("%d",getSegundos()),(float)(getWidth()*0.05),(float)(getHeight()*0.05),paint);
-        getJugador().draw(canvas);
+        jugador.draw(canvas);
         if(!isPasaObjeto() || objetos.size()==0){
             for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
                 if(objetos.get(i).getSegundo()<getSegundos()){          //Si el segundo de aparicion es menor, los sigue dibujando
@@ -109,6 +111,15 @@ public class GameView extends SurfaceView implements Observer {
                         setPasaObjeto(true);            //COMPRUEBA QUE NO SEA UN OBJETO DE LOS QUE HAY QUE COJER, SINO GAME OVER
                     }
                     objetos.remove(i);
+                }
+                else if(objetos.get(i).choqueJugador(jugador)){     //COMPRUEBA SI EL OBJETO CHOCA CON EL JUGADOR
+                    if(objetos.get(i).isCoger()){
+                        objetos.remove(i);
+                    }
+                    else{
+                        setPasaObjeto(true);
+                    }
+
                 }
             }
         }
@@ -149,13 +160,13 @@ public class GameView extends SurfaceView implements Observer {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction()== MotionEvent.ACTION_MOVE){
-            getJugador().touch((int) event.getRawX(),true);
+            jugador.touch((int) event.getRawX(),true);
         }
         else if(event.getAction()==MotionEvent.ACTION_UP){
-            getJugador().touch((int) event.getRawX(),false);
+            jugador.touch((int) event.getRawX(),false);
         }
         else if(event.getAction()==MotionEvent.ACTION_DOWN){
-            getJugador().touch((int) event.getRawX(),true);
+            jugador.touch((int) event.getRawX(),true);
         }
         return true;
     }
@@ -199,14 +210,6 @@ public class GameView extends SurfaceView implements Observer {
 
     public void setFondo(Bitmap fondo) {
         this.fondo = fondo;
-    }
-
-    public Player getJugador() {
-        return jugador;
-    }
-
-    public void setJugador(Player jugador) {
-        this.jugador = jugador;
     }
 
     public boolean isPasaObjeto() {
