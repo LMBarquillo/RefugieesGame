@@ -1,5 +1,6 @@
 package es.riberadeltajo.refugiadosgame.ruta3.view;
 
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -117,14 +118,25 @@ public class GUI {
             }
         }
         if(minutos == 0 && segundos == 0) {
-            getGameView().stop();
+            getGameView().setFin(true);
+            getGameView().getActivity().runOnUiThread(new Runnable() {
+                public void run() {
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(getGameView().getActivity());
+                    dialog.setTitle("You Lost");
+                    dialog.setMessage("You lost because time is up");
+                    dialog.setPositiveButton("Reintentar", null);
+                    dialog.setNegativeButton("Salir", null);
+                    dialog.create();
+                    dialog.show();
+                }
+            });
         }
     }
 
     public void start() {
         contador = 0;
-        minutos = 1;
-        segundos = 0;
+        minutos = 0;
+        segundos = 20;
     }
 
     public void touch(int x, int y) {

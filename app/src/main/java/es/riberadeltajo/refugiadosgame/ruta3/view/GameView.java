@@ -16,9 +16,11 @@ public class GameView extends SurfaceView {
     private Juego juego;
     private GameLoop loop;
     private boolean fin;
+    private Sarajevo activity;
 
-    public GameView(Context context) {
-        super(context);
+    public GameView(Sarajevo activity) {
+        super(activity);
+        setActivity(activity);
         setLoop(new GameLoop(this));
         setFin(false);
         getHolder().addCallback(new SurfaceHolder.Callback() {
@@ -67,13 +69,22 @@ public class GameView extends SurfaceView {
         this.fin = fin;
     }
 
+    public Sarajevo getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Sarajevo activity) {
+        this.activity = activity;
+    }
+
     @Override
     public void draw(Canvas canvas) {
         if(fin) {
             stop();
+        } else {
+            getJuego().draw(canvas);
+            getGui().draw(canvas);
         }
-        getJuego().draw(canvas);
-        getGui().draw(canvas);
     }
 
     @Override
@@ -96,12 +107,13 @@ public class GameView extends SurfaceView {
     private void start() {
         setJuego(new Juego(this));
         setGui(new GUI(this, getJuego()));
+        getJuego().start();
         getGui().start();
         getLoop().setRunning(true);
     }
 
     public void stop() {
         getLoop().setRunning(false);
-        getJuego().stopMusica();
+        getJuego().stop();
     }
 }

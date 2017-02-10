@@ -39,8 +39,6 @@ public class Juego {
         player = new Sprite(getGameView(), R.drawable.milan_personajeuno, 4, 4, (int)(getGameView().getWidth() * playerWidthScale), (int)(getGameView().getHeight() * playerHeightScale), (getGameView().getWidth() - 100) / 2, getGameView().getHeight() - 200, 0, 0);
         nenufares = new ArrayList<Sprite>();
         crearNenufares();
-        musica = MediaPlayer.create(getGameView().getContext(), R.raw.sarajevoswamp);
-        musica.start();
     }
 
     public GameView getGameView() {
@@ -78,6 +76,11 @@ public class Juego {
 
     }
 
+    public void start() {
+        musica = MediaPlayer.create(getGameView().getContext(), R.raw.sarajevoswamp);
+        musica.start();
+    }
+
     public void draw(Canvas canvas) {
         //canvas.drawBitmap(agua, 0, 0, null);
         canvas.drawBitmap(terreno, 0, 0, null);
@@ -108,9 +111,12 @@ public class Juego {
 
     }
 
-    public void stopMusica() {
-        musica.stop();
-        musica.release();
+    public void stop() {
+        if (musica != null) {
+            musica.stop();
+            musica.release();
+            musica = null;
+        }
     }
 
 }

@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta3.view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,9 +28,4 @@ public class Sarajevo extends Activity {
         setContentView(gameView);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        gameView.getJuego().stopMusica();
-    }
 }
