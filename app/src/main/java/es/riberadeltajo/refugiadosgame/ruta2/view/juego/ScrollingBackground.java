@@ -14,18 +14,19 @@ import es.riberadeltajo.refugiadosgame.R;
  */
 
 public class ScrollingBackground {
-private final int NUM_MONEDAS=30;
+    private final int NUM_MONEDAS=30;
+    private final int NUM_BICHOS=30;
     private Bitmap fondo;                   // Fondo del juego
     private int x, y, topeancho, topealto;  // Coordenadas por donde va el fondo y dimensiones de la pantalla
     private final int VELOCIDAD = 20;        // Velocidad a la que se moverá el fondo
     private Jugador jugador;
     private int anchosalida, altosalida;
     private ArrayList<Monedas> monedas;
+    private ArrayList<Bichos> bichos;
     private int anchoTotal;
     private int monedasBajas, monedasAltas;
     private GameView2 gameview2;
-    public ScrollingBackground(GameView2 gameview2,Bitmap fondo, int anchopantalla, int altopantalla, Jugador jugador, int anchosalida, int altosalida)
-    {
+    public ScrollingBackground(GameView2 gameview2,Bitmap fondo, int anchopantalla, int altopantalla, Jugador jugador, int anchosalida, int altosalida) {
         setFondo(fondo);
 
         x = y = 0;
@@ -42,7 +43,9 @@ private final int NUM_MONEDAS=30;
         setMonedasAltas((int) (altosalida*0.3));
         setMonedasBajas((int)(altosalida*0.6));
         monedas=new ArrayList<Monedas>();
+        bichos=new ArrayList<Bichos>();
         crearMonedas();
+        crearBichos();
 
     }
 
@@ -63,6 +66,33 @@ private final int NUM_MONEDAS=30;
                getMonedas().add(moneda);
            }
         }
+    }
+    private void crearBichos(){
+        double variable=0.15;
+        Bitmap imagenBicho= BitmapFactory.decodeResource(getGameview2().getResources(), R.drawable.milan_rana);
+        Bitmap redimension = Bitmap.createScaledBitmap(imagenBicho, (int)(getGameview2().getWidth()*0.5),(int)( getGameview2().getHeight()*0.5), false);
+        Bitmap imagenBicho2= BitmapFactory.decodeResource(getGameview2().getResources(), R.drawable.milan_murcielago);
+        Bitmap redimension2 = Bitmap.createScaledBitmap(imagenBicho2, (int)(getGameview2().getWidth()*0.4),(int)( getGameview2().getHeight()*0.5), false);
+        Bichos bicho;
+        for (int i=0;i<NUM_BICHOS;i++) {
+            if(i%2==0) {
+                bicho = new Bichos((int) (getAnchoTotal() * variable), getMonedasBajas(), redimension, getGameview2());
+            }
+            else{
+                bicho = new Bichos((int) (getAnchoTotal() * variable), getMonedasAltas(), redimension2, getGameview2());
+            }
+            getBichos().add(bicho);
+            variable+=0.08;
+        }
+
+    }
+
+    public ArrayList<Bichos> getBichos() {
+        return bichos;
+    }
+
+    public void setBichos(ArrayList<Bichos> bichos) {
+        this.bichos = bichos;
     }
 
     public GameView2 getGameview2() {
@@ -179,6 +209,9 @@ private final int NUM_MONEDAS=30;
         for (Monedas p:getMonedas()){
             p.setCorx(p.getCorx()-((int)(VELOCIDAD*3.5)));
         }
+        for (Bichos p:getBichos()){
+            p.setCorx((p.getCorx()-((int)(VELOCIDAD*3.5))));
+        }
 
 
 
@@ -194,28 +227,54 @@ private final int NUM_MONEDAS=30;
         else{
         for (Monedas p:getMonedas()) {
             p.setCorx(p.getCorx()+((int)(VELOCIDAD*3.5)));
-        }}
+        }
+            for (Bichos p:getBichos()){
+                p.setCorx((p.getCorx()+((int)(VELOCIDAD*3.5))));
+            }
+        }
 
     }
 
-    public void onDraw(Canvas lienzo)
-    {
-        if(getJugador().isEnMarcha() && getJugador().isDelante()){
+    public void onDraw(Canvas lienzo) {
+        if (getJugador().isEnMarcha() && getJugador().isDelante()) {
             avanzarX();
 
-        }
-        else if(getJugador().isEnMarcha() && getJugador().isDetras()){
+        } else if (getJugador().isEnMarcha() && getJugador().isDetras()) {
             retrocederX();
         }
 
         int x_tope = x + topeancho;
         Rect imagenfondoactual = new Rect(x, 0, x_tope, topealto);
         Rect imagenenpantalla = new Rect(0, 0, topeancho, topealto);
-        imagenenpantalla.set(0,0, getAnchosalida(),getAltosalida());
+        imagenenpantalla.set(0, 0, getAnchosalida(), getAltosalida());
         lienzo.drawBitmap(fondo, imagenfondoactual, imagenenpantalla, null);
-        for (Monedas p:getMonedas()){
+        for (Monedas p : getMonedas()) {
+            p.onDraw(lienzo);
+        }
+        for (Bichos p : getBichos()) {
             p.onDraw(lienzo);
         }
 
+        synchronized (getGameview2().getHolder()) {
+            for (int i = getBichos().size()-1; i >= 0; i--) {
+                if (getJugador().isCollition(getBichos().get(i).getCorx()+getBichos().get(i).getxInicio()+getBichos().get(i).getxSpeed()+getBichos().get(i).getWidth(),
+                        getBichos().get(i).getCory())
+                        ) {
+                    getBichos().remove(i);
+                    getJugador().setVidas(getJugador().getVidas()-1);
+                }
+            }
+            for (int i=getMonedas().size()-1;i>=0;i--){
+                if(getJugador().isCollition(getMonedas().get(i).getCorx(), getMonedas().get(i).getCory())
+                        || getJugador().isCollition(getMonedas().get(i).getCorx()+getMonedas().get(i).getWidth(),
+                        getMonedas().get(i).getCory()+getMonedas().get(i).getHeight())){
+                    getMonedas().remove(i);
+                    getJugador().setMonedas(getJugador().getMonedas()+1);
+                }
+            }
+
+        }
     }
-}
+
+    }
+

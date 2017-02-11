@@ -25,7 +25,6 @@ public class Monedas {
         setGameView2(gameView2);
         setCorx(corx);
         setCory(cory);
-
         setBmp(imagen);
         setWidth(imagen.getWidth()/BMP_COLUMNS);
         setHeight(imagen.getHeight());
