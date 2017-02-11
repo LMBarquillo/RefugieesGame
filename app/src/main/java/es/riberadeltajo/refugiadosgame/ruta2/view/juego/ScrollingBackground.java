@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import es.riberadeltajo.refugiadosgame.R;
 
@@ -17,12 +18,15 @@ public class ScrollingBackground {
     private final int NUM_MONEDAS=30;
     private final int NUM_BICHOS=30;
     private Bitmap fondo;                   // Fondo del juego
+    private Bitmap explosion;
+    private Bitmap destello;
     private int x, y, topeancho, topealto;  // Coordenadas por donde va el fondo y dimensiones de la pantalla
     private final int VELOCIDAD = 20;        // Velocidad a la que se moverá el fondo
     private Jugador jugador;
     private int anchosalida, altosalida;
     private ArrayList<Monedas> monedas;
     private ArrayList<Bichos> bichos;
+    private List<Temporales> temporales;
     private int anchoTotal;
     private int monedasBajas, monedasAltas;
     private GameView2 gameview2;
@@ -44,6 +48,10 @@ public class ScrollingBackground {
         setMonedasBajas((int)(altosalida*0.6));
         monedas=new ArrayList<Monedas>();
         bichos=new ArrayList<Bichos>();
+        temporales=new ArrayList<Temporales>();
+
+        setDestello(BitmapFactory.decodeResource(getGameview2().getResources(),R.drawable.milan_destellocoin));
+        setExplosion(BitmapFactory.decodeResource(getGameview2().getResources(),R.drawable.milan_explosion));
         crearMonedas();
         crearBichos();
 
@@ -85,6 +93,30 @@ public class ScrollingBackground {
             variable+=0.08;
         }
 
+    }
+
+    public Bitmap getDestello() {
+        return destello;
+    }
+
+    public void setDestello(Bitmap destello) {
+        this.destello = destello;
+    }
+
+    public Bitmap getExplosion() {
+        return explosion;
+    }
+
+    public void setExplosion(Bitmap explosion) {
+        this.explosion = explosion;
+    }
+
+    public List<Temporales> getTemporales() {
+        return temporales;
+    }
+
+    public void setTemporales(List<Temporales> temporales) {
+        this.temporales = temporales;
     }
 
     public ArrayList<Bichos> getBichos() {
@@ -212,6 +244,9 @@ public class ScrollingBackground {
         for (Bichos p:getBichos()){
             p.setCorx((p.getCorx()-((int)(VELOCIDAD*3.5))));
         }
+        for(Temporales p:getTemporales()){
+            p.setCorx(p.getCorx()-((int)(VELOCIDAD*3.5)));
+        }
 
 
 
@@ -230,6 +265,9 @@ public class ScrollingBackground {
         }
             for (Bichos p:getBichos()){
                 p.setCorx((p.getCorx()+((int)(VELOCIDAD*3.5))));
+            }
+            for(Temporales p:getTemporales()){
+                p.setCorx(p.getCorx()+((int)(VELOCIDAD*3.5)));
             }
         }
 
@@ -254,12 +292,19 @@ public class ScrollingBackground {
         for (Bichos p : getBichos()) {
             p.onDraw(lienzo);
         }
+        for(int i=getTemporales().size()-1;i>=0;i--){
+            getTemporales().get(i).draw(lienzo);
+        }
+
 
         synchronized (getGameview2().getHolder()) {
             for (int i = getBichos().size()-1; i >= 0; i--) {
                 if (getJugador().isCollition(getBichos().get(i).getCorx()+getBichos().get(i).getxInicio()+getBichos().get(i).getxSpeed()+getBichos().get(i).getWidth(),
                         getBichos().get(i).getCory())
                         ) {
+                    getTemporales().add(new Temporales(getTemporales(),getGameview2(),
+                            getBichos().get(i).getCorx()+getBichos().get(i).getWidth(),getBichos().get(i).getCory(),getExplosion()));
+
                     getBichos().remove(i);
                     getJugador().setVidas(getJugador().getVidas()-1);
                 }
@@ -268,6 +313,8 @@ public class ScrollingBackground {
                 if(getJugador().isCollition(getMonedas().get(i).getCorx(), getMonedas().get(i).getCory())
                         || getJugador().isCollition(getMonedas().get(i).getCorx()+getMonedas().get(i).getWidth(),
                         getMonedas().get(i).getCory()+getMonedas().get(i).getHeight())){
+                    getTemporales().add(new Temporales(getTemporales(),getGameview2(),
+                            getMonedas().get(i).getCorx()+getMonedas().get(i).getWidth(),getMonedas().get(i).getCory(),getDestello()));
                     getMonedas().remove(i);
                     getJugador().setMonedas(getJugador().getMonedas()+1);
                 }
