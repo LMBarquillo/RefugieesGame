@@ -11,7 +11,7 @@ import android.graphics.Rect;
  */
 
 public class Jugador {
-
+    private final int VIDAS_INICIO=3;
     private final int VELOCIDAD_SALTO=70;
     private final int VELOCIDAD_AVANCE=20;
     private final int[] DIRECCION={3,1,0,2}; //Para saber en qué dirección tiene que pintar
@@ -32,6 +32,7 @@ public class Jugador {
     private boolean saltando;
     private boolean descendiendo;
     private int corxinicio, coryinicio;
+    private int vidas, monedas;
 
 
 
@@ -56,8 +57,25 @@ public class Jugador {
         setDetras(false);
         setSaltando(false);
         setDescendiendo(false);
+        setMonedas(0);
+        setVidas(VIDAS_INICIO);
 
+    }
 
+    public int getVidas() {
+        return vidas;
+    }
+
+    public void setVidas(int vidas) {
+        this.vidas = vidas;
+    }
+
+    public int getMonedas() {
+        return monedas;
+    }
+
+    public void setMonedas(int monedas) {
+        this.monedas = monedas;
     }
 
     public int getSalto() {
@@ -205,13 +223,7 @@ public class Jugador {
 
     //Actualiza a la siguiente posición en la que va a aparecer
     public void update(){
-
-
     currentFrame = ++currentFrame % BMP_COLUMNS;
-
-
-
-
 
     }
     private int getDirection(){

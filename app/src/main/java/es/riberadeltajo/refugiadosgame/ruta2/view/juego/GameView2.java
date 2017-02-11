@@ -34,6 +34,7 @@ public class GameView2 extends SurfaceView {
     private ScrollingBackground fondo;
 
 
+
     public GameView2(Context context) {
         super(context);
         loop = new GameLoopThread2(this);
@@ -125,9 +126,12 @@ public class GameView2 extends SurfaceView {
             p.onDraw(canvas);
         }
 
+
+
+
             jugador.onDraw(canvas);
 
-        // canvas.drawText(String.valueOf(jugador.getWidth()+" "+jugador.getHeight()), 300, 300, paint);
+
 
 
     }
@@ -184,9 +188,8 @@ public class GameView2 extends SurfaceView {
        // int altoactual=fon.getHeight();
        // int altonuevo=getHeight();
         int anchonuevo=(fon.getHeight()*getWidth())/getHeight();
+        setFondo(new ScrollingBackground(this,fon, anchonuevo, fon.getHeight(), getJugador(), getWidth(), getHeight()));
 
-
-        setFondo(new ScrollingBackground(fon, anchonuevo, fon.getHeight(), getJugador(), getWidth(), getHeight()));
     }
 
     @Override
