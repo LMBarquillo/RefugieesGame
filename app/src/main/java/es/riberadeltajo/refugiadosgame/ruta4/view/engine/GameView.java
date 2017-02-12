@@ -11,14 +11,15 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteMensajes;
 import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteNotas;
 
 /**
@@ -28,25 +29,33 @@ public class GameView extends SurfaceView {
     private final int FPS = 60;
     private NoteGenerator generador;
     private ArrayList<SpriteNotas> notas;
+    private ArrayList<SpriteMensajes> mensajes;
     private GameLoopThread loop;
     private SurfaceHolder holder;
-    private MediaPlayer musica;
+    private MediaPlayer musica, error;
     private Bitmap fondo, pickups, cuerda;
-    private Typeface tipografia;
+    private Typeface tipoPuntos;
+    private int puntuacion, seguidas, testing;
+    //private double proporcion;
 
     public GameView(Context context) {
         super(context);
         loop=new GameLoopThread(this);
         notas = new ArrayList<SpriteNotas>();
+        mensajes = new ArrayList<SpriteMensajes>();
         generador = new NoteGenerator(context,this,"songs/smokeonthewater.txt");
         // Inicializamos bitmaps
         fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
         pickups = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.whitepickups);
         cuerda = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.guitarstring);
         // Fuentes
-        tipografia = Typeface.createFromAsset(context.getAssets(),"tipografias/aaaiight.ttf");
+        tipoPuntos = Typeface.createFromAsset(context.getAssets(),"tipografias/aaaiight.ttf");
+        puntuacion = 0;
+        seguidas = 0;
+        testing = 0;
 
-        setMusica(new MediaPlayer().create(context,R.raw.sweetchildofmine));
+        setMusica(new MediaPlayer().create(context,R.raw.smokeonthewater));
+        setError(new MediaPlayer().create(context,R.raw.guitarerror));
 
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -87,9 +96,10 @@ public class GameView extends SurfaceView {
         canvas.drawBitmap(fondo, null, new RectF(0, 0, canvas.getWidth(), canvas.getHeight()), null);
 
         // Pastillas
+        //proporcion = pickups.getWidth()/canvas.getWidth();
         canvas.drawBitmap(pickups,
                 new Rect(0,0,pickups.getWidth(),pickups.getHeight()),
-                new RectF(0, canvas.getHeight()-pickups.getHeight(), canvas.getWidth(), canvas.getHeight()),
+                new RectF(0, canvas.getHeight()-pickups.getHeight()/(pickups.getWidth()/canvas.getWidth()), canvas.getWidth(), canvas.getHeight()),
                 null);
 
         // Cuerdas
@@ -103,8 +113,14 @@ public class GameView extends SurfaceView {
             n.draw(canvas);
         }
 
+        // Dibujamos los mensajes de ánimo
+        for(SpriteMensajes m : getMensajes()) {
+            m.draw(canvas);
+        }
+
         // Monitores y/o contadores
-        escribeTexto(canvas,String.valueOf(notas.size()),50,100,80,Color.WHITE,Color.BLACK,tipografia);
+        escribeTexto(canvas,String.valueOf(puntuacion),50,100,canvas.getWidth()/10,Color.YELLOW,Color.BLACK,tipoPuntos);
+        //escribeTexto(canvas,String.valueOf(notas.size()),50,100,80,Color.WHITE,Color.BLACK,tipografia);
 
         // Eliminamos las notas que salieron fuera
         deleteOutNotes();
@@ -129,6 +145,9 @@ public class GameView extends SurfaceView {
         }
         // Y nos cargamos la posición 0 tantas veces como notas se fueron
         for(int i=0; i<outNotes; i++) notas.remove(0);
+        // Reiniciamos el contador de notas seguidas
+        if(outNotes>0) seguidas = 0;
+        testing ++;
     }
 
     @Override
@@ -140,11 +159,17 @@ public class GameView extends SurfaceView {
                     if(n.isCollition(event.getX(),event.getY())) {
                         // Comprobamos si está dentro del traste
                         if(event.getY() > (getHeight()-pickups.getHeight()) && event.getY() < getHeight()) {
-                            // Está dentro (mola)
+                            // Está dentro (mola). Lo primero es subir la puntuación
+                            puntuacion++;
+                            // Ahora nos cargamos la nota
+                            notas.remove(n);
+                            // Y mostramos un bonito efecto visual
 
                         } else {
-                            // Está fuera (la cagaste)
-
+                            // Está fuera (la cagaste). Reiniciamos el contador de notas seguidas
+                            seguidas = 0;
+                            // Y escuchamos un desagradable sonido de guitarra desafinando.
+                            getError().start();
                         }
                         break;
                     }
@@ -209,6 +234,14 @@ public class GameView extends SurfaceView {
         this.notas = notas;
     }
 
+    public ArrayList<SpriteMensajes> getMensajes() {
+        return mensajes;
+    }
+
+    public void setMensajes(ArrayList<SpriteMensajes> mensajes) {
+        this.mensajes = mensajes;
+    }
+
     public double getTPS() {
         return generador.getTps();
     }
@@ -223,5 +256,13 @@ public class GameView extends SurfaceView {
 
     public void setMusica(MediaPlayer musica) {
         this.musica = musica;
+    }
+
+    public MediaPlayer getError() {
+        return error;
+    }
+
+    public void setError(MediaPlayer error) {
+        this.error = error;
     }
 }
