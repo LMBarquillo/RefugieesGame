@@ -12,21 +12,20 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.engine.GameView;
 /**
  * Sprite de los mensajes de ánimo temporales.
   */
-
 public class SpriteMensajes {
-    private final int TEXT_SIZE = 120;
+    private final int TEXT_SIZE = 150;
     private final int SHADOW_SIZE = 10;
     private GameView gameView;
     private int posx, posy;
-    private float duracion;
     private String texto;
     private Typeface tipografia;
     private Paint paint;
+    private long vida;
 
-    public SpriteMensajes(GameView gameView, int duracion, String texto){
+    public SpriteMensajes(GameView gameView, long duracion, String texto){
         setGameView(gameView);
-        setDuracion(duracion);
         setTexto(texto);
+        setVida(duracion * gameView.getFPS() / 1000);
 
         setTipografia(Typeface.createFromAsset(gameView.getContext().getAssets(),"tipografias/streetgathering.ttf"));
         setPaint(new Paint());
@@ -40,9 +39,17 @@ public class SpriteMensajes {
     }
 
     public void draw(Canvas canvas){
-        paint.setColor(Color.YELLOW);
-        paint.setStyle(Paint.Style.STROKE);
-
+        if(--this.vida <= 0) {
+            getGameView().setMensaje(null);
+        } else {
+            // Borde blanco y relleno rojo
+            paint.setColor(Color.WHITE);
+            paint.setStyle(Paint.Style.STROKE);
+            canvas.drawText(getTexto(),getPosx(),getPosy(),paint);
+            paint.setColor(Color.RED);
+            paint.setStyle(Paint.Style.FILL);
+            canvas.drawText(getTexto(),getPosx(),getPosy(),paint);
+        }
     }
 
     public GameView getGameView() {
@@ -69,14 +76,6 @@ public class SpriteMensajes {
         this.posy = posy;
     }
 
-    public float getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(float duracion) {
-        this.duracion = duracion;
-    }
-
     public String getTexto() {
         return texto;
     }
@@ -99,5 +98,9 @@ public class SpriteMensajes {
 
     public void setPaint(Paint paint) {
         this.paint = paint;
+    }
+
+    public void setVida(long vida) {
+        this.vida = vida;
     }
 }
