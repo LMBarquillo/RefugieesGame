@@ -11,6 +11,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import es.riberadeltajo.refugiadosgame.R;
 
@@ -19,19 +20,20 @@ import es.riberadeltajo.refugiadosgame.R;
  */
 
 public class GameView extends SurfaceView {
-    private final int TIEMPO_MAX=300;
-    private Bitmap player,fondo;
+    private final int TIEMPO_MAX=120;
+    private final int MAX_POINTS=150;
+    private Bitmap player,coins,fondo,ticket;
     private SurfaceHolder holder;
     private GameLoop loop;
     private int corx,cory;
     private int xSpeed,ySpeed;
     private ArrayList<Sprite> sprites;
+    private ArrayList<Monedas> monedas;
+    private ArrayList<Ticket> tickets;
     private int puntuacion;
     private long crono,inicio;
     private Sprite jug;
     private Madrid contexto;
-    private ArrayList<Bitmap> drawgif;
-    private int cont=0;
 
     public GameView(Context context){
         super(context);
@@ -44,11 +46,14 @@ public class GameView extends SurfaceView {
         setInicio(System.currentTimeMillis());
         setPuntuacion(0);
         sprites=new ArrayList<Sprite>();
-        drawgif=new ArrayList<>();
+        monedas=new ArrayList<Monedas>();
+        tickets=new ArrayList<Ticket>();
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+                fondo=BitmapFactory.decodeResource(getResources(), R.drawable.madridfondo);
+                fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
                 createSprite();
                 loop.setRunning(true);
                 loop.start();
@@ -71,85 +76,6 @@ public class GameView extends SurfaceView {
                 }
             }
         });
-    }
-
-    //Prueba fondo animado. Cambio el fondo añadiendo al array, ya vacío, el siguiente
-    public Bitmap cambiarFondo(int cont){
-        Bitmap background=null;
-        if(cont==0){
-            background= drawgif.get(0);
-        }
-        else if(cont==1){
-            background= drawgif.get(0);
-        }
-        else if(cont==2){
-            background= drawgif.get(0);
-        }
-        else if(cont==3){
-            background= drawgif.get(0);
-        }
-        else if(cont==4){
-            background= drawgif.get(0);
-        }
-        else if(cont==5){
-            background= drawgif.get(0);
-        }
-        else if(cont==6){
-            background= drawgif.get(0);
-        }
-        else if(cont==7){
-            background= drawgif.get(0);
-        }
-        else if(cont==8){
-            background= drawgif.get(0);
-        }
-        else if(cont==9){
-            background= drawgif.get(0);
-        }
-        else if(cont==10){
-            background= drawgif.get(0);
-        }
-        else if(cont==11){
-            background= drawgif.get(0);
-        }
-        else if(cont==12){
-            background= drawgif.get(0);
-        }
-        else if(cont==13){
-            background= drawgif.get(0);
-        }
-        else if(cont==14){
-            background= drawgif.get(0);
-        }
-        else if(cont==15){
-            background= drawgif.get(0);
-        }
-        else if(cont==16){
-            background= drawgif.get(0);
-        }
-        else if(cont==17){
-            background= drawgif.get(0);
-        }
-        else if(cont==18){
-            background= drawgif.get(0);
-        }
-        else if(cont==19){
-            background= drawgif.get(0);
-        }
-        else if(cont==20){
-            background= drawgif.get(0);
-        }
-        else if(cont==21){
-            background= drawgif.get(0);
-        }
-        else if(cont==22){
-            background= drawgif.get(0);
-        }
-        else if(cont==23){
-            background= drawgif.get(0);
-        }
-
-        return background;
     }
 
     public int getCorx() {
@@ -224,179 +150,87 @@ public class GameView extends SurfaceView {
         this.inicio = inicio;
     }
 
-    //Creo el Sprite y le hago un setJug() para pasarle después la posición en el onTouchEvent
-    //Inicializo el fondo temporalmente aquí porque daba Null en el constructor
-    public void createSprite(){
-        player= BitmapFactory.decodeResource(getResources(),R.drawable.pruebamadrid);
-        setJug(new Sprite(this,player,10));
-        sprites.add(getJug());
-        fondo=BitmapFactory.decodeResource(getResources(), R.drawable.frame1);
-        fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
+    public ArrayList<Monedas> getMonedas() {
+        return monedas;
     }
 
-    //Prueba fondo animado. Crea el fondo antes de ponerle
-    public void createFondo(int cont){
-        Bitmap fond;
-        if (cont == 0) {
-            fond=BitmapFactory.decodeResource(getResources(), R.drawable.frame1);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
+    public void setMonedas(ArrayList<Monedas> monedas) {
+        this.monedas = monedas;
+    }
+
+    //Creo el Sprite y le hago un setJug() para pasarle después la posición en el onTouchEvent
+    //Creo las monedas de distinto valor y las barajeo para que se pinten posteriormente de forma aleatoria
+    //Creo el ticket que aparecerá cuando obtenga la puntuación requerida
+    public void createSprite(){
+        player= BitmapFactory.decodeResource(getResources(),R.drawable.pruebamadrid);
+        setJug(new Sprite(this,player,5));
+        sprites.add(getJug());
+        for(int i=0;i<250;i++) {
+            coins = BitmapFactory.decodeResource(getResources(), R.drawable.madridcoin1);
+            monedas.add(new Monedas(monedas, this, coins, 1));
         }
-        if (cont == 1) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame2);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
+        for(int i=0;i<100;i++) {
+            coins = BitmapFactory.decodeResource(getResources(), R.drawable.madridcoin2);
+            monedas.add(new Monedas(monedas, this, coins, 2));
         }
-        if (cont == 2) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame3);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
+        for(int i=0;i<45;i++) {
+            coins = BitmapFactory.decodeResource(getResources(), R.drawable.madridcoin5);
+            monedas.add(new Monedas(monedas, this, coins, 5));
         }
-        if (cont == 3) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame4);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
+        for(int i=0;i<5;i++) {
+            coins = BitmapFactory.decodeResource(getResources(), R.drawable.madridcoin10);
+            monedas.add(new Monedas(monedas, this, coins, 10));
         }
-        if (cont == 4) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame5);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 5) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame6);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 6) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame7);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 7) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame8);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 8) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame9);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 9) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame10);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 10) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame11);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 11) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame12);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 12) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame13);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 13) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame14);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 14) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame15);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 15) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame16);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 16) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame17);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 17) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame18);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 18) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame19);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 19) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame20);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 20) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame21);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 21) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame22);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 22) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame23);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 23) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame24);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
+        Collections.shuffle(getMonedas());
+        ticket=BitmapFactory.decodeResource(getResources(), R.drawable.madridticket);
+        tickets.add(new Ticket(tickets, this, ticket));
     }
 
     public void draw(Canvas canvas){
         Paint paint=new Paint();
         long actual;
+        boolean conseguido=false;
         paint.setColor(Color.RED);
         paint.setTextSize((float) (getWidth() * 0.1));
         canvas.drawBitmap(fondo,0,0,null);
-        /*createFondo(cont); //Creo el fondo, le guardo para luego borrarle y le pongo
-        Bitmap temp;
-        temp=cambiarFondo(cont);
-        canvas.drawBitmap(temp, 0, 0, null);
-        if(cont<22) {
-            cont++;
-            drawgif.remove(temp);
-        }
-        else{
-            cont=0;
-            drawgif.remove(temp);
-        }*/
         if((sprites.size()!=0) && getCrono()<TIEMPO_MAX) {
             actual=System.currentTimeMillis();
             for (Sprite miSprite : sprites) {
                 miSprite.draw(canvas);
             }
-            if(sprites.size()>0) {
+            if(getPuntuacion()<MAX_POINTS) {
+                for (int i = 0; i < monedas.size(); i++) {
+                    if (i <= 5) {
+                        monedas.get(i).draw(canvas);
+                        if (monedas.get(i).isCollition(getJug())) {
+                            sumarPuntos(monedas.get(i).getPuntos());
+                            monedas.remove(monedas.get(i));
+                        }
+                    }
+                }
+            }else{
+                for(int i=0;i<tickets.size();i++){
+                    tickets.get(i).draw(canvas);
+                    if(tickets.get(i).isCollition(getJug())) {
+                        conseguido=true;
+                        tickets.remove(tickets.get(i));
+                    }
+                }
+            }
+            if (sprites.size() > 0) {
                 setCrono((actual - inicio) / 1000);
             }
-            //Tiempo hacia arriba
-            //canvas.drawText(String.format("%s",pasarSeg(crono)),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
             canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
             canvas.drawText(String.format("%02d", getPuntuacion()), (float) (getWidth() * 0.80), (float) (getHeight() * 0.08), paint);
         }
         else{
-            if(getCrono()<TIEMPO_MAX) {
-                canvas.drawText("VICTORIA",(float)(getWidth()*0.25),(float)(getHeight()*0.49),paint);
-            }
-            else{
+            if(getCrono()>TIEMPO_MAX && !conseguido) {
                 canvas.drawText("GAME OVER",(float)(getWidth()*0.25),(float)(getHeight()*0.49),paint);
             }
+            finalizar();
+        }
+        if(conseguido){
+            canvas.drawText("BILLETE CONSEGUIDO",(float)(getWidth()*0.25),(float)(getHeight()*0.49),paint);
             finalizar();
         }
     }
