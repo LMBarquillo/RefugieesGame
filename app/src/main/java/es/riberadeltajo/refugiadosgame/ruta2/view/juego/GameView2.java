@@ -34,6 +34,7 @@ public class GameView2 extends SurfaceView {
     private ScrollingBackground fondo;
 
 
+
     public GameView2(Context context) {
         super(context);
         loop = new GameLoopThread2(this);
@@ -124,10 +125,9 @@ public class GameView2 extends SurfaceView {
         for (Boton p : botones) {
             p.onDraw(canvas);
         }
-
             jugador.onDraw(canvas);
 
-        // canvas.drawText(String.valueOf(jugador.getWidth()+" "+jugador.getHeight()), 300, 300, paint);
+
 
 
     }
@@ -180,13 +180,9 @@ public class GameView2 extends SurfaceView {
         boton = new Boton(bot, Boton.ACTION_UP, (int) ((getWidth() * 0.5) - (anch * 0.5)), (int) (getHeight() - alt), (int) alt, (int) anch);
         botones.add(boton);
         Bitmap fon=BitmapFactory.decodeResource(getResources(), R.drawable.milan_fondo);
-      //  int anchoactual=fon.getWidth();
-       // int altoactual=fon.getHeight();
-       // int altonuevo=getHeight();
         int anchonuevo=(fon.getHeight()*getWidth())/getHeight();
+        setFondo(new ScrollingBackground(this,fon, anchonuevo, fon.getHeight(), getJugador(), getWidth(), getHeight()));
 
-
-        setFondo(new ScrollingBackground(fon, anchonuevo, fon.getHeight(), getJugador(), getWidth(), getHeight()));
     }
 
     @Override

@@ -100,9 +100,6 @@ public class GUI {
                 abajoPosY,
                 null
         );
-        if(getGameView().isFin()) {
-            canvas.drawText("You Lose", getGameView().getWidth() / 2, getGameView().getHeight() / 2, txtPaint);
-        }
         /*Paint paint = new Paint();
         paint.setTextSize(50);
         paint.setColor(Color.RED);
@@ -141,15 +138,15 @@ public class GUI {
 
     public void touch(int x, int y) {
         if(x >= arribaPosX && x <= arribaPosX + arribaWidth && y >= arribaPosY && y <= arribaPosY + arribaHeight) {
-            getJuego().getPlayer().setSpeedY(-8);
+            getJuego().andarUp();
         } else
         if(x >= abajoPosX && x <= abajoPosX + abajoWidth && y >= abajoPosY && y <= abajoPosY + abajoHeight) {
-            getJuego().getPlayer().setSpeedY(8);
+            getJuego().andarDown();
         }
     }
 
     public void unTouch(int x, int y) {
-        getJuego().getPlayer().setSpeedY(0);
+        getJuego().andarStop();
     }
 
 }
