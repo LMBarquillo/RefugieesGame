@@ -29,6 +29,8 @@ public class GameView extends SurfaceView implements Observer {
     private int ySpeed;
     private Bitmap fondo;
     private Bitmap jugbmp;
+    private Bitmap hielo, vaso, refresco, pajita;
+    private boolean cojidoHielo, cojidoVaso, cojidoRefresco, cojidoPajita;
     private Player jugador;
     private ArrayList<Objetos> objetos;
     private GameLoop loop;
@@ -50,6 +52,10 @@ public class GameView extends SurfaceView implements Observer {
         setPasaObjeto(false);
         setSegundos(-1);
         setCojidos(4);
+        setCojidoHielo(false);
+        setCojidoVaso(false);
+        setCojidoRefresco(false);
+        setCojidoPajita(false);
         loop=new GameLoop(this);
         jugbmp=BitmapFactory.decodeResource(getResources(), R.drawable.playertehran);
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -74,7 +80,10 @@ public class GameView extends SurfaceView implements Observer {
         });
 
         setFondo(BitmapFactory.decodeResource(getResources(), R.drawable.fondoteheran));
-
+        setHielo(BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran));
+        setVaso(BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran));
+        setRefresco(BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran));
+        setPajita(BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran));
     }
 
     private void cargarObjetos(){
@@ -99,6 +108,18 @@ public class GameView extends SurfaceView implements Observer {
         canvas.drawText(String.format("%d",getSegundos()),(float)(getWidth()*0.05),(float)(getHeight()*0.05),paint);
         canvas.drawText(String.format("Objetos por Cojer: %d",getCojidos()),(float)(getWidth()*0.4),(float)(getHeight()*0.05),paint);
         jugador.draw(canvas);
+        if(!isCojidoHielo()){
+            canvas.drawBitmap(Bitmap.createScaledBitmap(getHielo(),(int)(getWidth()*0.05),(int)(getHeight()*0.05),false),(float)(getWidth()*0.9),(float)(getHeight()*0.07),null);
+        }
+        if(!isCojidoVaso()){
+            canvas.drawBitmap(Bitmap.createScaledBitmap(getVaso(),(int)(getWidth()*0.05),(int)(getHeight()*0.05),false),(float)(getWidth()*0.9),(float)(getHeight()*0.14),null);
+        }
+        if(!isCojidoRefresco()){
+            canvas.drawBitmap(Bitmap.createScaledBitmap(getRefresco(),(int)(getWidth()*0.05),(int)(getHeight()*0.05),false),(float)(getWidth()*0.9),(float)(getHeight()*0.21),null);
+        }
+        if(!isCojidoPajita()){
+            canvas.drawBitmap(Bitmap.createScaledBitmap(getPajita(),(int)(getWidth()*0.05),(int)(getHeight()*0.05),false),(float)(getWidth()*0.9),(float)(getHeight()*0.27),null);
+        }
         if(!isPasaObjeto() && objetos.size()>0 && getCojidos()>0){
             for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
                 if(objetos.get(i).getSegundo()<getSegundos()){          //Si el segundo de aparicion es menor, los sigue dibujando
@@ -117,8 +138,20 @@ public class GameView extends SurfaceView implements Observer {
                 }
                 else if(objetos.get(i).choqueJugador(jugador)){     //COMPRUEBA SI EL OBJETO CHOCA CON EL JUGADOR
                     if(objetos.get(i).isCoger()){
-                        objetos.remove(i);
                         setCojidos(getCojidos()-1);
+                        if(objetos.get(i).getBmp().sameAs(getHielo())){         //COMPRUEBA QUE OBJETO HA COJIDO PARA BORRARLO DE PANTALLA
+                            setCojidoHielo(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getVaso())){
+                            setCojidoVaso(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getRefresco())){
+                            setCojidoRefresco(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getPajita())){
+                            setCojidoPajita(true);
+                        }
+                        objetos.remove(i);
                     }
                     else{
                         setPasaObjeto(true);
@@ -244,5 +277,69 @@ public class GameView extends SurfaceView implements Observer {
 
     public void setSegundos(int segundos) {
         this.segundos = segundos;
+    }
+
+    public boolean isCojidoHielo() {
+        return cojidoHielo;
+    }
+
+    public void setCojidoHielo(boolean cojidoHielo) {
+        this.cojidoHielo = cojidoHielo;
+    }
+
+    public boolean isCojidoVaso() {
+        return cojidoVaso;
+    }
+
+    public void setCojidoVaso(boolean cojidoVaso) {
+        this.cojidoVaso = cojidoVaso;
+    }
+
+    public boolean isCojidoRefresco() {
+        return cojidoRefresco;
+    }
+
+    public void setCojidoRefresco(boolean cojidoRefresco) {
+        this.cojidoRefresco = cojidoRefresco;
+    }
+
+    public boolean isCojidoPajita() {
+        return cojidoPajita;
+    }
+
+    public void setCojidoPajita(boolean cojidoPajita) {
+        this.cojidoPajita = cojidoPajita;
+    }
+
+    public Bitmap getHielo() {
+        return hielo;
+    }
+
+    public void setHielo(Bitmap hielo) {
+        this.hielo = hielo;
+    }
+
+    public Bitmap getVaso() {
+        return vaso;
+    }
+
+    public void setVaso(Bitmap vaso) {
+        this.vaso = vaso;
+    }
+
+    public Bitmap getRefresco() {
+        return refresco;
+    }
+
+    public void setRefresco(Bitmap refresco) {
+        this.refresco = refresco;
+    }
+
+    public Bitmap getPajita() {
+        return pajita;
+    }
+
+    public void setPajita(Bitmap pajita) {
+        this.pajita = pajita;
     }
 }
