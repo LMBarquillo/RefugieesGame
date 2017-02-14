@@ -85,6 +85,9 @@ public class Player {
                 setCorx(getPosx());
             }
         }
+        if(getCorx()==getPosx()){
+            setMover(false);
+        }
         currentFrame=++currentFrame%BMP_COLUMNS;
     }
 
