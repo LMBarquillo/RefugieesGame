@@ -27,7 +27,7 @@ public class Juego {
     private final float nenufarSpeedXScale = .009f; //sobre 10px
     private final float aguaYScale = .192f; //sobre 369px
     private final float aguaHeightScale = .593f; //sobre 1140px
-
+    //private Salpicadura salpicadura;
     private Player player;
     private Bitmap bmpNenufar;
     private ArrayList<Nenufar> nenufares;
