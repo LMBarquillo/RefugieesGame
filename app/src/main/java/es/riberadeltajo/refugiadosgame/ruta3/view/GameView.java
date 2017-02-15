@@ -21,7 +21,6 @@ public class GameView extends SurfaceView {
     public GameView(Sarajevo activity) {
         super(activity);
         setActivity(activity);
-        setLoop(new GameLoop(this));
         setFin(false);
         getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -104,9 +103,10 @@ public class GameView extends SurfaceView {
         return true;
     }
 
-    private void start() {
+    public void start() {
         setJuego(new Juego(this));
         setGui(new GUI(this, getJuego()));
+        setLoop(new GameLoop(this));
         getJuego().start();
         getGui().start();
         getLoop().setRunning(true);

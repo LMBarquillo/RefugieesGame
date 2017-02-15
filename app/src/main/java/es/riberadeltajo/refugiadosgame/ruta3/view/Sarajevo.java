@@ -2,6 +2,7 @@ package es.riberadeltajo.refugiadosgame.ruta3.view;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
 
 public class Sarajevo extends Activity {
 
@@ -28,4 +30,11 @@ public class Sarajevo extends Activity {
         setContentView(gameView);
     }
 
+    public void start() {
+        gameView.start();
+    }
+
+    public void continuar() {
+        startActivity(new Intent(this, Istanbul.class));
+    }
 }

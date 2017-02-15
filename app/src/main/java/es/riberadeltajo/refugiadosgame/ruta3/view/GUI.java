@@ -130,7 +130,7 @@ public class GUI {
                     dialog.setNegativeButton("Salir", null);
                     dialog.create();
                     dialog.show();*/
-                    new Dialogo(getGameView().getActivity(), R.layout.dialogo_sarajevo).show();
+                    new Dialogo(getGameView().getActivity(), Dialogo.Tipo.LOSE).show();
                 }
             });
         }
@@ -138,8 +138,8 @@ public class GUI {
 
     public void start() {
         contador = 0;
-        minutos = 0;
-        segundos = 8;
+        minutos = 1;
+        segundos = 15;
         tiempo = String.format("%02d:%02d", minutos, segundos);
     }
 

@@ -10,6 +10,12 @@
 
     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
+    <string name="dialogo_btn_reintentar">Try again</string>
+    <string name="dialogo_btn_continuar">Continue</string>
+    <string name="dialogo_win_titulo">YOU WIN</string>
+    <string name="dialogo_win_mensaje">You have managed to escape and you can continue on your way to Istanbul.</string>
+    <string name="dialogo_lose_titulo">YOU LOSE</string>
+    <string name="dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>

@@ -55,17 +55,17 @@
             android:layout_weight="3">
 
             <Button
-                android:text="Button"
+                android:text="@string/dialogo_btn_reintentar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button7"
+                android:id="@+id/btnReiniciar"
                 android:layout_weight="1" />
 
             <Button
-                android:text="Button"
+                android:text="@string/dialogo_btn_continuar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button6"
+                android:id="@+id/btnContinuar"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
