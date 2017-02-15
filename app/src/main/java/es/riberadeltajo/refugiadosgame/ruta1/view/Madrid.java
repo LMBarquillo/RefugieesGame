@@ -5,11 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.os.Process;
 
+import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
 
 public class Madrid extends AppCompatActivity {
     private GameView gameView;
+    private Button btnPlay, btnExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +26,51 @@ public class Madrid extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_madrid);
+        btnPlay=(Button) findViewById(R.id.btnJugar);
+        btnPlay=(Button) findViewById(R.id.btnSalir);
+    }
+
+    public void jugar(View v){
         gameView=new GameView(this);
         setContentView(gameView);
+    }
 
+    public void reintentar(){
+        gameView=new GameView(this);
+        setContentView(gameView);
+    }
+
+    public void salir(View v){
+        finish();
     }
 
     public void continuar() {
         startActivity(new Intent(this, Milan.class));
+    }
+
+    public void onResume(){
+        super.onResume();
+        /*musica=MediaPlayer.create(this,R.raw.cantina);
+        musica.setLooping(true);
+        musica.start();*/
+    }
+
+    public void onPause(){
+        super.onPause();
+        /*if(musica!=null){
+            musica.stop();
+            musica.release();
+        }*/
+        onStop();
+    }
+
+    public void onStop(){
+        super.onStop();
+    }
+
+    public void onDestroy(){
+        super.onDestroy();
+        Process.killProcess(Process.myPid());
     }
 }

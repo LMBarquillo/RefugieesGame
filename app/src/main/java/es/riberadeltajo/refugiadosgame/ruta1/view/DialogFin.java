@@ -39,7 +39,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         getWindow().setLayout(size.x,(int)(size.y*1.2));
         getWindow().getAttributes().windowAnimations = R.style.madridDialogo;
         Drawable d = new ColorDrawable(Color.BLACK);
-        d.setAlpha(120);
+        d.setAlpha(130);
         getWindow().setBackgroundDrawable(d);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -97,7 +97,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
 
     private void reiniciar() {
         dismiss();
-        activity.recreate();
+        activity.reintentar();
     }
 
     private void continuar() {

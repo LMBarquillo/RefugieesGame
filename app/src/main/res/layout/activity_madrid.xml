@@ -10,4 +10,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="es.riberadeltajo.refugiadosgame.ruta1.view.Madrid">
 
+    <Button
+        android:text="Exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/btnJugar"
+        android:layout_marginBottom="72dp"
+        android:id="@+id/btnSalir"
+        android:onClick="salir" />
+
+    <Button
+        android:text="Play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="51dp"
+        android:id="@+id/btnJugar"
+        android:onClick="jugar"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

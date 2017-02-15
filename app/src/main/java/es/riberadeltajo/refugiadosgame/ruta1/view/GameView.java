@@ -20,7 +20,7 @@ import es.riberadeltajo.refugiadosgame.R;
  */
 
 public class GameView extends SurfaceView {
-    private final int TIEMPO_MAX=120;
+    private final int TIEMPO_MAX=12;
     private final int MAX_POINTS=100;
     private Bitmap player,coins,fondo,ticket;
     private SurfaceHolder holder;
@@ -189,7 +189,7 @@ public class GameView extends SurfaceView {
         boolean conseguido=false, finalizar=false;
         paint.setColor(Color.RED);
         paint.setTextSize((float) (getWidth() * 0.1));
-        canvas.drawBitmap(fondo,0,0,null);
+        canvas.drawBitmap(fondo, 0, 0, null);
         if((sprites.size()!=0) && getCrono()<TIEMPO_MAX && getVidas()>0) {
             actual=System.currentTimeMillis();
             for (Sprite miSprite : sprites) {
@@ -278,6 +278,7 @@ public class GameView extends SurfaceView {
         try{
             Thread.sleep(1000);
         }catch(InterruptedException ie){}
+        getContexto().onPause();
     }
 
     private void sumarPuntos(int puntos){
