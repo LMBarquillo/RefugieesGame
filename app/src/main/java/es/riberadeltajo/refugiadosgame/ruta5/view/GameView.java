@@ -38,10 +38,11 @@ public class GameView extends SurfaceView implements Observer {
     private Cronometro cronometro;
     private int segundos;
     private int cojidos;
+    private boolean camarero;
 
 
 
-    public GameView(Context context) {
+    public GameView(Context context, boolean cam) {
         super(context);
         principal=(Tehran)context;
         cronometro=new Cronometro();
@@ -50,6 +51,7 @@ public class GameView extends SurfaceView implements Observer {
         holder=getHolder();
         objetos=new ArrayList<Objetos>();
         setPasaObjeto(false);
+        setCamarero(cam);
         setSegundos(-1);
         setCojidos(4);
         setCojidoHielo(false);
@@ -88,14 +90,17 @@ public class GameView extends SurfaceView implements Observer {
 
     private void cargarObjetos(){
         jugador=new Player(this,Bitmap.createScaledBitmap(jugbmp,(int)(jugbmp.getWidth()*1.7),(int)(jugbmp.getHeight()*1.5),false));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+1));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+4));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+6));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+10));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.monedatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+10));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.alfombratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+14));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+18));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+22));
+        if(isCamarero()){
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+1));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+4));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+6));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+10));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.monedatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+10));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.alfombratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+14));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+18));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+22));
+        }
+
     }
 
 
@@ -106,7 +111,7 @@ public class GameView extends SurfaceView implements Observer {
         //canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
         canvas.drawText(String.format("%d",getSegundos()),(float)(getWidth()*0.05),(float)(getHeight()*0.05),paint);
-        canvas.drawText(String.format("Objetos por Cojer: %d",getCojidos()),(float)(getWidth()*0.4),(float)(getHeight()*0.05),paint);
+        //canvas.drawText(String.format("Objetos por Cojer: %d",getCojidos()),(float)(getWidth()*0.4),(float)(getHeight()*0.05),paint);
         jugador.draw(canvas);
         if(!isCojidoHielo()){
             canvas.drawBitmap(Bitmap.createScaledBitmap(getHielo(),(int)(getWidth()*0.05),(int)(getHeight()*0.05),false),(float)(getWidth()*0.9),(float)(getHeight()*0.07),null);
@@ -162,11 +167,11 @@ public class GameView extends SurfaceView implements Observer {
         }
         else{
             if(isPasaObjeto()){
-                canvas.drawText(String.format("GAME OVER"),(float)(getWidth()*0.32),(float)(getHeight()*0.45),paint);
+                canvas.drawText(String.format("%s",getContext().getString(R.string.game_over_tehran)),(float)(getWidth()*0.32),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
             else{
-                canvas.drawText(String.format("CONGRATULATIONS"),(float)(getWidth()*0.2),(float)(getHeight()*0.45),paint);
+                canvas.drawText(String.format("%s",getContext().getString(R.string.congratulations_tehran)),(float)(getWidth()*0.2),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
         }
@@ -341,5 +346,13 @@ public class GameView extends SurfaceView implements Observer {
 
     public void setPajita(Bitmap pajita) {
         this.pajita = pajita;
+    }
+
+    public boolean isCamarero() {
+        return camarero;
+    }
+
+    public void setCamarero(boolean camarero) {
+        this.camarero = camarero;
     }
 }

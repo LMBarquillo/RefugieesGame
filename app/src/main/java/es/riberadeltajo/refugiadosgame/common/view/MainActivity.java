@@ -12,6 +12,7 @@ import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
 import es.riberadeltajo.refugiadosgame.ruta3.view.Sarajevo;
 import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
 import es.riberadeltajo.refugiadosgame.ruta5.view.Tehran;
+import es.riberadeltajo.refugiadosgame.ruta5.view.teheran_main2;
 
 public class MainActivity extends AppCompatActivity {
     private final int RUTA1 = 1;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ruta5(View view) {
-        Intent i = new Intent(this,Tehran.class);
+        Intent i = new Intent(this,teheran_main2.class);
         i.putExtra("STATUS",status);
         startActivityForResult(i,RUTA5);
     }
