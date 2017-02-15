@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="sarajevoDialogo">
+        <item name="android:windowEnterAnimation">@anim/sarajevo_dialogo_entrada</item>
+        <item name="android:windowExitAnimation">@anim/sarajevo_dialogo_salida</item>
+    </style>
+
 </resources>
