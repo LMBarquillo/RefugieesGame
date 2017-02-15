@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -39,6 +40,9 @@ public class GameView extends SurfaceView implements Observer {
     private int segundos;
     private int cojidos;
     private boolean camarero;
+    private MediaPlayer musica;
+    private MediaPlayer lost;
+    private MediaPlayer win;
 
 
 
@@ -58,6 +62,9 @@ public class GameView extends SurfaceView implements Observer {
         setCojidoVaso(false);
         setCojidoRefresco(false);
         setCojidoPajita(false);
+        setMusica(MediaPlayer.create(getContext(),R.raw.tehranmusica));
+        setLost(MediaPlayer.create(getContext(),R.raw.tehranlost));
+        setWin(MediaPlayer.create(getContext(),R.raw.tehranwin));
         loop=new GameLoop(this);
         jugbmp=BitmapFactory.decodeResource(getResources(), R.drawable.playertehran);
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -86,6 +93,8 @@ public class GameView extends SurfaceView implements Observer {
         setVaso(BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran));
         setRefresco(BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran));
         setPajita(BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran));
+        getMusica().start();
+        getMusica().setLooping(true);
     }
 
     private void cargarObjetos(){
@@ -167,10 +176,16 @@ public class GameView extends SurfaceView implements Observer {
         }
         else{
             if(isPasaObjeto()){
+                getMusica().stop();
+                getMusica().release();
+                getLost().start();
                 canvas.drawText(String.format("%s",getContext().getString(R.string.game_over_tehran)),(float)(getWidth()*0.32),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
             else{
+                getMusica().stop();
+                getMusica().release();
+                getWin().start();
                 canvas.drawText(String.format("%s",getContext().getString(R.string.congratulations_tehran)),(float)(getWidth()*0.2),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
@@ -196,10 +211,18 @@ public class GameView extends SurfaceView implements Observer {
         loop.setRunning(false);
 
         try{
-            Thread.sleep(2000);
+            Thread.sleep(2500);
         }
         catch(InterruptedException ie){
 
+        }
+        if(isPasaObjeto()){
+            getLost().stop();
+            getLost().release();
+        }
+        else{
+            getWin().stop();
+            getWin().release();
         }
         principal.fin();
     }
@@ -354,5 +377,29 @@ public class GameView extends SurfaceView implements Observer {
 
     public void setCamarero(boolean camarero) {
         this.camarero = camarero;
+    }
+
+    public MediaPlayer getMusica() {
+        return musica;
+    }
+
+    public void setMusica(MediaPlayer musica) {
+        this.musica = musica;
+    }
+
+    public MediaPlayer getLost() {
+        return lost;
+    }
+
+    public void setLost(MediaPlayer lost) {
+        this.lost = lost;
+    }
+
+    public MediaPlayer getWin() {
+        return win;
+    }
+
+    public void setWin(MediaPlayer win) {
+        this.win = win;
     }
 }
