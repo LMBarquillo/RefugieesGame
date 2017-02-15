@@ -21,7 +21,7 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class GameView extends SurfaceView {
     private final int TIEMPO_MAX=120;
-    private final int MAX_POINTS=150;
+    private final int MAX_POINTS=100;
     private Bitmap player,coins,fondo,ticket;
     private SurfaceHolder holder;
     private GameLoop loop;
@@ -271,16 +271,14 @@ public class GameView extends SurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        setCorx((int)event.getRawX());
-        setCory((int)event.getRawY());
         if(event.getAction()==MotionEvent.ACTION_MOVE){
-            getJug().touch(getCorx(),getCory(),true);
+            getJug().touch(event.getRawX(),event.getRawY(),true);
         }
         else if(event.getAction()==MotionEvent.ACTION_UP){
-            getJug().touch(getCorx(),getCory(),false);
+            getJug().touch(event.getRawX(),event.getRawY(),false);
         }
         else if(event.getAction()==MotionEvent.ACTION_DOWN){
-            getJug().touch(getCorx(),getCory(),true);
+            getJug().touch(event.getRawX(),event.getRawY(),true);
         }
         return true;
     }

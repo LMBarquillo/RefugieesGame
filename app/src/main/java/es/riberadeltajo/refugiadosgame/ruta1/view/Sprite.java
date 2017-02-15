@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 
 /**
  * Created by alumno on 18/01/2017.
@@ -14,15 +15,15 @@ public class Sprite {
     private final int[] DIRECCION={4,5,3,1,0,2,7,6};
     private final int BMP_COLUMS=13;
     private final int BMP_ROWS=8;
-    private int corx,cory;
-    private int xSpeed,ySpeed;
+    private float corx,cory;
+    private float xSpeed,ySpeed;
     private GameView gameView;
     private Bitmap bmp;
     private int currentFrame;
     private int width;
     private int height;
     private int vida;
-    private int posX,posY;
+    private float posX,posY;
     private boolean pintar=false;
     private int direccion;
 
@@ -32,8 +33,8 @@ public class Sprite {
         setGameView(gameView);
         setBmp(bmp);
         setCurrentFrame(0);
-        setxSpeed(10);
-        setySpeed(10);
+        setxSpeed(0);
+        setySpeed(0);
         setPosX(0);
         setPosY(0);
         setCorx((int) (Math.random()*(gameView.getWidth()-getWidth())));
@@ -41,35 +42,35 @@ public class Sprite {
         setVida(vida);
     }
 
-    public int getCorx() {
+    public float getCorx() {
         return corx;
     }
 
-    public void setCorx(int corx) {
+    public void setCorx(float corx) {
         this.corx = corx;
     }
 
-    public int getCory() {
+    public float getCory() {
         return cory;
     }
 
-    public void setCory(int cory) {
+    public void setCory(float cory) {
         this.cory = cory;
     }
 
-    public int getxSpeed() {
+    public float getxSpeed() {
         return xSpeed;
     }
 
-    public void setxSpeed(int xSpeed) {
+    public void setxSpeed(float xSpeed) {
         this.xSpeed = xSpeed;
     }
 
-    public int getySpeed() {
+    public float getySpeed() {
         return ySpeed;
     }
 
-    public void setySpeed(int ySpeed) {
+    public void setySpeed(float ySpeed) {
         this.ySpeed = ySpeed;
     }
 
@@ -89,19 +90,19 @@ public class Sprite {
         this.height = height;
     }
 
-    public int getPosX() {
+    public float getPosX() {
         return posX;
     }
 
-    public void setPosX(int posX) {
+    public void setPosX(float posX) {
         this.posX = posX;
     }
 
-    public int getPosY() {
+    public float getPosY() {
         return posY;
     }
 
-    public void setPosY(int posY) {
+    public void setPosY(float posY) {
         this.posY = posY;
     }
 
@@ -146,26 +147,27 @@ public class Sprite {
     }
 
     //Método para que el Sprite mire en la dirección correcta
+    //Meto un rango de 0 a 10 para que se muestre más a menudo el sprite hacia X e Y ya que al haber float tendrían que coincidir hasta los decimales
     private int getDireccion(){
-        if(getPosX()==getCorx() && (getPosY()>getCory())){
+        if(((getPosX()-getCorx()>0 && (getPosX()-getCorx()<11)) || (getCorx()-getPosX()>0 && (getCorx()-getPosX()<11))) && (getPosY()>getCory())){
             direccion=4;
         }
         else if(getPosX()>getCorx() && (getPosY()>getCory())){
             direccion=5;
         }
-        else if(getPosY()==getCory() && (getPosX()<getCorx())){
+        else if(((getPosY()-getCory()>0 && (getPosY()-getCory()<11)) || (getCory()-getPosY()>0 && (getCory()-getPosY()<11))) && (getPosX()<getCorx())){
             direccion=2;
         }
         else if(getPosX()<getCorx() && (getPosY()>getCory())){
             direccion=3;
         }
-        else if(getPosX()==getCorx() && (getPosY()<getCory())){
+        else if(((getPosX()-getCorx()>0 && (getPosX()-getCorx()<11)) || (getCorx()-getPosX()>0 && (getCorx()-getPosX()<11))) && (getPosY()<getCory())){
             direccion=0;
         }
         else if(getPosX()<getCorx() && (getPosY()<getCory())){
             direccion=1;
         }
-        else if(getPosY()==getCory() && (getPosX()>getCorx())){
+        else if(((getPosY()-getCory()>0 && (getPosY()-getCory()<11)) || (getCory()-getPosY()>0 && (getCory()-getPosY()<11))) && (getPosX()>getCorx())){
             direccion=6;
         }
         else if(getPosX()>getCorx() && (getPosY()<getCory())){
@@ -185,7 +187,7 @@ public class Sprite {
                 }
             }else if (getCorx() > getPosX()){
                 setCorx(getCorx() - getxSpeed());
-                if(getCorx()-getPosX()<21){
+                if(getCorx()-getPosX()<0.2){
                     setCorx(getPosX());
                 }
             } else if (getCorx() == getPosX()) {
@@ -194,12 +196,12 @@ public class Sprite {
         } else {
             if (getCorx() < getPosX()) {
                 setCorx(getCorx() + getxSpeed());
-                if(getPosX()-getCorx()<21){
+                if(getPosX()-getCorx()<0.2){
                     setCorx(getPosX());
                 }
             } else if (getCorx() > getPosX()) {
                 setCorx(getCorx() - getxSpeed());
-                if(getCorx()-getPosX()<21){
+                if(getCorx()-getPosX()<0.2){
                     setCorx(getPosX());
                 }
             } else if (getCorx() == getPosX()) {
@@ -215,7 +217,7 @@ public class Sprite {
                 }
             } else if (getCory() > getPosY()) {
                 setCory(getCory() - getySpeed());
-                if(getCory()-getPosY()<21){
+                if(getCory()-getPosY()<0.2){
                     setCory(getPosY());
                 }
             } else if (getCory() == getPosY()) {
@@ -224,12 +226,12 @@ public class Sprite {
         } else {
             if (getCory() < getPosY()) {
                 setCory(getCory() + getySpeed());
-                if(getPosY()-getCory()<21){
+                if(getPosY()-getCory()<0.2){
                     setCory(getPosY());
                 }
             } else if (getCory() > getPosY()) {
                 setCory(getCory() - getySpeed());
-                if(getCory()-getPosY()<21){
+                if(getCory()-getPosY()<0.2){
                     setCory(getPosY());
                 }
             } else if (getCory() == getPosY()) {
@@ -242,9 +244,10 @@ public class Sprite {
         setCurrentFrame(++currentFrame % BMP_COLUMS);
     }
 
-    //Calculo la diagonal para un desplazamiento libre sin movimientos cuadriculares (sigue siendo por ser Integer)
+    //Calculo el desplazamiento en diagonal inversamente proporcional
     private void calcularDiagonal(){
-        int trayectoX,trayectoY,velX,velY,divisor;
+        float trayectoX,trayectoY,velX,velY;
+
         if(getPosX()>getCorx()) {
             trayectoX = getPosX() - getCorx();
         }else{
@@ -256,152 +259,38 @@ public class Sprite {
             trayectoY = getCory() - getPosY();
         }
 
-        divisor=mcd(trayectoX,trayectoY);
-        if(divisor>0){
-            velX=Math.round((float)trayectoX/divisor);
-            velY=Math.round((float)trayectoY/divisor);
-        }
-        else{
-            velX=trayectoX;
-            velY=trayectoY;
-        }
-        velRed(velX,velY);
-    }
-
-    //Reduzco al mínimo proporcionalmente para que no haga saltos de posición
-    public void velRed(int x, int y){
-        if((x>1000 && x<1981) || (y>1000 && y<1981)){
-            if(x>=198 || y>=198) {
-                x = Math.round((float)x / 198);
-                y = Math.round((float)y / 198);
-            }
-            else if(x<198){
-                x = (x-198)/x;
-                y = Math.round((float)y / 198);
-            }
-            else if(y<198){
-                x = Math.round((float)x / 198);
-                y = Math.round((float)y-198)/y;
-            }
-        }
-        if((x>500 && x<1001) || (y>500 && y<1001)){
-            if(x>=100 || y>=100) {
-                x = Math.round((float)x / 100);
-                y = Math.round((float)y / 100);
-            }
-            else if(x<100){
-                x = Math.round((float)x-100)/x;
-                y = Math.round((float)y / 100);
-            }
-            else if(y<100){
-                x = Math.round((float)x / 100);
-                y = Math.round((float)y-100)/y;
-            }
-        }
-        if((x>200 && x<501) || (y>200 && y<501)){
-            if(x>=50 || y>=50) {
-                x = Math.round((float)x / 50);
-                y = Math.round((float)y / 50);
-            }
-            else if(x<50){
-                x = Math.round((float)x-50)/x;
-                y = Math.round((float)y / 50);
-            }
-            else if(y<50){
-                x = Math.round((float)x / 50);
-                y = Math.round((float)y-50)/y;
-            }
-        }
-        if((x>100 && x<201) || (y>100 && y<201)){
-            if(x>=20 || y>=20) {
-                x = Math.round((float)x / 20);
-                y = Math.round((float)y / 20);
-            }
-            else if(x<20){
-                x = Math.round((float)x-20)/x;
-                y = Math.round((float)y / 20);
-            }
-            else if(y<20){
-                x = Math.round((float)x / 20);
-                y = Math.round((float)y-20)/y;
-            }
-        }
-        if((x>50 && x<101) || (y>50 && y<101)){
-            if(x>=10 || y>=10) {
-                x = Math.round((float)x / 10);
-                y = Math.round((float)y / 10);
-            }
-            else if(x<10){
-                x = Math.round((float)x-10)/x;
-                y = Math.round((float)y / 10);
-            }
-            else if(y<10){
-                x = Math.round((float)x / 10);
-                y = Math.round((float)y-10)/y;
-            }
-        }
-        if((x>20 && x<51) || (y>20 && y<51)){
-            if(x>=5 || y>=5) {
-                x = Math.round((float)x / 5);
-                y = Math.round((float)y / 5);
-            }
-            else if(x<5){
-                x = Math.round((float)x-5)/x;
-                y = Math.round((float)y / 5);
-            }
-            else if(y<5){
-                x = Math.round((float)x / 5);
-                y = Math.round((float)y-5)/y;
-            }
-        }
-        if((x>10 && x<21) || (y>10 && y<21)){
-            if(x>=2 || y>=2) {
-                x = Math.round((float)x / 2);
-                y = Math.round((float)y / 2);
-            }
-            else if(x<2){
-                x = Math.round((float)x-2)/x;
-                y = Math.round((float)y / 2);
-            }
-            else if(y<2){
-                x = Math.round((float)x / 2);
-                y = Math.round((float)y-2)/y;
-            }
-        }
-        if(getCorx()==getPosX()) {
-            setxSpeed(0);
-            setySpeed(y + 19);
-        }
-        else if(getCory()==getPosY()){
-            setxSpeed(x + 19);
-            setySpeed(0);
-        }
-        else{
-            setxSpeed(x+10);
-            setySpeed(y+10);
-        }
-    }
-
-    //Método que devuelve el máximo común divisor
-    private int mcd(int x,int y){
-            if(y==0) {
-                return x;
+        if(trayectoX<trayectoY){
+            if(trayectoY>0) {//Evito divisiones entre 0
+                velX = (25 * trayectoX) / trayectoY;
             }else{
-                return mcd(y, x % y);
+                velX=0;
+            }
+            velY=25;
         }
+        else{
+            velX=25;
+            if(trayectoX>0) {//Evito divisiones entre 0
+                velY = (25 * trayectoY) / trayectoX;
+            }
+            else{
+                velY=0;
+            }
+        }
+        setxSpeed(velX);
+        setySpeed(velY);
     }
 
-    //Dibujo el recténgulo y actualizo si el touch es true o no lo hago si es false
+    //Dibujo el rectángulo y actualizo si el touch es true o no lo hago si es false
     public void draw(Canvas canvas){
+        calcularDiagonal();
         getDireccion();
         if(isPintar()) {
             update();
-            calcularDiagonal();
         }
         int srcx=getCurrentFrame()*getWidth();
         int srcy=getDireccion()*getHeight();
         Rect src=new Rect(srcx,srcy,srcx+getWidth(),srcy+getHeight());
-        Rect dst=new Rect(getCorx(),getCory(),getCorx()+getWidth(),getCory()+getHeight());
+        RectF dst=new RectF(getCorx(),getCory(),getCorx()+getWidth(),getCory()+getHeight());
         canvas.drawBitmap(getBmp(),src,dst,null);
 
         //Temporal para ver la velocidad y la pos en pantalla
@@ -409,16 +298,16 @@ public class Sprite {
         paint.setColor(Color.YELLOW);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(80);
-        canvas.drawText(String.format("posX: %d\tposY: %d",getPosX(),getPosY()),(float)(getWidth()*0.8),(float)(getHeight()*1.2),paint);
-        canvas.drawText(String.format("corX: %d\tcorY: %d",getCorx(),getCory()),(float)(getWidth()*0.8),(float)(getHeight()*1.7),paint);
-        canvas.drawText(String.format("xSpeed: %d\tySpeed: %d",getxSpeed(),getySpeed()),(float)(getWidth()*0.5),(float)(getHeight()*2.2),paint);
+        canvas.drawText(String.format("posX: %.2f\tposY: %.2f",getPosX(),getPosY()),(float)(getWidth()*0.8),(float)(getHeight()*1.2),paint);
+        canvas.drawText(String.format("corX: %.2f\tcorY: %.2f",getCorx(),getCory()),(float)(getWidth()*0.8),(float)(getHeight()*1.7),paint);
+        canvas.drawText(String.format("xSpeed: %.2f\tySpeed: %.2f",getxSpeed(),getySpeed()),(float)(getWidth()*0.5),(float)(getHeight()*2.2),paint);
         canvas.drawText(String.format("coins: %d\t",getGameView().getMonedas().size()),(float)(getWidth()*0.8),(float)(getHeight()*2.7),paint);
     }
 
     //Devuelvo la posición donde quiero que se mueva el personaje al hacer touch desde GameView
-    public void touch(int x, int y, boolean pintar){
-        setPosX(x-(int)(getWidth()*0.5));
-        setPosY(y-(int)(getHeight()*0.5));
+    public void touch(float x, float y, boolean pintar){
+        setPosX(x-(float) (getWidth()*0.5));
+        setPosY(y-(float) (getHeight()*0.5));
         setPintar(pintar);
     }
 
