@@ -27,6 +27,7 @@ public class Tehran extends Activity {
     }
 
     public void fin(){
+        //ABRIR PAGINA DE FIN JUEGO/CREDITOS
         finish();
     }
 }
