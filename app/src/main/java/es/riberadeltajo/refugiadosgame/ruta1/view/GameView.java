@@ -20,7 +20,7 @@ import es.riberadeltajo.refugiadosgame.R;
  */
 
 public class GameView extends SurfaceView {
-    private final int TIEMPO_MAX=12;
+    private final int TIEMPO_MAX=120;
     private final int MAX_POINTS=100;
     private Bitmap player,coins,fondo,ticket;
     private SurfaceHolder holder;
