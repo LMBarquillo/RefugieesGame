@@ -4,6 +4,10 @@
 
     <!-- Madrid-Milán -->
     <string name="route1">Madrid-Milan</string>
+    <string name="madrid_win_titulo">TICKET ACQUIERD!</string>
+    <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
+    <string name="madrid_lose_titulo">GAME OVER</string>
+    <string name="madrid_lose_mensaje">You do not acquired the ticket on time. Try again?</string>
 
     <!-- Milán-Sarajevo -->
     <string name="route2">Milan-Sarajevo</string>

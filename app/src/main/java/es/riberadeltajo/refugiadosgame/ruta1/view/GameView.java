@@ -34,6 +34,7 @@ public class GameView extends SurfaceView {
     private long crono,inicio;
     private Sprite jug;
     private Madrid contexto;
+    private float vidas;
 
     public GameView(Context context){
         super(context);
@@ -45,6 +46,7 @@ public class GameView extends SurfaceView {
         setySpeed(10);
         setInicio(System.currentTimeMillis());
         setPuntuacion(0);
+        setVidas(5);
         sprites=new ArrayList<Sprite>();
         monedas=new ArrayList<Monedas>();
         tickets=new ArrayList<Ticket>();
@@ -52,11 +54,7 @@ public class GameView extends SurfaceView {
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                fondo=BitmapFactory.decodeResource(getResources(), R.drawable.madridfondo);
-                fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
-                createSprite();
-                loop.setRunning(true);
-                loop.start();
+                start();
             }
 
             @Override
@@ -64,16 +62,7 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-                boolean volver=true;
-                loop.setRunning(false);
-                while(volver){
-                    try {
-                        loop.join();
-                        volver=false;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+                stop();
             }
         });
     }
@@ -158,6 +147,14 @@ public class GameView extends SurfaceView {
         this.monedas = monedas;
     }
 
+    public float getVidas() {
+        return vidas;
+    }
+
+    public void setVidas(float vidas) {
+        this.vidas = vidas;
+    }
+
     //Creo el Sprite y le hago un setJug() para pasarle después la posición en el onTouchEvent
     //Creo las monedas de distinto valor y las barajeo para que se pinten posteriormente de forma aleatoria
     //Creo el ticket que aparecerá cuando obtenga la puntuación requerida
@@ -189,11 +186,11 @@ public class GameView extends SurfaceView {
     public void draw(Canvas canvas){
         Paint paint=new Paint();
         long actual;
-        boolean conseguido=false;
+        boolean conseguido=false, finalizar=false;
         paint.setColor(Color.RED);
         paint.setTextSize((float) (getWidth() * 0.1));
         canvas.drawBitmap(fondo,0,0,null);
-        if((sprites.size()!=0) && getCrono()<TIEMPO_MAX) {
+        if((sprites.size()!=0) && getCrono()<TIEMPO_MAX && getVidas()>0) {
             actual=System.currentTimeMillis();
             for (Sprite miSprite : sprites) {
                 miSprite.draw(canvas);
@@ -221,17 +218,28 @@ public class GameView extends SurfaceView {
                 setCrono((actual - inicio) / 1000);
             }
             canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
-            canvas.drawText(String.format("%02d", getPuntuacion()), (float) (getWidth() * 0.80), (float) (getHeight() * 0.08), paint);
+            canvas.drawText(String.format("%.1f",getVidas()),(float)(getWidth()*0.4),(float)(getHeight()*0.08),paint);
+            canvas.drawText(String.format("%02d/%02d", getPuntuacion(),MAX_POINTS), (float) (getWidth() * 0.60), (float) (getHeight() * 0.08), paint);
         }
         else{
-            if(getCrono()>TIEMPO_MAX && !conseguido) {
-                canvas.drawText("GAME OVER",(float)(getWidth()*0.25),(float)(getHeight()*0.49),paint);
-            }
-            finalizar();
+            conseguido=false;
+            finalizar=true;
         }
         if(conseguido){
-            canvas.drawText("BILLETE CONSEGUIDO",(float)(getWidth()*0.25),(float)(getHeight()*0.49),paint);
-            finalizar();
+            getContexto().runOnUiThread(new Runnable() {
+                public void run() {
+                    new DialogFin(getContexto(), DialogFin.Tipo.WIN).show();
+                }
+            });
+            stop();
+        }
+        else if(!conseguido && finalizar) {
+            getContexto().runOnUiThread(new Runnable() {
+                public void run() {
+                    new DialogFin(getContexto(), DialogFin.Tipo.LOSE).show();
+                }
+            });
+            stop();
         }
     }
 
@@ -257,12 +265,19 @@ public class GameView extends SurfaceView {
         return "";
     }
 
-    private void finalizar(){
+    private void start(){
+        fondo=BitmapFactory.decodeResource(getResources(), R.drawable.madridfondo);
+        fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
+        createSprite();
+        loop.setRunning(true);
+        loop.start();
+    }
+
+    private void stop(){
         loop.setRunning(false);
         try{
             Thread.sleep(1000);
         }catch(InterruptedException ie){}
-        getContexto().finish();
     }
 
     private void sumarPuntos(int puntos){

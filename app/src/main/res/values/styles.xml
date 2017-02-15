@@ -13,4 +13,9 @@
         <item name="android:windowExitAnimation">@anim/sarajevo_dialogo_salida</item>
     </style>
 
+    <style name="madridDialogo">
+        <item name="android:windowEnterAnimation">@anim/madrid_dialog_entrada</item>
+        <item name="android:windowExitAnimation">@anim/madrid_dialog_salida</item>
+    </style>
+
 </resources>

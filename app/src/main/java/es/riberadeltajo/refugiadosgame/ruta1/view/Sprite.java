@@ -37,8 +37,8 @@ public class Sprite {
         setySpeed(0);
         setPosX(0);
         setPosY(0);
-        setCorx((int) (Math.random()*(gameView.getWidth()-getWidth())));
-        setCory((int) (Math.random()*(gameView.getHeight()-getHeight())));
+        setCorx((float) (Math.random()*(gameView.getWidth()-getWidth())));
+        setCory((float) (Math.random()*(gameView.getHeight()-getHeight())));
         setVida(vida);
     }
 
@@ -294,14 +294,14 @@ public class Sprite {
         canvas.drawBitmap(getBmp(),src,dst,null);
 
         //Temporal para ver la velocidad y la pos en pantalla
-        Paint paint = new Paint();
+        /*Paint paint = new Paint();
         paint.setColor(Color.YELLOW);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(80);
         canvas.drawText(String.format("posX: %.2f\tposY: %.2f",getPosX(),getPosY()),(float)(getWidth()*0.8),(float)(getHeight()*1.2),paint);
         canvas.drawText(String.format("corX: %.2f\tcorY: %.2f",getCorx(),getCory()),(float)(getWidth()*0.8),(float)(getHeight()*1.7),paint);
         canvas.drawText(String.format("xSpeed: %.2f\tySpeed: %.2f",getxSpeed(),getySpeed()),(float)(getWidth()*0.5),(float)(getHeight()*2.2),paint);
-        canvas.drawText(String.format("coins: %d\t",getGameView().getMonedas().size()),(float)(getWidth()*0.8),(float)(getHeight()*2.7),paint);
+        canvas.drawText(String.format("coins: %d\t",getGameView().getMonedas().size()),(float)(getWidth()*0.8),(float)(getHeight()*2.7),paint);*/
     }
 
     //Devuelvo la posición donde quiero que se mueva el personaje al hacer touch desde GameView
