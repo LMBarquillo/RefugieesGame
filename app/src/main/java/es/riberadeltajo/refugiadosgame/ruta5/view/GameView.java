@@ -43,6 +43,7 @@ public class GameView extends SurfaceView implements Observer {
     private MediaPlayer musica;
     private MediaPlayer lost;
     private MediaPlayer win;
+    private int contadorHielos;
 
 
 
@@ -57,7 +58,7 @@ public class GameView extends SurfaceView implements Observer {
         setPasaObjeto(false);
         setCamarero(cam);
         setSegundos(-1);
-        setCojidos(4);
+        setCojidos(5);
         setCojidoHielo(false);
         setCojidoVaso(false);
         setCojidoRefresco(false);
@@ -65,6 +66,7 @@ public class GameView extends SurfaceView implements Observer {
         setMusica(MediaPlayer.create(getContext(),R.raw.tehranmusica));
         setLost(MediaPlayer.create(getContext(),R.raw.tehranlost));
         setWin(MediaPlayer.create(getContext(),R.raw.tehranwin));
+        setContadorHielos(2);
         loop=new GameLoop(this);
         jugbmp=BitmapFactory.decodeResource(getResources(), R.drawable.playertehran);
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -100,14 +102,16 @@ public class GameView extends SurfaceView implements Observer {
     private void cargarObjetos(){
         jugador=new Player(this,Bitmap.createScaledBitmap(jugbmp,(int)(jugbmp.getWidth()*1.7),(int)(jugbmp.getHeight()*1.5),false));
         if(isCamarero()){
-            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+1));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*15)+1));
             objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+4));
             objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+6));
             objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+10));
-            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.monedatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+10));
-            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.alfombratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+14));
-            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+18));
-            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+22));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.monedatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+14));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.alfombratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+18));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+22));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.saxofontehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+25));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+27));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+30));
         }
 
     }
@@ -154,7 +158,10 @@ public class GameView extends SurfaceView implements Observer {
                     if(objetos.get(i).isCoger()){
                         setCojidos(getCojidos()-1);
                         if(objetos.get(i).getBmp().sameAs(getHielo())){         //COMPRUEBA QUE OBJETO HA COJIDO PARA BORRARLO DE PANTALLA
-                            setCojidoHielo(true);
+                            setContadorHielos(getContadorHielos()-1);
+                            if(getContadorHielos()==0){
+                                setCojidoHielo(true);
+                            }
                         }
                         else if(objetos.get(i).getBmp().sameAs(getVaso())){
                             setCojidoVaso(true);
@@ -186,7 +193,7 @@ public class GameView extends SurfaceView implements Observer {
                 getMusica().stop();
                 getMusica().release();
                 getWin().start();
-                canvas.drawText(String.format("%s",getContext().getString(R.string.congratulations_tehran)),(float)(getWidth()*0.2),(float)(getHeight()*0.45),paint);
+                canvas.drawText(String.format("%s",getContext().getString(R.string.congratulations_tehran)),(float)(getWidth()*0.25),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
         }
@@ -242,6 +249,8 @@ public class GameView extends SurfaceView implements Observer {
         return true;
     }
 
+
+    //GETTER-SETTERS
     @Override
     public void update(Observable o, Object arg) {
         setSegundos(cronometro.getSegundos());
@@ -401,5 +410,13 @@ public class GameView extends SurfaceView implements Observer {
 
     public void setWin(MediaPlayer win) {
         this.win = win;
+    }
+
+    public int getContadorHielos() {
+        return contadorHielos;
+    }
+
+    public void setContadorHielos(int contadorHielos) {
+        this.contadorHielos = contadorHielos;
     }
 }

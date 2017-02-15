@@ -27,7 +27,9 @@ public class Juego {
     private final float nenufarSpeedXScale = .009f; //sobre 10px
     private final float aguaYScale = .192f; //sobre 369px
     private final float aguaHeightScale = .593f; //sobre 1140px
+    private final float cocheYScale = .862f;
     //private Salpicadura salpicadura;
+    private Coche coche;
     private Player player;
     private Bitmap bmpNenufar;
     private ArrayList<Nenufar> nenufares;
@@ -38,6 +40,7 @@ public class Juego {
         //agua = Bitmap.createScaledBitmap(agua, getGameView().getWidth(), getGameView().getHeight(), false);
         terreno = BitmapFactory.decodeResource(getGameView().getResources(), R.drawable.sarajevocarretera);
         terreno = Bitmap.createScaledBitmap(terreno, getGameView().getWidth(), getGameView().getHeight(), false);
+        coche = new Coche(getGameView(), R.drawable.sarajevocoche, -getGameView().getWidth(), (int)(getGameView().getHeight() * cocheYScale), 15, 0, 4, 4, 250, 150);
         player = new Player(getGameView(), R.drawable.milan_personajeuno, 4, 4, (int)(getGameView().getWidth() * playerWidthScale), (int)(getGameView().getHeight() * playerHeightScale), (getGameView().getWidth() - 100) / 2, getGameView().getHeight() - 200, 0, 0);
         nenufares = new ArrayList<Nenufar>();
         crearNenufares();
@@ -125,6 +128,7 @@ public class Juego {
             s.draw(canvas);
         }
         player.draw(canvas);
+        coche.draw(canvas);
     }
 
     public void andarUp() {
