@@ -13,11 +13,11 @@ import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
 
 public class Madrid extends AppCompatActivity {
     private GameView gameView;
-    private Button btnPlay, btnExit;
+    //private Button btnPlay, btnExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //Evita que se apague la pantalla
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -26,9 +26,10 @@ public class Madrid extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_madrid);
+        reset(); //Temporal
+        /*setContentView(R.layout.activity_madrid);
         btnPlay=(Button) findViewById(R.id.btnJugar);
-        btnPlay=(Button) findViewById(R.id.btnSalir);
+        btnPlay=(Button) findViewById(R.id.btnSalir);*/
     }
 
     public void jugar(View v){
@@ -36,7 +37,7 @@ public class Madrid extends AppCompatActivity {
         setContentView(gameView);
     }
 
-    public void reintentar(){
+    public void reset(){
         gameView=new GameView(this);
         setContentView(gameView);
     }
@@ -45,7 +46,7 @@ public class Madrid extends AppCompatActivity {
         finish();
     }
 
-    public void continuar() {
+    public void goToNextLevel() {
         startActivity(new Intent(this, Milan.class));
     }
 

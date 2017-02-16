@@ -10,6 +10,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
@@ -28,6 +29,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
 
     private Tipo tipo;
     private Madrid activity;
+    private ImageView ganaPierde,reintentar,irMenu,sigNiv;
 
     public DialogFin(Madrid activity, Tipo tipo) {
         super(activity, R.style.AppTheme);
@@ -49,21 +51,25 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.dialogfin_madrid);
-        TextView txtTitulo = (TextView) findViewById(R.id.txtTitulo);
-        TextView txtMensaje = (TextView) findViewById(R.id.txtMensaje);
-        Button btnReiniciar = (Button) findViewById(R.id.btnReiniciar);
-        Button btnContinuar = (Button) findViewById(R.id.btnContinuar);
-        btnReiniciar.setOnClickListener(this);
-        btnContinuar.setOnClickListener(this);
+        ganaPierde = (ImageView) findViewById(R.id.imgAcc);
+        TextView txtMensaje = (TextView) findViewById(R.id.txtMens);
+        reintentar = (ImageView) findViewById(R.id.imgTryAgain);
+        irMenu = (ImageView) findViewById(R.id.imgMenu);
+        sigNiv = (ImageView) findViewById(R.id.imgNextLevel);
+        reintentar.setImageResource(R.drawable.madrid_tryagain);
+        irMenu.setImageResource(R.drawable.madrid_menu);
+        sigNiv.setImageResource(R.drawable.madrid_nextlevel);
+        reintentar.setOnClickListener(this);
+        sigNiv.setOnClickListener(this);
         if(tipo == Tipo.WIN) {
-            txtTitulo.setText(R.string.madrid_win_titulo);
+            ganaPierde.setImageResource(R.drawable.madrid_win);
             txtMensaje.setText(R.string.madrid_win_mensaje);
-            btnContinuar.setEnabled(true);
         } else
         if(tipo == Tipo.LOSE) {
-            txtTitulo.setText(R.string.madrid_lose_titulo);
+            ganaPierde.setImageResource(R.drawable.madrid_lose);
             txtMensaje.setText(R.string.madrid_lose_mensaje);
-            btnContinuar.setEnabled(false);
+            sigNiv.setImageResource(R.drawable.madrid_nextlevel_disabled);
+            sigNiv.setEnabled(false);
         }
     }
 
@@ -86,22 +92,32 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.btnReiniciar:
-                reiniciar();
+            case R.id.imgTryAgain:
+                reintentar.setImageResource(R.drawable.madrid_tryagain_hover);
+                reset();
                 break;
-            case R.id.btnContinuar:
-                continuar();
+            case R.id.imgMenu:
+                sigNiv.setImageResource(R.drawable.madrid_nextlevel_hover);
+                goToMenu();
+                break;
+            case R.id.imgNextLevel:
+                sigNiv.setImageResource(R.drawable.madrid_nextlevel_hover);
+                goToNextLevel();
                 break;
         }
     }
 
-    private void reiniciar() {
+    private void reset() {
         dismiss();
-        activity.reintentar();
+        activity.reset();
     }
 
-    private void continuar() {
+    private void goToMenu(){
         dismiss();
-        activity.continuar();
+    }
+
+    private void goToNextLevel() {
+        dismiss();
+        activity.goToNextLevel();
     }
 }

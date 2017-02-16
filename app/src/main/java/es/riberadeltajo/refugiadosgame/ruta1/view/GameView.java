@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,7 +22,7 @@ import es.riberadeltajo.refugiadosgame.R;
  */
 
 public class GameView extends SurfaceView {
-    private final int TIEMPO_MAX=12;
+    private final int TIEMPO_MAX=120;
     private final int MAX_POINTS=100;
     private Bitmap player,coins,fondo,ticket;
     private SurfaceHolder holder;
@@ -35,6 +37,7 @@ public class GameView extends SurfaceView {
     private Sprite jug;
     private Madrid contexto;
     private float vidas;
+    private Typeface font;
 
     public GameView(Context context){
         super(context);
@@ -50,6 +53,7 @@ public class GameView extends SurfaceView {
         sprites=new ArrayList<Sprite>();
         monedas=new ArrayList<Monedas>();
         tickets=new ArrayList<Ticket>();
+        font = Typeface.createFromAsset(context.getAssets(),"tipografias/madrid_font.ttf");
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -184,12 +188,21 @@ public class GameView extends SurfaceView {
     }
 
     public void draw(Canvas canvas){
-        Paint paint=new Paint();
         long actual;
         boolean conseguido=false, finalizar=false;
-        paint.setColor(Color.RED);
-        paint.setTextSize((float) (getWidth() * 0.1));
         canvas.drawBitmap(fondo, 0, 0, null);
+        Paint paint=new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth((float)((getWidth()*0.1)/12));
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setTextSize((float) (getWidth() * 0.1));
+        paint.setTypeface(font);
+        canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
+        canvas.drawText(String.format("(Life)"/*getVidas()*/),(float)(getWidth()*0.3),(float)(getHeight()*0.08),paint);
+        canvas.drawText(String.format("%02d/%02d", getPuntuacion(),MAX_POINTS), (float) (getWidth() * 0.60), (float) (getHeight() * 0.08), paint);
+        paint.setColor(Color.rgb(85,247,247));
+        paint.setStyle(Paint.Style.FILL);
+
         if((sprites.size()!=0) && getCrono()<TIEMPO_MAX && getVidas()>0) {
             actual=System.currentTimeMillis();
             for (Sprite miSprite : sprites) {
@@ -218,7 +231,7 @@ public class GameView extends SurfaceView {
                 setCrono((actual - inicio) / 1000);
             }
             canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
-            canvas.drawText(String.format("%.1f",getVidas()),(float)(getWidth()*0.4),(float)(getHeight()*0.08),paint);
+            canvas.drawText(String.format("(Life)"/*getVidas()*/),(float)(getWidth()*0.3),(float)(getHeight()*0.08),paint);
             canvas.drawText(String.format("%02d/%02d", getPuntuacion(),MAX_POINTS), (float) (getWidth() * 0.60), (float) (getHeight() * 0.08), paint);
         }
         else{
@@ -297,5 +310,13 @@ public class GameView extends SurfaceView {
             getJug().touch(event.getRawX(),event.getRawY(),true);
         }
         return true;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == event.KEYCODE_BACK) {
+            //new DialogSalirSiNo().show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <Space android:layout_weight="1"
+    <Space android:layout_weight="0.77"
         android:layout_height="match_parent"
         android:layout_width="0dp" />
 
@@ -18,60 +19,84 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4.81" />
+            android:layout_weight="0.50" />
 
-        <TextView
-            android:text="YOU WIN"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="159dp"
+            app:srcCompat="@drawable/madrid_win"
+            android:id="@+id/imgAcc"
+            android:layout_weight="1.80"
+            android:cropToPadding="true"
+            android:scaleType="centerInside" />
+
+        <Space
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:id="@+id/txtTitulo"
-            android:textSize="36sp"
-            android:typeface="normal"
-            android:textColor="@android:color/white"
-            android:textAlignment="center"
-            android:textStyle="normal|bold"
-            android:textAllCaps="true"
-            android:layout_weight="1.99" />
+            android:layout_height="wrap_content"
+            android:layout_weight="0.57" />
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/txtMensaje"
+            android:id="@+id/txtMens"
             android:textSize="18sp"
             android:typeface="normal"
             android:textAlignment="center"
-            android:layout_weight="2.45"
+            android:layout_weight="1.51"
             android:textColor="@android:color/white" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="0.33" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_height="69dp"
+            android:layout_weight="0.25">
 
-            <Button
-                android:text="@string/dialogo_btn_reintentar"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnReiniciar"
-                android:layout_weight="1" />
+                app:srcCompat="@drawable/madrid_tryagain"
+                android:layout_weight="1"
+                android:onClick="reset"
+                android:id="@+id/imgTryAgain"
+                android:cropToPadding="true"
+                android:scaleType="centerInside" />
 
-            <Button
-                android:text="@string/dialogo_btn_continuar"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnContinuar"
-                android:layout_weight="1" />
+                app:srcCompat="@drawable/madrid_menu"
+                android:layout_weight="1"
+                android:id="@+id/imgMenu"
+                android:cropToPadding="true"
+                android:scaleType="centerInside"
+                android:onClick="goToMenu" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/madrid_nextlevel"
+                android:layout_weight="1"
+                android:onClick="goToNextLevel"
+                android:id="@+id/imgNextLevel"
+                android:cropToPadding="true"
+                android:scaleType="centerInside" />
+
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.97" />
+
     </LinearLayout>
 
-    <Space android:layout_weight="1"
+    <Space android:layout_weight="0.76"
         android:layout_height="match_parent"
         android:layout_width="0dp" />
 </LinearLayout>
