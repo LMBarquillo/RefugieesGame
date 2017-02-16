@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -12,6 +13,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -24,7 +27,7 @@ import es.riberadeltajo.refugiadosgame.R;
 public class GameView extends SurfaceView {
     private final int TIEMPO_MAX=120;
     private final int MAX_POINTS=100;
-    private Bitmap player,coins,fondo,ticket;
+    private Bitmap player,coin1,coin2,coin5,coin10,fondo,ticket,life1,life2,life3,moneyBag,sandClock;
     private SurfaceHolder holder;
     private GameLoop loop;
     private int corx,cory;
@@ -163,30 +166,46 @@ public class GameView extends SurfaceView {
     //Creo las monedas de distinto valor y las barajeo para que se pinten posteriormente de forma aleatoria
     //Creo el ticket que aparecerá cuando obtenga la puntuación requerida
     public void createSprite(){
-        player= BitmapFactory.decodeResource(getResources(),R.drawable.pruebamadrid);
+        player=getBitmapFromAssets(getContext(),"madrid_resources/madrid_sprite.png");
+        coin1=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin1.png");
+        coin2=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin2.png");
+        coin5=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin5.png");
+        coin10=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin10.png");
         setJug(new Sprite(this,player,5));
         sprites.add(getJug());
         for(int i=0;i<250;i++) {
-            coins = BitmapFactory.decodeResource(getResources(), R.drawable.madridcoin1);
-            monedas.add(new Monedas(monedas, this, coins, 1));
+            monedas.add(new Monedas(monedas, this, coin1, 1));
         }
         for(int i=0;i<100;i++) {
-            coins = BitmapFactory.decodeResource(getResources(), R.drawable.madridcoin2);
-            monedas.add(new Monedas(monedas, this, coins, 2));
+            monedas.add(new Monedas(monedas, this, coin2, 2));
         }
         for(int i=0;i<45;i++) {
-            coins = BitmapFactory.decodeResource(getResources(), R.drawable.madridcoin5);
-            monedas.add(new Monedas(monedas, this, coins, 5));
+            monedas.add(new Monedas(monedas, this, coin5, 5));
         }
         for(int i=0;i<5;i++) {
-            coins = BitmapFactory.decodeResource(getResources(), R.drawable.madridcoin10);
-            monedas.add(new Monedas(monedas, this, coins, 10));
+            monedas.add(new Monedas(monedas, this, coin10, 10));
         }
         Collections.shuffle(getMonedas());
-        ticket=BitmapFactory.decodeResource(getResources(), R.drawable.madridticket);
+        ticket=getBitmapFromAssets(getContext(),"madrid_resources/madrid_ticket.png");
         tickets.add(new Ticket(tickets, this, ticket));
     }
 
+    //Obtener bitmap escalado para distintos dispositivos
+    public static Bitmap getBitmapFromAssets(Context context, String filePath) {
+        AssetManager assetManager = context.getAssets();
+
+        InputStream inStream;
+        Bitmap bitmap = null;
+        try {
+            inStream = assetManager.open(filePath);
+            bitmap = BitmapFactory.decodeStream(inStream);
+        } catch (IOException e) {
+        }
+
+        return bitmap;
+    }
+
+    //Pinto interfaz, creo sprite y monedas y compruebo si hay colisiones y abro dialogo al finalizar
     public void draw(Canvas canvas){
         long actual;
         boolean conseguido=false, finalizar=false;
@@ -195,12 +214,18 @@ public class GameView extends SurfaceView {
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth((float)((getWidth()*0.1)/12));
         paint.setStyle(Paint.Style.STROKE);
-        paint.setTextSize((float) (getWidth() * 0.1));
+        paint.setTextSize((float) (getWidth() * 0.08));
         paint.setTypeface(font);
-        canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
-        canvas.drawText(String.format("(Life)"/*getVidas()*/),(float)(getWidth()*0.3),(float)(getHeight()*0.08),paint);
-        canvas.drawText(String.format("%02d/%02d", getPuntuacion(),MAX_POINTS), (float) (getWidth() * 0.60), (float) (getHeight() * 0.08), paint);
-        paint.setColor(Color.rgb(85,247,247));
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawBitmap(sandClock,(float)(getWidth()*0.05),(float)(getHeight()*0.035),null);
+        canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
+        canvas.drawBitmap(life1,(float)(getWidth()*0.3),(float)(getHeight()*0.045),null);
+        canvas.drawBitmap(life2,(float)(getWidth()*0.3+life1.getWidth()*1.05),(float)(getHeight()*0.045),null);
+        canvas.drawBitmap(life3,(float)(getWidth()*0.3+life1.getWidth()*1.05+life2.getWidth()*1.05),(float)(getHeight()*0.045),null);
+        paint.setTextAlign(Paint.Align.RIGHT);
+        canvas.drawBitmap(moneyBag,(float)(getWidth()*0.57),(float)(getHeight()*0.035),null);
+        canvas.drawText(String.format("%03d/%03d", getPuntuacion(),MAX_POINTS), (float)(getWidth()-(getWidth()*0.05)+moneyBag.getWidth()*0.4), (float) (getHeight() * 0.084), paint);
+        paint.setColor(Color.rgb(255,255,0));
         paint.setStyle(Paint.Style.FILL);
 
         if((sprites.size()!=0) && getCrono()<TIEMPO_MAX && getVidas()>0) {
@@ -210,7 +235,7 @@ public class GameView extends SurfaceView {
             }
             if(getPuntuacion()<MAX_POINTS) {
                 for (int i = 0; i < monedas.size(); i++) {
-                    if (i <= 5) {
+                    if (i < 5) {
                         monedas.get(i).draw(canvas);
                         if (monedas.get(i).isCollition(getJug())) {
                             sumarPuntos(monedas.get(i).getPuntos());
@@ -230,9 +255,10 @@ public class GameView extends SurfaceView {
             if (sprites.size() > 0) {
                 setCrono((actual - inicio) / 1000);
             }
-            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
-            canvas.drawText(String.format("(Life)"/*getVidas()*/),(float)(getWidth()*0.3),(float)(getHeight()*0.08),paint);
-            canvas.drawText(String.format("%02d/%02d", getPuntuacion(),MAX_POINTS), (float) (getWidth() * 0.60), (float) (getHeight() * 0.08), paint);
+            paint.setTextAlign(Paint.Align.LEFT);
+            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
+            paint.setTextAlign(Paint.Align.RIGHT);
+            canvas.drawText(String.format("%03d/%03d", getPuntuacion(),MAX_POINTS), (float)(getWidth()-(getWidth()*0.05)+moneyBag.getWidth()*0.2), (float) (getHeight() * 0.08), paint);
         }
         else{
             conseguido=false;
@@ -278,9 +304,20 @@ public class GameView extends SurfaceView {
         return "";
     }
 
+    //Inicializo el fondo y los bitmap de la interfaz, creo el sprite e inicio el bucle
     private void start(){
         fondo=BitmapFactory.decodeResource(getResources(), R.drawable.madridfondo);
         fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
+        life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+        life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+        life2 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+        life3 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        moneyBag=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_money);
+        moneyBag = Bitmap.createScaledBitmap(moneyBag, (int)(getWidth()*0.08), (int)(getHeight()*0.06), false);
+        sandClock=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_clock);
+        sandClock = Bitmap.createScaledBitmap(sandClock, (int)(getWidth()*0.065), (int)(getHeight()*0.06), false);
         createSprite();
         loop.setRunning(true);
         loop.start();
@@ -298,6 +335,7 @@ public class GameView extends SurfaceView {
         setPuntuacion(getPuntuacion()+puntos);
     }
 
+    //Mando al Sprite la posición de la pantalla donde quiero que se mueva el personaje
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction()==MotionEvent.ACTION_MOVE){
@@ -312,6 +350,7 @@ public class GameView extends SurfaceView {
         return true;
     }
 
+    //Habro un diálogo si pulso el botón de ir atrás de android para pedir confirmación
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == event.KEYCODE_BACK) {

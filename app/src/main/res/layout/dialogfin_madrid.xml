@@ -14,48 +14,46 @@
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_weight="8"
-        android:layout_width="0dp">
+        android:layout_width="0dp"
+        android:weightSum="1">
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.50" />
+            android:layout_height="38dp" />
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="159dp"
+            android:layout_height="190dp"
             app:srcCompat="@drawable/madrid_win"
             android:id="@+id/imgAcc"
-            android:layout_weight="1.80"
             android:cropToPadding="true"
-            android:scaleType="centerInside" />
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.57" />
+            android:layout_height="23dp"
+            android:layout_weight="0.33" />
 
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="99dp"
             android:id="@+id/txtMens"
             android:textSize="18sp"
-            android:typeface="normal"
             android:textAlignment="center"
-            android:layout_weight="1.51"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/holo_blue_bright"
+            android:layout_weight="0.25" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.33" />
+            android:layout_height="46dp"
+            android:layout_weight="0.04" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:layout_weight="0.25">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -65,7 +63,8 @@
                 android:onClick="reset"
                 android:id="@+id/imgTryAgain"
                 android:cropToPadding="true"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -75,7 +74,8 @@
                 android:id="@+id/imgMenu"
                 android:cropToPadding="true"
                 android:scaleType="centerInside"
-                android:onClick="goToMenu" />
+                android:onClick="goToMenu"
+                android:adjustViewBounds="true" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -85,14 +85,14 @@
                 android:onClick="goToNextLevel"
                 android:id="@+id/imgNextLevel"
                 android:cropToPadding="true"
-                android:scaleType="centerInside" />
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true" />
 
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.97" />
+            android:layout_height="12dp" />
 
     </LinearLayout>
 

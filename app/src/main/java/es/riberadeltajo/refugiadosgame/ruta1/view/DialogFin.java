@@ -3,6 +3,7 @@ package es.riberadeltajo.refugiadosgame.ruta1.view;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     private Tipo tipo;
     private Madrid activity;
     private ImageView ganaPierde,reintentar,irMenu,sigNiv;
+    private Typeface font;
 
     public DialogFin(Madrid activity, Tipo tipo) {
         super(activity, R.style.AppTheme);
@@ -41,7 +43,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         getWindow().setLayout(size.x,(int)(size.y*1.2));
         getWindow().getAttributes().windowAnimations = R.style.madridDialogo;
         Drawable d = new ColorDrawable(Color.BLACK);
-        d.setAlpha(130);
+        d.setAlpha(150);
         getWindow().setBackgroundDrawable(d);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -53,6 +55,8 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         setContentView(R.layout.dialogfin_madrid);
         ganaPierde = (ImageView) findViewById(R.id.imgAcc);
         TextView txtMensaje = (TextView) findViewById(R.id.txtMens);
+        txtMensaje.setTypeface(font);
+        font = Typeface.createFromAsset(getContext().getApplicationContext().getAssets(),"tipografias/madrid_dialog_font.ttf");
         reintentar = (ImageView) findViewById(R.id.imgTryAgain);
         irMenu = (ImageView) findViewById(R.id.imgMenu);
         sigNiv = (ImageView) findViewById(R.id.imgNextLevel);
