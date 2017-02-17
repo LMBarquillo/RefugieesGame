@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu_dialog_background">
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="8">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8">
+
+            <TextView
+                android:text="@string/btn_jugar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/txtTitulo"
+                android:layout_weight="1"
+                android:background="@drawable/menu_dialog_titulo_backgroud"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/holo_green_light"
+                android:textAllCaps="true"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="30dp" />
+
+            <TextView
+                android:text="@string/dialog_play_mensaje"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/txtMensaje"
+                android:layout_weight="6"
+                android:gravity="center_vertical|center_horizontal"
+                android:textStyle="normal|bold"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textSize="12dp" />
+
+            <Button
+                android:text="@string/btn_continuar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnContinuar"
+                android:background="@drawable/menu_btn"
+                android:textSize="25dp"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/white" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2" />
+
+            <Button
+                android:text="@string/btn_nueva"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnNuevo"
+                android:background="@drawable/menu_btn"
+                android:textStyle="normal|bold"
+                android:textColor="@android:color/white"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+</LinearLayout>
