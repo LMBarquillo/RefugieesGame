@@ -61,4 +61,8 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("STATUS",status);
         startActivityForResult(i,RUTA5);
     }
+
+    public void menu(View view) {
+        startActivity(new Intent(this, MainActivity2.class));
+    }
 }

@@ -137,7 +137,11 @@ public class Coche {
     }
 
     public void draw(Canvas canvas) {
-        Rect src = new Rect(getCurrentCol() * getSprite().getWidth()/getColumnas(), getCurrentRow() * getSprite().getHeight()/getFilas(), getCurrentCol() * getSprite().getWidth()/getColumnas() + getSprite().getWidth()/getColumnas(), getCurrentRow() * getSprite().getHeight()/getFilas() + getSprite().getHeight()/getFilas());
+        int x = getCurrentCol() * (getSprite().getWidth() / getColumnas());
+        int y = getCurrentRow() * (getSprite().getHeight() / getFilas());
+        int x2 = x + (getSprite().getWidth() / getColumnas());
+        int y2 = y + (getSprite().getHeight() / getFilas());
+        Rect src = new Rect(x, y, x2, y2);
         Rect dst = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
         canvas.drawBitmap(getSprite(), src, dst, null);
         if(++currentCol == getColumnas()) {
