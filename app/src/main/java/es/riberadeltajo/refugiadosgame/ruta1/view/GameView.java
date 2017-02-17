@@ -198,7 +198,8 @@ public class GameView extends SurfaceView {
         Bitmap bitmap = null;
         try {
             inStream = assetManager.open(filePath);
-       } catch (IOException e) {}
+            bitmap = BitmapFactory.decodeStream(inStream);
+        } catch (IOException e) {}
 
         return bitmap;
     }
