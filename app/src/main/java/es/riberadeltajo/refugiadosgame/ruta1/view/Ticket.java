@@ -35,8 +35,8 @@ public class Ticket {
         setxSpeed(5);
         setySpeed(5);
         setCurrentFrame(0);
-        setCorx((int) (Math.random()*(getGameView().getWidth()-getWidth())));
-        setCory((int) (Math.random()*(getGameView().getHeight()-getHeight())));
+        setCorx((int) (Math.random()*(gameView.getWidth()-(2*getWidth()+(gameview.getWidth()*0.1))))+(int)(gameview.getWidth()*0.1));
+        setCory((int) (Math.random()*(gameView.getHeight()-(2*getHeight()+(gameview.getHeight()*0.1))))+(int)(gameview.getHeight()*0.1));
     }
 
     private int getDireccion(){

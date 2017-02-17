@@ -36,7 +36,7 @@ public class Monedas {
         setCurrentFrame(0);
         setxSpeed(1);
         setySpeed(1);
-        setCorx((int) (Math.random()*(gameView.getWidth()-(2*getWidth()))));
+        setCorx((int) (Math.random()*(gameView.getWidth()-(2*getWidth()+(gameview.getWidth()*0.1))))+(int)(gameview.getWidth()*0.1));
         setCory((int) (Math.random()*(gameView.getHeight()-(2*getHeight()+(gameview.getHeight()*0.1))))+(int)(gameview.getHeight()*0.1));
         setPuntos(puntos);
     }

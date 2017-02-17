@@ -37,8 +37,8 @@ public class Sprite {
         setySpeed(0);
         setPosX(0);
         setPosY(0);
-        setCorx((float) (Math.random()*(gameView.getWidth()-getWidth())));
-        setCory((float) (Math.random()*(gameView.getHeight()-getHeight())));
+        setCorx((float) (Math.random()*(gameView.getWidth()-(2*getWidth()+(gameView.getWidth()*0.1))))+(float) (gameView.getWidth()*0.1));
+        setCory((float) (Math.random()*(gameView.getHeight()-(2*getHeight()+(gameView.getHeight()*0.1))))+(float) (gameView.getHeight()*0.1));
         setVida(vida);
     }
 
@@ -178,7 +178,7 @@ public class Sprite {
 
     //Movimiento del sprite
     private void update(){
-        if (getCorx() >= getGameView().getWidth() - getWidth() - getxSpeed() || getCorx() + getxSpeed() <= 0) {
+        if (getCorx() >= getGameView().getWidth() - getWidth() - getxSpeed() || getCorx() - getxSpeed() - (getWidth()*0.5) <= 0) {
             if (getCorx() < getPosX()) {
                 setCorx(getCorx() + getxSpeed());
                 if(getCorx()>=getGameView().getWidth()-getWidth()-getxSpeed()){
@@ -187,7 +187,11 @@ public class Sprite {
                 }
             }else if (getCorx() > getPosX()){
                 setCorx(getCorx() - getxSpeed());
-                if(getCorx()-getPosX()<0.2){
+                if(getCorx()-getxSpeed()-(getWidth()*0.5)<=0){
+                    setCorx((float)(getWidth()*0.25));
+                    setPosX(getCorx());
+                }
+                else if(getCorx()-getPosX()<0.2){
                     setCorx(getPosX());
                 }
             } else if (getCorx() == getPosX()) {
@@ -208,7 +212,7 @@ public class Sprite {
                 setCorx(getPosX());
             }
         }
-        if (getCory() >= getGameView().getHeight() - getHeight() - getySpeed() || getCory() + getySpeed() <= 0) {
+        if (getCory() >= getGameView().getHeight() - getHeight() - getySpeed() || getCory() - getySpeed() - (getHeight()*0.5) <= 0) {
             if (getCory() < getPosY()) {
                 setCory(getCory() + getySpeed());
                 if(getCory()>=getGameView().getHeight()-getHeight()-getySpeed()){
@@ -217,6 +221,10 @@ public class Sprite {
                 }
             } else if (getCory() > getPosY()) {
                 setCory(getCory() - getySpeed());
+                if(getCory()-getySpeed()-(getHeight())<=(float)(getGameView().getHeight()*0.3)){
+                    setCory((float)(getHeight()*0.65));
+                    setPosY((float)(getGameView().getHeight()*0.1)-getCory());
+                }
                 if(getCory()-getPosY()<0.2){
                     setCory(getPosY());
                 }
