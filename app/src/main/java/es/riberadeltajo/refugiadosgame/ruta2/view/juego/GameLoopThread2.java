@@ -45,15 +45,28 @@ public class GameLoopThread2 extends Thread {
             }
             sleepTime=click-(System.currentTimeMillis()-timeStart); //Tiempo que tiene que estar dormido
             try{
+
+
                 if(sleepTime>0){
                     sleep(sleepTime);
                 }else{
-                    sleep(100);
+
+                        sleep(100);
                 }
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        if(getGameView2().isTerminado() && getGameView2().isBanderaLoop())
+            try {
+                sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        getGameView2().fin();
+
+
     }
 }
 

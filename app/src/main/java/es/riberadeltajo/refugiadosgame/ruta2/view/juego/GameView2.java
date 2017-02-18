@@ -2,6 +2,7 @@ package es.riberadeltajo.refugiadosgame.ruta2.view.juego;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -19,8 +20,9 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class GameView2 extends SurfaceView {
 
-
+    private final int MARGENES=20;
     private final int TIEMPO_MAX = 30;
+    private final int NUM_MONEDAS=10;
     private Bitmap player;
     private SurfaceHolder holder;
     private GameLoopThread2 loop;
@@ -32,6 +34,12 @@ public class GameView2 extends SurfaceView {
     private ArrayList<Boton> botones;
     private boolean enMarcha;
     private ScrollingBackground fondo;
+    private Monedas moneda_arriba;
+    private ArrayList<Bitmap> vidas;
+    private boolean terminado;
+    private boolean ganado;
+    private boolean banderaLoop;
+
 
 
 
@@ -42,6 +50,17 @@ public class GameView2 extends SurfaceView {
         actividad = (Activity) context;
         this.inicio = System.currentTimeMillis();
         botones = new ArrayList<Boton>();
+        Bitmap mon=BitmapFactory.decodeResource(getResources(), R.drawable.milan_moneda);
+        moneda_arriba=new Monedas(this,20,(int)(getHeight()*0.5),mon);
+        vidas=new ArrayList<Bitmap>();
+        terminado=false;
+        ganado=false;
+        banderaLoop=false;
+
+
+
+
+
 
 
 
@@ -112,34 +131,182 @@ public class GameView2 extends SurfaceView {
         this.jugador = jugador;
     }
 
+    public long getCrono() {
+        return crono;
+    }
 
+    public void setCrono(long crono) {
+        this.crono = crono;
+    }
+
+    public long getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(long inicio) {
+        this.inicio = inicio;
+    }
+
+    public ArrayList<Boton> getBotones() {
+        return botones;
+    }
+
+    public void setBotones(ArrayList<Boton> botones) {
+        this.botones = botones;
+    }
+
+    public boolean isEnMarcha() {
+        return enMarcha;
+    }
+
+    public void setEnMarcha(boolean enMarcha) {
+        this.enMarcha = enMarcha;
+    }
+
+    public Monedas getMoneda_arriba() {
+        return moneda_arriba;
+    }
+
+    public void setMoneda_arriba(Monedas moneda_arriba) {
+        this.moneda_arriba = moneda_arriba;
+    }
+
+    public ArrayList<Bitmap> getVidas() {
+        return vidas;
+    }
+
+    public void setVidas(ArrayList<Bitmap> vidas) {
+        this.vidas = vidas;
+    }
+
+    public boolean isTerminado() {
+        return terminado;
+    }
+
+    public void setTerminado(boolean terminado) {
+        this.terminado = terminado;
+    }
+
+    public boolean isGanado() {
+        return ganado;
+    }
+
+    public void setGanado(boolean ganado) {
+        this.ganado = ganado;
+    }
+
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    public boolean isBanderaLoop() {
+        return banderaLoop;
+    }
+
+    public void setBanderaLoop(boolean banderaLoop) {
+        this.banderaLoop = banderaLoop;
+    }
 
     public void draw(Canvas canvas) {
+
         Paint paint = new Paint();
         long actual;
         float trans;
-        paint.setColor(Color.RED);
-        paint.setTextSize(60);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(80);
         canvas.drawText(String.valueOf(getFondo().getTopealto()), 300, 300, paint);
         getFondo().onDraw(canvas);
-        for (Boton p : botones) {
-            p.onDraw(canvas);
-        }
-            jugador.onDraw(canvas);
+        canvas.drawRect(0,0,getWidth(), (int)(getHeight()*0.10), paint);
+        paint.setColor(Color.RED);
+        canvas.drawText(String.valueOf(getJugador().getMonedas()),MARGENES+moneda_arriba.getWidth(),(int)(getHeight()*0.05),paint);
+        moneda_arriba.onDraw(canvas);
+        if(!terminado) {
+            for (Boton p : botones) {
+                p.onDraw(canvas);
+            }
+            actual=System.currentTimeMillis();
+            crono = (actual / 1000) - (inicio / 1000);
 
+
+
+            jugador.onDraw(canvas);
+        }
+        for(int i=1;i<jugador.getVidas()+1;i++) {
+            vidas.add(BitmapFactory.decodeResource(getResources(), R.drawable.milan_vidas));
+
+            canvas.drawBitmap(vidas.get(i-1),(float)(MARGENES+moneda_arriba.getWidth()+MARGENES+(vidas.get(i-1).getWidth()*i)),0,null);
+
+        }
+        canvas.drawText((String.valueOf(pasarSeg(crono))), (float) (getWidth() * 0.8), (float) (getHeight() * 0.09), paint);
+
+
+
+        if(terminado){
+            paint.setARGB(150,0,0,0);
+            canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(),paint);
+            paint.setColor(Color.RED);
+            if(ganado){
+                canvas.drawText("¡Has ganado!",20,500,paint);
+                finalizar();
+            }
+            else{
+                canvas.drawText("¡Has perdido!",20,500,paint);
+                finalizar();
+
+            }
+
+
+
+        }
+        comprobarJuego();
 
 
 
     }
 
+    private void comprobarJuego() {
+        if((jugador.getVidas()==0 && getJugador().getMonedas()<NUM_MONEDAS) || (getJugador().getMonedas()<NUM_MONEDAS && crono==TIEMPO_MAX)){
+            terminado=true;
+            ganado=false;
+
+
+        }
+        else if((jugador.getVidas()>0 && getJugador().getMonedas()==NUM_MONEDAS) || (getJugador().getMonedas()==NUM_MONEDAS && crono<TIEMPO_MAX)){
+            terminado=true;
+            ganado=true;
+
+
+        }
+        else{
+            terminado=false;
+            ganado=false;
+        }
+    }
+
+
     private void finalizar() {
+
+        banderaLoop=true;
         loop.setRunning(false);
 
-        fin();
+
+
+
 
     }
 
     public void fin() {
+
+
+
+        Intent i=new Intent();
+        i.putExtra("resultado", ganado);
+        actividad.setResult(Activity.RESULT_OK, i);
+
         actividad.finish();
 
     }
@@ -183,11 +350,12 @@ public class GameView2 extends SurfaceView {
         int anchonuevo=(fon.getHeight()*getWidth())/getHeight();
         setFondo(new ScrollingBackground(this,fon, anchonuevo, fon.getHeight(), getJugador(), getWidth(), getHeight()));
 
+
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN && !terminado) {
             synchronized ((getHolder())) {
                 for (Boton p:botones){
                     if (p.isCollition(event.getX(), event.getY())){

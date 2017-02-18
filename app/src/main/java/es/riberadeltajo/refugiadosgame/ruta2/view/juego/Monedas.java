@@ -12,7 +12,7 @@ import es.riberadeltajo.refugiadosgame.R;
  */
 
 public class Monedas {
-    private final int VELOCIDAD=20;
+    private final int VELOCIDAD=10;
     private final int  BMP_COLUMNS=10;
     private int corx, cory;
     private Bitmap bmp; //Imagen de las figuritas
@@ -85,6 +85,11 @@ public class Monedas {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public int getVELOCIDAD() {
+        return VELOCIDAD;
+    }
+
     public void update(){
         currentFrame = ++currentFrame % BMP_COLUMNS;
 

@@ -21,7 +21,7 @@ public class ScrollingBackground {
     private Bitmap explosion;
     private Bitmap destello;
     private int x, y, topeancho, topealto;  // Coordenadas por donde va el fondo y dimensiones de la pantalla
-    private final int VELOCIDAD = 20;        // Velocidad a la que se moverá el fondo
+    private final int VELOCIDAD = 10;        // Velocidad a la que se moverá el fondo
     private Jugador jugador;
     private int anchosalida, altosalida;
     private ArrayList<Monedas> monedas;
@@ -239,38 +239,36 @@ public class ScrollingBackground {
             x = fondo.getWidth() - topeancho;
         }
         for (Monedas p:getMonedas()){
-            p.setCorx(p.getCorx()-((int)(VELOCIDAD*3.5)));
+            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 3.5)));
         }
         for (Bichos p:getBichos()){
-            p.setCorx((p.getCorx()-((int)(VELOCIDAD*3.5))));
+            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 3.5)));
         }
         for(Temporales p:getTemporales()){
-            p.setCorx(p.getCorx()-((int)(VELOCIDAD*3.5)));
+            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 3.5)));
         }
 
 
 
     }
-    public void retrocederX()
-    {
+    public void retrocederX() {
 
 
         x -= VELOCIDAD;
-        if(x < 0) {
+        if (x < 0) {
             x = 0;
-        }
-        else{
-        for (Monedas p:getMonedas()) {
-            p.setCorx(p.getCorx()+((int)(VELOCIDAD*3.5)));
-        }
-            for (Bichos p:getBichos()){
-                p.setCorx((p.getCorx()+((int)(VELOCIDAD*3.5))));
+        } else {
+            for (Monedas p : getMonedas()) {
+                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 3.5)));
             }
-            for(Temporales p:getTemporales()){
-                p.setCorx(p.getCorx()+((int)(VELOCIDAD*3.5)));
+            for (Bichos p : getBichos()) {
+                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 3.5)));
             }
-        }
+            for (Temporales p : getTemporales()) {
+                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 3.5)));
+            }
 
+        }
     }
 
     public void onDraw(Canvas lienzo) {

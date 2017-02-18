@@ -10,7 +10,7 @@ import android.graphics.Rect;
 
 public class Bichos {
 
-    private final int VELOCIDAD=20;
+    private final int VELOCIDAD=10;
     private final int  BMP_COLUMNS=3;
     private final int BMP_ROWS=2;
     private final int RANGO_MOVIMIENTO=500;

@@ -13,7 +13,7 @@ import android.graphics.Rect;
 public class Jugador {
     private final int VIDAS_INICIO=3;
     private final int VELOCIDAD_SALTO=70;
-    private final int VELOCIDAD_AVANCE=20;
+    private final int VELOCIDAD_AVANCE=10;
     private final int[] DIRECCION={3,1,0,2}; //Para saber en qué dirección tiene que pintar
     private final int  BMP_COLUMNS=4; //Cantidad de columnas de movimiento
     private final int BMP_ROWS=4; //Cantidad de filas de movimiento
