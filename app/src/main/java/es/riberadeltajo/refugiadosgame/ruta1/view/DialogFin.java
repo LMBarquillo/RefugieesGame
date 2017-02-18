@@ -1,0 +1,127 @@
+package es.riberadeltajo.refugiadosgame.ruta1.view;
+
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
+import android.view.Display;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.ruta3.view.Sarajevo;
+
+/**
+ * Created by Alex on 14/02/2017.
+ */
+
+public class DialogFin extends Dialog implements View.OnClickListener {
+
+    public enum Tipo {
+        WIN,
+        LOSE
+    }
+
+    private Tipo tipo;
+    private Madrid activity;
+    private ImageView ganaPierde,reintentar,irMenu,sigNiv;
+    private Typeface font;
+
+    public DialogFin(Madrid activity, Tipo tipo) {
+        super(activity, R.style.AppTheme);
+        this.activity = activity;
+        this.tipo = tipo;
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        getWindow().setLayout(size.x,(int)(size.y*1.2));
+        getWindow().getAttributes().windowAnimations = R.style.madridDialogo;
+        Drawable d = new ColorDrawable(Color.BLACK);
+        d.setAlpha(150);
+        getWindow().setBackgroundDrawable(d);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.dialogfin_madrid);
+        ganaPierde = (ImageView) findViewById(R.id.imgAcc);
+        TextView txtMensaje = (TextView) findViewById(R.id.txtMens);
+        txtMensaje.setTypeface(font);
+        font = Typeface.createFromAsset(getContext().getApplicationContext().getAssets(),"tipografias/madrid_dialog_font.ttf");
+        reintentar = (ImageView) findViewById(R.id.imgTryAgain);
+        irMenu = (ImageView) findViewById(R.id.imgMenu);
+        sigNiv = (ImageView) findViewById(R.id.imgNextLevel);
+        reintentar.setImageResource(R.drawable.madrid_tryagain);
+        irMenu.setImageResource(R.drawable.madrid_menu);
+        sigNiv.setImageResource(R.drawable.madrid_nextlevel);
+        reintentar.setOnClickListener(this);
+        sigNiv.setOnClickListener(this);
+        if(tipo == Tipo.WIN) {
+            ganaPierde.setImageResource(R.drawable.madrid_win);
+            txtMensaje.setText(R.string.madrid_win_mensaje);
+        } else
+        if(tipo == Tipo.LOSE) {
+            ganaPierde.setImageResource(R.drawable.madrid_lose);
+            txtMensaje.setText(R.string.madrid_lose_mensaje);
+            sigNiv.setImageResource(R.drawable.madrid_nextlevel_disabled);
+            sigNiv.setEnabled(false);
+        }
+    }
+
+    @Override
+    public void show() {
+        // Set the dialog to not focusable.
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+
+        //Copiamos la visibilidad de la actividad (Full Screen)
+        getWindow().getDecorView().setSystemUiVisibility(activity.getWindow().getDecorView().getSystemUiVisibility());
+
+        // Show the dialog with NavBar hidden.
+        super.show();
+
+        // Set the dialog to focusable again.
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.imgTryAgain:
+                reintentar.setImageResource(R.drawable.madrid_tryagain_hover);
+                reset();
+                break;
+            case R.id.imgMenu:
+                sigNiv.setImageResource(R.drawable.madrid_nextlevel_hover);
+                goToMenu();
+                break;
+            case R.id.imgNextLevel:
+                sigNiv.setImageResource(R.drawable.madrid_nextlevel_hover);
+                goToNextLevel();
+                break;
+        }
+    }
+
+    private void reset() {
+        dismiss();
+        activity.reset();
+    }
+
+    private void goToMenu(){
+        dismiss();
+    }
+
+    private void goToNextLevel() {
+        dismiss();
+        activity.goToNextLevel();
+    }
+}

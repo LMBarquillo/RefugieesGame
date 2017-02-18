@@ -2,19 +2,49 @@
     <!-- RECORDATORIO: LOS TEXTOS VAN EN INGLÉS -->
     <string name="app_name">RefugeeGame</string>
 
+    <!-- Menú Principal -->
+    <string name="btn_jugar">Play</string>
+    <string name="btn_opciones">Options</string>
+    <string name="btn_continuar">Continue</string>
+    <string name="btn_nueva">New game</string>
+    <string name="dialog_play_mensaje">Do you want to continue or start a new game?</string>
+    <string name="btn_prueba">Prueba del menu</string>
+
     <!-- Madrid-Milán -->
     <string name="route1">Madrid-Milan</string>
+    <string name="madrid_win_titulo">TICKET ACQUIERD!</string>
+    <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
+    <string name="madrid_lose_titulo">GAME OVER</string>
+    <string name="madrid_lose_mensaje">You do not acquired the ticket on time. Try again?</string>
 
     <!-- Milán-Sarajevo -->
     <string name="route2">Milan-Sarajevo</string>
 
     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
+    <string name="dialogo_btn_reintentar">Try again</string>
+    <string name="dialogo_btn_continuar">Continue</string>
+    <string name="dialogo_win_titulo">YOU WIN</string>
+    <string name="dialogo_win_mensaje">You have managed to escape and you can continue on your way to Istanbul.</string>
+    <string name="dialogo_lose_titulo">YOU LOSE</string>
+    <string name="dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>
+    <string name="notes10">Good!</string>
+    <string name="notes20">Oh Yeah!</string>
+    <string name="notes30">Nice baby!</string>
+    <string name="notes40">You rock!</string>
+    <string name="notes50">Wonderful!</string>
+    <string name="notes100">INCREDIBLE!</string>
 
     <!-- Teherán-Bombai -->
     <string name="route5">Tehran-Mumbai</string>
+    <string name="select_work">Select Work</string>
+    <string name="congratulations_tehran">Congratulations!</string>
+    <string name="game_over_tehran">Game Over</string>
+    <string name="waiter_tehran">Waiter</string>
+    <string name="cleaner_tehran">Cleaner</string>
+    <string name="return_tehran">Return</string>
 
 </resources>

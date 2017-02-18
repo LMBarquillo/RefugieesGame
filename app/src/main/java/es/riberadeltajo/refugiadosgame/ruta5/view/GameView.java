@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -29,6 +30,10 @@ public class GameView extends SurfaceView implements Observer {
     private int ySpeed;
     private Bitmap fondo;
     private Bitmap jugbmp;
+    private Bitmap hielo, vaso, refresco, pajita;
+    private Bitmap aspiradora, basura, escoba, fregona, limpiador;
+    private boolean cojidoHielo, cojidoVaso, cojidoRefresco, cojidoPajita;
+    private boolean cojidoAspiradora, cojidoBasura, cojidoEscoba, cojidoFregona, cojidoLimpiador;
     private Player jugador;
     private ArrayList<Objetos> objetos;
     private GameLoop loop;
@@ -36,10 +41,15 @@ public class GameView extends SurfaceView implements Observer {
     private Cronometro cronometro;
     private int segundos;
     private int cojidos;
+    private boolean camarero;
+    private MediaPlayer musica;
+    private MediaPlayer lost;
+    private MediaPlayer win;
+    private int contadorHielos;
 
 
 
-    public GameView(Context context) {
+    public GameView(Context context, boolean cam) {
         super(context);
         principal=(Tehran)context;
         cronometro=new Cronometro();
@@ -48,8 +58,17 @@ public class GameView extends SurfaceView implements Observer {
         holder=getHolder();
         objetos=new ArrayList<Objetos>();
         setPasaObjeto(false);
+        setCamarero(cam);
         setSegundos(-1);
-        setCojidos(4);
+        setCojidos(5);
+        setCojidoHielo(false);
+        setCojidoVaso(false);
+        setCojidoRefresco(false);
+        setCojidoPajita(false);
+        setMusica(MediaPlayer.create(getContext(),R.raw.tehranmusica));
+        setLost(MediaPlayer.create(getContext(),R.raw.tehranlost));
+        setWin(MediaPlayer.create(getContext(),R.raw.tehranwin));
+        setContadorHielos(2);
         loop=new GameLoop(this);
         jugbmp=BitmapFactory.decodeResource(getResources(), R.drawable.playertehran);
         holder.addCallback(new SurfaceHolder.Callback() {
@@ -74,19 +93,46 @@ public class GameView extends SurfaceView implements Observer {
         });
 
         setFondo(BitmapFactory.decodeResource(getResources(), R.drawable.fondoteheran));
-
+        setHielo(BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran));
+        setVaso(BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran));
+        setRefresco(BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran));
+        setPajita(BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran));
+        setAspiradora(BitmapFactory.decodeResource(getResources(), R.drawable.aspiradoratehran));
+        setBasura(BitmapFactory.decodeResource(getResources(), R.drawable.basuratehran));
+        setEscoba(BitmapFactory.decodeResource(getResources(), R.drawable.escobatehran));
+        setFregona(BitmapFactory.decodeResource(getResources(), R.drawable.fregonatehran));
+        setLimpiador(BitmapFactory.decodeResource(getResources(), R.drawable.limpiadortehran));
+        getMusica().start();
+        getMusica().setLooping(true);
     }
 
     private void cargarObjetos(){
         jugador=new Player(this,Bitmap.createScaledBitmap(jugbmp,(int)(jugbmp.getWidth()*1.7),(int)(jugbmp.getHeight()*1.5),false));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*15)+10,false,(int)(Math.random()*5)+1));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*15)+10,false,(int)(Math.random()*5)+4));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*15)+10,true,(int)(Math.random()*5)+6));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*15)+10,true,(int)(Math.random()*5)+10));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.monedatehran),(int)(Math.random()*15)+10,false,(int)(Math.random()*5)+10));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.alfombratehran),(int)(Math.random()*15)+10,false,(int)(Math.random()*5)+14));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*15)+10,true,(int)(Math.random()*5)+18));
-        objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*15)+10,true,(int)(Math.random()*5)+22));
+        if(isCamarero()){
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*15)+1));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+4));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+6));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.bebidatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+10));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.monedatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+14));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.alfombratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+18));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pajitatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+22));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.saxofontehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+25));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.hielotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+27));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.vasotehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+30));
+        }
+        else{
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.guitarratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*15)+1));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.pizzatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+4));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.escobatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+6));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.fregonatehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+10));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.monedatehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+14));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.alfombratehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+18));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.basuratehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+22));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.saxofontehran),(int)(Math.random()*10)+10,false,(int)(Math.random()*5)+25));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.limpiadortehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+27));
+            objetos.add(new Objetos(this,BitmapFactory.decodeResource(getResources(), R.drawable.aspiradoratehran),(int)(Math.random()*10)+10,true,(int)(Math.random()*5)+30));
+        }
+
     }
 
 
@@ -97,8 +143,39 @@ public class GameView extends SurfaceView implements Observer {
         //canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
         canvas.drawText(String.format("%d",getSegundos()),(float)(getWidth()*0.05),(float)(getHeight()*0.05),paint);
-        canvas.drawText(String.format("Objetos por Cojer: %d",getCojidos()),(float)(getWidth()*0.4),(float)(getHeight()*0.05),paint);
+        //canvas.drawText(String.format("Objetos por Cojer: %d",getCojidos()),(float)(getWidth()*0.4),(float)(getHeight()*0.05),paint);
         jugador.draw(canvas);
+        if(isCamarero()) {
+            if (!isCojidoHielo()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getHielo(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.07), null);
+            }
+            if (!isCojidoVaso()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getVaso(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.14), null);
+            }
+            if (!isCojidoRefresco()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getRefresco(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.21), null);
+            }
+            if (!isCojidoPajita()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getPajita(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.27), null);
+            }
+        }
+        else {
+            if (!isCojidoAspiradora()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getAspiradora(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.07), null);
+            }
+            if (!isCojidoBasura()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getBasura(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.14), null);
+            }
+            if (!isCojidoEscoba()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getEscoba(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.21), null);
+            }
+            if (!isCojidoFregona()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getFregona(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.27), null);
+            }
+            if (!isCojidoLimpiador()) {
+                canvas.drawBitmap(Bitmap.createScaledBitmap(getLimpiador(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.33), null);
+            }
+        }
         if(!isPasaObjeto() && objetos.size()>0 && getCojidos()>0){
             for(int i=0;i<objetos.size();i++){      //Dibuja los objetos
                 if(objetos.get(i).getSegundo()<getSegundos()){          //Si el segundo de aparicion es menor, los sigue dibujando
@@ -117,8 +194,38 @@ public class GameView extends SurfaceView implements Observer {
                 }
                 else if(objetos.get(i).choqueJugador(jugador)){     //COMPRUEBA SI EL OBJETO CHOCA CON EL JUGADOR
                     if(objetos.get(i).isCoger()){
-                        objetos.remove(i);
                         setCojidos(getCojidos()-1);
+                        if(objetos.get(i).getBmp().sameAs(getHielo())){         //COMPRUEBA QUE OBJETO HA COJIDO PARA BORRARLO DE PANTALLA
+                            setContadorHielos(getContadorHielos()-1);
+                            if(getContadorHielos()==0){
+                                setCojidoHielo(true);
+                            }
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getVaso())){
+                            setCojidoVaso(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getRefresco())){
+                            setCojidoRefresco(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getPajita())){
+                            setCojidoPajita(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getAspiradora())){
+                            setCojidoAspiradora(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getBasura())){
+                            setCojidoBasura(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getEscoba())){
+                            setCojidoEscoba(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getFregona())){
+                            setCojidoFregona(true);
+                        }
+                        else if(objetos.get(i).getBmp().sameAs(getLimpiador())){
+                            setCojidoLimpiador(true);
+                        }
+                        objetos.remove(i);
                     }
                     else{
                         setPasaObjeto(true);
@@ -129,11 +236,17 @@ public class GameView extends SurfaceView implements Observer {
         }
         else{
             if(isPasaObjeto()){
-                canvas.drawText(String.format("GAME OVER"),(float)(getWidth()*0.32),(float)(getHeight()*0.45),paint);
+                getMusica().stop();
+                getMusica().release();
+                getLost().start();
+                canvas.drawText(String.format("%s",getContext().getString(R.string.game_over_tehran)),(float)(getWidth()*0.32),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
             else{
-                canvas.drawText(String.format("CONGRATULATIONS"),(float)(getWidth()*0.2),(float)(getHeight()*0.45),paint);
+                getMusica().stop();
+                getMusica().release();
+                getWin().start();
+                canvas.drawText(String.format("%s",getContext().getString(R.string.congratulations_tehran)),(float)(getWidth()*0.25),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
         }
@@ -158,10 +271,18 @@ public class GameView extends SurfaceView implements Observer {
         loop.setRunning(false);
 
         try{
-            Thread.sleep(2000);
+            Thread.sleep(2500);
         }
         catch(InterruptedException ie){
 
+        }
+        if(isPasaObjeto()){
+            getLost().stop();
+            getLost().release();
+        }
+        else{
+            getWin().stop();
+            getWin().release();
         }
         principal.fin();
     }
@@ -181,6 +302,8 @@ public class GameView extends SurfaceView implements Observer {
         return true;
     }
 
+
+    //GETTER-SETTERS
     @Override
     public void update(Observable o, Object arg) {
         setSegundos(cronometro.getSegundos());
@@ -244,5 +367,189 @@ public class GameView extends SurfaceView implements Observer {
 
     public void setSegundos(int segundos) {
         this.segundos = segundos;
+    }
+
+    public boolean isCojidoHielo() {
+        return cojidoHielo;
+    }
+
+    public void setCojidoHielo(boolean cojidoHielo) {
+        this.cojidoHielo = cojidoHielo;
+    }
+
+    public boolean isCojidoVaso() {
+        return cojidoVaso;
+    }
+
+    public void setCojidoVaso(boolean cojidoVaso) {
+        this.cojidoVaso = cojidoVaso;
+    }
+
+    public boolean isCojidoRefresco() {
+        return cojidoRefresco;
+    }
+
+    public void setCojidoRefresco(boolean cojidoRefresco) {
+        this.cojidoRefresco = cojidoRefresco;
+    }
+
+    public boolean isCojidoPajita() {
+        return cojidoPajita;
+    }
+
+    public void setCojidoPajita(boolean cojidoPajita) {
+        this.cojidoPajita = cojidoPajita;
+    }
+
+    public Bitmap getHielo() {
+        return hielo;
+    }
+
+    public void setHielo(Bitmap hielo) {
+        this.hielo = hielo;
+    }
+
+    public Bitmap getVaso() {
+        return vaso;
+    }
+
+    public void setVaso(Bitmap vaso) {
+        this.vaso = vaso;
+    }
+
+    public Bitmap getRefresco() {
+        return refresco;
+    }
+
+    public void setRefresco(Bitmap refresco) {
+        this.refresco = refresco;
+    }
+
+    public Bitmap getPajita() {
+        return pajita;
+    }
+
+    public void setPajita(Bitmap pajita) {
+        this.pajita = pajita;
+    }
+
+    public boolean isCamarero() {
+        return camarero;
+    }
+
+    public void setCamarero(boolean camarero) {
+        this.camarero = camarero;
+    }
+
+    public MediaPlayer getMusica() {
+        return musica;
+    }
+
+    public void setMusica(MediaPlayer musica) {
+        this.musica = musica;
+    }
+
+    public MediaPlayer getLost() {
+        return lost;
+    }
+
+    public void setLost(MediaPlayer lost) {
+        this.lost = lost;
+    }
+
+    public MediaPlayer getWin() {
+        return win;
+    }
+
+    public void setWin(MediaPlayer win) {
+        this.win = win;
+    }
+
+    public int getContadorHielos() {
+        return contadorHielos;
+    }
+
+    public void setContadorHielos(int contadorHielos) {
+        this.contadorHielos = contadorHielos;
+    }
+
+    public Bitmap getAspiradora() {
+        return aspiradora;
+    }
+
+    public void setAspiradora(Bitmap aspiradora) {
+        this.aspiradora = aspiradora;
+    }
+
+    public Bitmap getBasura() {
+        return basura;
+    }
+
+    public void setBasura(Bitmap basura) {
+        this.basura = basura;
+    }
+
+    public Bitmap getEscoba() {
+        return escoba;
+    }
+
+    public void setEscoba(Bitmap escoba) {
+        this.escoba = escoba;
+    }
+
+    public boolean isCojidoBasura() {
+        return cojidoBasura;
+    }
+
+    public void setCojidoBasura(boolean cojidoBasura) {
+        this.cojidoBasura = cojidoBasura;
+    }
+
+    public boolean isCojidoEscoba() {
+        return cojidoEscoba;
+    }
+
+    public void setCojidoEscoba(boolean cojidoEscoba) {
+        this.cojidoEscoba = cojidoEscoba;
+    }
+
+    public boolean isCojidoAspiradora() {
+        return cojidoAspiradora;
+    }
+
+    public void setCojidoAspiradora(boolean cojidoAspiradora) {
+        this.cojidoAspiradora = cojidoAspiradora;
+    }
+
+    public Bitmap getLimpiador() {
+        return limpiador;
+    }
+
+    public void setLimpiador(Bitmap limpiador) {
+        this.limpiador = limpiador;
+    }
+
+    public Bitmap getFregona() {
+        return fregona;
+    }
+
+    public void setFregona(Bitmap fregona) {
+        this.fregona = fregona;
+    }
+
+    public boolean isCojidoFregona() {
+        return cojidoFregona;
+    }
+
+    public void setCojidoFregona(boolean cojidoFregona) {
+        this.cojidoFregona = cojidoFregona;
+    }
+
+    public boolean isCojidoLimpiador() {
+        return cojidoLimpiador;
+    }
+
+    public void setCojidoLimpiador(boolean cojidoLimpiador) {
+        this.cojidoLimpiador = cojidoLimpiador;
     }
 }

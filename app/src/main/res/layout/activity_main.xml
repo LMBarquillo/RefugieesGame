@@ -69,4 +69,14 @@
         android:layout_marginTop="18dp"
         android:id="@+id/textView"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="@string/btn_prueba"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:id="@+id/button6"
+        android:onClick="menu" />
 </RelativeLayout>

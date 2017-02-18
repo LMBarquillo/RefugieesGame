@@ -1,16 +1,22 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import es.riberadeltajo.refugiadosgame.R;
 
@@ -19,19 +25,22 @@ import es.riberadeltajo.refugiadosgame.R;
  */
 
 public class GameView extends SurfaceView {
-    private final int TIEMPO_MAX=300;
-    private Bitmap player,fondo;
+    private final int TIEMPO_MAX=120;
+    private final int MAX_POINTS=100;
+    private Bitmap player,coin1,coin2,coin5,coin10,fondo,ticket,life1,life2,life3,moneyBag,sandClock;
     private SurfaceHolder holder;
     private GameLoop loop;
     private int corx,cory;
     private int xSpeed,ySpeed;
     private ArrayList<Sprite> sprites;
+    private ArrayList<Monedas> monedas;
+    private ArrayList<Ticket> tickets;
     private int puntuacion;
     private long crono,inicio;
     private Sprite jug;
     private Madrid contexto;
-    private ArrayList<Bitmap> drawgif;
-    private int cont=0;
+    private float vidas;
+    private Typeface font;
 
     public GameView(Context context){
         super(context);
@@ -43,15 +52,16 @@ public class GameView extends SurfaceView {
         setySpeed(10);
         setInicio(System.currentTimeMillis());
         setPuntuacion(0);
+        setVidas(5);
         sprites=new ArrayList<Sprite>();
-        drawgif=new ArrayList<>();
+        monedas=new ArrayList<Monedas>();
+        tickets=new ArrayList<Ticket>();
+        font = Typeface.createFromAsset(context.getAssets(),"tipografias/madrid_font.ttf");
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                createSprite();
-                loop.setRunning(true);
-                loop.start();
+                start();
             }
 
             @Override
@@ -59,97 +69,9 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
-                boolean volver=true;
-                loop.setRunning(false);
-                while(volver){
-                    try {
-                        loop.join();
-                        volver=false;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+                stop();
             }
         });
-    }
-
-    //Prueba fondo animado. Cambio el fondo añadiendo al array, ya vacío, el siguiente
-    public Bitmap cambiarFondo(int cont){
-        Bitmap background=null;
-        if(cont==0){
-            background= drawgif.get(0);
-        }
-        else if(cont==1){
-            background= drawgif.get(0);
-        }
-        else if(cont==2){
-            background= drawgif.get(0);
-        }
-        else if(cont==3){
-            background= drawgif.get(0);
-        }
-        else if(cont==4){
-            background= drawgif.get(0);
-        }
-        else if(cont==5){
-            background= drawgif.get(0);
-        }
-        else if(cont==6){
-            background= drawgif.get(0);
-        }
-        else if(cont==7){
-            background= drawgif.get(0);
-        }
-        else if(cont==8){
-            background= drawgif.get(0);
-        }
-        else if(cont==9){
-            background= drawgif.get(0);
-        }
-        else if(cont==10){
-            background= drawgif.get(0);
-        }
-        else if(cont==11){
-            background= drawgif.get(0);
-        }
-        else if(cont==12){
-            background= drawgif.get(0);
-        }
-        else if(cont==13){
-            background= drawgif.get(0);
-        }
-        else if(cont==14){
-            background= drawgif.get(0);
-        }
-        else if(cont==15){
-            background= drawgif.get(0);
-        }
-        else if(cont==16){
-            background= drawgif.get(0);
-        }
-        else if(cont==17){
-            background= drawgif.get(0);
-        }
-        else if(cont==18){
-            background= drawgif.get(0);
-        }
-        else if(cont==19){
-            background= drawgif.get(0);
-        }
-        else if(cont==20){
-            background= drawgif.get(0);
-        }
-        else if(cont==21){
-            background= drawgif.get(0);
-        }
-        else if(cont==22){
-            background= drawgif.get(0);
-        }
-        else if(cont==23){
-            background= drawgif.get(0);
-        }
-
-        return background;
     }
 
     public int getCorx() {
@@ -224,180 +146,138 @@ public class GameView extends SurfaceView {
         this.inicio = inicio;
     }
 
+    public ArrayList<Monedas> getMonedas() {
+        return monedas;
+    }
+
+    public void setMonedas(ArrayList<Monedas> monedas) {
+        this.monedas = monedas;
+    }
+
+    public float getVidas() {
+        return vidas;
+    }
+
+    public void setVidas(float vidas) {
+        this.vidas = vidas;
+    }
+
     //Creo el Sprite y le hago un setJug() para pasarle después la posición en el onTouchEvent
-    //Inicializo el fondo temporalmente aquí porque daba Null en el constructor
+    //Creo las monedas de distinto valor y las barajeo para que se pinten posteriormente de forma aleatoria
+    //Creo el ticket que aparecerá cuando obtenga la puntuación requerida
     public void createSprite(){
-        player= BitmapFactory.decodeResource(getResources(),R.drawable.pruebamadrid);
-        setJug(new Sprite(this,player,10));
+        player=getBitmapFromAssets(getContext(),"madrid_resources/madrid_sprite.png");
+        coin1=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin1.png");
+        coin2=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin2.png");
+        coin5=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin5.png");
+        coin10=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin10.png");
+        setJug(new Sprite(this,player,5));
         sprites.add(getJug());
-        fondo=BitmapFactory.decodeResource(getResources(), R.drawable.frame1);
-        fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
+        for(int i=0;i<250;i++) {
+            monedas.add(new Monedas(monedas, this, coin1, 1));
+        }
+        for(int i=0;i<100;i++) {
+            monedas.add(new Monedas(monedas, this, coin2, 2));
+        }
+        for(int i=0;i<45;i++) {
+            monedas.add(new Monedas(monedas, this, coin5, 5));
+        }
+        for(int i=0;i<5;i++) {
+            monedas.add(new Monedas(monedas, this, coin10, 10));
+        }
+        Collections.shuffle(getMonedas());
+        ticket=getBitmapFromAssets(getContext(),"madrid_resources/madrid_ticket.png");
+        tickets.add(new Ticket(tickets, this, ticket));
     }
 
-    //Prueba fondo animado. Crea el fondo antes de ponerle
-    public void createFondo(int cont){
-        Bitmap fond;
-        if (cont == 0) {
-            fond=BitmapFactory.decodeResource(getResources(), R.drawable.frame1);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 1) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame2);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 2) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame3);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 3) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame4);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 4) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame5);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 5) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame6);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 6) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame7);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 7) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame8);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 8) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame9);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 9) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame10);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 10) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame11);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 11) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame12);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 12) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame13);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 13) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame14);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 14) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame15);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 15) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame16);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 16) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame17);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 17) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame18);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 18) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame19);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 19) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame20);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 20) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame21);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 21) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame22);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 22) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame23);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
-        if (cont == 23) {
-            fond = BitmapFactory.decodeResource(getResources(), R.drawable.frame24);
-            fond = Bitmap.createScaledBitmap(fond, getWidth(), getHeight(), false);
-            drawgif.add(fond);
-        }
+    //Obtener bitmap escalado para distintos dispositivos
+    public static Bitmap getBitmapFromAssets(Context context, String filePath) {
+        AssetManager assetManager = context.getAssets();
+
+        InputStream inStream;
+        Bitmap bitmap = null;
+        try {
+            inStream = assetManager.open(filePath);
+            bitmap = BitmapFactory.decodeStream(inStream);
+        } catch (IOException e) {}
+
+        return bitmap;
     }
 
+    //Pinto interfaz, creo sprite y monedas y compruebo si hay colisiones y abro dialogo al finalizar
     public void draw(Canvas canvas){
-        Paint paint=new Paint();
         long actual;
-        paint.setColor(Color.RED);
-        paint.setTextSize((float) (getWidth() * 0.1));
-        canvas.drawBitmap(fondo,0,0,null);
-        /*createFondo(cont); //Creo el fondo, le guardo para luego borrarle y le pongo
-        Bitmap temp;
-        temp=cambiarFondo(cont);
-        canvas.drawBitmap(temp, 0, 0, null);
-        if(cont<22) {
-            cont++;
-            drawgif.remove(temp);
-        }
-        else{
-            cont=0;
-            drawgif.remove(temp);
-        }*/
-        if((sprites.size()!=0) && getCrono()<TIEMPO_MAX) {
+        boolean conseguido=false, finalizar=false;
+        canvas.drawBitmap(fondo, 0, 0, null);
+        Paint paint=new Paint();
+        paint.setColor(Color.BLACK);
+        paint.setStrokeWidth((float)((getWidth()*0.1)/12));
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setTextSize((float) (getWidth() * 0.08));
+        paint.setTypeface(font);
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawBitmap(sandClock,(float)(getWidth()*0.05),(float)(getHeight()*0.035),null);
+        canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
+        canvas.drawBitmap(life1,(float)(getWidth()*0.3),(float)(getHeight()*0.045),null);
+        canvas.drawBitmap(life2,(float)(getWidth()*0.3+life1.getWidth()*1.05),(float)(getHeight()*0.045),null);
+        canvas.drawBitmap(life3,(float)(getWidth()*0.3+life1.getWidth()*1.05+life2.getWidth()*1.05),(float)(getHeight()*0.045),null);
+        paint.setTextAlign(Paint.Align.RIGHT);
+        canvas.drawBitmap(moneyBag,(float)(getWidth()*0.57),(float)(getHeight()*0.035),null);
+        canvas.drawText(String.format("%03d/%03d", getPuntuacion(),MAX_POINTS), (float)(getWidth()-(getWidth()*0.05)+moneyBag.getWidth()*0.4), (float) (getHeight() * 0.084), paint);
+        paint.setColor(Color.rgb(255,255,0));
+        paint.setStyle(Paint.Style.FILL);
+
+        if((sprites.size()!=0) && getCrono()<TIEMPO_MAX && getVidas()>0) {
             actual=System.currentTimeMillis();
             for (Sprite miSprite : sprites) {
                 miSprite.draw(canvas);
             }
-            if(sprites.size()>0) {
+            if(getPuntuacion()<MAX_POINTS) {
+                for (int i = 0; i < monedas.size(); i++) {
+                    if (i < 5) {
+                        monedas.get(i).draw(canvas);
+                        if (monedas.get(i).isCollition(getJug())) {
+                            sumarPuntos(monedas.get(i).getPuntos());
+                            monedas.remove(monedas.get(i));
+                        }
+                    }
+                }
+            }else{
+                for(int i=0;i<tickets.size();i++){
+                    tickets.get(i).draw(canvas);
+                    if(tickets.get(i).isCollition(getJug())) {
+                        conseguido=true;
+                        tickets.remove(tickets.get(i));
+                    }
+                }
+            }
+            if (sprites.size() > 0) {
                 setCrono((actual - inicio) / 1000);
             }
-            //Tiempo hacia arriba
-            //canvas.drawText(String.format("%s",pasarSeg(crono)),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
-            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.1),(float)(getHeight()*0.08),paint);
-            canvas.drawText(String.format("%02d", getPuntuacion()), (float) (getWidth() * 0.80), (float) (getHeight() * 0.08), paint);
+            paint.setTextAlign(Paint.Align.LEFT);
+            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
+            paint.setTextAlign(Paint.Align.RIGHT);
+            canvas.drawText(String.format("%03d/%03d", getPuntuacion(),MAX_POINTS), (float)(getWidth()-(getWidth()*0.05)+moneyBag.getWidth()*0.2), (float) (getHeight() * 0.08), paint);
         }
         else{
-            if(getCrono()<TIEMPO_MAX) {
-                canvas.drawText("VICTORIA",(float)(getWidth()*0.25),(float)(getHeight()*0.49),paint);
-            }
-            else{
-                canvas.drawText("GAME OVER",(float)(getWidth()*0.25),(float)(getHeight()*0.49),paint);
-            }
-            finalizar();
+            conseguido=false;
+            finalizar=true;
+        }
+        if(conseguido){
+            getContexto().runOnUiThread(new Runnable() {
+                public void run() {
+                    new DialogFin(getContexto(), DialogFin.Tipo.WIN).show();
+                }
+            });
+            stop();
+        }
+        else if(!conseguido && finalizar) {
+            getContexto().runOnUiThread(new Runnable() {
+                public void run() {
+                    new DialogFin(getContexto(), DialogFin.Tipo.LOSE).show();
+                }
+            });
+            stop();
         }
     }
 
@@ -423,31 +303,58 @@ public class GameView extends SurfaceView {
         return "";
     }
 
-    private void finalizar(){
+    //Inicializo el fondo y los bitmap de la interfaz, creo el sprite e inicio el bucle
+    private void start(){
+        fondo=BitmapFactory.decodeResource(getResources(), R.drawable.madridfondo);
+        fondo = Bitmap.createScaledBitmap(fondo, getWidth(), getHeight(), false);
+        life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+        life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+        life2 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+        life3 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        moneyBag=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_money);
+        moneyBag = Bitmap.createScaledBitmap(moneyBag, (int)(getWidth()*0.08), (int)(getHeight()*0.06), false);
+        sandClock=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_clock);
+        sandClock = Bitmap.createScaledBitmap(sandClock, (int)(getWidth()*0.065), (int)(getHeight()*0.06), false);
+        createSprite();
+        loop.setRunning(true);
+        loop.start();
+    }
+
+    private void stop(){
         loop.setRunning(false);
         try{
             Thread.sleep(1000);
         }catch(InterruptedException ie){}
-        getContexto().finish();
+        getContexto().onPause();
     }
 
     private void sumarPuntos(int puntos){
         setPuntuacion(getPuntuacion()+puntos);
     }
 
+    //Mando al Sprite la posición de la pantalla donde quiero que se mueva el personaje
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        setCorx((int)event.getRawX());
-        setCory((int)event.getRawY());
         if(event.getAction()==MotionEvent.ACTION_MOVE){
-            getJug().touch(getCorx(),getCory(),true);
+            getJug().touch(event.getRawX(),event.getRawY(),true);
         }
         else if(event.getAction()==MotionEvent.ACTION_UP){
-            getJug().touch(getCorx(),getCory(),false);
+            getJug().touch(event.getRawX(),event.getRawY(),false);
         }
         else if(event.getAction()==MotionEvent.ACTION_DOWN){
-            getJug().touch(getCorx(),getCory(),true);
+            getJug().touch(event.getRawX(),event.getRawY(),true);
         }
         return true;
+    }
+
+    //Habro un diálogo si pulso el botón de ir atrás de android para pedir confirmación
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == event.KEYCODE_BACK) {
+            //new DialogSalirSiNo().show();
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
