@@ -28,12 +28,14 @@ public class NoteGenerator extends Thread {
     private String cancion;
     private ArrayList<Nota> notas;
     private boolean running;
+    private int dificultad;
 
-    public NoteGenerator(Context context, GameView gameview, String cancion) {
+    public NoteGenerator(Context context, GameView gameview, String cancion, int dificultad) {
         setNotas(new ArrayList<Nota>());
         setContext(context);
         setGameview(gameview);
         setCancion(cancion);
+        setDificultad(dificultad);
         setRunning(true);
         crearNotas();
     }
@@ -90,7 +92,7 @@ public class NoteGenerator extends Thread {
                                 default:
                                     bmp = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.noteblue);
                             }
-                            getGameview().getNotas().add(new SpriteNotas(getGameview(), bmp, n.getPosicion(), n.getDuracion()));
+                            getGameview().getNotas().add(new SpriteNotas(getGameview(), bmp, n.getPosicion(), n.getDuracion(), getDificultad()));
                             nota++;
                         }
                     } while (traste == n.getTraste());
@@ -147,5 +149,13 @@ public class NoteGenerator extends Thread {
 
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    public int getDificultad() {
+        return dificultad;
+    }
+
+    public void setDificultad(int dificultad) {
+        this.dificultad = dificultad;
     }
 }

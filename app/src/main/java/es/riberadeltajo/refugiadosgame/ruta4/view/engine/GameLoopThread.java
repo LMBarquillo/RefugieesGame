@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta4.view.engine;
 
 import android.graphics.Canvas;
+import android.view.SurfaceView;
 
 /**
  * Game Loop Thread
@@ -9,7 +10,7 @@ import android.graphics.Canvas;
 
 public class GameLoopThread extends Thread {
     private int fps;
-    private GameView gameView;
+    private SurfaceView gameView;
     private boolean running;
 
     public GameLoopThread(GameView gameView){
@@ -18,7 +19,13 @@ public class GameLoopThread extends Thread {
         setFps(gameView.getFPS());  // Nos traemos los FPS del GameView. Los tenemos ahí porque los necesitaremos en otras clases para conseguir el sincronismo de la música.
     }
 
-    public void setGameView(GameView gameView) {
+    public GameLoopThread(OptionsView gameView){
+        setGameView(gameView);
+        setRunning(false);
+        setFps(20); // Aquí no necesitamos tanto
+    }
+
+    public void setGameView(SurfaceView gameView) {
         this.gameView = gameView;
     }
 
@@ -34,7 +41,7 @@ public class GameLoopThread extends Thread {
         this.fps = fps;
     }
 
-    public GameView getGameView() {
+    public SurfaceView getGameView() {
         return gameView;
     }
 

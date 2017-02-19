@@ -37,15 +37,14 @@ public class GameView extends SurfaceView {
     private Bitmap fondo, pickups, cuerda;
     private Typeface tipoPuntos;
     private int puntuacion, seguidas;
+    private int cancion,dificultad,lugar;
 
-    public GameView(Context context) {
+    public GameView(Context context, int cancion, int dificultad, int lugar) {
         super(context);
         loop=new GameLoopThread(this);
         notas = new ArrayList<SpriteNotas>();
         explosiones = new ArrayList<SpriteXplosion>();
-        generador = new NoteGenerator(context,this,"songs/smokeonthewater.txt");
         // Inicializamos bitmaps
-        fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
         pickups = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.pickupsuhrv60);
         cuerda = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.guitarstring);
         // Fuentes
@@ -53,7 +52,10 @@ public class GameView extends SurfaceView {
         puntuacion = 0;
         seguidas = 0;
 
-        setMusica(new MediaPlayer().create(context,R.raw.smokeonthewater));
+        setCancion(cancion);
+        setDificultad(dificultad);
+        setLugar(lugar);
+
         setError(new MediaPlayer().create(context,R.raw.guitarerror));
 
         holder=getHolder();
@@ -328,5 +330,56 @@ public class GameView extends SurfaceView {
 
     public void setPuntuacion(int puntuacion) {
         this.puntuacion = puntuacion;
+    }
+
+    public NoteGenerator getGenerador() {
+        return generador;
+    }
+
+    public void setGenerador(NoteGenerator generador) {
+        this.generador = generador;
+    }
+
+    public int getCancion() {
+        return cancion;
+    }
+
+    public void setCancion(int cancion) {
+        this.cancion = cancion;
+        switch (cancion) {
+            case OptionsView.SONG_SOTW:
+                setMusica(new MediaPlayer().create(getContext(),R.raw.smokeonthewater));
+                setGenerador(new NoteGenerator(getContext(),this,"songs/smokeonthewater.txt",getDificultad()));
+                break;
+            case OptionsView.SONG_SCOM:
+                setMusica(new MediaPlayer().create(getContext(),R.raw.sweetchildofmine));
+                setGenerador(new NoteGenerator(getContext(),this,"songs/sweetchildofmine.txt",getDificultad()));
+        }
+    }
+
+    public int getDificultad() {
+        return dificultad;
+    }
+
+    public void setDificultad(int dificultad) {
+        this.dificultad = dificultad;
+    }
+
+    public int getLugar() {
+        return lugar;
+    }
+
+    public void setLugar(int lugar) {
+        this.lugar = lugar;
+        switch (lugar){
+            case OptionsView.PLACE_AZADI:
+                fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranazaditower);
+                break;
+            case OptionsView.PLACE_GOLESTAN:
+                fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehrangolestanpalace);
+                break;
+            case OptionsView.PLACE_ABDOL:
+                fondo = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.tehranshahabdolazimshrine);
+        }
     }
 }
