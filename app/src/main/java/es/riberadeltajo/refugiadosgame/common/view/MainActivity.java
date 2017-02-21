@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Instanciamos el estado del jugador. Este objeto le iremos pasando de una a otra activity.
-        status = new PlayerStatus();
+        status=PlayerStatus.getInstancia(this);
     }
 
     public void ruta1(View view) {
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ruta3(View view) {
         Intent i = new Intent(this,Sarajevo.class);
-        i.putExtra("STATUS",status);
+        //i.putExtra("STATUS",status);
         startActivityForResult(i,RUTA3);
     }
 
