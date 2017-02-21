@@ -23,7 +23,7 @@ public class Juego {
     private final float playerSpeedYScale = .007f; // sobre 10px
     private final float nenufarWidthScale = .133f; // sobre 145px
     private final float nenufarHeightScale = .074f; //sobre 145px
-    private final float nenufarPosYScale = .192f; //sobre 362px
+    private final float nenufarPosYScale = .1935f; //sobre 362px
     private final float nenufarSpeedXScale = .009f; //sobre 10px
     private final float aguaYScale = .192f; //sobre 369px
     private final float aguaHeightScale = .593f; //sobre 1140px
