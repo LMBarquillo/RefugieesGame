@@ -45,11 +45,13 @@ public class GameView extends SurfaceView implements Observer {
     private MediaPlayer lost;
     private MediaPlayer win;
     private int contadorJabon1;
+    private Tehran th;
 
 
 
     public GameView(Context context, boolean fab) {
         super(context);
+        setTh((Tehran)context);
         principal=(Tehran)context;
         cronometro=new Cronometro();
         cronometro.addObserver(this);
@@ -232,13 +234,13 @@ public class GameView extends SurfaceView implements Observer {
         }
         else{
             if(isPasaObjeto()){
-
+                getTh().stopMusic();
                 getLost().start();
                 canvas.drawText(String.format("%s",getContext().getString(R.string.game_over_tehran)),(float)(getWidth()*0.32),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
             else{
-
+                getTh().stopMusic();
                 getWin().start();
                 canvas.drawText(String.format("%s",getContext().getString(R.string.congratulations_tehran)),(float)(getWidth()*0.25),(float)(getHeight()*0.45),paint);
                 finalizar();
@@ -537,5 +539,13 @@ public class GameView extends SurfaceView implements Observer {
 
     public void setCojidoLimpiador(boolean cojidoLimpiador) {
         this.cojidoLimpiador = cojidoLimpiador;
+    }
+
+    public Tehran getTh() {
+        return th;
+    }
+
+    public void setTh(Tehran th) {
+        this.th = th;
     }
 }

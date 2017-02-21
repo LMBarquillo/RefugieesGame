@@ -38,10 +38,8 @@ public class Tehran extends Activity {
 
     public void onPause(){
         super.onPause();
-        if(musica!=null){
-            musica.stop();
-            musica.release();
-        }
+        musica.stop();
+        stopMusic();
     }
 
     public void onStop(){
@@ -52,6 +50,10 @@ public class Tehran extends Activity {
     public void onDestroy(){
         super.onDestroy();
         //releaseInstance();
+    }
+
+    public void stopMusic(){
+        musica.stop();
     }
 
     public void fin(){

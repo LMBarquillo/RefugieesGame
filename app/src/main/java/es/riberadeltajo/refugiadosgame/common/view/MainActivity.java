@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void ruta3(View view) {
         Intent i = new Intent(this,Sarajevo.class);
-        //i.putExtra("STATUS",status);
+        i.putExtra("STATUS",status);
         startActivityForResult(i,RUTA3);
     }
 
