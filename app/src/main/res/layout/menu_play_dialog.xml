@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnContinuar"
-                android:background="@drawable/menu_btn_unpressed"
+                android:background="@drawable/menu_btn"
                 android:textSize="25dp"
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/white" />
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnNuevo"
-                android:background="@drawable/menu_btn_unpressed"
+                android:background="@drawable/menu_btn"
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/white"
                 android:textSize="25dp" />
