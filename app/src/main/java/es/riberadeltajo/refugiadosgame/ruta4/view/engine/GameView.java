@@ -26,6 +26,7 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteXplosion;
  * Gameview.
  */
 public class GameView extends SurfaceView {
+
     private final int FPS = 60;
     private NoteGenerator generador;
     private ArrayList<SpriteNotas> notas;
@@ -45,7 +46,7 @@ public class GameView extends SurfaceView {
         notas = new ArrayList<SpriteNotas>();
         explosiones = new ArrayList<SpriteXplosion>();
         // Inicializamos bitmaps
-        pickups = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.pickupsuhrv60);
+        pickups = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.pickupbolas);
         cuerda = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.guitarstring);
         // Fuentes
         tipoPuntos = Typeface.createFromAsset(context.getAssets(),"tipografias/aaaiight.ttf");
@@ -98,7 +99,7 @@ public class GameView extends SurfaceView {
         // Pastillas (se reducen por proporcionalidad en base a la anchura de la pantalla)
         canvas.drawBitmap(pickups,
                 new Rect(0,0,pickups.getWidth(),pickups.getHeight()),
-                new RectF(0, (float)(canvas.getHeight()-(pickups.getHeight()*canvas.getHeight()/pickups.getWidth())), canvas.getWidth(), canvas.getHeight()),
+                new RectF(0, (float)(canvas.getHeight()-(canvas.getWidth()/5) - (canvas.getHeight()*0.05)) , canvas.getWidth(), (float)(canvas.getHeight()- (canvas.getHeight()*0.05))),
                 null);
 
         // Cuerdas

@@ -75,12 +75,10 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
     }
 
     private void nuevo() {
-        dismiss();
         activity.startActivity(new Intent(activity, Madrid.class));
     }
 
     private void continuar() {
-        dismiss();
         activity.startActivity(new Intent(activity, Madrid.class));
     }
 }

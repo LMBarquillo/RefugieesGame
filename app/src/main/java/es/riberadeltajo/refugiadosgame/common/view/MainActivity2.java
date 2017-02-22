@@ -10,6 +10,8 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
 
+    private PlayDialog dialogoJugar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -22,6 +24,7 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        dialogoJugar = new PlayDialog(this);
         Button btnPlay = (Button) findViewById(R.id.btnJugar);
         btnPlay.setOnClickListener(this);
     }
@@ -35,7 +38,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        dialogoJugar.dismiss();
+    }
+
     private void jugar() {
-        new PlayDialog(this).show();
+        dialogoJugar.show();
     }
 }
