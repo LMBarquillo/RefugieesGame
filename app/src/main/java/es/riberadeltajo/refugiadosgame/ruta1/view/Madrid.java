@@ -9,11 +9,12 @@ import android.widget.Button;
 import android.os.Process;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Maletas;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
 
 public class Madrid extends AppCompatActivity {
     private GameView gameView;
-    //private Button btnPlay, btnExit;
+    private Button btnPlay, btnExit, btnMaletas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,11 @@ public class Madrid extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
-        reset(); //Temporal
-        /*setContentView(R.layout.activity_madrid);
+        //reset(); //Temporal
+        setContentView(R.layout.activity_madrid);
         btnPlay=(Button) findViewById(R.id.btnJugar);
-        btnPlay=(Button) findViewById(R.id.btnSalir);*/
+        btnPlay=(Button) findViewById(R.id.btnSalir);
+        btnMaletas=(Button) findViewById(R.id.btnMaletas);
     }
 
     public void jugar(View v){
@@ -48,6 +50,10 @@ public class Madrid extends AppCompatActivity {
 
     public void goToNextLevel() {
         startActivity(new Intent(this, Milan.class));
+    }
+
+    public void irMaletas(View v){
+        startActivity(new Intent(this, Madrid_Maletas.class));
     }
 
     public void onResume(){

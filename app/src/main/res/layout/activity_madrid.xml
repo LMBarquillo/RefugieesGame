@@ -29,4 +29,14 @@
         android:onClick="jugar"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Maletas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSalir"
+        android:layout_alignStart="@+id/btnSalir"
+        android:layout_marginBottom="148dp"
+        android:id="@+id/btnMaletas"
+        android:onClick="irMaletas" />
 </RelativeLayout>

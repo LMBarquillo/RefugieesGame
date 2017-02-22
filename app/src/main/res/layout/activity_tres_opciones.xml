@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_maletas"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+    tools:context="es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Maletas">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_weight="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:background="@drawable/menu1"
+            android:layout_height="38dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    app:srcCompat="@drawable/madrid_money"
+                    android:id="@+id/imgMoney" />
+
+                <TextView
+                    android:text="800"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtMoney"
+                    android:textAlignment="viewStart"
+                    android:textStyle="normal|bold"
+                    android:textSize="23sp"
+                    android:textColor="@android:color/background_dark"
+                    android:textAllCaps="false"
+                    android:fontFamily="sans-serif"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="43dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imgpassport" />
+
+                <TextView
+                    android:text="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtPassport"
+                    android:layout_weight="1"
+                    android:textSize="23sp"
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/background_dark" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
+
+            <Space
+                android:layout_height="match_parent"
+                android:layout_width="15dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_weight="1">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="22dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:clipToPadding="false">
+
+                    <ImageView
+                        android:id="@+id/opcion1"
+                        android:layout_weight="1"
+                        android:background="@drawable/menu1"
+                        android:cropToPadding="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:clickable="true"
+                        android:onClick="opcion1" />
+
+                    <Space
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.71"
+                        android:layout_width="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/opcion2"
+                        android:layout_weight="1"
+                        android:background="@drawable/menu1"
+                        android:cropToPadding="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:clickable="true"
+                        android:onClick="opcion2" />
+
+                    <Space
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.71"
+                        android:layout_width="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/opcion3"
+                        android:layout_weight="1"
+                        android:background="@drawable/menu1"
+                        android:cropToPadding="true"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:clickable="true"
+                        android:onClick="opcion3" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp" />
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/texto"
+                    android:layout_weight="1"
+                    android:background="@drawable/menu1"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/background_dark" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="49dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:text="Back"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnBack"
+                        android:background="@drawable/menu_btn"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold"
+                        android:layout_width="100dp"
+                        android:onClick="goBack" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4.49" />
+
+                    <Button
+                        android:text="Next"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btnNext"
+                        android:background="@drawable/menu_btn"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold"
+                        android:layout_width="100dp"
+                        android:onClick="goNext" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="13dp" />
+
+            </LinearLayout>
+
+            <Space android:layout_height="match_parent"
+                android:layout_width="15dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -64,7 +65,44 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         irMenu.setImageResource(R.drawable.madrid_menu);
         sigNiv.setImageResource(R.drawable.madrid_nextlevel);
         reintentar.setOnClickListener(this);
+        irMenu.setOnClickListener(this);
         sigNiv.setOnClickListener(this);
+        reintentar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    reintentar.setImageResource(R.drawable.madrid_tryagain_hover);
+                }
+                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    reintentar.setImageResource(R.drawable.madrid_tryagain);
+                }
+                return true;
+            }
+        });
+        irMenu.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    irMenu.setImageResource(R.drawable.madrid_menu_hover);
+                }
+                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    irMenu.setImageResource(R.drawable.madrid_menu);
+                }
+                return true;
+            }
+        });
+        sigNiv.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    sigNiv.setImageResource(R.drawable.madrid_nextlevel_hover);
+                }
+                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    sigNiv.setImageResource(R.drawable.madrid_nextlevel);
+                }
+                return true;
+            }
+        });
         if(tipo == Tipo.WIN) {
             ganaPierde.setImageResource(R.drawable.madrid_win);
             txtMensaje.setText(R.string.madrid_win_mensaje);
@@ -97,15 +135,12 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.imgTryAgain:
-                reintentar.setImageResource(R.drawable.madrid_tryagain_hover);
                 reset();
                 break;
             case R.id.imgMenu:
-                sigNiv.setImageResource(R.drawable.madrid_nextlevel_hover);
                 goToMenu();
                 break;
             case R.id.imgNextLevel:
-                sigNiv.setImageResource(R.drawable.madrid_nextlevel_hover);
                 goToNextLevel();
                 break;
         }
