@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private final int RUTA4 = 4;
     private final int RUTA5 = 5;
 
-    private PlayerStatus status;
+    //private PlayerStatus status;
 
 
     @Override
@@ -29,37 +29,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Instanciamos el estado del jugador. Este objeto le iremos pasando de una a otra activity.
-        status=PlayerStatus.getInstancia(this);
+        //status = new PlayerStatus();
     }
 
     public void ruta1(View view) {
         Intent i = new Intent(this,Madrid.class);
-        i.putExtra("STATUS",status);
-        startActivityForResult(i,RUTA1);
+        /*i.putExtra("STATUS",status);
+        startActivityForResult(i,RUTA1);*/
+        startActivity(i);
     }
 
     public void ruta2(View view) {
         Intent i = new Intent(this,Milan.class);
-        i.putExtra("STATUS",status);
+        /*i.putExtra("STATUS",status);
         startActivityForResult(i,RUTA2);
+        startActivity(i);*/
     }
 
     public void ruta3(View view) {
         Intent i = new Intent(this,Sarajevo.class);
-        i.putExtra("STATUS",status);
-        startActivityForResult(i,RUTA3);
+        /*i.putExtra("STATUS",status);
+        startActivityForResult(i,RUTA3);*/
+        startActivity(i);
     }
 
     public void ruta4(View view) {
         Intent i = new Intent(this,Istanbul.class);
-        i.putExtra("STATUS",status);
-        startActivityForResult(i,RUTA4);
+        /*i.putExtra("STATUS",status);
+        startActivityForResult(i,RUTA4);*/
+        startActivity(i);
     }
 
     public void ruta5(View view) {
         Intent i = new Intent(this,teheran_main2.class);
-        i.putExtra("STATUS",status);
-        startActivityForResult(i,RUTA5);
+        /*i.putExtra("STATUS",status);
+        startActivityForResult(i,RUTA5);*/
+        startActivity(i);
     }
 
     public void menu(View view) {

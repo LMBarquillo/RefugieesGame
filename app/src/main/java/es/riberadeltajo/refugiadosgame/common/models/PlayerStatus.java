@@ -49,6 +49,10 @@ public class PlayerStatus {
         sharedPreferences = getContext().getSharedPreferences(NOMBRE_FICHERO, getContext().MODE_PRIVATE);
     }
 
+    public void resetStatus() {
+        sharedPreferences.edit().clear().commit();
+    }
+
     public int getRuta() {
         return sharedPreferences.getInt(KEY_RUTA, DEFAULT_RUTA);
     }
