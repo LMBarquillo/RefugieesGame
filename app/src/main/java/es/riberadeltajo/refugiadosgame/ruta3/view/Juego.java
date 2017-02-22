@@ -20,10 +20,10 @@ public class Juego {
     private MediaPlayer musica;
     private float playerWidthScale = .092f; //sobre 100px
     private float playerHeightScale = .104f; //sobre 200px
-    private float playerSpeedYScale = .007f; // sobre 10px
-    private float nenufarWidthScale = .133f; // sobre 145px
-    private float nenufarHeightScale = .074f; //sobre 145px
-    private float nenufarPosYScale = .1935f; //sobre 362px
+    private float playerSpeedYScale = .008f; // sobre 10px
+    private float nenufarWidthScale = 144.5f/1080;//.1335f; // sobre 145px
+    private float nenufarHeightScale = 144.5f/1920;//.0745f; //sobre 145px
+    private float nenufarPosYScale = 362.5f/1920;//.194f; //sobre 362px
     private float nenufarSpeedXScale = .009f; //sobre 10px
     private float aguaYScale = .192f; //sobre 369px
     private float aguaHeightScale = .593f; //sobre 1140px
