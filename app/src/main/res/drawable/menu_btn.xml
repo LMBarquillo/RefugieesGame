@@ -4,5 +4,5 @@
     <!--<item android:state_enabled="false" android:drawable="@drawable/boton_gris"/>-->
     <item android:state_pressed="true" android:drawable="@drawable/menu_btn_pressed"/>
     <item android:state_focused="true" android:drawable="@drawable/menu_btn_pressed"/>
-    <item android:drawable="@drawable/menu_btn"/>
+    <item android:drawable="@drawable/menu_btn_unpressed"/>
 </selector>

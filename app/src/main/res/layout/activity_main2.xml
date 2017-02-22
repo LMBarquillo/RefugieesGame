@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnJugar"
-                android:background="@drawable/menu_btn"
+                android:background="@drawable/menu_btn_unpressed"
                 android:fontFamily="sans-serif-medium"
                 android:typeface="monospace"
                 android:textColor="@android:color/white"
