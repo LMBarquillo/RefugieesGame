@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!--<item android:state_focused="true" android:drawable="@drawable/boton_azul"/>-->
     <!--<item android:state_enabled="false" android:drawable="@drawable/boton_gris"/>-->
-    <item android:state_pressed="true" android:drawable="@drawable/menu_btn_pressed"/>
-    <item android:state_focused="true" android:drawable="@drawable/menu_btn_pressed"/>
-    <item android:drawable="@drawable/menu_btn_unpressed"/>
+    <item android:state_pressed="true" android:drawable="@drawable/menu_btn_pressed" />
+    <item android:state_focused="true" android:drawable="@drawable/menu_btn_pressed" />
+    <item android:drawable="@drawable/menu_btn_unpressed" />
 </selector>
