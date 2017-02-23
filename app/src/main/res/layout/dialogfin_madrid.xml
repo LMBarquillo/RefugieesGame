@@ -22,18 +22,27 @@
             android:layout_height="38dp"
             android:layout_weight="0.39" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="190dp"
-            app:srcCompat="@drawable/madrid_lose"
-            android:id="@+id/imgAcc"
-            android:cropToPadding="true"
-            android:scaleType="centerInside" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.39">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/madrid_lose"
+                android:id="@+id/imgAcc"
+                android:cropToPadding="true"
+                android:scaleType="centerInside"
+                android:layout_weight="1"
+                android:adjustViewBounds="true" />
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="23dp"
-            android:layout_weight="0.12" />
+            android:layout_weight="0.08" />
 
         <TextView
             android:text="TextView"

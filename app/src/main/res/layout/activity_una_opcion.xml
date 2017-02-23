@@ -115,7 +115,7 @@
                         android:id="@+id/opcion1"
                         android:layout_weight="1"
                         android:background="@drawable/menu1"
-                        android:scaleType="centerCrop"
+                        android:scaleType="centerInside"
                         android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -137,7 +137,8 @@
                     android:id="@+id/texto"
                     android:background="@drawable/menu1"
                     android:textAlignment="center"
-                    android:textColor="@android:color/background_dark" />
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="24sp" />
 
                 <Space
                     android:layout_width="match_parent"

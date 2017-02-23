@@ -1,5 +1,6 @@
 package es.riberadeltajo.refugiadosgame.common.models;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,6 +37,9 @@ public class Modelo_Tres_Opciones extends AppCompatActivity implements View.OnCl
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         opc3=(ImageView) findViewById(R.id.opcion3); //ImageView de la opción 3
         texto=(TextView) findViewById(R.id.texto); //TextView de la historia
+        Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+        texto.setTypeface(font);
+        texto.setText("Historia");
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
