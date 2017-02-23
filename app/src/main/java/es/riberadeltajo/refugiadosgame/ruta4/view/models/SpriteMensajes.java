@@ -13,7 +13,7 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.engine.GameView;
  * Sprite de los mensajes de ánimo temporales.
   */
 public class SpriteMensajes {
-    private final int TEXT_SIZE = 150;
+    private final int TEXT_SIZE = 250;
     private final int SHADOW_SIZE = 10;
     private GameView gameView;
     private int posx, posy;
