@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -23,7 +24,7 @@ import es.riberadeltajo.refugiadosgame.R;
 public class DialogSalirSiNo extends Dialog implements View.OnClickListener {
 
     private Madrid activity;
-    private ImageView reintentar,sigNiv;
+    private ImageView si,no;
     private Typeface font;
 
     public DialogSalirSiNo(Madrid activity) {
@@ -48,34 +49,35 @@ public class DialogSalirSiNo extends Dialog implements View.OnClickListener {
         TextView txtMensaje = (TextView) findViewById(R.id.txtMens);
         font = Typeface.createFromAsset(getContext().getApplicationContext().getAssets(),"tipografias/madrid_dialog_font.ttf");
         txtMensaje.setTypeface(font);
-        reintentar = (ImageView) findViewById(R.id.imgTryAgain);
-        sigNiv = (ImageView) findViewById(R.id.imgNextLevel);
-        reintentar.setImageResource(R.drawable.madrid_tryagain);
-        sigNiv.setImageResource(R.drawable.madrid_nextlevel);
-        reintentar.setOnClickListener(this);
-        sigNiv.setOnClickListener(this);
-        reintentar.setOnTouchListener(new View.OnTouchListener() {
+        txtMensaje.setText(R.string.madrid_salirJuego);
+        si = (ImageView) findViewById(R.id.imgSi);
+        no = (ImageView) findViewById(R.id.imgNo);
+        si.setImageResource(R.drawable.madrid_yes);
+        no.setImageResource(R.drawable.madrid_no);
+        si.setOnClickListener(this);
+        no.setOnClickListener(this);
+        si.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    reintentar.setImageResource(R.drawable.madrid_tryagain_hover);
+                    si.setImageResource(R.drawable.madrid_yes_hover);
                 }
                 else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    reintentar.setImageResource(R.drawable.madrid_tryagain);
-                    reset();
+                    si.setImageResource(R.drawable.madrid_yes);
+                    salir();
                 }
                 return true;
             }
         });
-        sigNiv.setOnTouchListener(new View.OnTouchListener() {
+        no.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    sigNiv.setImageResource(R.drawable.madrid_nextlevel_hover);
+                    no.setImageResource(R.drawable.madrid_no_hover);
                 }
                 else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    sigNiv.setImageResource(R.drawable.madrid_nextlevel);
-                    goToNextLevel();
+                    no.setImageResource(R.drawable.madrid_no);
+                    noSalir();
                 }
                 return true;
             }
@@ -102,25 +104,20 @@ public class DialogSalirSiNo extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.imgTryAgain:
-                reset();
+                salir();
                 break;
             case R.id.imgNextLevel:
-                goToNextLevel();
+                noSalir();
                 break;
         }
     }
 
-    private void reset() {
-        dismiss();
-        activity.reset();
-    }
-
-    private void goToMenu(){
+    private void salir() {
+        activity.onPause();
         dismiss();
     }
 
-    private void goToNextLevel() {
+    private void noSalir() {
         dismiss();
-        activity.goToNextLevel();
     }
 }

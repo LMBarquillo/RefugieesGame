@@ -155,6 +155,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     }
 
     private void goToMenu(){
+        activity.onPause();
         dismiss();
     }
 

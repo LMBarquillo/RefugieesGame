@@ -88,12 +88,12 @@ public class Madrid_Trans extends AppCompatActivity implements View.OnClickListe
     }
 
     public void goBack(){
-        //Activity anterior
+        this.onBackPressed();
     }
 
     public void goNext(){
         if(cont==OPCION_A){
-            new Intent(this, GameView.class);
+            //Activity siguiente si se cumple opcion A
         }
         else if(cont==OPCION_B){
             //Activity siguiente si se cumple opcion B

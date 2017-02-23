@@ -77,30 +77,28 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
         opc1.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         opc2.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=1;
-        Toast.makeText(this, String.valueOf(cont), Toast.LENGTH_SHORT).show();
     }
 
     public void opcion2(){
         opc2.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         opc1.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=2;
-        Toast.makeText(this, String.valueOf(cont), Toast.LENGTH_SHORT).show();
     }
 
     public void goBack(){
-        //Activity anterior
+        this.onBackPressed();
     }
 
     public void goNext(){
         if(cont==OPCION_A){
             PlayerStatus.getInstancia(this).setDinero(500);
             PlayerStatus.getInstancia(this).setObjeto(1);
-            new Intent(this, Madrid_Trans.class);
+            startActivity(new Intent(this, Madrid_Trans.class));
         }
         else if(cont==OPCION_B){
             PlayerStatus.getInstancia(this).setDinero(250);
             PlayerStatus.getInstancia(this).setObjeto(0);
-            new Intent(this, Madrid_Trans.class);
+            startActivity(new Intent(this, Madrid_Trans.class));
         }
     }
 }
