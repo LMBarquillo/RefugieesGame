@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta5.view;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,6 +38,8 @@ public class tehran3 extends AppCompatActivity implements View.OnClickListener{
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         texto=(TextView) findViewById(R.id.texto); //TextView de la historia
+        Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+        texto.setTypeface(font);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
@@ -49,7 +52,7 @@ public class tehran3 extends AppCompatActivity implements View.OnClickListener{
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
-        texto.setText(String.format("%s%n%s%n%s",getString(R.string.tehran_text3),getString(R.string.tehran_text3_2),getString(R.string.tehran_text3_3)));
+        texto.setText(String.format("%s%n%n%s%n%n%s",getString(R.string.tehran_text3),getString(R.string.tehran_text3_2),getString(R.string.tehran_text3_3)));
         passport=(ImageView) findViewById(R.id.imgObject);
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
