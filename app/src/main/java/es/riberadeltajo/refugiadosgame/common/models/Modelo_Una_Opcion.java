@@ -14,9 +14,6 @@ public class Modelo_Una_Opcion extends AppCompatActivity implements View.OnClick
     private ImageView opc1,passport;
     private TextView texto,dinero,objeto;
     private Button btnAtras, btnSig;
-    private final int OPCION_A=1;
-    private final int OPCION_B=2;
-    private int cont=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +62,6 @@ public class Modelo_Una_Opcion extends AppCompatActivity implements View.OnClick
     }
 
     public void goNext(){
-        if(cont==OPCION_A){
-            //Activity siguiente si se cumple opcion A
-        }
-        else if(cont==OPCION_B){
-            //Activity siguiente si se cumple opcion B
-        }
+        //Activity siguiente si se cumple opcion A
     }
 }
