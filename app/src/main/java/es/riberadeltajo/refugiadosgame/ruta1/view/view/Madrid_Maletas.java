@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view.view;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,9 +37,14 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
         getWindow().getDecorView().setBackgroundResource(R.drawable.madrid_history_fondo); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
-        texto=(TextView) findViewById(R.id.texto); //TextView de la historia
+        texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
+        Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+        texto.setTypeface(font);
+        texto.setText("Historia");
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
+        dinero.setTypeface(font);
+        objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
         opc1.setImageResource(R.drawable.madrid_maleta1); //Imagen para la opción 1
@@ -94,11 +100,13 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
             PlayerStatus.getInstancia(this).setDinero(500);
             PlayerStatus.getInstancia(this).setObjeto(1);
             startActivity(new Intent(this, Madrid_Trans.class));
+            finish();
         }
         else if(cont==OPCION_B){
             PlayerStatus.getInstancia(this).setDinero(250);
             PlayerStatus.getInstancia(this).setObjeto(0);
             startActivity(new Intent(this, Madrid_Trans.class));
+            finish();
         }
     }
 }

@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="94dp"
             android:id="@+id/txtMens"
-            android:textSize="18sp"
+            android:textSize="24sp"
             android:textAlignment="center"
             android:textColor="@android:color/holo_blue_bright" />
 

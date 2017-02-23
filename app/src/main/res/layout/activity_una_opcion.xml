@@ -48,7 +48,6 @@
                     android:cropToPadding="true" />
 
                 <TextView
-                    android:text="800"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtMoney"
@@ -57,8 +56,8 @@
                     android:textSize="23sp"
                     android:textColor="@android:color/background_dark"
                     android:textAllCaps="false"
-                    android:fontFamily="sans-serif"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif" />
 
                 <ImageView
                     android:layout_width="43dp"
@@ -69,14 +68,14 @@
                     android:cropToPadding="true" />
 
                 <TextView
-                    android:text="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtObjeto"
                     android:layout_weight="1"
                     android:textSize="23sp"
                     android:textStyle="normal|bold"
-                    android:textColor="@android:color/background_dark" />
+                    android:textColor="@android:color/background_dark"
+                    android:fontFamily="sans-serif" />
             </LinearLayout>
 
         </LinearLayout>
@@ -131,14 +130,14 @@
                     android:layout_height="43dp" />
 
                 <TextView
-                    android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
-                    android:id="@+id/texto"
+                    android:id="@+id/txtMens1"
                     android:background="@drawable/menu1"
                     android:textAlignment="center"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="24sp" />
+                    android:textSize="18sp"
+                    android:gravity="center_vertical|center_horizontal" />
 
                 <Space
                     android:layout_width="match_parent"

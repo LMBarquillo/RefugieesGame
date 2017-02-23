@@ -30,12 +30,14 @@ public class Modelo_Una_Opcion extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_una_opcion);
         getWindow().getDecorView().setBackgroundResource(R.drawable.madrid_history_fondo); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
-        texto=(TextView) findViewById(R.id.texto); //TextView de la historia
+        texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
         texto.setText("Historia");
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
+        dinero.setTypeface(font);
+        objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
         opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
