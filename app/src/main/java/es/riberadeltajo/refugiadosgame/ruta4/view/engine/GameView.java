@@ -39,6 +39,7 @@ public class GameView extends SurfaceView {
     private Typeface tipoPuntos;
     private int puntuacion, seguidas;
     private int cancion,dificultad,lugar;
+    private RectF dstPickups;
 
     public GameView(Context context, int cancion, int dificultad, int lugar) {
         super(context);
@@ -97,9 +98,10 @@ public class GameView extends SurfaceView {
         canvas.drawBitmap(fondo, null, new RectF(0, 0, canvas.getWidth(), canvas.getHeight()), null);
 
         // Pastillas (se reducen por proporcionalidad en base a la anchura de la pantalla)
+        dstPickups = new RectF(0, (float)(canvas.getHeight()-(canvas.getWidth()/5) - (canvas.getHeight()*0.05)) , canvas.getWidth(), (float)(canvas.getHeight()- (canvas.getHeight()*0.05)));
         canvas.drawBitmap(pickups,
                 new Rect(0,0,pickups.getWidth(),pickups.getHeight()),
-                new RectF(0, (float)(canvas.getHeight()-(canvas.getWidth()/5) - (canvas.getHeight()*0.05)) , canvas.getWidth(), (float)(canvas.getHeight()- (canvas.getHeight()*0.05))),
+                dstPickups,
                 null);
 
         // Cuerdas
@@ -210,7 +212,7 @@ public class GameView extends SurfaceView {
                     // Si pulsamos una nota...
                     if(n.isCollition(event.getX(),event.getY())) {
                         // Comprobamos si está dentro del traste
-                        if(event.getY() > (getHeight()-pickups.getHeight()) && event.getY() < getHeight()) {
+                        if(event.getY() > dstPickups.top && event.getY() < dstPickups.bottom) {
                             // Está dentro (mola). Lo primero es subir la puntuación
                             setPuntuacion(getPuntuacion()+1);
                             // Ahora nos cargamos la nota

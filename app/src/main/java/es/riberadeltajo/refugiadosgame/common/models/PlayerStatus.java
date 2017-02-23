@@ -31,6 +31,7 @@ public class PlayerStatus {
 
     private Context context;
     private SharedPreferences sharedPreferences;
+    private boolean fabrica;
 
     private PlayerStatus(){}
 
@@ -77,6 +78,14 @@ public class PlayerStatus {
 
     public void setDinero(int dinero) {
         sharedPreferences.edit().putInt(KEY_DINERO, dinero).commit();
+    }
+
+    public boolean isFabrica() {
+        return fabrica;
+    }
+
+    public void setFabrica(boolean fabrica) {
+        this.fabrica = fabrica;
     }
 
     public int getObjeto() {

@@ -52,8 +52,9 @@
     <string name="return_tehran">Return</string>
     <string name="tehran_text1">Finally you have arrived in a country where you think you can live.</string>
     <string name="tehran_text1_2">You have to look for a job to make a living. You need to check some ads.</string>
-    <string name="tehran_text2">CLEANER</string>
-    <string name="tehran_text2_2">SOAP FACTORY</string>
+    <string name="tehran_text2_1">Select the job offer you prefer</string>
+    <string name="tehran_text2_2">CLEANER</string>
+    <string name="tehran_text2_3">SOAP FACTORY</string>
     <string name="tehran_text3">The day of the interview you have to choose your clothes. Which one would you choose?</string>
     <string name="tehran_text3_2">Typical clothes from that country?</string>
     <string name="tehran_text3_3">A suit?</string>

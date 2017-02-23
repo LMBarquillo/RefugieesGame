@@ -30,7 +30,12 @@
         <activity
             android:name=".ruta4.view.Istanbul"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta5.view.Tehran" />
+        <activity android:name=".ruta5.view.Tehran" android:screenOrientation="portrait"/>
+        <activity android:name=".ruta5.view.tehran1" android:screenOrientation="portrait"/>
+        <activity android:name=".ruta5.view.tehran2" android:screenOrientation="portrait"/>
+        <activity android:name=".ruta5.view.tehran3" android:screenOrientation="portrait"/>
+        <activity android:name=".ruta5.view.tehran4" android:screenOrientation="portrait"/>
+
         <activity android:name=".ruta2.view.juego.milan_juego" />
         <activity android:name=".ruta2.view.juego.milan_juego2" />
         <activity android:name=".ruta5.view.teheran_main2" />

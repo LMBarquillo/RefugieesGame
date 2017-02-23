@@ -30,13 +30,13 @@ public class OptionsView extends SurfaceView {
     public static final int SONG_SOTW = 1;
     public static final int SONG_SCOM = 2;
     public static final int DIF_EASY = 3;
-    public static final int DIF_MEDIUM = 5;
-    public static final int DIF_HARD = 8;
+    public static final int DIF_MEDIUM = 6;
+    public static final int DIF_HARD = 10;
     public static final int PLACE_AZADI = 1;
     public static final int PLACE_GOLESTAN = 2;
     public static final int PLACE_ABDOL = 3;
 
-    private enum Fase {INICIO,TEMA,CREDITOS,DIFICULTAD,LUGAR};   // Las fases por las que pasará el menú
+    private enum Fase {INICIO,TEMA,CREDITOS,DIFICULTAD,LUGAR,INSTRUCCIONES};   // Las fases por las que pasará el menú
 
     private Distribuidor distribuidor;
     private GameLoopThread loop;
@@ -118,17 +118,19 @@ public class OptionsView extends SurfaceView {
         canvas.drawBitmap(logo,logoSrc,logoDst,null);
 
         float firstY = logoDst.bottom + pc20;
+        int buttonHeight = 0;
+        // Declaramos nuestro play fuera del switch para usar el botón en el cálculo de las alturas comunes
+        Bitmap play = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.buttonplayred);
+        buttonHeight = play.getHeight() * (canvas.getWidth()-(pc15*2)) / play.getWidth();
 
         switch (fase){
             case INICIO:
-                Bitmap play = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.buttonplayred);
                 Bitmap credits = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.buttoncreditsred);
                 Bitmap quit = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.buttonquitred);
-                int sh = play.getHeight() * (canvas.getWidth()-(pc15*2)) / play.getWidth();
                 Rect playSrc = new Rect(0,0,play.getWidth(),play.getHeight());
-                oneof3Dst = new RectF(pc15, firstY, canvas.getWidth()-pc15,firstY+sh);
-                twoof3Dst = new RectF(pc15, oneof3Dst.bottom + pc3, canvas.getWidth()-pc15, oneof3Dst.bottom + pc3 + sh);
-                threeof3Dst = new RectF(pc15, twoof3Dst.bottom + pc3, canvas.getWidth()-pc15, twoof3Dst.bottom + pc3 + sh);
+                oneof3Dst = new RectF(pc15, firstY, canvas.getWidth()-pc15,firstY+buttonHeight);
+                twoof3Dst = new RectF(pc15, oneof3Dst.bottom + pc3, canvas.getWidth()-pc15, oneof3Dst.bottom + pc3 + buttonHeight);
+                threeof3Dst = new RectF(pc15, twoof3Dst.bottom + pc3, canvas.getWidth()-pc15, twoof3Dst.bottom + pc3 + buttonHeight);
                 canvas.drawBitmap(play, playSrc, oneof3Dst, null);
                 canvas.drawBitmap(credits, playSrc, twoof3Dst, null);
                 canvas.drawBitmap(quit, playSrc, threeof3Dst, null);
@@ -169,11 +171,10 @@ public class OptionsView extends SurfaceView {
                     bhard = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.blevelhardgreen);
                 }
                 escribeTexto(canvas,getContext().getString(R.string.selectdiff),logoDst.bottom + pc10, Color.YELLOW, Color.BLACK, tipografia);
-                int lh = beasy.getHeight() * (canvas.getWidth()-(pc15*2)) / beasy.getWidth();
                 Rect levelSrc = new Rect(0,0,beasy.getWidth(),beasy.getHeight());
-                oneof3Dst = new RectF(pc15, firstY, canvas.getWidth()-pc15,firstY+lh);
-                twoof3Dst = new RectF(pc15, oneof3Dst.bottom + pc3, canvas.getWidth()-pc15,oneof3Dst.bottom + pc3 + lh);
-                threeof3Dst = new RectF(pc15, twoof3Dst.bottom + pc3, canvas.getWidth()-pc15,twoof3Dst.bottom + pc3 + lh);
+                oneof3Dst = new RectF(pc15, firstY, canvas.getWidth()-pc15,firstY+buttonHeight);
+                twoof3Dst = new RectF(pc15, oneof3Dst.bottom + pc3, canvas.getWidth()-pc15,oneof3Dst.bottom + pc3 + buttonHeight);
+                threeof3Dst = new RectF(pc15, twoof3Dst.bottom + pc3, canvas.getWidth()-pc15,twoof3Dst.bottom + pc3 + buttonHeight);
                 canvas.drawBitmap(beasy, levelSrc, oneof3Dst, null);
                 canvas.drawBitmap(bmedium, levelSrc, twoof3Dst, null);
                 canvas.drawBitmap(bhard, levelSrc, threeof3Dst, null);
@@ -181,7 +182,7 @@ public class OptionsView extends SurfaceView {
                 canvas.drawBitmap(bnext,new Rect(0,0,bback.getWidth(),bback.getHeight()),nextDst,null);
                 break;
             case LUGAR:
-                Bitmap bazadi, bgolestan, babdol, bletsrock;
+                Bitmap bazadi, bgolestan, babdol;
                 if(selectedPlace == PLACE_AZADI) {
                     bazadi = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.bplaceazadigreen);
                     bgolestan = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.bplacegolestanred);
@@ -196,21 +197,34 @@ public class OptionsView extends SurfaceView {
                     babdol = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.bplaceabdolgreen);
                 }
                 escribeTexto(canvas,getContext().getString(R.string.selectplace),logoDst.bottom + pc10, Color.YELLOW, Color.BLACK, tipografia);
-                bletsrock = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.buttonletsrock);
-                int ph = bazadi.getHeight() * (canvas.getWidth()-(pc15*2)) / bazadi.getWidth();
-                Rect placeSrc = new Rect(0,0,bazadi.getWidth(),bazadi.getHeight());
-                oneof3Dst = new RectF(pc15, firstY, canvas.getWidth()-pc15,firstY+ph);
-                twoof3Dst = new RectF(pc15, oneof3Dst.bottom + pc3, canvas.getWidth()-pc15,oneof3Dst.bottom + pc3 + ph);
-                threeof3Dst = new RectF(pc15, twoof3Dst.bottom + pc3, canvas.getWidth()-pc15,twoof3Dst.bottom + pc3 + ph);
 
-                float lrw = bletsrock.getWidth() * (backDst.bottom-backDst.top) / bletsrock.getHeight();
-                letsrockDst = new RectF(canvas.getWidth() - (canvas.getWidth()/16) - (lrw), backDst.top, canvas.getWidth() - (canvas.getWidth()/16) ,backDst.bottom);
+                oneof3Dst = new RectF(pc15, firstY, canvas.getWidth()-pc15,firstY+buttonHeight);
+                twoof3Dst = new RectF(pc15, oneof3Dst.bottom + pc3, canvas.getWidth()-pc15,oneof3Dst.bottom + pc3 + buttonHeight);
+                threeof3Dst = new RectF(pc15, twoof3Dst.bottom + pc3, canvas.getWidth()-pc15,twoof3Dst.bottom + pc3 + buttonHeight);
+                Rect placeSrc = new Rect(0,0,bazadi.getWidth(),bazadi.getHeight());
                 canvas.drawBitmap(bazadi, placeSrc, oneof3Dst, null);
                 canvas.drawBitmap(bgolestan, placeSrc, twoof3Dst, null);
                 canvas.drawBitmap(babdol, placeSrc, threeof3Dst, null);
-                canvas.drawBitmap(bletsrock, placeSrc, letsrockDst, null);
+                //canvas.drawBitmap(bletsrock, placeSrc, letsrockDst, null);
                 canvas.drawBitmap(bback,new Rect(0,0,bback.getWidth(),bback.getHeight()),backDst,null);
+                canvas.drawBitmap(bnext,new Rect(0,0,bback.getWidth(),bback.getHeight()),nextDst,null);
+                break;
+            case INSTRUCCIONES:
+                Bitmap bletsrock, demoScreen;
+                bletsrock = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.buttonletsrock);
+                demoScreen = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.streetguitarinstructions);
 
+                //float lrw = bletsrock.getWidth() * (backDst.bottom-backDst.top) / bletsrock.getHeight();
+                Rect instSrc = new Rect(0,0,bletsrock.getWidth(),bletsrock.getHeight());
+                //letsrockDst = new RectF(canvas.getWidth() - (canvas.getWidth()/16) - (lrw), backDst.top, canvas.getWidth() - (canvas.getWidth()/16) ,backDst.bottom);
+                letsrockDst = new RectF(pc15, canvas.getHeight()-buttonHeight-pc10, canvas.getWidth()-pc15, canvas.getHeight()-pc10);
+                RectF demoScreenDST = new RectF(pc15,pc10,canvas.getWidth()-pc15, letsrockDst.top - pc10);
+
+                canvas.drawBitmap(demoScreen,new Rect(0,0,demoScreen.getWidth(),demoScreen.getHeight()),demoScreenDST,null);
+                canvas.drawBitmap(bletsrock, instSrc, letsrockDst, null);
+                canvas.drawBitmap(logo,logoSrc,logoDst,null);   // Plantamos de nuevo el logo encima del demo
+                canvas.drawBitmap(bback,new Rect(0,0,bback.getWidth(),bback.getHeight()),backDst,null);
+                break;
         }
     }
 
@@ -305,17 +319,30 @@ public class OptionsView extends SurfaceView {
                             chord.play(idButton, 1, 1, 1, 0, 1);
                             selectedPlace = PLACE_ABDOL;
                         }
+                        // NEXT
+                        if(event.getX() >= nextDst.left && event.getX() <= nextDst.right && event.getY() >= nextDst.top && event.getY() <= nextDst.bottom) {
+                            chord.play(idChord, 1, 1, 1, 0, 1);
+                            fase = Fase.INSTRUCCIONES;
+                        }
                         // BACK
                         if(event.getX() >= backDst.left && event.getX() <= backDst.right && event.getY() >= backDst.top && event.getY() <= backDst.bottom) {
                             chord.play(idChord, 1, 1, 1, 0, 1);
                             fase = Fase.DIFICULTAD;
                         }
+                        break;
+                    case INSTRUCCIONES:
                         // LET'S PLAY !!
                         if(event.getX() >= letsrockDst.left && event.getX() <= letsrockDst.right && event.getY() >= letsrockDst.top && event.getY() <= letsrockDst.bottom) {
                             chord.play(idChord, 1, 1, 1, 0, 1);
                             distribuidor.setOpciones(selectedSong,selectedDifficulty,selectedPlace);
                             distribuidor.cambiarFase(Istanbul.JUEGO);
                         }
+                        // BACK
+                        if(event.getX() >= backDst.left && event.getX() <= backDst.right && event.getY() >= backDst.top && event.getY() <= backDst.bottom) {
+                            chord.play(idChord, 1, 1, 1, 0, 1);
+                            fase = Fase.LUGAR;
+                        }
+                        break;
                 }
             }
         }
