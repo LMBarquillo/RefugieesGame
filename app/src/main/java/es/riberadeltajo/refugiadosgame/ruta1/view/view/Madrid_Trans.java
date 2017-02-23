@@ -1,7 +1,9 @@
-package es.riberadeltajo.refugiadosgame.common.models;
+package es.riberadeltajo.refugiadosgame.ruta1.view.view;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -9,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.ruta1.view.GameView;
+import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
 
-public class Modelo_Dos_Opciones extends AppCompatActivity implements View.OnClickListener{
+public class Madrid_Trans extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
     private TextView texto,dinero,objeto;
     private Button btnAtras, btnSig;
@@ -88,7 +93,7 @@ public class Modelo_Dos_Opciones extends AppCompatActivity implements View.OnCli
 
     public void goNext(){
         if(cont==OPCION_A){
-            //Activity siguiente si se cumple opcion A
+            new Intent(this, GameView.class);
         }
         else if(cont==OPCION_B){
             //Activity siguiente si se cumple opcion B

@@ -1,21 +1,21 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import es.riberadeltajo.refugiadosgame.R;
-import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
+import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
 public class Madrid_Maletas extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
-    private TextView texto;
+    private TextView texto,dinero,objeto;
     private Button btnAtras, btnSig;
     private final int OPCION_A=1;
     private final int OPCION_B=2;
@@ -37,17 +37,22 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         texto=(TextView) findViewById(R.id.texto); //TextView de la historia
-        opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
-        opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
+        dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
+        objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
+        dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
+        objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
+        opc1.setImageResource(R.drawable.madrid_maleta1); //Imagen para la opción 1
+        opc2.setImageResource(R.drawable.madrid_maleta2); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
-        passport=(ImageView) findViewById(R.id.imgpassport);
+        passport=(ImageView) findViewById(R.id.imgObject);
         passport.setImageResource(R.drawable.madrid_passport);
-        setVisible(true); //Sólo visible en Madrid-Milan, si en tu historia no vas a usar ningún otro objeto, cambiar a false
+        passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
     }
 
     @Override
@@ -72,12 +77,14 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
         opc1.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         opc2.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=1;
+        Toast.makeText(this, String.valueOf(cont), Toast.LENGTH_SHORT).show();
     }
 
     public void opcion2(){
         opc2.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         opc1.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=2;
+        Toast.makeText(this, String.valueOf(cont), Toast.LENGTH_SHORT).show();
     }
 
     public void goBack(){
@@ -86,10 +93,14 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
 
     public void goNext(){
         if(cont==OPCION_A){
-            //Activity siguiente si se cumple opcion A
+            PlayerStatus.getInstancia(this).setDinero(500);
+            PlayerStatus.getInstancia(this).setObjeto(1);
+            new Intent(this, Madrid_Trans.class);
         }
         else if(cont==OPCION_B){
-            //Activity siguiente si se cumple opcion B
+            PlayerStatus.getInstancia(this).setDinero(250);
+            PlayerStatus.getInstancia(this).setObjeto(0);
+            new Intent(this, Madrid_Trans.class);
         }
     }
 }

@@ -20,10 +20,12 @@ public class PlayerStatus {
     private static final String KEY_RUTA = "ruta";
     private static final String KEY_TRAMO = "tramo";
     private static final String KEY_DINERO = "dinero";
+    private static final String KEY_OBJETO = "objeto";
 
     private static final int DEFAULT_RUTA = 1;
     private static final int DEFAULT_TRAMO = 1;
     private static final int DEFAULT_DINERO = 0;
+    private static final int DEFAULT_OBJETO = 0;
 
     private static PlayerStatus instancia = null;
 
@@ -75,6 +77,14 @@ public class PlayerStatus {
 
     public void setDinero(int dinero) {
         sharedPreferences.edit().putInt(KEY_DINERO, dinero).commit();
+    }
+
+    public int getObjeto() {
+        return sharedPreferences.getInt(KEY_OBJETO, DEFAULT_OBJETO);
+    }
+
+    public void setObjeto(int objeto) {
+        sharedPreferences.edit().putInt(KEY_OBJETO, objeto).commit();
     }
 
 }

@@ -12,7 +12,7 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class Modelo_Tres_Opciones extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,opc3,passport;
-    private TextView texto;
+    private TextView texto,dinero,objeto;
     private Button btnAtras, btnSig;
     private final int OPCION_A=1;
     private final int OPCION_B=2;
@@ -36,6 +36,10 @@ public class Modelo_Tres_Opciones extends AppCompatActivity implements View.OnCl
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         opc3=(ImageView) findViewById(R.id.opcion3); //ImageView de la opción 3
         texto=(TextView) findViewById(R.id.texto); //TextView de la historia
+        dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
+        objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
+        dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
+        objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
         opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
         opc3.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 3
@@ -46,9 +50,10 @@ public class Modelo_Tres_Opciones extends AppCompatActivity implements View.OnCl
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
-        passport=(ImageView) findViewById(R.id.imgpassport);
+        passport=(ImageView) findViewById(R.id.imgObject);
         passport.setImageResource(R.drawable.madrid_passport);
-        setVisible(true); //Sólo visible en Madrid-Milan, si en tu historia no vas a usar ningún otro objeto, cambiar a false
+        passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
     }
 
     @Override

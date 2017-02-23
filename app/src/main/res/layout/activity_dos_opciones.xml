@@ -9,7 +9,7 @@
     android:paddingLeft="5dp"
     android:paddingRight="5dp"
     android:paddingTop="5dp"
-    tools:context="es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Maletas">
+    tools:context="es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Trans">
 
     <LinearLayout
         android:orientation="vertical"
@@ -42,7 +42,10 @@
                     android:layout_width="35dp"
                     android:layout_height="25dp"
                     app:srcCompat="@drawable/madrid_money"
-                    android:id="@+id/imgMoney" />
+                    android:id="@+id/imgMoney"
+                    android:cropToPadding="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerInside" />
 
                 <TextView
                     android:text="800"
@@ -60,13 +63,16 @@
                 <ImageView
                     android:layout_width="43dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/imgpassport" />
+                    android:id="@+id/imgObject"
+                    android:cropToPadding="true"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true" />
 
                 <TextView
                     android:text="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtPassport"
+                    android:id="@+id/txtObjeto"
                     android:layout_weight="1"
                     android:textSize="23sp"
                     android:textStyle="normal|bold"

@@ -497,13 +497,6 @@ public class GameView extends SurfaceView {
     }
 
     //Habro un diálogo si pulso el botón de ir atrás de android para pedir confirmación
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == event.KEYCODE_BACK) {
-            //new DialogSalirSiNo().show();
-        }
-        return super.onKeyDown(keyCode, event);
-    }
 
     public ArrayList<Disparo> getMisiles() {
         return misiles;

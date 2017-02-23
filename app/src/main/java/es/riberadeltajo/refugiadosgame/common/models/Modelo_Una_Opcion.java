@@ -12,7 +12,7 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class Modelo_Una_Opcion extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
-    private TextView texto;
+    private TextView texto,dinero,objeto;
     private Button btnAtras, btnSig;
     private final int OPCION_A=1;
     private final int OPCION_B=2;
@@ -33,14 +33,19 @@ public class Modelo_Una_Opcion extends AppCompatActivity implements View.OnClick
         getWindow().getDecorView().setBackgroundResource(R.drawable.madrid_history_fondo); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         texto=(TextView) findViewById(R.id.texto); //TextView de la historia
+        dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
+        objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
+        dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
+        objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
         opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
-        passport=(ImageView) findViewById(R.id.imgpassport);
+        passport=(ImageView) findViewById(R.id.imgObject);
         passport.setImageResource(R.drawable.madrid_passport);
-        setVisible(true); //Sólo visible en Madrid-Milan, si en tu historia no vas a usar ningún otro objeto, cambiar a false
+        passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
     }
 
     @Override
