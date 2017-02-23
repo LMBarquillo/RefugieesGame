@@ -37,7 +37,7 @@ public class tehran2 extends AppCompatActivity implements View.OnClickListener{
         getWindow().getDecorView().setBackgroundResource(R.drawable.fondoteheran); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
-        texto=(TextView) findViewById(R.id.texto); //TextView de la historia
+        texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
