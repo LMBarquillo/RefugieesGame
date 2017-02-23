@@ -14,10 +14,9 @@
 
     <!-- Madrid-Milán -->
     <string name="route1">Madrid-Milan</string>
-    <string name="madrid_win_titulo">TICKET ACQUIERD!</string>
     <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
-    <string name="madrid_lose_titulo">GAME OVER</string>
-    <string name="madrid_lose_mensaje">You do not acquired the ticket on time. Try again?</string>
+    <string name="madrid_lose_mensaje">You do not acquired the ticket. Try again?</string>
+    <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
 
     <!-- Milán-Sarajevo -->
     <string name="route2">Milan-Sarajevo</string>
@@ -51,5 +50,30 @@
     <string name="waiter_tehran">Soap Fact</string>
     <string name="cleaner_tehran">Cleaner</string>
     <string name="return_tehran">Return</string>
+    <string name="tehran_text1">Finally you have arrived in a country where you think you can live.</string>
+    <string name="tehran_text1_2">You have to look for a job to make a living. You need to check some ads.</string>
+    <string name="tehran_text2_1">Select the job offer you prefer</string>
+    <string name="tehran_text2_2">CLEANER</string>
+    <string name="tehran_text2_3">SOAP FACTORY</string>
+    <string name="tehran_text3">The day of the interview you have to choose your clothes. Which one would you choose?</string>
+    <string name="tehran_text3_2">Typical clothes from that country?</string>
+    <string name="tehran_text3_3">A suit?</string>
+    <string name="tehran_text4">The recruiter asks you in the interview…</string>
+    <string name="tehran_text4_2">Have you worked before in this country?</string>
+    <string name="tehran_yes">Yes</string>
+    <string name="tehran_no">No</string>
+    <string name="tehran_text4_3">How well do you speak the language? Will you understand instructions? </string>
+    <string name="tehran_text_4_3_2">I have some difficulty</string>
+    <string name="tehran_text_4_3_3">I don´t speak it well</string>
+    <string name="tehran_text_4_4">Why do you think I should choose you?</string>
+    <string name="tehran_text_4_4_2">Because I need the money</string>
+    <string name="tehran_text_4_4_3">I am a hardworking person</string>
+    <string name="tehran_text_4_5">What kind of degrees do you have? </string>
+    <string name="tehran_text_4_5_2">I used to be a teacher</string>
+    <string name="tehran_text_4_5_3">I used to work as an accountant</string>
+    <string name="tehran_text_4_6">Have you been trained for this job before? </string>
+    <string name="tehran_text_4_6_2">Yes, when I was younger</string>
+    <string name="tehran_text_4_6_3">No, but I can learn</string>
+    <string name="tehran_text_5">Congratulations! You´ve got the job!</string>
 
 </resources>

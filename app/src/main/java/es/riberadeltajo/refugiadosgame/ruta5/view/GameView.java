@@ -141,9 +141,9 @@ public class GameView extends SurfaceView implements Observer {
         //canvas.drawColor(Color.WHITE);      //Dibuja Fondo Blanco
         canvas.drawBitmap(Bitmap.createScaledBitmap(fondo,getWidth(),getHeight(),false),0,0,null);      //Dibuja imagen fondo
         canvas.drawText(String.format("%d",getSegundos()),(float)(getWidth()*0.05),(float)(getHeight()*0.05),paint);
-        //canvas.drawText(String.format("Objetos por Cojer: %d",getCojidos()),(float)(getWidth()*0.4),(float)(getHeight()*0.05),paint);
+        //canvas.drawText(String.format("Objetos por Coger: %d",getCojidos()),(float)(getWidth()*0.4),(float)(getHeight()*0.05),paint);
         jugador.draw(canvas);
-        if(isFabrica()) {
+        if(isFabrica()) {       //Dibuja Objetos a coger en la esquina derecha segun trabajo escogido
             if (!isCojidoJabon1()) {
                 canvas.drawBitmap(Bitmap.createScaledBitmap(getJabon1(), (int) (getWidth() * 0.05), (int) (getHeight() * 0.05), false), (float) (getWidth() * 0.9), (float) (getHeight() * 0.07), null);
             }
@@ -179,7 +179,7 @@ public class GameView extends SurfaceView implements Observer {
                 if(objetos.get(i).getSegundo()<getSegundos()){          //Si el segundo de aparicion es menor, los sigue dibujando
                     objetos.get(i).draw(canvas);
                 }
-                else if(objetos.get(i).getSegundo()==getSegundos()){     //Si coinciden los segundos lo dibuja  //NO FUNCIONA
+                else if(objetos.get(i).getSegundo()==getSegundos()){     //Si coinciden los segundos lo dibuja
                     objetos.get(i).draw(canvas);
                 }
             }
@@ -233,13 +233,13 @@ public class GameView extends SurfaceView implements Observer {
             }
         }
         else{
-            if(isPasaObjeto()){
+            if(isPasaObjeto()){         //GAME OVER
                 getTh().stopMusic();
                 getLost().start();
                 canvas.drawText(String.format("%s",getContext().getString(R.string.game_over_tehran)),(float)(getWidth()*0.32),(float)(getHeight()*0.45),paint);
                 finalizar();
             }
-            else{
+            else{                       //WINNER
                 getTh().stopMusic();
                 getWin().start();
                 canvas.drawText(String.format("%s",getContext().getString(R.string.congratulations_tehran)),(float)(getWidth()*0.25),(float)(getHeight()*0.45),paint);
@@ -272,7 +272,7 @@ public class GameView extends SurfaceView implements Observer {
         catch(InterruptedException ie){
 
         }
-        if(isPasaObjeto()){
+        if(isPasaObjeto()){         //Para la musica, segun ganes o pierdas
             getLost().stop();
             getLost().release();
         }

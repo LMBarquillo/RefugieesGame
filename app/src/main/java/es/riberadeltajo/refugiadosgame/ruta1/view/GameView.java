@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import es.riberadeltajo.refugiadosgame.R;
 
@@ -27,8 +28,10 @@ import es.riberadeltajo.refugiadosgame.R;
 public class GameView extends SurfaceView {
     private final int TIEMPO_MAX=120;
     private final int MAX_POINTS=100;
-    private Bitmap player,coin1,coin2,coin5,coin10,fondo,ticket,life1,life2,life3,moneyBag,sandClock;
+    private Bitmap player,coin1,coin2,coin5,coin10,fondo,ticket,life1,life2,life3,moneyBag,sandClock,bombaArriba,bombaAbajo,bombaDrcha,bombaIzqda;
     private SurfaceHolder holder;
+    private ArrayList<Disparo> disparos;
+    private ArrayList<Disparo>misiles;
     private GameLoop loop;
     private int corx,cory;
     private int xSpeed,ySpeed;
@@ -39,8 +42,11 @@ public class GameView extends SurfaceView {
     private long crono,inicio;
     private Sprite jug;
     private Madrid contexto;
-    private float vidas;
+    private int vidas;
     private Typeface font;
+    private Bitmap misil,misilgirado;
+    private int ran;
+    private int ran2;
 
     public GameView(Context context){
         super(context);
@@ -52,7 +58,9 @@ public class GameView extends SurfaceView {
         setySpeed(10);
         setInicio(System.currentTimeMillis());
         setPuntuacion(0);
-        setVidas(5);
+        setVidas(6);
+        misiles=new ArrayList<>();
+        disparos=new ArrayList<Disparo>();
         sprites=new ArrayList<Sprite>();
         monedas=new ArrayList<Monedas>();
         tickets=new ArrayList<Ticket>();
@@ -154,11 +162,11 @@ public class GameView extends SurfaceView {
         this.monedas = monedas;
     }
 
-    public float getVidas() {
+    public int getVidas() {
         return vidas;
     }
 
-    public void setVidas(float vidas) {
+    public void setVidas(int vidas) {
         this.vidas = vidas;
     }
 
@@ -171,8 +179,15 @@ public class GameView extends SurfaceView {
         coin2=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin2.png");
         coin5=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin5.png");
         coin10=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin10.png");
-        setJug(new Sprite(this,player,5));
+        bombaArriba=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_up.png");
+        bombaAbajo=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_down.png");
+        bombaDrcha=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_right.png");
+        bombaIzqda=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_left.png");
+        setJug(new Sprite(this,player,getVidas()));
         sprites.add(getJug());
+        for(int i=0;i<5;i++){
+            disparos.add(getDisparos());
+        }
         for(int i=0;i<250;i++) {
             monedas.add(new Monedas(monedas, this, coin1, 1));
         }
@@ -204,6 +219,44 @@ public class GameView extends SurfaceView {
         return bitmap;
     }
 
+    private Disparo getDisparos() {
+        ran=(int)(Math.random()*4)+1;
+        ran2=(int)(Math.random()*2)+1;
+        Disparo disp;
+        if(ran==1){
+            if(ran2==1){
+                disp=new Disparo(this,bombaIzqda,2,ran,10);
+            }else {
+                disp = new Disparo(this, misilgirado, 1, ran, 5);
+                disp.setxSpeed(disp.getxSpeed()-10);
+            }
+        }else if(ran==2) {
+            if(ran2==1){
+                disp=new Disparo(this,bombaArriba,2,ran,10);
+            }else {
+                disp = new Disparo(this, misil, 1, ran, 5);
+                disp.setySpeed(disp.getySpeed()+10);
+            }
+        }else if(ran==3){
+            if(ran2==1){
+                disp=new Disparo(this,bombaDrcha,2,ran,10);
+            }else {
+                disp = new Disparo(this, misilgirado, 1, ran, 5);
+                disp.setxSpeed(disp.getxSpeed()+10);
+            }
+        }else if(ran==4) {
+            if(ran2==1){
+                disp=new Disparo(this,bombaAbajo,2,ran,10);
+            }else {
+                disp = new Disparo(this, misil, 1, ran, 5);
+                disp.setySpeed(disp.getySpeed()-10);
+            }
+        }else{
+            disp=null;
+        }
+
+        return disp;
+    }
     //Pinto interfaz, creo sprite y monedas y compruebo si hay colisiones y abro dialogo al finalizar
     public void draw(Canvas canvas){
         long actual;
@@ -251,6 +304,33 @@ public class GameView extends SurfaceView {
                     }
                 }
             }
+            for (int i = 0; i < disparos.size(); i++) {
+                //if (i < 5) {
+                    disparos.get(i).draw(canvas);
+                    if (disparos.get(i).isCollition(getJug())) {
+                        restarVida(disparos.get(i).getVida());
+                        restaPuntos(disparos.get(i).getPuntos());
+                        disparos.remove(disparos.get(i));
+                        disparos.add(getDisparos());
+                    }
+                    else if(disparos.get(i).getCorx()<=0){
+                        disparos.remove(disparos.get(i));
+                        disparos.add(getDisparos());
+                    }
+                    else if(disparos.get(i).getCory()>=getHeight()){
+                        disparos.remove(disparos.get(i));
+                        disparos.add(getDisparos());
+                    }
+                    else if(disparos.get(i).getCorx()>=getWidth()){
+                        disparos.remove(disparos.get(i));
+                        disparos.add(getDisparos());
+                    }
+                    else if(disparos.get(i).getCory()<=0){
+                        disparos.remove(disparos.get(i));
+                        disparos.add(getDisparos());
+                    }
+                //}
+            }
             if (sprites.size() > 0) {
                 setCrono((actual - inicio) / 1000);
             }
@@ -278,6 +358,69 @@ public class GameView extends SurfaceView {
                 }
             });
             stop();
+        }
+    }
+
+    private void restaPuntos(int puntos) {
+        if (puntos > getPuntuacion()) {
+            setPuntuacion(0);
+        } else {
+            setPuntuacion(getPuntuacion() - puntos);
+        }
+    }
+
+
+    private void restarVida(int vida){
+        getJug().setVida(getVidas()-vida);
+        setVidas(getJug().getVida());
+
+        if(getJug().getVida()==5){
+            life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+            life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+            life2 = Bitmap.createScaledBitmap(life2, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_halfheart);
+            life3 = Bitmap.createScaledBitmap(life3, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        }
+        if(getJug().getVida()==4){
+            life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+            life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+            life2 = Bitmap.createScaledBitmap(life2, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life3 = Bitmap.createScaledBitmap(life3, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        }
+        if(getJug().getVida()==3){
+            life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+            life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_halfheart);
+            life2 = Bitmap.createScaledBitmap(life2, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life3 = Bitmap.createScaledBitmap(life3, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        }
+        if(getJug().getVida()==2){
+            life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
+            life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life2 = Bitmap.createScaledBitmap(life2, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life3 = Bitmap.createScaledBitmap(life3, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        }
+        if(getJug().getVida()==1){
+            life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_halfheart);
+            life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life2 = Bitmap.createScaledBitmap(life2, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life3 = Bitmap.createScaledBitmap(life3, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        }
+        if(getJug().getVida()<=0){
+            life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life2 = Bitmap.createScaledBitmap(life2, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+            life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_empyheart);
+            life3 = Bitmap.createScaledBitmap(life3, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
         }
     }
 
@@ -310,13 +453,17 @@ public class GameView extends SurfaceView {
         life1=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
         life1 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
         life2=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
-        life2 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        life2 = Bitmap.createScaledBitmap(life2, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
         life3=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_fullheart);
-        life3 = Bitmap.createScaledBitmap(life1, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
+        life3 = Bitmap.createScaledBitmap(life3, (int)(getWidth()*0.08), (int)(getHeight()*0.045), false);
         moneyBag=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_money);
         moneyBag = Bitmap.createScaledBitmap(moneyBag, (int)(getWidth()*0.08), (int)(getHeight()*0.06), false);
         sandClock=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_clock);
         sandClock = Bitmap.createScaledBitmap(sandClock, (int)(getWidth()*0.065), (int)(getHeight()*0.06), false);
+        misil=BitmapFactory.decodeResource(getResources(),R.drawable.disparo);
+        misilgirado=BitmapFactory.decodeResource(getResources(),R.drawable.disparos2);
+        //bomba=BitmapFactory.decodeResource(getResources(),R.drawable.misil23);
+        //bombagirado=BitmapFactory.decodeResource(getResources(),R.drawable.misil23girado);
         createSprite();
         loop.setRunning(true);
         loop.start();
@@ -350,11 +497,8 @@ public class GameView extends SurfaceView {
     }
 
     //Habro un diálogo si pulso el botón de ir atrás de android para pedir confirmación
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == event.KEYCODE_BACK) {
-            //new DialogSalirSiNo().show();
-        }
-        return super.onKeyDown(keyCode, event);
+
+    public ArrayList<Disparo> getMisiles() {
+        return misiles;
     }
 }

@@ -20,15 +20,18 @@ public class PlayerStatus {
     private static final String KEY_RUTA = "ruta";
     private static final String KEY_TRAMO = "tramo";
     private static final String KEY_DINERO = "dinero";
+    private static final String KEY_OBJETO = "objeto";
 
     private static final int DEFAULT_RUTA = 1;
     private static final int DEFAULT_TRAMO = 1;
     private static final int DEFAULT_DINERO = 0;
+    private static final int DEFAULT_OBJETO = 0;
 
     private static PlayerStatus instancia = null;
 
     private Context context;
     private SharedPreferences sharedPreferences;
+    private boolean fabrica;
 
     private PlayerStatus(){}
 
@@ -75,6 +78,22 @@ public class PlayerStatus {
 
     public void setDinero(int dinero) {
         sharedPreferences.edit().putInt(KEY_DINERO, dinero).commit();
+    }
+
+    public boolean isFabrica() {
+        return fabrica;
+    }
+
+    public void setFabrica(boolean fabrica) {
+        this.fabrica = fabrica;
+    }
+
+    public int getObjeto() {
+        return sharedPreferences.getInt(KEY_OBJETO, DEFAULT_OBJETO);
+    }
+
+    public void setObjeto(int objeto) {
+        sharedPreferences.edit().putInt(KEY_OBJETO, objeto).commit();
     }
 
 }

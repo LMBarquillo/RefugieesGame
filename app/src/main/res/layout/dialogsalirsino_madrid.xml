@@ -22,27 +22,10 @@
             android:layout_height="38dp"
             android:layout_weight="0.39" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.39">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/madrid_lose"
-                android:id="@+id/imgAcc"
-                android:cropToPadding="true"
-                android:scaleType="centerInside"
-                android:layout_weight="1"
-                android:adjustViewBounds="true" />
-        </LinearLayout>
-
         <Space
             android:layout_width="match_parent"
             android:layout_height="23dp"
-            android:layout_weight="0.08" />
+            android:layout_weight="0.12" />
 
         <TextView
             android:text="TextView"
@@ -65,10 +48,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/madrid_tryagain"
+                app:srcCompat="@drawable/madrid_yes"
                 android:layout_weight="1"
                 android:onClick="reset"
-                android:id="@+id/imgTryAgain"
+                android:id="@+id/imgSi"
                 android:cropToPadding="true"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true" />
@@ -76,21 +59,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/madrid_menu"
-                android:layout_weight="1"
-                android:id="@+id/imgMenu"
-                android:cropToPadding="true"
-                android:scaleType="centerInside"
-                android:onClick="goToMenu"
-                android:adjustViewBounds="true" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/madrid_nextlevel"
+                app:srcCompat="@drawable/madrid_no"
                 android:layout_weight="1"
                 android:onClick="goToNextLevel"
-                android:id="@+id/imgNextLevel"
+                android:id="@+id/imgNo"
                 android:cropToPadding="true"
                 android:scaleType="centerInside"
                 android:adjustViewBounds="true" />
