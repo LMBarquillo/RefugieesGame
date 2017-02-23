@@ -11,33 +11,24 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
-import es.riberadeltajo.refugiadosgame.ruta3.view.Sarajevo;
 
 /**
  * Created by Alex on 14/02/2017.
  */
 
-public class DialogFin extends Dialog implements View.OnClickListener {
+public class DialogSalirSiNo extends Dialog implements View.OnClickListener {
 
-    public enum Tipo {
-        WIN,
-        LOSE
-    }
-
-    private Tipo tipo;
     private Madrid activity;
-    private ImageView ganaPierde,reintentar,irMenu,sigNiv;
+    private ImageView reintentar,sigNiv;
     private Typeface font;
 
-    public DialogFin(Madrid activity, Tipo tipo) {
+    public DialogSalirSiNo(Madrid activity) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
-        this.tipo = tipo;
         Display display = activity.getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -53,19 +44,15 @@ public class DialogFin extends Dialog implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.dialogfin_madrid);
-        ganaPierde = (ImageView) findViewById(R.id.imgAcc);
+        setContentView(R.layout.dialogsalirsino_madrid);
         TextView txtMensaje = (TextView) findViewById(R.id.txtMens);
         font = Typeface.createFromAsset(getContext().getApplicationContext().getAssets(),"tipografias/madrid_dialog_font.ttf");
         txtMensaje.setTypeface(font);
         reintentar = (ImageView) findViewById(R.id.imgTryAgain);
-        irMenu = (ImageView) findViewById(R.id.imgMenu);
         sigNiv = (ImageView) findViewById(R.id.imgNextLevel);
         reintentar.setImageResource(R.drawable.madrid_tryagain);
-        irMenu.setImageResource(R.drawable.madrid_menu);
         sigNiv.setImageResource(R.drawable.madrid_nextlevel);
         reintentar.setOnClickListener(this);
-        irMenu.setOnClickListener(this);
         sigNiv.setOnClickListener(this);
         reintentar.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -76,19 +63,6 @@ public class DialogFin extends Dialog implements View.OnClickListener {
                 else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
                     reintentar.setImageResource(R.drawable.madrid_tryagain);
                     reset();
-                }
-                return true;
-            }
-        });
-        irMenu.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-                    irMenu.setImageResource(R.drawable.madrid_menu_hover);
-                }
-                else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
-                    irMenu.setImageResource(R.drawable.madrid_menu);
-                    goToMenu();
                 }
                 return true;
             }
@@ -106,16 +80,6 @@ public class DialogFin extends Dialog implements View.OnClickListener {
                 return true;
             }
         });
-        if(tipo == Tipo.WIN) {
-            ganaPierde.setImageResource(R.drawable.madrid_win);
-            txtMensaje.setText(R.string.madrid_win_mensaje);
-        } else
-        if(tipo == Tipo.LOSE) {
-            ganaPierde.setImageResource(R.drawable.madrid_lose);
-            txtMensaje.setText(R.string.madrid_lose_mensaje);
-            sigNiv.setImageResource(R.drawable.madrid_nextlevel_disabled);
-            sigNiv.setEnabled(false);
-        }
     }
 
     @Override
@@ -139,9 +103,6 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         switch(v.getId()) {
             case R.id.imgTryAgain:
                 reset();
-                break;
-            case R.id.imgMenu:
-                goToMenu();
                 break;
             case R.id.imgNextLevel:
                 goToNextLevel();
