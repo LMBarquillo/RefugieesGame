@@ -1,4 +1,4 @@
-package es.riberadeltajo.refugiadosgame.ruta3.view;
+package es.riberadeltajo.refugiadosgame.ruta3.view.arcade;
 
 import android.graphics.Canvas;
 

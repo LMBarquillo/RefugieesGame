@@ -11,12 +11,10 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
-import es.riberadeltajo.refugiadosgame.ruta3.view.Sarajevo;
 
 /**
  * Created by Alex on 14/02/2017.

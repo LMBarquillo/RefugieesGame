@@ -2,10 +2,6 @@ package es.riberadeltajo.refugiadosgame.common.models;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import es.riberadeltajo.refugiadosgame.ruta3.view.Player;
 
 /**
  * Clase para definir el objeto que contendrá los datos de progreso del jugador.

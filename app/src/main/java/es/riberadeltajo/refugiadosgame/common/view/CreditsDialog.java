@@ -18,11 +18,11 @@ import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
  * Created by Alex on 14/02/2017.
  */
 
-public class PlayDialog extends Dialog implements View.OnClickListener {
+public class CreditsDialog extends Dialog implements View.OnClickListener {
 
     private MainActivity2 activity;
 
-    public PlayDialog(MainActivity2 activity) {
+    public CreditsDialog(MainActivity2 activity) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
         Display display = activity.getWindowManager().getDefaultDisplay();
@@ -31,7 +31,6 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
         //getWindow().setLayout((int)(size.x * 0.7), (int)(size.y * 0.5));
         getWindow().setLayout(size.x, size.y);
         getWindow().getAttributes().windowAnimations = R.style.sarajevoDialogo;
-        //getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#80000000")));
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -40,11 +39,9 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.menu_play_dialog);
-        Button btnContinuar = (Button) findViewById(R.id.btnContinuar);
-        Button btnNuevo = (Button) findViewById(R.id.btnNuevo);
-        btnContinuar.setOnClickListener(this);
-        btnNuevo.setOnClickListener(this);
+        setContentView(R.layout.menu_credits_dialog);
+        Button btnSalir = (Button) findViewById(R.id.btnSalir);
+        btnSalir.setOnClickListener(this);
     }
 
     @Override
@@ -65,20 +62,10 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.btnNuevo:
-                nuevo();
-                break;
-            case R.id.btnContinuar:
-                continuar();
+            case R.id.btnSalir:
+                dismiss();
                 break;
         }
     }
 
-    private void nuevo() {
-        activity.startActivity(new Intent(activity, Madrid.class));
-    }
-
-    private void continuar() {
-        activity.startActivity(new Intent(activity, Madrid.class));
-    }
 }

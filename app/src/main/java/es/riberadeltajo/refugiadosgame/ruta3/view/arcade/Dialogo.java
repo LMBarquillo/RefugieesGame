@@ -1,9 +1,6 @@
-package es.riberadeltajo.refugiadosgame.ruta3.view;
+package es.riberadeltajo.refugiadosgame.ruta3.view.arcade;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.WallpaperInfo;
-import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -27,9 +24,9 @@ public class Dialogo extends Dialog implements View.OnClickListener {
     }
 
     private Tipo tipo;
-    private Sarajevo activity;
+    private SarajevoArcade activity;
 
-    public Dialogo(Sarajevo activity, Tipo tipo) {
+    public Dialogo(SarajevoArcade activity, Tipo tipo) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
         this.tipo = tipo;

@@ -6,13 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import es.riberadeltajo.refugiadosgame.R;
-import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
-import es.riberadeltajo.refugiadosgame.ruta3.view.Sarajevo;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
 import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
-import es.riberadeltajo.refugiadosgame.ruta5.view.Tehran;
-import es.riberadeltajo.refugiadosgame.ruta5.view.teheran_main2;
 import es.riberadeltajo.refugiadosgame.ruta5.view.tehran1;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ruta3(View view) {
-        Intent i = new Intent(this,Sarajevo.class);
+        //Intent i = new Intent(this,SarajevoArcade.class);
+        Intent i = new Intent(this, SarajevoAlojamiento.class);
         /*i.putExtra("STATUS",status);
         startActivityForResult(i,RUTA3);*/
         startActivity(i);

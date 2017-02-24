@@ -14,24 +14,33 @@
 
     <!-- Madrid-Milán -->
     <string name="route1">Madrid-Milan</string>
+    <string name="madrid_autores">Adrián Portela Ortiz\nJosé Carlos Sáncez Pérez</string>
     <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
     <string name="madrid_lose_mensaje">You do not acquired the ticket. Try again?</string>
     <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
 
     <!-- Milán-Sarajevo -->
     <string name="route2">Milan-Sarajevo</string>
+    <string name="milan_autores">Roberto Ramos Rodríguez\nSergio Jimenez Gomez</string>
 
     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
+    <string name="sarajevo_autores">Alejandro Luna Flores\nJorge Morón García</string>
     <string name="dialogo_btn_reintentar">Try again</string>
     <string name="dialogo_btn_continuar">Continue</string>
     <string name="dialogo_win_titulo">YOU WIN</string>
     <string name="dialogo_win_mensaje">You have managed to escape and you can continue on your way to Istanbul.</string>
     <string name="dialogo_lose_titulo">YOU LOSE</string>
     <string name="dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
+    <string name="txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
+    <string name="txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
+    <string name="txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
+    <string name="txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>
+    <string name="txt_habitacion">Finally, you\'have found your room! What a hard day, huh!</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>
+    <string name="estambul_autores">Luís M. Barquillo Romero\nMiguel del Puerto Melchor</string>
     <string name="notes10">Good!</string>
     <string name="notes20">Oh Yeah!</string>
     <string name="notes30">Nice baby!</string>
@@ -44,6 +53,7 @@
 
     <!-- Teherán-Bombai -->
     <string name="route5">Tehran-Mumbai</string>
+    <string name="teheran_autores">Raúl Fernandez del Cerro\nRoberto Calvo García</string>
     <string name="select_work">Select Work</string>
     <string name="congratulations_tehran">Congratulations!</string>
     <string name="game_over_tehran">Game Over</string>

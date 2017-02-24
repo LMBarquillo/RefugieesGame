@@ -11,6 +11,7 @@ import es.riberadeltajo.refugiadosgame.R;
 public class MainActivity2 extends AppCompatActivity implements View.OnClickListener {
 
     private PlayDialog dialogoJugar;
+    private CreditsDialog dialogoCreditos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +26,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         dialogoJugar = new PlayDialog(this);
+        dialogoCreditos = new CreditsDialog(this);
         Button btnPlay = (Button) findViewById(R.id.btnJugar);
+        Button btnCreditos = (Button) findViewById(R.id.btnCreditos);
+        Button btnSalir = (Button) findViewById(R.id.btnSalir);
         btnPlay.setOnClickListener(this);
+        btnCreditos.setOnClickListener(this);
+        btnSalir.setOnClickListener(this);
     }
 
     @Override
@@ -34,6 +40,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         switch(v.getId()) {
             case R.id.btnJugar:
                 jugar();
+                break;
+            case R.id.btnCreditos:
+                creditos();
+                break;
+            case R.id.btnSalir:
+                salir();
                 break;
         }
     }
@@ -46,5 +58,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     private void jugar() {
         dialogoJugar.show();
+    }
+
+    private void creditos() {
+        dialogoCreditos.show();
+    }
+
+    private void salir() {
+        finishAffinity();
     }
 }

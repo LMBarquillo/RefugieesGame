@@ -1,4 +1,4 @@
-package es.riberadeltajo.refugiadosgame.ruta3.view;
+package es.riberadeltajo.refugiadosgame.ruta3.view.arcade;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -6,14 +6,17 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 /**
- * Created by Alex on 14/02/2017.
+ * Created by Alex on 28/01/2017.
  */
 
-public class Salpicadura {
+public class Sprite {
+
+    private final int[] DIRECCION = {3, 1, 0, 2};
 
     private GameView gameView;
     private Bitmap sprite;
     private int currentFrame;
+    private int direccion;
     private int filas;
     private int columnas;
     private int width;
@@ -23,9 +26,8 @@ public class Salpicadura {
     private int speedX;
     private int speedY;
     private boolean safe;
-    private boolean arriba;
 
-    public Salpicadura(GameView gameView, Bitmap bitmap, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
+    public Sprite(GameView gameView, Bitmap bitmap, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
         setGameView(gameView);
         setFilas(filas);
         setColumnas(columnas);
@@ -37,10 +39,9 @@ public class Salpicadura {
         setSpeedY(speedY);
         setSprite(bitmap);
         setSafe(true);
-        setArriba(true);
     }
 
-    public Salpicadura(GameView gameView, int spriteRes, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
+    public Sprite(GameView gameView, int spriteRes, int filas, int columnas, int width, int height, int posX, int posY, int speedX, int speedY) {
         setGameView(gameView);
         setFilas(filas);
         setColumnas(columnas);
@@ -81,6 +82,16 @@ public class Salpicadura {
 
     public void setCurrentFrame(int currentframe) {
         this.currentFrame = currentframe;
+    }
+
+    public int getDireccion() {
+        double dir = Math.atan2(getSpeedX(), getSpeedY()) / (Math.PI / 2) + 2;
+        int direccion = (int) Math.round(dir) % getColumnas();
+        return DIRECCION[direccion];
+    }
+
+    public void setDireccion(int direccion) {
+        this.direccion = direccion;
     }
 
     public int getFilas() {
@@ -155,37 +166,14 @@ public class Salpicadura {
         this.safe = safe;
     }
 
-    public boolean isArriba() {
-        return arriba;
-    }
-
-    public void setArriba(boolean arriba) {
-        this.arriba = arriba;
-    }
-
     public void draw(Canvas canvas) {
         update();
-        if(getSpeedY() > 0) {
-            Rect src = new Rect(getCurrentFrame() * getWidth(), 0, (getCurrentFrame() * getWidth()) + getWidth(), 0 + getHeight());
+        if (getFilas() > 1 && getColumnas() > 1) {
+            Rect src = new Rect(getCurrentFrame() * getWidth(), getDireccion() * getHeight(), (getCurrentFrame() * getWidth()) + getWidth(), (getDireccion() * getHeight() + getHeight()));
             Rect dst = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
             canvas.drawBitmap(getSprite(), src, dst, null);
-            setArriba(false);
-        } else
-        if(getSpeedY() < 0) {
-            Rect src = new Rect(getCurrentFrame() * getWidth(), 3 * getHeight(), (getCurrentFrame() * getWidth()) + getWidth(), 3 * getHeight() + getHeight());
-            Rect dst = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
-            canvas.drawBitmap(getSprite(), src, dst, null);
-            setArriba(true);
         } else {
-            if(arriba) {
-                Rect src = new Rect(2 * getWidth(), 3 * getHeight(), (2 * getWidth()) + getWidth(), 3 * getHeight() + getHeight());
-                Rect dst = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
-                canvas.drawBitmap(getSprite(), src, dst, null);
-            } else {
-                Rect src = new Rect(2 * getWidth(), 0, (2 * getWidth()) + getWidth(), 0 + getHeight());
-                Rect dst = new Rect(getPosX(), getPosY(), getPosX() + getWidth(), getPosY() + getHeight());
-                canvas.drawBitmap(getSprite(), src, dst, null);
-            }
+            canvas.drawBitmap(getSprite(), (float)getPosX(), (float)getPosY(), null);
         }
         if(!isSafe()) {
             getGameView().setFin(true);
@@ -193,6 +181,17 @@ public class Salpicadura {
     }
 
     private void update() {
+        /*if(getPosX() >= getGameView().getWidth() - getWidth() - getSpeedX() || getPosX() + getSpeedX() <= 0) {
+            setSpeedX(-getSpeedX());
+        } else {
+            setPosX(getPosX() + getSpeedX());
+        }
+        if(getPosY() >= getGameView().getHeight() - getHeight() - getSpeedY() || getPosY() + getSpeedY() <= 0) {
+            setSpeedY(-getSpeedY());
+        } else {
+            setPosY(getPosY() + getSpeedY());
+        }*/
+
         if(getSpeedX() != 0 || getSpeedY() != 0) {
             if(getPosY() + getSpeedY() < 0 || getPosY() + getHeight() + getSpeedY() > getGameView().getHeight()) {
                 setSpeedX(0);
@@ -203,6 +202,7 @@ public class Salpicadura {
         }
         setPosX(getPosX() + getSpeedX());
         setPosY(getPosY() + getSpeedY());
+
     }
 
     public boolean isCollition(Sprite s) {
@@ -222,4 +222,5 @@ public class Salpicadura {
         Rect r2 = new Rect(0, y, getGameView().getWidth(), y + height);
         return r1.intersect(r2);
     }
+
 }

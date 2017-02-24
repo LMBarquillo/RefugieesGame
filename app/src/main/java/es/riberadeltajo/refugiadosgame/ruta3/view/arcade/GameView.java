@@ -1,6 +1,5 @@
-package es.riberadeltajo.refugiadosgame.ruta3.view;
+package es.riberadeltajo.refugiadosgame.ruta3.view.arcade;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -16,9 +15,9 @@ public class GameView extends SurfaceView {
     private Juego juego;
     private GameLoop loop;
     private boolean fin;
-    private Sarajevo activity;
+    private SarajevoArcade activity;
 
-    public GameView(Sarajevo activity) {
+    public GameView(SarajevoArcade activity) {
         super(activity);
         setActivity(activity);
         setFin(false);
@@ -68,11 +67,11 @@ public class GameView extends SurfaceView {
         this.fin = fin;
     }
 
-    public Sarajevo getActivity() {
+    public SarajevoArcade getActivity() {
         return activity;
     }
 
-    public void setActivity(Sarajevo activity) {
+    public void setActivity(SarajevoArcade activity) {
         this.activity = activity;
     }
 

@@ -1,6 +1,5 @@
-package es.riberadeltajo.refugiadosgame.ruta3.view;
+package es.riberadeltajo.refugiadosgame.ruta3.view.arcade;
 
-import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;

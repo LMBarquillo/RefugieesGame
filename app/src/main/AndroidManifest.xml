@@ -26,7 +26,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.Milan" />
         <activity
-            android:name=".ruta3.view.Sarajevo"
+            android:name=".ruta3.view.arcade.SarajevoArcade"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
@@ -81,7 +81,7 @@
         <activity android:name=".ruta3.view.ruta.SarajevoMejicano" />
         <activity android:name=".ruta3.view.ruta.SarajevoAfricano" />
         <activity android:name=".ruta3.view.ruta.SarajevoHabitacion" />
-        <activity android:name=".ruta3.view.ruta.SarajevoBanda"></activity>
+        <activity android:name=".ruta3.view.ruta.SarajevoBanda" />
     </application>
 
 </manifest>
