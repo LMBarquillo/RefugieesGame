@@ -29,8 +29,8 @@
             android:layout_weight="0.39">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 app:srcCompat="@drawable/madrid_lose"
                 android:id="@+id/imgAcc"
                 android:cropToPadding="true"
@@ -41,8 +41,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="23dp"
-            android:layout_weight="0.08" />
+            android:layout_height="39dp" />
 
         <TextView
             android:text="TextView"
@@ -99,8 +98,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="12dp"
-            android:layout_weight="0.27" />
+            android:layout_height="87dp" />
 
     </LinearLayout>
 

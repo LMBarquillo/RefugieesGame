@@ -10,33 +10,88 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="es.riberadeltajo.refugiadosgame.ruta1.view.Madrid">
 
-    <Button
-        android:text="Exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/btnJugar"
-        android:layout_marginBottom="72dp"
-        android:id="@+id/btnSalir"
-        android:onClick="salir" />
-
-    <Button
-        android:text="Play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="51dp"
-        android:id="@+id/btnJugar"
-        android:onClick="jugar"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true">
 
-    <Button
-        android:text="Maletas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnSalir"
-        android:layout_alignStart="@+id/btnSalir"
-        android:layout_marginBottom="148dp"
-        android:id="@+id/btnMaletas"
-        android:onClick="irMaletas" />
+        <Button
+            android:text="Play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="51dp"
+            android:id="@+id/btnJugar"
+            android:onClick="jugar"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:text="Easy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnEasy"
+                android:layout_weight="1"
+                android:background="@android:color/holo_green_dark"
+                android:onClick="modoFacil" />
+
+            <Button
+                android:text="Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnMed"
+                android:layout_weight="1"
+                android:background="@android:color/holo_orange_dark"
+                android:onClick="modoMedio" />
+
+            <Button
+                android:text="Hard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnHard"
+                android:layout_weight="1"
+                android:background="@android:color/holo_red_light"
+                android:onClick="modoDificil" />
+
+            <Button
+                android:text="Extreme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnExtreme"
+                android:layout_alignBaseline="@+id/btnHard"
+                android:layout_alignBottom="@+id/btnHard"
+                android:layout_alignParentEnd="true"
+                android:background="@android:color/holo_red_dark"
+                android:onClick="modoExtremo"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <Button
+            android:text="Maletas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnSalir"
+            android:layout_alignStart="@+id/btnSalir"
+            android:layout_marginBottom="148dp"
+            android:id="@+id/btnMaletas"
+            android:onClick="irMaletas" />
+
+        <Button
+            android:text="Exit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/btnJugar"
+            android:layout_marginBottom="72dp"
+            android:id="@+id/btnSalir"
+            android:onClick="salir" />
+
+    </LinearLayout>
+
 </RelativeLayout>

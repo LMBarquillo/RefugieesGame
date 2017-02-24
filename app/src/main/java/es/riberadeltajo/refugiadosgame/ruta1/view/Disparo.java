@@ -23,23 +23,23 @@ public class Disparo extends Sprite {
         if(ran==1){
             setCorx(gameView.getWidth());
             setCory((int) (Math.random()*(gameView.getHeight()-(4*getHeight()+(gameView.getHeight()*0.1))))+(int)(gameView.getHeight()*0.1));
-            setxSpeed(-5);
+            setxSpeed(-6);
             setySpeed(0);
         }else if(ran==2){
             setCorx((int) (Math.random()*(gameView.getWidth()-(4*getWidth()+(gameView.getWidth()*0.1))))+(int)(gameView.getWidth()*0.1));
             setCory(0);
             setxSpeed(0);
-            setySpeed(5);
+            setySpeed(6);
         }else if(ran==3){
             setCorx(0);
             setCory((int) (Math.random()*(gameView.getHeight()-(4*getHeight()+(gameView.getHeight()*0.1))))+(int)(gameView.getHeight()*0.1));
-            setxSpeed(5);
+            setxSpeed(6);
             setySpeed(0);
         }else if(ran==4){
             setCorx((int) (Math.random()*(gameView.getWidth()-(4*getWidth()+(gameView.getWidth()*0.1))))+(int)(gameView.getWidth()*0.1));
             setCory(gameView.getHeight());
             setxSpeed(0);
-            setySpeed(-5);
+            setySpeed(-6);
         }
 
     }

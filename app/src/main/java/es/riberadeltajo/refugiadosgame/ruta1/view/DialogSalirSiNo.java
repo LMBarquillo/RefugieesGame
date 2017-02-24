@@ -113,7 +113,7 @@ public class DialogSalirSiNo extends Dialog implements View.OnClickListener {
     }
 
     private void salir() {
-        activity.onPause();
+        activity.recreate();
         dismiss();
     }
 

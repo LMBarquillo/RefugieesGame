@@ -10,19 +10,15 @@ import android.widget.Button;
 import android.os.Process;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Maletas;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Trans;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
 
 public class Madrid extends AppCompatActivity {
-    public static final int MENU = 1;
-    public static final int JUEGO_EASY = 2;
-    public static final int JUEGO_MEDIUM = 3;
-    public static final int JUEGO_HARD = 4;
-    public static final int JUEGO_EXTREME = 5;
-
     private GameView gameView;
     private Button btnPlay, btnExit, btnMaletas;
+    private Button easy,med,hard,ex;
     private MediaPlayer musica;
 
     @Override
@@ -41,14 +37,15 @@ public class Madrid extends AppCompatActivity {
         btnPlay=(Button) findViewById(R.id.btnJugar);
         btnPlay=(Button) findViewById(R.id.btnSalir);
         btnMaletas=(Button) findViewById(R.id.btnMaletas);
+        easy=(Button) findViewById(R.id.btnEasy);
+        med=(Button) findViewById(R.id.btnMed);
+        hard=(Button) findViewById(R.id.btnHard);
+        ex=(Button) findViewById(R.id.btnExtreme);
     }
 
     public void jugar(View v){
         musica.stop();
         musica.release();
-        musica=MediaPlayer.create(this,R.raw.madrid_easy);
-        musica.setLooping(true);
-        musica.start();
         gameView=new GameView(this);
         setContentView(gameView);
     }
@@ -86,15 +83,15 @@ public class Madrid extends AppCompatActivity {
 
     public void onPause(){
         super.onPause();
-        if(musica!=null){
-            musica.stop();
-            musica.release();
-        }
-        onStop();
+        //onStop();
     }
 
     public void onStop(){
         super.onStop();
+        if(musica!=null){
+            musica.stop();
+            musica.release();
+        }
     }
 
     public void onDestroy(){
@@ -113,5 +110,22 @@ public class Madrid extends AppCompatActivity {
 
     public void setMusica(MediaPlayer musica) {
         this.musica = musica;
+    }
+
+    public void modoFacil(View v){
+        PlayerStatus.getInstancia(this).setDinero(350);
+        jugar(v);
+    }
+    public void modoMedio(View v){
+        PlayerStatus.getInstancia(this).setDinero(250);
+        jugar(v);
+    }
+    public void modoDificil(View v){
+        PlayerStatus.getInstancia(this).setDinero(150);
+        jugar(v);
+    }
+    public void modoExtremo(View v){
+        PlayerStatus.getInstancia(this).setDinero(50);
+        jugar(v);
     }
 }
