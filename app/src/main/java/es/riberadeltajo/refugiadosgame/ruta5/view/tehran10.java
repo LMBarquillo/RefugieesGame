@@ -13,7 +13,7 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
-public class tehran4 extends AppCompatActivity implements View.OnClickListener{
+public class tehran10 extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
     private TextView texto,dinero,objeto;
     private Button btnAtras, btnSig;
@@ -35,9 +35,12 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        //texto.setText("Historia");
+        texto.setText(String.format("%s%n%n%s",getString(R.string.tehran_text_5),getString(R.string.tehran_text_5_1)));
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
+        dinero.setTypeface(font);
+        dinero.setVisibility(View.INVISIBLE);
+        objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
         opc1.setImageResource(R.drawable.tehranentrevista1); //Imagen para la opción 1
@@ -45,7 +48,6 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
-        texto.setText(String.format("%s",getString(R.string.tehran_text4)));
         passport=(ImageView) findViewById(R.id.imgObject);
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
@@ -65,13 +67,13 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void goBack(){
-        Intent i = new Intent(this,tehran3.class);
+        Intent i = new Intent(this,tehran4.class);
         startActivity(i);
         finish();
     }
 
     public void goNext(){
-        Intent i = new Intent(this,tehran5.class);
+        Intent i = new Intent(this,Tehran.class);
         startActivity(i);
         finish();
     }

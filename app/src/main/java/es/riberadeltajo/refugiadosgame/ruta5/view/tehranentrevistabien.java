@@ -13,10 +13,11 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
-public class tehran4 extends AppCompatActivity implements View.OnClickListener{
+public class tehranentrevistabien extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
     private TextView texto,dinero,objeto;
     private Button btnAtras, btnSig;
+    private int activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +32,25 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_una_opcion);
         getWindow().getDecorView().setBackgroundResource(R.drawable.fondoteheran); //Pon un fondo de la ciudad de tu ruta
+        setActivity(getIntent().getIntExtra("activity",0));
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        //texto.setText("Historia");
+        texto.setText(getString(R.string.tehran_text_bien));
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
+        dinero.setTypeface(font);
+        dinero.setVisibility(View.INVISIBLE);
+        objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
-        opc1.setImageResource(R.drawable.tehranentrevista1); //Imagen para la opción 1
+        opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
         btnAtras=(Button) findViewById(R.id.btnBack);
+        btnAtras.setVisibility(View.INVISIBLE);
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
-        texto.setText(String.format("%s",getString(R.string.tehran_text4)));
         passport=(ImageView) findViewById(R.id.imgObject);
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
@@ -65,14 +70,47 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void goBack(){
-        Intent i = new Intent(this,tehran3.class);
-        startActivity(i);
-        finish();
+        //Activity anterior
     }
 
     public void goNext(){
-        Intent i = new Intent(this,tehran5.class);
-        startActivity(i);
-        finish();
+        if(getActivity()==5){
+            Intent i = new Intent(this,tehran6.class);
+            startActivity(i);
+            finish();
+        }
+        else if(getActivity()==6){
+            Intent i = new Intent(this,tehran7.class);
+            startActivity(i);
+            finish();
+        }
+        else if(getActivity()==7){
+            Intent i = new Intent(this,tehran8.class);
+            startActivity(i);
+            finish();
+        }
+        else if(getActivity()==8){
+            Intent i = new Intent(this,tehran9.class);
+            startActivity(i);
+            finish();
+        }
+        else if(getActivity()==9){
+            Intent i = new Intent(this,tehran10.class);
+            startActivity(i);
+            finish();
+        }
+        else if(getActivity()==0){
+            Intent i = new Intent(this,tehran4.class);
+            startActivity(i);
+            finish();
+        }
+    }
+
+    public int getActivity() {
+        return activity;
+    }
+
+    public void setActivity(int activity) {
+        this.activity = activity;
     }
 }

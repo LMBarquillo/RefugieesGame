@@ -17,6 +17,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
 /**
  * Created by Profesor on 26/01/2017.

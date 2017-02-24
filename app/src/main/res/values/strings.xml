@@ -75,5 +75,8 @@
     <string name="tehran_text_4_6_2">Yes, when I was younger</string>
     <string name="tehran_text_4_6_3">No, but I can learn</string>
     <string name="tehran_text_5">Congratulations! You´ve got the job!</string>
+    <string name="tehran_text_5_1">It is time to work!!</string>
+    <string name="tehran_text_bien">All right!</string>
+    <string name="tehran_text_mal">Wrong!</string>
 
 </resources>
