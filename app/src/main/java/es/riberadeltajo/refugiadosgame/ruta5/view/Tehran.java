@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
 public class Tehran extends Activity {
 
@@ -25,7 +26,7 @@ public class Tehran extends Activity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
-        setContentView(new GameView(this,camarero));
+        setContentView(new GameView(this, PlayerStatus.getInstancia(this).isFabrica()));
 
     }
 
