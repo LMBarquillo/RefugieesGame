@@ -50,6 +50,27 @@
         <activity
             android:name=".ruta5.view.tehran5"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran6"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehranentrevistabien"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehranentrevistamal"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran7"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran8"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran9"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran10"
+            android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.juego.milan_juego" />
         <activity android:name=".ruta2.view.juego.milan_juego2" />
         <activity android:name=".ruta5.view.teheran_main2" />

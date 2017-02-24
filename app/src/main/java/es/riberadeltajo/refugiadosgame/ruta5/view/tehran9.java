@@ -13,7 +13,7 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
-public class tehran5 extends AppCompatActivity implements View.OnClickListener{
+public class tehran9 extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
     private TextView texto,dinero,objeto;
     private Button btnAtras, btnSig;
@@ -39,7 +39,7 @@ public class tehran5 extends AppCompatActivity implements View.OnClickListener{
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.tehran_text4_2);
+        texto.setText(getString(R.string.tehran_text_4_6));
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -47,8 +47,8 @@ public class tehran5 extends AppCompatActivity implements View.OnClickListener{
         objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
-        opc1.setImageResource(R.drawable.tehranyes); //Imagen para la opción 1
-        opc2.setImageResource(R.drawable.tehranno); //Imagen para la opción 2
+        opc1.setImageResource(R.drawable.tehranpreg5); //Imagen para la opción 1
+        opc2.setImageResource(R.drawable.tehranpreg5_1); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
         btnAtras=(Button) findViewById(R.id.btnBack);
@@ -92,21 +92,19 @@ public class tehran5 extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void goBack(){
-        Intent i = new Intent(this,tehran4.class);
-        startActivity(i);
-        finish();
+        //Activity anterior
     }
 
     public void goNext(){
         if(cont==OPCION_A){
             Intent i = new Intent(this,tehranentrevistabien.class);
-            i.putExtra("activity",5);
+            i.putExtra("activity",9);
             startActivity(i);
             finish();
         }
         else if(cont==OPCION_B){
             Intent i = new Intent(this,tehranentrevistamal.class);
-            i.putExtra("activity",5);
+            i.putExtra("activity",9);
             startActivity(i);
             finish();
         }
