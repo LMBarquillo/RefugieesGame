@@ -17,7 +17,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import es.riberadeltajo.refugiadosgame.R;
-import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
 /**
  * Created by Profesor on 26/01/2017.
@@ -237,14 +236,22 @@ public class GameView extends SurfaceView implements Observer {
             if(isPasaObjeto()){         //GAME OVER
                 getTh().stopMusic();
                 getLost().start();
-                canvas.drawText(String.format("%s",getContext().getString(R.string.game_over_tehran)),(float)(getWidth()*0.32),(float)(getHeight()*0.45),paint);
-                finalizar();
+                getTh().runOnUiThread(new Runnable() {
+                    public void run() {
+                        new DialogFinT(getTh(), DialogFinT.Tipo.LOSE).show();
+                    }
+                });
+
             }
             else{                       //WINNER
                 getTh().stopMusic();
                 getWin().start();
-                canvas.drawText(String.format("%s",getContext().getString(R.string.congratulations_tehran)),(float)(getWidth()*0.25),(float)(getHeight()*0.45),paint);
-                finalizar();
+                getTh().runOnUiThread(new Runnable() {
+                    public void run() {
+                        new DialogFinT(getTh(), DialogFinT.Tipo.WIN).show();
+                    }
+                });
+                getLoop().setRunning(false);
             }
         }
 

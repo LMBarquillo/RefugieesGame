@@ -15,13 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
-import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
 
 /**
  * Created by Alex on 14/02/2017.
  */
 
-public class DialogFin extends Dialog implements View.OnClickListener {
+public class DialogFinT extends Dialog implements View.OnClickListener {
 
     public enum Tipo {
         WIN,
@@ -29,11 +28,11 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     }
 
     private Tipo tipo;
-    private Madrid activity;
+    private Tehran activity;
     private ImageView ganaPierde,reintentar,irMenu,sigNiv;
     private Typeface font;
 
-    public DialogFin(Madrid activity, Tipo tipo) {
+    public DialogFinT(Tehran activity, Tipo tipo) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
         this.tipo = tipo;
@@ -107,11 +106,11 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         });
         if(tipo == Tipo.WIN) {
             ganaPierde.setImageResource(R.drawable.madrid_win);
-            txtMensaje.setText(R.string.madrid_win_mensaje);
+            txtMensaje.setText(R.string.congratulations_tehran);
         } else
         if(tipo == Tipo.LOSE) {
             ganaPierde.setImageResource(R.drawable.madrid_lose);
-            txtMensaje.setText(R.string.madrid_lose_mensaje);
+            txtMensaje.setText(R.string.tehran_text_lost_game);
             sigNiv.setImageResource(R.drawable.madrid_nextlevel_disabled);
             sigNiv.setEnabled(false);
         }
@@ -160,6 +159,6 @@ public class DialogFin extends Dialog implements View.OnClickListener {
 
     private void goToNextLevel() {
         dismiss();
-        activity.goToNextLevel();
+        //activity.goToNextLevel();
     }
 }

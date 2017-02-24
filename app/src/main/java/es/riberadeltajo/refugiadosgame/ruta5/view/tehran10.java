@@ -39,7 +39,7 @@ public class tehran10 extends AppCompatActivity implements View.OnClickListener{
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
-        dinero.setVisibility(View.INVISIBLE);
+        //dinero.setVisibility(View.INVISIBLE);
         objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus

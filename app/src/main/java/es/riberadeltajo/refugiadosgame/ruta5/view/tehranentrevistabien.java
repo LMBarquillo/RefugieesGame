@@ -45,7 +45,7 @@ public class tehranentrevistabien extends AppCompatActivity implements View.OnCl
         objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
-        opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
+        opc1.setImageResource(R.drawable.tehranentrevistabien); //Imagen para la opción 1
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnAtras.setVisibility(View.INVISIBLE);
         btnSig=(Button) findViewById(R.id.btnNext);

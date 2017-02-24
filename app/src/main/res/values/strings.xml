@@ -88,5 +88,7 @@
     <string name="tehran_text_5_1">It is time to work!!</string>
     <string name="tehran_text_bien">All right!</string>
     <string name="tehran_text_mal">Wrong!</string>
+    <string name="tehran_text_reset">Reset</string>
+    <string name="tehran_text_lost_game">You have taken an object that you should not have, or you have let an object pass that you should catch</string>
 
 </resources>
