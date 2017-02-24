@@ -18,28 +18,46 @@
         <activity
             android:name=".ruta1.view.Madrid"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta1.view.view.Madrid_Maletas"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ruta1.view.view.Madrid_Trans"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ruta1.view.view.Madrid_Maletas"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Trans"
+            android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.Milan" />
         <activity
             android:name=".ruta3.view.Sarajevo"
-            android:screenOrientation="portrait"
-            android:configChanges="keyboardHidden" />
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ruta4.view.Istanbul"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta5.view.Tehran" android:screenOrientation="portrait"/>
-        <activity android:name=".ruta5.view.tehran1" android:screenOrientation="portrait"/>
-        <activity android:name=".ruta5.view.tehran2" android:screenOrientation="portrait"/>
-        <activity android:name=".ruta5.view.tehran3" android:screenOrientation="portrait"/>
-        <activity android:name=".ruta5.view.tehran4" android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".ruta5.view.Tehran"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta5.view.tehran4"
+            android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.juego.milan_juego" />
         <activity android:name=".ruta2.view.juego.milan_juego2" />
         <activity android:name=".ruta5.view.teheran_main2" />
         <activity android:name=".common.view.MainActivity2" />
+        <activity android:name=".ruta3.view.ruta.SarajevoAlojamiento" />
+        <activity android:name=".ruta3.view.ruta.SarajevoPasillo" />
+        <activity android:name=".ruta3.view.ruta.SarajevoChino" />
+        <activity android:name=".ruta3.view.ruta.SarajevoMejicano" />
+        <activity android:name=".ruta3.view.ruta.SarajevoAfricano" />
+        <activity android:name=".ruta3.view.ruta.SarajevoHabitacion" />
+        <activity android:name=".ruta3.view.ruta.SarajevoBanda"></activity>
     </application>
 
 </manifest>
