@@ -16,7 +16,7 @@ import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
 public class Madrid_Maletas extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
-    private TextView texto,dinero,objeto;
+    private TextView texto,dinero,objeto,descOpc1,descOpc2;
     private Button btnAtras, btnSig;
     private final int OPCION_A=1;
     private final int OPCION_B=2;
@@ -47,6 +47,12 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
         objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
+        descOpc1=(TextView) findViewById(R.id.txtOpc1Desc); //TextView para descripción de la opción 1
+        descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
+        descOpc1.setTypeface(font);
+        descOpc2.setTypeface(font);
+        descOpc1.setText("SUITCASE A");
+        descOpc2.setText("SUITCASE B");
         opc1.setImageResource(R.drawable.madrid_maleta1); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.madrid_maleta2); //Imagen para la opción 2
         opc1.setOnClickListener(this);
@@ -59,6 +65,8 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+        descOpc2.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
     }
 
     @Override
@@ -82,12 +90,16 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
     public void opcion1(){
         opc1.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         opc2.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
+        descOpc1.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
+        descOpc2.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=1;
     }
 
     public void opcion2(){
         opc2.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         opc1.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
+        descOpc2.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
+        descOpc1.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=2;
     }
 
@@ -102,7 +114,7 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, Madrid_Trans.class));
         }
         else if(cont==OPCION_B){
-            PlayerStatus.getInstancia(this).setDinero(50);
+            PlayerStatus.getInstancia(this).setDinero(250);
             PlayerStatus.getInstancia(this).setObjeto(0);
             startActivity(new Intent(this, Madrid_Trans.class));
         }

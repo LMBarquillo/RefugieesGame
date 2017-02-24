@@ -106,63 +106,100 @@
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:clipToPadding="false">
+                    android:clipToPadding="false"
+                    android:layout_height="162dp"
+                    android:layout_weight="0.42">
 
-                    <ImageView
-                        android:id="@+id/opcion1"
-                        android:layout_weight="1"
-                        android:background="@drawable/menu1"
-                        android:cropToPadding="true"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerInside"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:clickable="true"
-                        android:onClick="opcion1" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="500">
+
+                        <ImageView
+                            android:id="@+id/opcion1"
+                            android:layout_weight="1"
+                            android:background="@drawable/menu1"
+                            android:cropToPadding="true"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerInside"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:clickable="true"
+                            android:onClick="opcion1" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtOpc1Desc"
+                            android:layout_weight="0.1"
+                            android:textSize="18sp"
+                            android:textColor="@android:color/background_dark"
+                            android:textAlignment="center"
+                            android:textStyle="normal|bold"
+                            android:background="@drawable/menu1" />
+                    </LinearLayout>
 
                     <Space
                         android:layout_height="match_parent"
-                        android:layout_weight="0.71"
-                        android:layout_width="wrap_content" />
+                        android:layout_weight="0.38"
+                        android:layout_width="20dp" />
 
-                    <ImageView
-                        android:id="@+id/opcion2"
-                        android:layout_weight="1"
-                        android:background="@drawable/menu1"
-                        android:cropToPadding="true"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerInside"
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:clickable="true"
-                        android:onClick="opcion2" />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="500"
+                        android:elevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/opcion2"
+                            android:layout_weight="1"
+                            android:background="@drawable/menu1"
+                            android:cropToPadding="true"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerInside"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:clickable="true"
+                            android:onClick="opcion2" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtOpc2Desc"
+                            android:layout_weight="0.1"
+                            android:textStyle="normal|bold"
+                            android:textAlignment="center"
+                            android:textSize="18sp"
+                            android:textColor="@android:color/background_dark"
+                            android:background="@drawable/menu1" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="43dp" />
+                    android:layout_height="40dp" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:id="@+id/txtMens2"
                     android:layout_weight="1"
                     android:background="@drawable/menu1"
                     android:textAlignment="center"
                     android:textColor="@android:color/background_dark"
                     android:textSize="18sp"
-                    android:gravity="center_vertical|fill_horizontal" />
+                    android:gravity="center_vertical|fill_horizontal"
+                    android:layout_height="150dp" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="49dp" />
+                    android:layout_height="35dp" />
 
                 <LinearLayout
                     android:orientation="horizontal"

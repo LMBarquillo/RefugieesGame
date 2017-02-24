@@ -201,14 +201,14 @@ public class GameView extends SurfaceView {
         bombaIzqda=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_left.png");
         setJug(new Sprite(this,player,getVidas()));
         sprites.add(getJug());
-        crearMonedas();
+        crearMonedasYDisparosPorDificultad();
         Collections.shuffle(getMonedas());
         ticket=getBitmapFromAssets(getContext(),"madrid_resources/madrid_ticket.png");
         tickets.add(new Ticket(tickets, this, ticket));
 
     }
 
-    public void crearMonedas(){
+    public void crearMonedasYDisparosPorDificultad(){
         //NIVEL FÁCIL
         if(PlayerStatus.getInstancia(getContexto()).getDinero()==350){
             musica= MediaPlayer.create(getContexto(),R.raw.madrid_easy);
@@ -236,8 +236,6 @@ public class GameView extends SurfaceView {
             musica.setLooping(true);
             musica.start();
             for(int i=0;i<5;i++){
-                setxSpeed((int)(getDisparos().getxSpeed()*1.2));
-                setySpeed((int)(getDisparos().getySpeed()*1.2));
                 disparos.add(getDisparos());
             }
             for(int i=0;i<213;i++) {
@@ -259,8 +257,6 @@ public class GameView extends SurfaceView {
             musica.setLooping(true);
             musica.start();
             for(int i=0;i<7;i++){
-                setxSpeed((int)(getDisparos().getxSpeed()*1.5));
-                setySpeed((int)(getDisparos().getySpeed()*1.5));
                 disparos.add(getDisparos());
             }
             for(int i=0;i<163;i++) {
@@ -282,8 +278,6 @@ public class GameView extends SurfaceView {
             musica.setLooping(true);
             musica.start();
             for(int i=0;i<10;i++){
-                setxSpeed((int)(getDisparos().getxSpeed()*2));
-                setySpeed((int)(getDisparos().getySpeed()*2));
                 disparos.add(getDisparos());
             }
             for(int i=0;i<88;i++) {
@@ -330,36 +324,200 @@ public class GameView extends SurfaceView {
             if(ran2==1){
                 disp=new Disparo(this,bombaIzqda,2,ran,10);
                 soundPool.play(idDisparoBomba,0,(float)0.1,0,0,1);
+                //NIVEL FÁCIL
+                if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*1.2));
+                    disp.setySpeed((int)(disp.getySpeed()*1.2));
+                }
+                //NIVEL MEDIO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*1.5));
+                    disp.setySpeed((int)(disp.getySpeed()*1.5));
+                    disp.setPuntos((int)(disp.getPuntos()*1.2));
+                }
+                //NIVEL DIFICIL
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2));
+                    disp.setySpeed((int)(disp.getySpeed()*2));
+                    disp.setPuntos((int)(disp.getPuntos()*1.5));
+                }
+                //NIVEL EXTREMO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
+                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setPuntos(disp.getPuntos()*2);
+                }
             }else {
                 disp = new Disparo(this, misilgirado, 1, ran, 5);
-                disp.setxSpeed(disp.getxSpeed()-12);
+                //NIVEL FÁCIL
+                if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*-2.2));
+                }
+                //NIVEL MEDIO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*-2.5));
+                    disp.setPuntos((int)(disp.getPuntos()*1.2));
+                }
+                //NIVEL DIFICIL
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*-4));
+                    disp.setPuntos((int)(disp.getPuntos()*1.5));
+                }
+                //NIVEL EXTREMO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*-5));
+                    disp.setPuntos(disp.getPuntos()*2);
+                }
                 soundPool.play(idDisparoMisil,0,(float)0.2,0,0,1);
             }
         }else if(ran==2) {
             if(ran2==1){
                 disp=new Disparo(this,bombaArriba,2,ran,10);
                 soundPool.play(idDisparoBomba,(float)0.1,(float)0.1,0,0,1);
+                //NIVEL FÁCIL
+                if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*1.2));
+                    disp.setySpeed((int)(disp.getySpeed()*1.2));
+                }
+                //NIVEL MEDIO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*1.5));
+                    disp.setySpeed((int)(disp.getySpeed()*1.5));
+                    disp.setPuntos((int)(disp.getPuntos()*1.2));
+                }
+                //NIVEL DIFICIL
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2));
+                    disp.setySpeed((int)(disp.getySpeed()*2));
+                    disp.setPuntos((int)(disp.getPuntos()*1.5));
+                }
+                //NIVEL EXTREMO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
+                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setPuntos(disp.getPuntos()*2);
+                }
             }else {
                 disp = new Disparo(this, misil, 1, ran, 5);
-                disp.setySpeed(disp.getySpeed()+12);
+                //NIVEL FÁCIL
+                if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                    disp.setySpeed((int)(disp.getySpeed()*2.2));
+                }
+                //NIVEL MEDIO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setPuntos((int)(disp.getPuntos()*1.2));
+                }
+                //NIVEL DIFICIL
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                    disp.setySpeed((int)(disp.getySpeed()*4));
+                    disp.setPuntos((int)(disp.getPuntos()*1.5));
+                }
+                //NIVEL EXTREMO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                    disp.setySpeed((int)(disp.getySpeed()*5));
+                    disp.setPuntos(disp.getPuntos()*2);
+                }
                 soundPool.play(idDisparoMisil,(float)0.1,(float)0.1,0,0,1);
             }
         }else if(ran==3){
             if(ran2==1){
                 disp=new Disparo(this,bombaDrcha,2,ran,10);
                 soundPool.play(idDisparoBomba,(float)0.1,0,0,0,1);
+                //NIVEL FÁCIL
+                if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*1.2));
+                    disp.setySpeed((int)(disp.getySpeed()*1.2));
+                }
+                //NIVEL MEDIO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*1.5));
+                    disp.setySpeed((int)(disp.getySpeed()*1.5));
+                    disp.setPuntos((int)(disp.getPuntos()*1.2));
+                }
+                //NIVEL DIFICIL
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2));
+                    disp.setySpeed((int)(disp.getySpeed()*2));
+                    disp.setPuntos((int)(disp.getPuntos()*1.5));
+                }
+                //NIVEL EXTREMO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
+                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setPuntos(disp.getPuntos()*2);
+                }
             }else {
                 disp = new Disparo(this, misilgirado, 1, ran, 5);
-                disp.setxSpeed(disp.getxSpeed()+12);
+                //NIVEL FÁCIL
+                if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2.2));
+                }
+                //NIVEL MEDIO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
+                    disp.setPuntos((int)(disp.getPuntos()*1.2));
+                }
+                //NIVEL DIFICIL
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*4));
+                    disp.setPuntos((int)(disp.getPuntos()*1.5));
+                }
+                //NIVEL EXTREMO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*5));
+                    disp.setPuntos(disp.getPuntos()*2);
+                }
                 soundPool.play(idDisparoMisil,(float)0.2,0,0,0,1);
             }
         }else if(ran==4) {
             if(ran2==1){
                 disp=new Disparo(this,bombaAbajo,2,ran,10);
                 soundPool.play(idDisparoBomba,(float)0.1,(float)0.1,0,0,1);
+                //NIVEL FÁCIL
+                if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*1.2));
+                    disp.setySpeed((int)(disp.getySpeed()*1.2));
+                }
+                //NIVEL MEDIO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*1.5));
+                    disp.setySpeed((int)(disp.getySpeed()*1.5));
+                    disp.setPuntos((int)(disp.getPuntos()*1.2));
+                }
+                //NIVEL DIFICIL
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2));
+                    disp.setySpeed((int)(disp.getySpeed()*2));
+                    disp.setPuntos((int)(disp.getPuntos()*1.5));
+                }
+                //NIVEL EXTREMO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
+                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setPuntos(disp.getPuntos()*2);
+                }
             }else {
                 disp = new Disparo(this, misil, 1, ran, 5);
-                disp.setySpeed(disp.getySpeed()-12);
+                //NIVEL FÁCIL
+                if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                    disp.setySpeed((int)(disp.getySpeed()*-2.2));
+                }
+                //NIVEL MEDIO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                    disp.setySpeed((int)(disp.getySpeed()*-2.5));
+                    disp.setPuntos((int)(disp.getPuntos()*1.2));
+                }
+                //NIVEL DIFICIL
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                    disp.setySpeed((int)(disp.getySpeed()*-4));
+                    disp.setPuntos((int)(disp.getPuntos()*1.5));
+                }
+                //NIVEL EXTREMO
+                else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                    disp.setySpeed((int)(disp.getySpeed()*-5));
+                    disp.setPuntos(disp.getPuntos()*2);
+                }
                 soundPool.play(idDisparoMisil,(float)0.1,(float)0.1,0,0,1);
             }
         }else{
@@ -411,7 +569,10 @@ public class GameView extends SurfaceView {
             for (Sprite miSprite : sprites) {
                 miSprite.draw(canvas);
             }
-            if(getPuntuacion()<MAX_POINTS_EASY || getPuntuacion()<MAX_POINTS_MEDIUM || getPuntuacion()<MAX_POINTS_HARD || getPuntuacion()<MAX_POINTS_EXTREME) {
+            if((getPuntuacion()<MAX_POINTS_EASY && PlayerStatus.getInstancia(getContexto()).getDinero()==350)
+                    || (getPuntuacion()<MAX_POINTS_MEDIUM && PlayerStatus.getInstancia(getContexto()).getDinero()==250)
+                    || (getPuntuacion()<MAX_POINTS_HARD && PlayerStatus.getInstancia(getContexto()).getDinero()==150)
+                    || (getPuntuacion()<MAX_POINTS_EXTREME && PlayerStatus.getInstancia(getContexto()).getDinero()==50)) {
                 for (int i = 0; i < monedas.size(); i++) {
                     if (i < 5) {
                         monedas.get(i).draw(canvas);

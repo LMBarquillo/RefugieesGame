@@ -13,7 +13,7 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class Modelo_Dos_Opciones extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
-    private TextView texto,dinero,objeto;
+    private TextView texto,dinero,objeto,descOpc1,descOpc2;
     private Button btnAtras, btnSig;
     private final int OPCION_A=1;
     private final int OPCION_B=2;
@@ -44,6 +44,12 @@ public class Modelo_Dos_Opciones extends AppCompatActivity implements View.OnCli
         objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
+        descOpc1=(TextView) findViewById(R.id.txtOpc1Desc); //TextView para descripción de la opción 1
+        descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
+        descOpc1.setTypeface(font);
+        descOpc2.setTypeface(font);
+        descOpc1.setText("Descripción");
+        descOpc2.setText("Descripción");
         opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
         opc1.setOnClickListener(this);
@@ -56,6 +62,8 @@ public class Modelo_Dos_Opciones extends AppCompatActivity implements View.OnCli
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+        descOpc2.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
     }
 
     @Override
@@ -79,12 +87,16 @@ public class Modelo_Dos_Opciones extends AppCompatActivity implements View.OnCli
     public void opcion1(){
         opc1.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         opc2.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
+        descOpc1.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
+        descOpc2.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=1;
     }
 
     public void opcion2(){
         opc2.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         opc1.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
+        descOpc2.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
+        descOpc1.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=2;
     }
 

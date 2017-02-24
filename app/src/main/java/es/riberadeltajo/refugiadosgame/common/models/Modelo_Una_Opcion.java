@@ -13,7 +13,7 @@ import es.riberadeltajo.refugiadosgame.R;
 
 public class Modelo_Una_Opcion extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
-    private TextView texto,dinero,objeto;
+    private TextView texto,dinero,objeto,descOpc1;
     private Button btnAtras, btnSig;
 
     @Override
@@ -40,6 +40,9 @@ public class Modelo_Una_Opcion extends AppCompatActivity implements View.OnClick
         objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
+        descOpc1=(TextView) findViewById(R.id.txtOpcDesc); //TextView para descripción de la opción 1
+        descOpc1.setTypeface(font);
+        descOpc1.setText("Descripción");
         opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
@@ -49,6 +52,7 @@ public class Modelo_Una_Opcion extends AppCompatActivity implements View.OnClick
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
     }
 
     @Override
