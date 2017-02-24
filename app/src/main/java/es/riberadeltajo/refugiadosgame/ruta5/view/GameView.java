@@ -60,7 +60,7 @@ public class GameView extends SurfaceView implements Observer {
         objetos=new ArrayList<Objetos>();
         setPasaObjeto(false);
         setFabrica(fab);
-        setSegundos(-1);
+        setSegundos(0);
         setCojidos(5);
         setCojidoJabon1(false);
         setCojidoJabon2(false);

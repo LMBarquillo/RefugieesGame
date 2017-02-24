@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta5.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 
 public class Tehran extends Activity {
 
@@ -62,7 +64,9 @@ public class Tehran extends Activity {
     }
 
     public void goToNextLevel() {
-
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
     public void fin(){
