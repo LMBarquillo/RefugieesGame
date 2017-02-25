@@ -56,7 +56,8 @@ public class GameView extends SurfaceView {
     private int ran2;
     private MediaPlayer musica;
     private SoundPool soundPool;
-    private int idDisparoBomba,idDisparoMisil,idContacto,idGrito,idCaeMoneda;
+    private int idDisparoBomba,idDisparoMisil,idGrito,idCaeMoneda,
+            idCoin1,idCoin2,idCoin5,idCoin10,idGameOver,idWin;
 
     public GameView(Context context){
         super(context);
@@ -75,12 +76,17 @@ public class GameView extends SurfaceView {
         monedas=new ArrayList<Monedas>();
         tickets=new ArrayList<Ticket>();
         font = Typeface.createFromAsset(context.getAssets(),"tipografias/madrid_font.ttf");
-        soundPool = new SoundPool(20, AudioManager.STREAM_MUSIC , 0);
-        idDisparoBomba = soundPool.load(context, R.raw.madrid_misil, 0);
-        idDisparoMisil = soundPool.load(context, R.raw.madrid_shot, 0);
-        idContacto = soundPool.load(context, R.raw.madrid_shot_contact, 0);
-        idGrito = soundPool.load(context, R.raw.madrid_pain_loud, 0);
-        idCaeMoneda = soundPool.load(context, R.raw.madrid_coins_falling, 0);
+        soundPool = new SoundPool(32, AudioManager.STREAM_MUSIC , 0);
+        idDisparoBomba = soundPool.load(context, R.raw.madrid_misil, 4);
+        idDisparoMisil = soundPool.load(context, R.raw.madrid_shot, 4);
+        idGrito = soundPool.load(context, R.raw.madrid_pain_loud, 2);
+        idCaeMoneda = soundPool.load(context, R.raw.madrid_coins_falling, 3);
+        idCoin1 = soundPool.load(context, R.raw.madrid_coin1_effect, 1);
+        idCoin2 = soundPool.load(context, R.raw.madrid_coin2_effect, 1);
+        idCoin5 = soundPool.load(context, R.raw.madrid_coin5_effect, 1);
+        idCoin10 = soundPool.load(context, R.raw.madrid_coin10_effect, 1);
+        idWin = soundPool.load(context, R.raw.madrid_win_effect, 0);
+        idGameOver = soundPool.load(context, R.raw.madrid_gameover_effect, 0);
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -212,6 +218,7 @@ public class GameView extends SurfaceView {
         //NIVEL FÁCIL
         if(PlayerStatus.getInstancia(getContexto()).getDinero()==350){
             musica= MediaPlayer.create(getContexto(),R.raw.madrid_easy);
+            musica.setVolume(0.5f,0.5f);
             musica.setLooping(true);
             musica.start();
             for(int i=0;i<5;i++){
@@ -233,6 +240,7 @@ public class GameView extends SurfaceView {
         //NIVEL MEDIO
         else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250){
             musica= MediaPlayer.create(getContexto(),R.raw.madrid_medium);
+            musica.setVolume(0.5f,0.5f);
             musica.setLooping(true);
             musica.start();
             for(int i=0;i<5;i++){
@@ -254,6 +262,7 @@ public class GameView extends SurfaceView {
         //NIVEL DIFÍCIL
         else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150){
             musica= MediaPlayer.create(getContexto(),R.raw.madrid_hard);
+            musica.setVolume(0.5f,0.5f);
             musica.setLooping(true);
             musica.start();
             for(int i=0;i<7;i++){
@@ -275,6 +284,7 @@ public class GameView extends SurfaceView {
         //NIVEL EXTREMO
         else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50){
             musica= MediaPlayer.create(getContexto(),R.raw.madrid_extreme);
+            musica.setVolume(0.5f,0.5f);
             musica.setLooping(true);
             musica.start();
             for(int i=0;i<10;i++){
@@ -323,7 +333,7 @@ public class GameView extends SurfaceView {
         if(ran==1){
             if(ran2==1){
                 disp=new Disparo(this,bombaIzqda,2,ran,10);
-                soundPool.play(idDisparoBomba,0,(float)0.1,0,0,1);
+                soundPool.play(idDisparoBomba,0,(float)0.09,4,0,1);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
                     disp.setxSpeed((int)(disp.getxSpeed()*1.2));
@@ -368,12 +378,12 @@ public class GameView extends SurfaceView {
                     disp.setxSpeed((int)(disp.getxSpeed()*-5));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
-                soundPool.play(idDisparoMisil,0,(float)0.2,0,0,1);
+                soundPool.play(idDisparoMisil,0,(float)0.09,4,0,1);
             }
         }else if(ran==2) {
             if(ran2==1){
                 disp=new Disparo(this,bombaArriba,2,ran,10);
-                soundPool.play(idDisparoBomba,(float)0.1,(float)0.1,0,0,1);
+                soundPool.play(idDisparoBomba,(float)0.07,(float)0.07,4,0,1);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
                     disp.setxSpeed((int)(disp.getxSpeed()*1.2));
@@ -418,12 +428,12 @@ public class GameView extends SurfaceView {
                     disp.setySpeed((int)(disp.getySpeed()*5));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
-                soundPool.play(idDisparoMisil,(float)0.1,(float)0.1,0,0,1);
+                soundPool.play(idDisparoMisil,(float)0.07,(float)0.07,4,0,1);
             }
         }else if(ran==3){
             if(ran2==1){
                 disp=new Disparo(this,bombaDrcha,2,ran,10);
-                soundPool.play(idDisparoBomba,(float)0.1,0,0,0,1);
+                soundPool.play(idDisparoBomba,(float)0.09,0,4,0,1);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
                     disp.setxSpeed((int)(disp.getxSpeed()*1.2));
@@ -468,12 +478,12 @@ public class GameView extends SurfaceView {
                     disp.setxSpeed((int)(disp.getxSpeed()*5));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
-                soundPool.play(idDisparoMisil,(float)0.2,0,0,0,1);
+                soundPool.play(idDisparoMisil,(float)0.09,0,4,0,1);
             }
         }else if(ran==4) {
             if(ran2==1){
                 disp=new Disparo(this,bombaAbajo,2,ran,10);
-                soundPool.play(idDisparoBomba,(float)0.1,(float)0.1,0,0,1);
+                soundPool.play(idDisparoBomba,(float)0.07,(float)0.07,4,0,1);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
                     disp.setxSpeed((int)(disp.getxSpeed()*1.2));
@@ -518,7 +528,7 @@ public class GameView extends SurfaceView {
                     disp.setySpeed((int)(disp.getySpeed()*-5));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
-                soundPool.play(idDisparoMisil,(float)0.1,(float)0.1,0,0,1);
+                soundPool.play(idDisparoMisil,(float)0.07,(float)0.07,4,0,1);
             }
         }else{
             disp=null;
@@ -578,6 +588,18 @@ public class GameView extends SurfaceView {
                         monedas.get(i).draw(canvas);
                         if (monedas.get(i).isCollition(getJug())) {
                             sumarPuntos(monedas.get(i).getPuntos());
+                            if(monedas.get(i).getPuntos()==1){
+                                soundPool.play(idCoin1,(float)0.4,(float)0.4,1,0,1);
+                            }
+                            else if(monedas.get(i).getPuntos()==2){
+                                soundPool.play(idCoin2,(float)0.5,(float)0.5,1,0,1);
+                            }
+                            else if(monedas.get(i).getPuntos()==5){
+                                soundPool.play(idCoin5,1,1,1,0,1);
+                            }
+                            else if(monedas.get(i).getPuntos()==10){
+                                soundPool.play(idCoin10,1,1,1,0,1);
+                            }
                             monedas.remove(monedas.get(i));
                         }
                     }
@@ -586,17 +608,17 @@ public class GameView extends SurfaceView {
                 for(int i=0;i<tickets.size();i++){
                     tickets.get(i).draw(canvas);
                     if(tickets.get(i).isCollition(getJug())) {
-                        conseguido=true;
+                        soundPool.play(idWin,(float)0.5,(float)0.5,0,0,1);
                         tickets.remove(tickets.get(i));
+                        conseguido=true;
                     }
                 }
             }
             for (int i = 0; i < disparos.size(); i++) {
                     disparos.get(i).draw(canvas);
                     if (disparos.get(i).isCollition(getJug())) {
-                        soundPool.play(idContacto,1,1,0,0,1);
-                        soundPool.play(idCaeMoneda,(float)0.4,(float)0.4,1,0,1);
-                        soundPool.play(idGrito,(float)0.5,(float)0.5,2,0,1);
+                        soundPool.play(idCaeMoneda,(float)0.4,(float)0.4,2,0,1);
+                        soundPool.play(idGrito,(float)0.5,(float)0.5,1,0,1);
                         restarVida(disparos.get(i).getVida());
                         restaPuntos(disparos.get(i).getPuntos());
                         disparos.remove(disparos.get(i));
@@ -645,6 +667,7 @@ public class GameView extends SurfaceView {
         else{
             conseguido=false;
             finalizar=true;
+            soundPool.play(idGameOver,1,1,0,0,1);
         }
         if(conseguido){
             getContexto().runOnUiThread(new Runnable() {
@@ -778,7 +801,6 @@ public class GameView extends SurfaceView {
         loop.setRunning(false);
         musica.stop();
         musica.release();
-        getContexto().onPause();
     }
 
     private void sumarPuntos(int puntos){
