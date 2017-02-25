@@ -22,8 +22,8 @@ import es.riberadeltajo.refugiadosgame.R;
 public class GameView2 extends SurfaceView implements View.OnTouchListener {
 
     private final int MARGENES=20;
-    private final int TIEMPO_MAX = 30;
-    private final int NUM_MONEDAS=10;
+    private final int TIEMPO_MAX = 45;
+    private final int NUM_MONEDAS=15;
     private Bitmap player;
     private SurfaceHolder holder;
     private GameLoopThread2 loop;
@@ -139,6 +139,14 @@ public class GameView2 extends SurfaceView implements View.OnTouchListener {
 
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
+    }
+
+    public GameLoopThread2 getLoop() {
+        return loop;
+    }
+
+    public void setLoop(GameLoopThread2 loop) {
+        this.loop = loop;
     }
 
     public long getCrono() {
@@ -260,11 +268,11 @@ public class GameView2 extends SurfaceView implements View.OnTouchListener {
             canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(),paint);
             paint.setColor(Color.RED);
             if(ganado){
-                canvas.drawText("¡Has ganado!",20,500,paint);
+                canvas.drawText(getResources().getString(R.string.milan_ganado),20,500,paint);
                 finalizar();
             }
             else{
-                canvas.drawText("¡Has perdido!",20,500,paint);
+                canvas.drawText(getResources().getString(R.string.milan_perdido),20,500,paint);
                 finalizar();
 
             }
@@ -298,10 +306,11 @@ public class GameView2 extends SurfaceView implements View.OnTouchListener {
     }
 
 
-    private void finalizar() {
+    public void finalizar() {
 
         banderaLoop=true;
         loop.setRunning(false);
+        fin();
 
 
 

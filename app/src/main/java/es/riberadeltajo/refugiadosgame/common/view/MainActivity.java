@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     public void ruta2(View view) {
         Intent i = new Intent(this,Milan.class);
         /*i.putExtra("STATUS",status);
-        startActivityForResult(i,RUTA2);
-        startActivity(i);*/
+        startActivityForResult(i,RUTA2);*/
+        startActivity(i);
     }
 
     public void ruta3(View view) {

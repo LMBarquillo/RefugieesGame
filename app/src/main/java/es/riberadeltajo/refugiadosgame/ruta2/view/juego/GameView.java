@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -29,6 +31,7 @@ public class GameView extends SurfaceView {
     private ArrayList<Boton> botones;
     private Bitmap fondo;
     private milan_juego actividad;
+    private boolean ayuda;
 
 
     public GameView(Context context) {
@@ -39,6 +42,7 @@ public class GameView extends SurfaceView {
 
         setFondo(resource);
         setActividad((milan_juego)context);
+        setAyuda(false);
 
 
         holder=getHolder();
@@ -113,6 +117,14 @@ public class GameView extends SurfaceView {
         this.fondo = fondo;
     }
 
+    public boolean isAyuda() {
+        return ayuda;
+    }
+
+    public void setAyuda(boolean ayuda) {
+        this.ayuda = ayuda;
+    }
+
     public GameLoopThread getLoop() {
         return loop;
     }
@@ -123,20 +135,24 @@ public class GameView extends SurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction()== MotionEvent.ACTION_DOWN){
-            synchronized ((getHolder())){
-                for (Boton p:botones){
-                    if (p.isCollition(event.getX(), event.getY())){
-                        if(p.getAccion().equals(Boton.ACTION_HELP)){
-                            ayuda();
+        if (event.getAction()== MotionEvent.ACTION_DOWN) {
+            if (isAyuda()) {
+                setAyuda(false);
+
+            } else {
+                synchronized ((getHolder())) {
+
+                    for (Boton p : botones) {
+                        if (p.isCollition(event.getX(), event.getY())) {
+                            if (p.getAccion().equals(Boton.ACTION_HELP)) {
+                                ayuda();
+                            } else if (p.getAccion().equals(Boton.ACTION_EXIT)) {
+                                salir();
+                            } else if (p.getAccion().equals(Boton.ACTION_PLAY)) {
+                                jugar();
+                            }
+                            break;
                         }
-                        else if(p.getAccion().equals(Boton.ACTION_EXIT)){
-                            salir();
-                        }
-                        else if(p.getAccion().equals(Boton.ACTION_PLAY)){
-                            jugar();
-                        }
-                        break;
                     }
                 }
             }
@@ -146,9 +162,11 @@ public class GameView extends SurfaceView {
         return true;
     }
     public void ayuda(){
+        setAyuda(true);
 
     }
     public void salir(){
+        loop.setRunning(false);
         Intent i=new Intent();
         i.putExtra("resultado", false);
         actividad.setResult(Activity.RESULT_OK, i);
@@ -177,7 +195,20 @@ public class GameView extends SurfaceView {
         for (Boton p : getBotones())
                 p.onDraw(canvas);
 
+        if(isAyuda()){
+            Paint paint = new Paint();
+            paint.setTextSize(60);
+            paint.setARGB(150,0,0,0);
+            canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(),paint);
+            paint.setColor(Color.RED);
+            canvas.drawText(getResources().getString(R.string.milan_help),20,300,paint);
+            canvas.drawText(getResources().getString(R.string.milan_help2),20,500,paint);
+            canvas.drawText(getResources().getString(R.string.milan_help3),20,700,paint);
+
+        }
+
     }
+
 
 
 

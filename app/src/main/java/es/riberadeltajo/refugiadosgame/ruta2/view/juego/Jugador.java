@@ -277,7 +277,7 @@ public class Jugador {
         //canvas.drawBitmap(bmp, getCorx(), getCory(), null);
     }
     public boolean isCollition(float x2, float y2){
-        //Comprueba si está en las coordenadas que se le pasan, que son las del dedo pulsado
+
         boolean comprobar=false;
         if(x2>corx && x2<(corx+width) && y2>cory && y2<(cory+height)){
             comprobar=true;

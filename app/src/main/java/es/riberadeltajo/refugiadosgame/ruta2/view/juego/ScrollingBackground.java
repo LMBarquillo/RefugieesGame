@@ -297,11 +297,12 @@ public class ScrollingBackground {
 
         synchronized (getGameview2().getHolder()) {
             for (int i = getBichos().size()-1; i >= 0; i--) {
-                if (getJugador().isCollition(getBichos().get(i).getCorx()+getBichos().get(i).getxInicio()+getBichos().get(i).getxSpeed()+getBichos().get(i).getWidth(),
+                if (getJugador().isCollition(getBichos().get(i).getCorx()+getBichos().get(i).getxInicio()+getBichos().get(i).getxSpeed()+(getBichos().get(i).getWidth()/2),
                         getBichos().get(i).getCory())
                         ) {
                     getTemporales().add(new Temporales(getTemporales(),getGameview2(),
-                            getBichos().get(i).getCorx()+getBichos().get(i).getWidth(),getBichos().get(i).getCory(),getExplosion()));
+                            getBichos().get(i).getCorx()+getBichos().get(i).getWidth()+getBichos().get(i).getxInicio()
+                            ,getBichos().get(i).getCory(),getExplosion()));
 
                     getBichos().remove(i);
                     getJugador().setVidas(getJugador().getVidas()-1);
