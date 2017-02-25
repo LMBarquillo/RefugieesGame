@@ -255,12 +255,12 @@ public class Jugador {
             if(getCory()>=getCoryinicio()){
                 setDescendiendo(false);
                 setSaltando(false);
-                setEnMarcha(false);
+
 
             }
 
         }
-        if(isEnMarcha() && !isSaltando()) {
+        if(isEnMarcha()) {
 
         update();
 
@@ -296,7 +296,7 @@ public class Jugador {
 
     }
     public void saltar(){
-        setEnMarcha(true);
+
         setSaltando(true);
 
 

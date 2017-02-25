@@ -239,13 +239,13 @@ public class ScrollingBackground {
             x = fondo.getWidth() - topeancho;
         }
         for (Monedas p:getMonedas()){
-            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 3.5)));
+            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 4)));
         }
         for (Bichos p:getBichos()){
-            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 3.5)));
+            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 4)));
         }
         for(Temporales p:getTemporales()){
-            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 3.5)));
+            p.setCorx(p.getCorx()- ((int) (VELOCIDAD * 4)));
         }
 
 
@@ -259,13 +259,13 @@ public class ScrollingBackground {
             x = 0;
         } else {
             for (Monedas p : getMonedas()) {
-                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 3.5)));
+                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 4)));
             }
             for (Bichos p : getBichos()) {
-                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 3.5)));
+                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 4)));
             }
             for (Temporales p : getTemporales()) {
-                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 3.5)));
+                p.setCorx(p.getCorx() + ((int) (VELOCIDAD * 4)));
             }
 
         }
