@@ -12,17 +12,18 @@ import android.media.MediaPlayer;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import java.util.ArrayList;
 
 import es.riberadeltajo.refugiadosgame.R;
 
 
-public class GameView2 extends SurfaceView {
+public class GameView2 extends SurfaceView implements View.OnTouchListener {
 
     private final int MARGENES=20;
-    private final int TIEMPO_MAX = 30;
-    private final int NUM_MONEDAS=10;
+    private final int TIEMPO_MAX = 45;
+    private final int NUM_MONEDAS=15;
     private Bitmap player;
     private SurfaceHolder holder;
     private GameLoopThread2 loop;
@@ -39,11 +40,13 @@ public class GameView2 extends SurfaceView {
     private boolean terminado;
     private boolean ganado;
     private boolean banderaLoop;
+    private int coordenadas1[];
+    private int coordenadas2[];
 
 
 
 
-    public GameView2(Context context) {
+    public GameView2(Context context){
         super(context);
         loop = new GameLoopThread2(this);
         puntuacion = 0;
@@ -56,6 +59,13 @@ public class GameView2 extends SurfaceView {
         terminado=false;
         ganado=false;
         banderaLoop=false;
+        coordenadas1=new int[2];
+        coordenadas2=new int[2];
+        coordenadas1[0]=-1;
+        coordenadas1[1]=-1;
+        coordenadas2[0]=-1;
+        coordenadas2[1]=-1;
+        setOnTouchListener(this);
 
 
 
@@ -129,6 +139,14 @@ public class GameView2 extends SurfaceView {
 
     public void setJugador(Jugador jugador) {
         this.jugador = jugador;
+    }
+
+    public GameLoopThread2 getLoop() {
+        return loop;
+    }
+
+    public void setLoop(GameLoopThread2 loop) {
+        this.loop = loop;
     }
 
     public long getCrono() {
@@ -250,11 +268,11 @@ public class GameView2 extends SurfaceView {
             canvas.drawRect(0,0,canvas.getWidth(),canvas.getHeight(),paint);
             paint.setColor(Color.RED);
             if(ganado){
-                canvas.drawText("¡Has ganado!",20,500,paint);
+                canvas.drawText(getResources().getString(R.string.milan_ganado),20,500,paint);
                 finalizar();
             }
             else{
-                canvas.drawText("¡Has perdido!",20,500,paint);
+                canvas.drawText(getResources().getString(R.string.milan_perdido),20,500,paint);
                 finalizar();
 
             }
@@ -288,10 +306,11 @@ public class GameView2 extends SurfaceView {
     }
 
 
-    private void finalizar() {
+    public void finalizar() {
 
         banderaLoop=true;
         loop.setRunning(false);
+        fin();
 
 
 
@@ -353,45 +372,105 @@ public class GameView2 extends SurfaceView {
 
     }
 
+
+
+
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN && !terminado) {
-            synchronized ((getHolder())) {
-                for (Boton p:botones){
-                    if (p.isCollition(event.getX(), event.getY())){
-                        if(p.getAccion().equals(Boton.ACTION_UP)){
-                            getJugador().saltar();
+    public boolean onTouch(View v, MotionEvent event) {
+        int action= event.getAction() & MotionEvent.ACTION_MASK;
+        int pointerIndex=(event.getAction()&MotionEvent.ACTION_POINTER_INDEX_MASK)>>MotionEvent.ACTION_POINTER_INDEX_SHIFT;
 
-                        }
-                        else if(p.getAccion().equals(Boton.ACTION_AVANCE)){
-                            getJugador().avanzar();
-                            getFondo().avanzarX();
-
-
-
-                        }
-                        else if(p.getAccion().equals(Boton.ACTION_ATRAS)){
-                            getJugador().atras();
-                            getFondo().retrocederX();
-
-
-                        }
-                        break;
-                    }
+        switch(action){
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN:
+                if(pointerIndex==0){
+                    coordenadas1[0]=(int)event.getX(pointerIndex);
+                    coordenadas1[1]=(int)event.getY(pointerIndex);
+                }else{
+                    coordenadas2[0]=(int)event.getX(pointerIndex);
+                    coordenadas2[1]=(int)event.getY(pointerIndex);
 
                 }
 
+                    for (Boton p:getBotones()){
+                        if (p.isCollition(event.getX(pointerIndex), event.getY(pointerIndex))){
+                            if(p.getAccion().equals(Boton.ACTION_UP)){
+                                getJugador().saltar();
 
-            }
+                            }
+                            else if(p.getAccion().equals(Boton.ACTION_AVANCE)){
+                                getJugador().avanzar();
+                                getFondo().avanzarX();
 
 
-        }if(event.getAction() == MotionEvent.ACTION_UP){
-            getJugador().parar();
+
+                            }
+                            else if(p.getAccion().equals(Boton.ACTION_ATRAS)){
+                                getJugador().atras();
+                                getFondo().retrocederX();
+
+
+                            }
+                        }
+
+                    }
+
+
+
+
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP:
+                if(pointerIndex==0){
+                    coordenadas1[0]=-1;
+                    coordenadas1[1]=-1;
+
+                }else{
+                    coordenadas2[0]=-1;
+                    coordenadas2[1]=-1;
+
+                }
+
+                    for (Boton p:getBotones()){
+                        if (p.isCollition(event.getX(pointerIndex), event.getY(pointerIndex))){
+                            if(p.getAccion().equals(Boton.ACTION_UP)){
+
+
+                            }
+                            else if(p.getAccion().equals(Boton.ACTION_AVANCE)){
+                                getJugador().parar();
+
+
+
+
+                            }
+                            else if(p.getAccion().equals(Boton.ACTION_ATRAS)){
+                                getJugador().parar();
+
+
+
+                            }
+
+                        }
+
+                    }
+
+
+
+
+
+                break;
+
+
+
+
+
         }
 
-        return true;
-    }
 
+        return true;
+
+    }
 }
 
 
