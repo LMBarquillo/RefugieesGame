@@ -241,7 +241,7 @@ public class GameView extends SurfaceView implements Observer {
                         new DialogFinT(getTh(), DialogFinT.Tipo.LOSE).show();
                     }
                 });
-
+                getLoop().setRunning(false);
             }
             else{                       //WINNER
                 getTh().stopMusic();

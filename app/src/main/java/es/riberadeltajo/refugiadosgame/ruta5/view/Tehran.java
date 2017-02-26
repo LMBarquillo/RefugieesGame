@@ -61,6 +61,7 @@ public class Tehran extends Activity {
             musica.release();
         }
         setContentView(new GameView(this, PlayerStatus.getInstancia(this).isFabrica()));
+        onResume();
     }
 
     public void goToNextLevel() {
