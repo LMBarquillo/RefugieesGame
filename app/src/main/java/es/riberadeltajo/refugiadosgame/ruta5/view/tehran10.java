@@ -29,6 +29,8 @@ public class tehran10 extends AppCompatActivity implements View.OnClickListener{
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+        PlayerStatus.getInstancia(this).setRuta(5);
+        PlayerStatus.getInstancia(this).setTramo(10);
         setContentView(R.layout.activity_una_opcion);
         getWindow().getDecorView().setBackgroundResource(R.drawable.fondoteheran); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
