@@ -592,7 +592,7 @@ public class GameView extends SurfaceView {
                                 soundPool.play(idCoin1,(float)0.4,(float)0.4,1,0,1);
                             }
                             else if(monedas.get(i).getPuntos()==2){
-                                soundPool.play(idCoin2,(float)0.5,(float)0.5,1,0,1);
+                                soundPool.play(idCoin2,(float)0.4,(float)0.4,1,0,1);
                             }
                             else if(monedas.get(i).getPuntos()==5){
                                 soundPool.play(idCoin5,1,1,1,0,1);
