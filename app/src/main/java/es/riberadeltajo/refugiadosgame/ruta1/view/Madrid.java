@@ -44,8 +44,10 @@ public class Madrid extends AppCompatActivity {
     }
 
     public void jugar(View v){
-        musica.stop();
-        musica.release();
+        if(musica!=null) {
+            musica.stop();
+            musica.release();
+        }
         gameView=new GameView(this);
         setContentView(gameView);
     }
@@ -55,9 +57,6 @@ public class Madrid extends AppCompatActivity {
             musica.stop();
             musica.release();
         }
-        musica=MediaPlayer.create(this,R.raw.madrid_easy);
-        musica.setLooping(true);
-        musica.start();
         gameView=new GameView(this);
         setContentView(gameView);
     }
@@ -83,15 +82,15 @@ public class Madrid extends AppCompatActivity {
 
     public void onPause(){
         super.onPause();
-        //onStop();
-    }
-
-    public void onStop(){
-        super.onStop();
         if(musica!=null){
             musica.stop();
             musica.release();
         }
+        onStop();
+    }
+
+    public void onStop(){
+        super.onStop();
     }
 
     public void onDestroy(){

@@ -24,6 +24,45 @@
         <activity
             android:name=".ruta1.view.view.Madrid_Trans"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Milan_1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Milan_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Milan_3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Passport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Peso_1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Peso_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Peso_Else_1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Peso_Else_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Pie"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Pie_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Rueda_1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Rueda_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Wait"
+            android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.Milan" />
         <activity
             android:name=".ruta3.view.arcade.SarajevoArcade"

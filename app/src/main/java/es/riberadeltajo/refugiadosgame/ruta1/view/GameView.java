@@ -30,7 +30,10 @@ import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
  */
 
 public class GameView extends SurfaceView {
-    private final int TIEMPO_MAX=180;
+    private final int TIEMPO_MAX_EASY=90;
+    private final int TIEMPO_MAX_MEDIUM=90;
+    private final int TIEMPO_MAX_HARD=120;
+    private final int TIEMPO_MAX_EXTREME=150;
     private final int MAX_POINTS_EASY=150;
     private final int MAX_POINTS_MEDIUM=250;
     private final int MAX_POINTS_HARD=350;
@@ -287,7 +290,7 @@ public class GameView extends SurfaceView {
             musica.setVolume(0.5f,0.5f);
             musica.setLooping(true);
             musica.start();
-            for(int i=0;i<10;i++){
+            for(int i=0;i<8;i++){
                 disparos.add(getDisparos());
             }
             for(int i=0;i<88;i++) {
@@ -549,7 +552,22 @@ public class GameView extends SurfaceView {
         paint.setTypeface(font);
         paint.setTextAlign(Paint.Align.LEFT);
         canvas.drawBitmap(sandClock,(float)(getWidth()*0.05),(float)(getHeight()*0.035),null);
-        canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
+        //NIVEL FÁCIL
+        if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_EASY-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
+        }
+        //NIVEL MEDIO
+        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_MEDIUM-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
+        }
+        //NIVEL DIFICIL
+        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_HARD-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
+        }
+        //NIVEL EXTREMO
+        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_EXTREME-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
+        }
         canvas.drawBitmap(life1,(float)(getWidth()*0.3),(float)(getHeight()*0.045),null);
         canvas.drawBitmap(life2,(float)(getWidth()*0.3+life1.getWidth()*1.05),(float)(getHeight()*0.045),null);
         canvas.drawBitmap(life3,(float)(getWidth()*0.3+life1.getWidth()*1.05+life2.getWidth()*1.05),(float)(getHeight()*0.045),null);
@@ -574,7 +592,10 @@ public class GameView extends SurfaceView {
         paint.setColor(Color.rgb(255,255,0));
         paint.setStyle(Paint.Style.FILL);
 
-        if((sprites.size()!=0) && getCrono()<TIEMPO_MAX && getVidas()>0) {
+        if((sprites.size()!=0) && getVidas()>0 && ((getCrono()<TIEMPO_MAX_EASY && PlayerStatus.getInstancia(getContexto()).getDinero()==350)
+                || (getCrono()<TIEMPO_MAX_MEDIUM && PlayerStatus.getInstancia(getContexto()).getDinero()==250)
+                || (getCrono()<TIEMPO_MAX_HARD&& PlayerStatus.getInstancia(getContexto()).getDinero()==150)
+                || (getCrono()<TIEMPO_MAX_EXTREME && PlayerStatus.getInstancia(getContexto()).getDinero()==50))) {
             actual=System.currentTimeMillis();
             for (Sprite miSprite : sprites) {
                 miSprite.draw(canvas);
@@ -645,7 +666,22 @@ public class GameView extends SurfaceView {
                 setCrono((actual - inicio) / 1000);
             }
             paint.setTextAlign(Paint.Align.LEFT);
-            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
+            //NIVEL FÁCIL
+            if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
+                canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_EASY-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
+            }
+            //NIVEL MEDIO
+            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
+                canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_MEDIUM-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
+            }
+            //NIVEL DIFICIL
+            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
+                canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_HARD-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
+            }
+            //NIVEL EXTREMO
+            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
+                canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_EXTREME-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
+            }
             paint.setTextAlign(Paint.Align.RIGHT);
             //NIVEL FÁCIL
             if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {

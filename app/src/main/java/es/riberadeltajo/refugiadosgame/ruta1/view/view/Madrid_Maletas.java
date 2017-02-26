@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 
 public class Madrid_Maletas extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
@@ -40,7 +41,7 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText("Historia");
+        texto.setText(R.string.madrid_maletas);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -51,8 +52,8 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
         descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
-        descOpc1.setText("SUITCASE A");
-        descOpc2.setText("SUITCASE B");
+        descOpc1.setText(R.string.madrid_maletas_desc1);
+        descOpc2.setText(R.string.madrid_maletas_desc2);
         opc1.setImageResource(R.drawable.madrid_maleta1); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.madrid_maleta2); //Imagen para la opción 2
         opc1.setOnClickListener(this);
@@ -104,7 +105,8 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
     }
 
     public void goBack(){
-        this.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     public void goNext(){
@@ -112,11 +114,13 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
             PlayerStatus.getInstancia(this).setDinero(450);
             PlayerStatus.getInstancia(this).setObjeto(1);
             startActivity(new Intent(this, Madrid_Trans.class));
+            finish();
         }
         else if(cont==OPCION_B){
             PlayerStatus.getInstancia(this).setDinero(250);
             PlayerStatus.getInstancia(this).setObjeto(0);
             startActivity(new Intent(this, Madrid_Trans.class));
+            finish();
         }
     }
 }

@@ -14,10 +14,43 @@
 
     <!-- Madrid-Milán -->
     <string name="route1">Madrid-Milan</string>
-    <string name="madrid_autores">Adrián Portela Ortiz\nJosé Carlos Sáncez Pérez</string>
+    <string name="madrid_autores">Adrián Portela Ortiz\nJosé Carlos Sánchez Pérez</string>
     <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
     <string name="madrid_lose_mensaje">You do not acquired the ticket. Try again?</string>
     <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
+
+    <string name="madrid_maletas_desc1">SUITCASE A</string>
+    <string name="madrid_maletas_desc2">SUITCASE B</string>
+
+    <string name="madrid_trans_desc1">LORRY: PAY 300</string>
+    <string name="madrid_trans_desc2">STEAL A CAR</string>
+    <string name="madrid_trans_toast">You do not have enough money to choose this transport</string>
+
+    <string name="madrid_peso2_desc1"></string>
+    <string name="madrid_peso2_desc2"></string>
+    <string name="madrid_peso2_desc3"></string>
+
+    <string name="madrid_passport_desc1">YOU HAVE ONE</string>
+    <string name="madrid_passport_desc2">YOU PAY 100 TO BUY A FAKE ONE</string>
+    <string name="madrid_passport_toast1">You do not have a passport</string>
+    <string name="madrid_passport_toast2">You already have a passport!</string>
+
+    <string name="madrid_main"></string>
+    <string name="madrid_maletas"></string>
+    <string name="madrid_trans"></string>
+    <string name="madrid_peso1"></string>
+    <string name="madrid_peso2"></string>
+    <string name="madrid_peso_else1"></string>
+    <string name="madrid_peso_else2"></string>
+    <string name="madrid_milan1"></string>
+    <string name="madrid_rueda1"></string>
+    <string name="madrid_rueda2"></string>
+    <string name="madrid_pie"></string>
+    <string name="madrid_pie2">After a few days, you have met some people on the way and this time you decide to go with them, but do you have your passport?</string>
+    <string name="madrid_passport"></string>
+    <string name="madrid_milan2"></string>
+    <string name="madrid_wait"></string>
+    <string name="madrid_milan3"></string>
 
     <!-- Milán-Sarajevo -->
     <string name="route2">Milan-Sarajevo</string>
