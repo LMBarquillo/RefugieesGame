@@ -121,6 +121,7 @@ public class Madrid_Passport extends AppCompatActivity implements View.OnClickLi
 
     public void goNext(){
         if(cont==OPCION_A){
+            PlayerStatus.getInstancia(this).setObjeto(0);
             startActivity(new Intent(this, Madrid_Milan_2.class));
             finish();
         }

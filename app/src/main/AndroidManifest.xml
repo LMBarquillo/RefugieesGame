@@ -19,6 +19,9 @@
             android:name=".ruta1.view.Madrid"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ruta1.view.view.Madrid_Main"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ruta1.view.view.Madrid_Maletas"
             android:screenOrientation="portrait" />
         <activity

@@ -112,13 +112,13 @@ public class Madrid_Maletas extends AppCompatActivity implements View.OnClickLis
     public void goNext(){
         if(cont==OPCION_A){
             PlayerStatus.getInstancia(this).setDinero(450);
-            PlayerStatus.getInstancia(this).setObjeto(1);
+            PlayerStatus.getInstancia(this).setObjeto(0);
             startActivity(new Intent(this, Madrid_Trans.class));
             finish();
         }
         else if(cont==OPCION_B){
             PlayerStatus.getInstancia(this).setDinero(250);
-            PlayerStatus.getInstancia(this).setObjeto(0);
+            PlayerStatus.getInstancia(this).setObjeto(1);
             startActivity(new Intent(this, Madrid_Trans.class));
             finish();
         }

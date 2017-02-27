@@ -38,7 +38,8 @@ public class GameView extends SurfaceView {
     private final int MAX_POINTS_MEDIUM=250;
     private final int MAX_POINTS_HARD=350;
     private final int MAX_POINTS_EXTREME=450;
-    private Bitmap player,coin1,coin2,coin5,coin10,fondo,ticket,life1,life2,life3,moneyBag,sandClock,bombaArriba,bombaAbajo,bombaDrcha,bombaIzqda;
+    private Bitmap player,coin1,coin2,coin5,coin10,fondo,ticket,life1,life2,life3,
+            moneyBag,sandClock,bombaArriba,bombaAbajo,bombaDrcha,bombaIzqda,fuegoArriba,fuegoAbajo,fuegoDrcha,fuegoIzqda;
     private SurfaceHolder holder;
     private ArrayList<Disparo> disparos;
     private ArrayList<Disparo>misiles;
@@ -54,7 +55,6 @@ public class GameView extends SurfaceView {
     private Madrid contexto;
     private int vidas;
     private Typeface font;
-    private Bitmap misil,misilgirado;
     private int ran;
     private int ran2;
     private MediaPlayer musica;
@@ -199,22 +199,49 @@ public class GameView extends SurfaceView {
     //Creo las monedas de distinto valor y las barajeo para que se pinten posteriormente de forma aleatoria
     //Creo el ticket que aparecerá cuando obtenga la puntuación requerida
     public void createSprite(){
-        player=getBitmapFromAssets(getContext(),"madrid_resources/madrid_sprite.png");
-        coin1=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin1.png");
-        coin2=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin2.png");
-        coin5=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin5.png");
-        coin10=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin10.png");
-        bombaArriba=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_up.png");
-        bombaAbajo=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_down.png");
-        bombaDrcha=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_right.png");
-        bombaIzqda=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_left.png");
+        player = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_sprite);
+        player = Bitmap.createScaledBitmap(player, (int)(getWidth()*1.45), (int)(getHeight()*0.6), false);
+        coin1 = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_coin1);
+        coin1 = Bitmap.createScaledBitmap(coin1, (int)(getWidth()*0.35), (int)(getHeight()*0.035), false);
+        coin2 = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_coin2);
+        coin2 = Bitmap.createScaledBitmap(coin2, (int)(getWidth()*0.35), (int)(getHeight()*0.035), false);
+        coin5 = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_coin5);
+        coin5 = Bitmap.createScaledBitmap(coin5, (int)(getWidth()*0.35), (int)(getHeight()*0.035), false);
+        coin10 = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_coin10);
+        coin10 = Bitmap.createScaledBitmap(coin10, (int)(getWidth()*0.35), (int)(getHeight()*0.035), false);
+        bombaArriba = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_bomba_up);
+        bombaArriba = Bitmap.createScaledBitmap(bombaArriba, (int)(getWidth()*0.05), (int)(getHeight()*0.06), false);
+        bombaAbajo = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_bomba_down);
+        bombaAbajo = Bitmap.createScaledBitmap(bombaAbajo, (int)(getWidth()*0.05), (int)(getHeight()*0.06), false);
+        bombaDrcha = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_bomba_right);
+        bombaDrcha = Bitmap.createScaledBitmap(bombaDrcha, (int)(getWidth()*0.1), (int)(getHeight()*0.03), false);
+        bombaIzqda = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_bomba_left);
+        bombaIzqda = Bitmap.createScaledBitmap(bombaIzqda, (int)(getWidth()*0.1), (int)(getHeight()*0.03), false);
+        fuegoArriba = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_fire_up);
+        fuegoArriba = Bitmap.createScaledBitmap(fuegoArriba, (int)(getWidth()*0.02), (int)(getHeight()*0.03), false);
+        fuegoAbajo = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_fire_down);
+        fuegoAbajo = Bitmap.createScaledBitmap(fuegoAbajo, (int)(getWidth()*0.02), (int)(getHeight()*0.03), false);
+        fuegoDrcha = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_fire_right);
+        fuegoDrcha = Bitmap.createScaledBitmap(fuegoDrcha, (int)(getWidth()*0.06), (int)(getHeight()*0.01), false);
+        fuegoIzqda = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_fire_left);
+        fuegoIzqda = Bitmap.createScaledBitmap(fuegoIzqda, (int)(getWidth()*0.06), (int)(getHeight()*0.01), false);
+        ticket = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_ticket);
+        ticket = Bitmap.createScaledBitmap(ticket, (int)(getWidth()*0.15), (int)(getHeight()*0.05), false);
+        //player=getBitmapFromAssets(getContext(),"madrid_resources/madrid_sprite.png");
+        //coin1=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin1.png");
+        //coin2=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin2.png");
+        //coin5=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin5.png");
+        //coin10=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin10.png");
+        //bombaArriba=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_up.png");
+        //bombaAbajo=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_down.png");
+        //bombaDrcha=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_right.png");
+        //bombaIzqda=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_left.png");
         setJug(new Sprite(this,player,getVidas()));
         sprites.add(getJug());
         crearMonedasYDisparosPorDificultad();
         Collections.shuffle(getMonedas());
-        ticket=getBitmapFromAssets(getContext(),"madrid_resources/madrid_ticket.png");
+        //ticket=getBitmapFromAssets(getContext(),"madrid_resources/madrid_ticket.png");
         tickets.add(new Ticket(tickets, this, ticket));
-
     }
 
     public void crearMonedasYDisparosPorDificultad(){
@@ -290,7 +317,7 @@ public class GameView extends SurfaceView {
             musica.setVolume(0.5f,0.5f);
             musica.setLooping(true);
             musica.start();
-            for(int i=0;i<8;i++){
+            for(int i=0;i<7;i++){
                 disparos.add(getDisparos());
             }
             for(int i=0;i<88;i++) {
@@ -321,13 +348,6 @@ public class GameView extends SurfaceView {
 
         return bitmap;
     }
-
-    /*if(disparos.get(i).getBmp().equals(bombaAbajo) || disparos.get(i).getBmp().equals(bombaArriba) || disparos.get(i).getBmp().equals(bombaIzqda) || disparos.get(i).getBmp().equals(bombaDrcha)) {
-        soundPool.play(idDisparoBomba,(float)0.2,1,0,0,1);
-    }
-    else if(disparos.get(i).getBmp().equals(misil) || disparos.get(i).getBmp().equals(misilgirado)){
-        soundPool.play(idDisparoMisil,(float)0.2,1,0,0,1);
-    }*/
 
     private Disparo getDisparos() {
         ran=(int)(Math.random()*4)+1;
@@ -361,7 +381,7 @@ public class GameView extends SurfaceView {
                     disp.setPuntos(disp.getPuntos()*2);
                 }
             }else {
-                disp = new Disparo(this, misilgirado, 1, ran, 5);
+                disp = new Disparo(this, fuegoIzqda, 1, ran, 5);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
                     disp.setxSpeed((int)(disp.getxSpeed()*-2.2));
@@ -411,7 +431,7 @@ public class GameView extends SurfaceView {
                     disp.setPuntos(disp.getPuntos()*2);
                 }
             }else {
-                disp = new Disparo(this, misil, 1, ran, 5);
+                disp = new Disparo(this, fuegoArriba, 1, ran, 5);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
                     disp.setySpeed((int)(disp.getySpeed()*2.2));
@@ -461,7 +481,7 @@ public class GameView extends SurfaceView {
                     disp.setPuntos(disp.getPuntos()*2);
                 }
             }else {
-                disp = new Disparo(this, misilgirado, 1, ran, 5);
+                disp = new Disparo(this, fuegoDrcha, 1, ran, 5);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
                     disp.setxSpeed((int)(disp.getxSpeed()*2.2));
@@ -511,7 +531,7 @@ public class GameView extends SurfaceView {
                     disp.setPuntos(disp.getPuntos()*2);
                 }
             }else {
-                disp = new Disparo(this, misil, 1, ran, 5);
+                disp = new Disparo(this, fuegoAbajo, 1, ran, 5);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
                     disp.setySpeed((int)(disp.getySpeed()*-2.2));
@@ -822,10 +842,6 @@ public class GameView extends SurfaceView {
         moneyBag = Bitmap.createScaledBitmap(moneyBag, (int)(getWidth()*0.08), (int)(getHeight()*0.06), false);
         sandClock=BitmapFactory.decodeResource(getResources(),R.drawable.madrid_clock);
         sandClock = Bitmap.createScaledBitmap(sandClock, (int)(getWidth()*0.065), (int)(getHeight()*0.06), false);
-        misil=BitmapFactory.decodeResource(getResources(),R.drawable.disparo);
-        misilgirado=BitmapFactory.decodeResource(getResources(),R.drawable.disparos2);
-        //bomba=BitmapFactory.decodeResource(getResources(),R.drawable.misil23);
-        //bombagirado=BitmapFactory.decodeResource(getResources(),R.drawable.misil23girado);
         createSprite();
         if (loop.getState() == Thread.State.NEW) {
             loop.start();
