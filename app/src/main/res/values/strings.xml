@@ -26,12 +26,12 @@
     <string name="madrid_trans_desc2">STEAL A CAR</string>
     <string name="madrid_trans_toast">You do not have enough money to choose this transport</string>
 
-    <string name="madrid_peso2_desc1">WATER AND FOOD</string>
-    <string name="madrid_peso2_desc2">A BLANKET</string>
-    <string name="madrid_peso2_desc3">OBJECTS WITH SENTIMENTAL VALUE</string>
+    <string name="madrid_peso2_desc1">FOODS</string>
+    <string name="madrid_peso2_desc2">BLANKETS</string>
+    <string name="madrid_peso2_desc3">MEMORIES</string>
 
     <string name="madrid_passport_desc1">YOU HAVE ONE</string>
-    <string name="madrid_passport_desc2">YOU PAY 100€ TO BUY A FAKE ONE</string>
+    <string name="madrid_passport_desc2">FAKE ONE: 100€</string>
     <string name="madrid_passport_toast1">You do not have a passport</string>
     <string name="madrid_passport_toast2">You already have a passport!</string>
 
