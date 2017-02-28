@@ -36,6 +36,8 @@ public class SarajevoPasillo extends AppCompatActivity implements View.OnClickLi
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+        PlayerStatus.getInstancia(this).setRuta(3);
+        PlayerStatus.getInstancia(this).setTramo(2);
         setContentView(R.layout.activity_cuatro_opciones);
         getWindow().getDecorView().setBackgroundResource(R.drawable.sarajevofondohistoria); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
@@ -73,6 +75,7 @@ public class SarajevoPasillo extends AppCompatActivity implements View.OnClickLi
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
         opc3.setOnClickListener(this);
+        opc4.setOnClickListener(this);
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
