@@ -48,9 +48,9 @@ public class Modelo_Cuatro_Opciones extends AppCompatActivity implements View.On
         objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
-        descOpc1=(TextView) findViewById(R.id.txtOpc1Descr); //TextView para descripción de la opción 1
-        descOpc2=(TextView) findViewById(R.id.txtOpc2Descr); //TextView para descripción de la opción 2
-        descOpc3=(TextView) findViewById(R.id.txtOpc3Descr); //TextView para descripción de la opción 3
+        descOpc1=(TextView) findViewById(R.id.txtOpc1Desc); //TextView para descripción de la opción 1
+        descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
+        descOpc3=(TextView) findViewById(R.id.txtOpc3Desc); //TextView para descripción de la opción 3
         descOpc4=(TextView) findViewById(R.id.txtOpc4Desc); //TextView para descripción de la opción 3
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
