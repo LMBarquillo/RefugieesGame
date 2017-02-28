@@ -9,13 +9,11 @@ import android.os.Bundle;
 public class milan_juego extends Activity {
 
     private int reques_code=1;
-    GameView pantalla;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pantalla=new GameView(this);
-        setContentView(pantalla);
+        setContentView(new GameView(this));
 
 
     }
@@ -28,8 +26,8 @@ public class milan_juego extends Activity {
                 if(resultado){
                     Intent i=new Intent();
                     i.putExtra("resultado", resultado);
-                   setResult(Activity.RESULT_OK, i);
-                   finish();
+                    setResult(Activity.RESULT_OK, i);
+                    finish();
                 }
                 else{
                     setContentView(new GameView(this));
@@ -38,23 +36,5 @@ public class milan_juego extends Activity {
 
             }
         }
-    }
-    @Override
-    protected void onPause(){
-
-        pantalla.salir();
-        super.onPause();
-
-
-    }
-    @Override
-    protected void onStop(){
-        pantalla.salir();
-        super.onStop();
-    }
-    @Override
-    protected void onDestroy(){
-        pantalla.salir();
-        super.onDestroy();
     }
 }
