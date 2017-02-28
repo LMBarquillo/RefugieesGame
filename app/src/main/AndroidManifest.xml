@@ -19,10 +19,52 @@
             android:name=".ruta1.view.Madrid"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ruta1.view.view.Madrid_Main"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ruta1.view.view.Madrid_Maletas"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ruta1.view.view.Madrid_Trans"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Milan_1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Milan_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Milan_3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Passport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Peso_1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Peso_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Peso_Else_1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Peso_Else_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Pie"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Pie_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Rueda_1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Rueda_2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta1.view.view.Madrid_Wait"
             android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.Milan" />
         <activity
@@ -75,13 +117,27 @@
         <activity android:name=".ruta2.view.juego.milan_juego2" />
         <activity android:name=".ruta5.view.teheran_main2" />
         <activity android:name=".common.view.MainActivity2" />
-        <activity android:name=".ruta3.view.ruta.SarajevoAlojamiento" />
-        <activity android:name=".ruta3.view.ruta.SarajevoPasillo" />
-        <activity android:name=".ruta3.view.ruta.SarajevoChino" />
-        <activity android:name=".ruta3.view.ruta.SarajevoMejicano" />
-        <activity android:name=".ruta3.view.ruta.SarajevoAfricano" />
-        <activity android:name=".ruta3.view.ruta.SarajevoHabitacion" />
-        <activity android:name=".ruta3.view.ruta.SarajevoBanda" />
+        <activity android:name=".ruta3.view.ruta.SarajevoAlojamiento"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta3.view.ruta.SarajevoPasillo"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta3.view.ruta.SarajevoChino"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta3.view.ruta.SarajevoMejicano"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta3.view.ruta.SarajevoAfricano"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta3.view.ruta.SarajevoHabitacion"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta3.view.ruta.SarajevoBanda"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

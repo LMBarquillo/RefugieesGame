@@ -254,7 +254,7 @@ public class Sprite {
 
     //Calculo el desplazamiento en diagonal inversamente proporcional
     private void calcularDiagonal(){
-        float trayectoX,trayectoY,velX,velY;
+        float trayectoX,trayectoY,velX,velY,vx,vy,x,y;
 
         if(getPosX()>getCorx()) {
             trayectoX = getPosX() - getCorx();
@@ -284,8 +284,12 @@ public class Sprite {
                 velY=0;
             }
         }
-        setxSpeed(velX);
-        setySpeed(velY);
+        x=velX/1080;
+        y=velY/1920;
+        vx=getGameView().getWidth()*x;
+        vy=getGameView().getHeight()*y;
+        setxSpeed(vx);
+        setySpeed(vy);
     }
 
     //Dibujo el rectángulo y actualizo si el touch es true o no lo hago si es false

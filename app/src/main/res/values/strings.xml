@@ -14,10 +14,44 @@
 
     <!-- Madrid-Milán -->
     <string name="route1">Madrid-Milan</string>
-    <string name="madrid_autores">Adrián Portela Ortiz\nJosé Carlos Sáncez Pérez</string>
+    <string name="madrid_autores">Adrián Portela Ortiz\nJosé Carlos Sánchez Pérez</string>
     <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
     <string name="madrid_lose_mensaje">You do not acquired the ticket. Try again?</string>
     <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
+
+    <string name="madrid_maletas_desc1">SUITCASE A</string>
+    <string name="madrid_maletas_desc2">SUITCASE B</string>
+
+    <string name="madrid_trans_desc1">LORRY: PAY 300€</string>
+    <string name="madrid_trans_desc2">STEAL A CAR</string>
+    <string name="madrid_trans_toast">You do not have enough money to choose this transport</string>
+
+    <string name="madrid_peso2_desc1">WATER AND FOOD</string>
+    <string name="madrid_peso2_desc2">A BLANKET</string>
+    <string name="madrid_peso2_desc3">OBJECTS WITH SENTIMENTAL VALUE</string>
+
+    <string name="madrid_passport_desc1">YOU HAVE ONE</string>
+    <string name="madrid_passport_desc2">YOU PAY 100€ TO BUY A FAKE ONE</string>
+    <string name="madrid_passport_toast1">You do not have a passport</string>
+    <string name="madrid_passport_toast2">You already have a passport!</string>
+
+    <string name="madrid_main">The Third World War has taken place in Europe. You have to flee in order to save your life. Hurry up! Try to be wise!</string>
+    <string name="madrid_maletas">The enemies are about to arrive. What will you take with you?</string>
+    <string name="madrid_trans">Very good. Now it is time to leave. Do you want to pay for a means of transport or steal a car?</string>
+    <string name="madrid_peso1">You have spent 300 €, but you can travel by lorry.</string>
+    <string name="madrid_peso2">Oh, no! There is too much weight! What do you want to get rid of?</string>
+    <string name="madrid_peso_else1">You are hungry and thirsty. You have to spend 100€</string>
+    <string name="madrid_peso_else2">You are freezing. It is very cold. You have to spend 100€ to be warm.</string>
+    <string name="madrid_peso_if">Good! They are not really necessary.</string>
+    <string name="madrid_milan1">Congratulations! You can continue the journey.</string>
+    <string name="madrid_rueda1">Oh no, you have a flat tire! What do you want to do?</string>
+    <string name="madrid_rueda2">Do you want to continue on foot or do you prefer to wait till someone shows up?</string>
+    <string name="madrid_pie">You have met some people on the way. Do you want to talk with them?</string>
+    <string name="madrid_pie2">After a few days, you have met some people on the way and this time you decide to go with them, but do you have your passport?</string>
+    <string name="madrid_passport">They want to help you but they do not trust in people without passport. Do you have your passport?</string>
+    <string name="madrid_milan2">Congratulations! You can continue the journey.</string>
+    <string name="madrid_wait">Some people stop to help you.</string>
+    <string name="madrid_milan3">You have to spend 100€ to buy a fake one. Congratulations! You can continue the journey.</string>
 
     <!-- Milán-Sarajevo -->
     <string name="route2">Milan-Sarajevo</string>
@@ -38,6 +72,9 @@
     <string name="dialogo_lose_titulo">YOU LOSE</string>
     <string name="dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
     <string name="txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
+    <string name="txt_hotel">It\'s too expensive</string>
+    <string name="txt_hostel">Where you have to share your room with people from other nationalities?</string>
+    <string name="txt_pasillo">Which one do you think it\'s your room?</string>
     <string name="txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
     <string name="txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
     <string name="txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>

@@ -17,6 +17,7 @@ public class PlayerStatus {
     private static final String KEY_TRAMO = "tramo";
     private static final String KEY_DINERO = "dinero";
     private static final String KEY_OBJETO = "objeto";
+    private static final String KEY_FABRICA="fabrica";
 
     private static final int DEFAULT_RUTA = 1;
     private static final int DEFAULT_TRAMO = 1;
@@ -77,11 +78,11 @@ public class PlayerStatus {
     }
 
     public boolean isFabrica() {
-        return fabrica;
+        return sharedPreferences.getBoolean(KEY_FABRICA, false);
     }
 
     public void setFabrica(boolean fabrica) {
-        this.fabrica = fabrica;
+        sharedPreferences.edit().putBoolean(KEY_FABRICA, fabrica).commit();
     }
 
     public int getObjeto() {

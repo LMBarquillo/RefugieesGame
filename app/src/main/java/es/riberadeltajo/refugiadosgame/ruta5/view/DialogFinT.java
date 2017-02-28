@@ -105,11 +105,11 @@ public class DialogFinT extends Dialog implements View.OnClickListener {
             }
         });
         if(tipo == Tipo.WIN) {
-            ganaPierde.setImageResource(R.drawable.madrid_win);
+            ganaPierde.setImageResource(R.drawable.tehranworkdone);
             txtMensaje.setText(R.string.congratulations_tehran);
         } else
         if(tipo == Tipo.LOSE) {
-            ganaPierde.setImageResource(R.drawable.madrid_lose);
+            ganaPierde.setImageResource(R.drawable.tehrangameover);
             txtMensaje.setText(R.string.tehran_text_lost_game);
             sigNiv.setImageResource(R.drawable.madrid_nextlevel_disabled);
             sigNiv.setEnabled(false);

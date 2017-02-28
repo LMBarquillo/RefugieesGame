@@ -168,7 +168,7 @@
                     android:layout_height="wrap_content">
 
                     <Button
-                        android:text="Back"
+                        android:text="Menu"
                         android:layout_height="wrap_content"
                         android:id="@+id/btnBack"
                         android:background="@drawable/menu_btn"

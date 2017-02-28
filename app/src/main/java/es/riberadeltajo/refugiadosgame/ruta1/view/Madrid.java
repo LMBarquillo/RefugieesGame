@@ -11,6 +11,7 @@ import android.os.Process;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Main;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Maletas;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Trans;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
@@ -44,8 +45,10 @@ public class Madrid extends AppCompatActivity {
     }
 
     public void jugar(View v){
-        musica.stop();
-        musica.release();
+        if(musica!=null) {
+            musica.stop();
+            musica.release();
+        }
         gameView=new GameView(this);
         setContentView(gameView);
     }
@@ -55,9 +58,6 @@ public class Madrid extends AppCompatActivity {
             musica.stop();
             musica.release();
         }
-        musica=MediaPlayer.create(this,R.raw.madrid_easy);
-        musica.setLooping(true);
-        musica.start();
         gameView=new GameView(this);
         setContentView(gameView);
     }
@@ -71,7 +71,7 @@ public class Madrid extends AppCompatActivity {
     }
 
     public void irMaletas(View v){
-        startActivity(new Intent(this, Madrid_Maletas.class));
+        startActivity(new Intent(this, Madrid_Main.class));
     }
 
     public void onResume(){
@@ -83,15 +83,15 @@ public class Madrid extends AppCompatActivity {
 
     public void onPause(){
         super.onPause();
-        //onStop();
-    }
-
-    public void onStop(){
-        super.onStop();
         if(musica!=null){
             musica.stop();
             musica.release();
         }
+        onStop();
+    }
+
+    public void onStop(){
+        super.onStop();
     }
 
     public void onDestroy(){

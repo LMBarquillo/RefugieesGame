@@ -48,7 +48,7 @@ public class Modelo_Tres_Opciones extends AppCompatActivity implements View.OnCl
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
         descOpc1=(TextView) findViewById(R.id.txtOpc1Descr); //TextView para descripción de la opción 1
         descOpc2=(TextView) findViewById(R.id.txtOpc2Descr); //TextView para descripción de la opción 2
-        descOpc3=(TextView) findViewById(R.id.txtOpc2Descr); //TextView para descripción de la opción 3
+        descOpc3=(TextView) findViewById(R.id.txtOpc3Descr); //TextView para descripción de la opción 3
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
         descOpc3.setTypeface(font);

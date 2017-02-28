@@ -19,8 +19,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_weight="0.39" />
+            android:layout_height="34dp" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -31,12 +30,12 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/madrid_lose"
+                app:srcCompat="@drawable/madrid_win"
                 android:id="@+id/imgAcc"
                 android:cropToPadding="true"
                 android:scaleType="centerInside"
-                android:layout_weight="1"
-                android:adjustViewBounds="true" />
+                android:adjustViewBounds="true"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <Space
@@ -46,7 +45,7 @@
         <TextView
             android:text="TextView"
             android:layout_width="match_parent"
-            android:layout_height="94dp"
+            android:layout_height="wrap_content"
             android:id="@+id/txtMens"
             android:textSize="24sp"
             android:textAlignment="center"
@@ -54,7 +53,8 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="19dp" />
+            android:layout_height="24dp"
+            android:layout_weight="0.18" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -98,7 +98,8 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="87dp" />
+            android:layout_height="28dp"
+            android:layout_weight="0.18" />
 
     </LinearLayout>
 

@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 import es.riberadeltajo.refugiadosgame.ruta5.view.Tehran;
 
 /**
@@ -75,7 +77,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
                 }
                 else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
                     reintentar.setImageResource(R.drawable.madrid_tryagain);
-                    reset();
+                    reset(view);
                 }
                 return true;
             }
@@ -138,7 +140,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.imgTryAgain:
-                reset();
+                reset(v);
                 break;
             case R.id.imgMenu:
                 goToMenu();
@@ -149,18 +151,18 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         }
     }
 
-    private void reset() {
+    private void reset(View v) {
+        activity.jugar(v);
         dismiss();
-        activity.reset();
     }
 
     private void goToMenu(){
-        activity.onPause();
+        activity.startActivity(new Intent(activity.getApplicationContext(), MainActivity.class));
         dismiss();
     }
 
     private void goToNextLevel() {
-        dismiss();
         activity.goToNextLevel();
+        dismiss();
     }
 }

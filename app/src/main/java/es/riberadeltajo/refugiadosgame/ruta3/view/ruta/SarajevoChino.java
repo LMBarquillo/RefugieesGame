@@ -15,7 +15,7 @@ import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
 public class SarajevoChino extends AppCompatActivity implements View.OnClickListener {
     private ImageView opc1,passport;
-    private TextView texto,dinero,objeto;
+    private TextView texto,dinero,objeto,descOpc1;
     private Button btnAtras, btnSig;
 
     @Override
@@ -35,13 +35,16 @@ public class SarajevoChino extends AppCompatActivity implements View.OnClickList
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(getString(R.string.txt_chino));
+        texto.setText(R.string.txt_chino);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
         objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
+        descOpc1=(TextView) findViewById(R.id.txtOpcDesc); //TextView para descripción de la opción 1
+        descOpc1.setTypeface(font);
+        descOpc1.setText("Descripción");
         opc1.setImageResource(R.drawable.sarajevochino); //Imagen para la opción 1
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
@@ -51,6 +54,7 @@ public class SarajevoChino extends AppCompatActivity implements View.OnClickList
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
     }
 
     @Override
@@ -70,7 +74,6 @@ public class SarajevoChino extends AppCompatActivity implements View.OnClickList
     }
 
     public void goNext(){
-        //Activity siguiente
-        startActivity(new Intent(this, SarajevoMejicano.class));
+        startActivity(new Intent(this, SarajevoPasillo.class));
     }
 }
