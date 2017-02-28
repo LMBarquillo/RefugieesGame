@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 
 public class SarajevoAlojamiento extends AppCompatActivity implements View.OnClickListener {
     private ImageView opc1,opc2,passport;
@@ -68,6 +69,11 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
         objeto.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
         descOpc2.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this, MainActivity2.class));
     }
 
     @Override

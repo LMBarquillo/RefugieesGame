@@ -16,7 +16,6 @@ import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Main;
-import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.Player;
 import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.SarajevoArcade;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAfricano;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
@@ -42,7 +41,7 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
 
     private final int[] banderas = {
             R.drawable.bandera_madrid,
-            R.drawable.bandera_italia,
+            R.drawable.bandera_milan,
             R.drawable.bandera_sarajevo,
             R.drawable.bandera_estambul,
             R.drawable.bandera_teheran
@@ -110,7 +109,7 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
 
     private void nuevo() {
         PlayerStatus.getInstancia(activity).resetStatus();
-        activity.startActivity(new Intent(activity, Madrid.class));
+        activity.startActivity(new Intent(activity, Madrid_Main.class));
     }
 
     private void continuar() {
