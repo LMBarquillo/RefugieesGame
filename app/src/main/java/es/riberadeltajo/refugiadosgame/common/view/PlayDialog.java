@@ -10,15 +10,42 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
+import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Main;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.SarajevoArcade;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAfricano;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoBanda;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoChino;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoHabitacion;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoMejicano;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoPasillo;
 
 /**
  * Created by Alex on 14/02/2017.
  */
 
 public class PlayDialog extends Dialog implements View.OnClickListener {
+
+    private final Class[][] activities = {
+        {null},
+        {null},
+        {SarajevoAlojamiento.class, SarajevoPasillo.class, SarajevoChino.class, SarajevoMejicano.class, SarajevoAfricano.class, SarajevoHabitacion.class, SarajevoBanda.class, SarajevoArcade.class},
+        {null},
+        {null}
+    };
+
+    private final int[] banderas = {
+            R.drawable.bandera_madrid,
+            R.drawable.bandera_milan,
+            R.drawable.bandera_sarajevo,
+            R.drawable.bandera_estambul,
+            R.drawable.bandera_teheran
+    };
 
     private MainActivity2 activity;
 
@@ -40,11 +67,15 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.menu_play_dialog);
+        setContentView(R.layout.menu_play_dialog2);
+        ImageView imgBandera = (ImageView) findViewById(R.id.imgBandera);
+        imgBandera.setImageResource(banderas[PlayerStatus.getInstancia(activity).getRuta() - 1]);
         Button btnContinuar = (Button) findViewById(R.id.btnContinuar);
         Button btnNuevo = (Button) findViewById(R.id.btnNuevo);
+        Button btnSalir = (Button) findViewById(R.id.btnSalir);
         btnContinuar.setOnClickListener(this);
         btnNuevo.setOnClickListener(this);
+        btnSalir.setOnClickListener(this);
     }
 
     @Override
@@ -71,14 +102,27 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
             case R.id.btnContinuar:
                 continuar();
                 break;
+            case R.id.btnSalir:
+                dismiss();
         }
     }
 
     private void nuevo() {
-        activity.startActivity(new Intent(activity, Madrid.class));
+        PlayerStatus.getInstancia(activity).resetStatus();
+        activity.startActivity(new Intent(activity, Madrid_Main.class));
     }
 
     private void continuar() {
-        activity.startActivity(new Intent(activity, Madrid.class));
+        Class clase = Madrid_Main.class;
+        int ruta = PlayerStatus.getInstancia(activity).getRuta() - 1;
+        int tramo = PlayerStatus.getInstancia(activity).getTramo() - 1;
+        if(ruta >= 0 && ruta < activities.length){
+            if(tramo >= 0 && tramo < activities[ruta].length) {
+                if(activities[ruta][tramo] != null) {
+                    clase = activities[ruta][tramo];
+                }
+            }
+        }
+        activity.startActivity(new Intent(activity, clase));
     }
 }

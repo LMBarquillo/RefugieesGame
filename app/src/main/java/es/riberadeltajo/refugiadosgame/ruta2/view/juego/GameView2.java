@@ -310,7 +310,7 @@ public class GameView2 extends SurfaceView implements View.OnTouchListener {
 
         banderaLoop=true;
         loop.setRunning(false);
-        fin();
+
 
 
 

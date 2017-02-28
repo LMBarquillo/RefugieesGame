@@ -72,6 +72,10 @@
     <string name="dialogo_lose_titulo">YOU LOSE</string>
     <string name="dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
     <string name="txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
+    <string name="txt_hotel">It\'s too expensive</string>
+    <!--<string name="txt_hostel">Where you have to share your room with people from other nationalities?</string>-->
+    <string name="txt_hostel">Shared rooms</string>
+    <string name="txt_pasillo">Which one do you think it\'s your room?</string>
     <string name="txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
     <string name="txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
     <string name="txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>

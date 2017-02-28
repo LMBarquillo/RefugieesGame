@@ -92,7 +92,7 @@ public class tehran2 extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void goBack(){
-        Intent i = new Intent(this,tehran1.class);
+        Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
         finish();
     }

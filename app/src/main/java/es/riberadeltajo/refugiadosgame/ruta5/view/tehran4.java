@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 
 public class tehran4 extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
@@ -67,7 +68,7 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void goBack(){
-        Intent i = new Intent(this,tehran3.class);
+        Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
         finish();
     }

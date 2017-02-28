@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
 
 public class SarajevoArcade extends Activity {
@@ -23,6 +24,8 @@ public class SarajevoArcade extends Activity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+        PlayerStatus.getInstancia(this).setRuta(3);
+        PlayerStatus.getInstancia(this).setTramo(8);
         gameView = new GameView(this);
         setContentView(gameView);
     }
