@@ -13,6 +13,7 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
 public class SarajevoAlojamiento extends AppCompatActivity implements View.OnClickListener {
     private ImageView opc1,opc2,passport;
@@ -42,7 +43,7 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.txt_alojamiento);
+        texto.setText(R.string.sarajevo_txt_alojamiento);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -53,8 +54,8 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
         descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
-        descOpc1.setText(R.string.txt_hotel);
-        descOpc2.setText(R.string.txt_hostel);
+        descOpc1.setText(R.string.sarajevo_txt_hotel);
+        descOpc2.setText(R.string.sarajevo_txt_hostel);
         opc1.setImageResource(R.drawable.sarajevohotel); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.sarajevopension); //Imagen para la opción 2
         opc1.setOnClickListener(this);
@@ -73,7 +74,7 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, MainActivity2.class));
+        new MenuDialog(this).show();
     }
 
     @Override
@@ -111,7 +112,7 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
     }
 
     public void goBack(){
-        //Activity anterior
+        new MenuDialog(this).show();
     }
 
     public void goNext(){

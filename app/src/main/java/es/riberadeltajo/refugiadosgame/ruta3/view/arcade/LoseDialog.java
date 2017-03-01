@@ -1,4 +1,4 @@
-package es.riberadeltajo.refugiadosgame.common.view;
+package es.riberadeltajo.refugiadosgame.ruta3.view.arcade;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.widget.ImageView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Main;
-import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.SarajevoArcade;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAfricano;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoBanda;
@@ -23,32 +23,17 @@ import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoChino;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoHabitacion;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoMejicano;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoPasillo;
+import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
 
 /**
  * Created by Alex on 14/02/2017.
  */
 
-public class PlayDialog extends Dialog implements View.OnClickListener {
+public class LoseDialog extends Dialog implements View.OnClickListener {
 
-    private final Class[][] activities = {
-        {null},
-        {null},
-        {SarajevoAlojamiento.class, SarajevoPasillo.class, SarajevoChino.class, SarajevoMejicano.class, SarajevoAfricano.class, SarajevoHabitacion.class, SarajevoBanda.class, SarajevoArcade.class},
-        {null},
-        {null}
-    };
+    private SarajevoArcade activity;
 
-    private final int[] banderas = {
-            R.drawable.bandera_madrid,
-            R.drawable.bandera_milan,
-            R.drawable.bandera_sarajevo,
-            R.drawable.bandera_estambul,
-            R.drawable.bandera_teheran
-    };
-
-    private MainActivity2 activity;
-
-    public PlayDialog(MainActivity2 activity) {
+    public LoseDialog(SarajevoArcade activity) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
         Display display = activity.getWindowManager().getDefaultDisplay();
@@ -66,15 +51,9 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.menu_play_dialog);
-        ImageView imgBandera = (ImageView) findViewById(R.id.imgBandera);
-        imgBandera.setImageResource(banderas[PlayerStatus.getInstancia(activity).getRuta() - 1]);
-        Button btnContinuar = (Button) findViewById(R.id.btnContinuar);
-        Button btnNuevo = (Button) findViewById(R.id.btnNuevo);
-        Button btnSalir = (Button) findViewById(R.id.btnSalir);
-        btnContinuar.setOnClickListener(this);
-        btnNuevo.setOnClickListener(this);
-        btnSalir.setOnClickListener(this);
+        setContentView(R.layout.sarajevo_lose_dialog);
+        Button btnReintentar = (Button) findViewById(R.id.btnReintentar);
+        btnReintentar.setOnClickListener(this);
     }
 
     @Override
@@ -93,35 +72,22 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.btnNuevo:
-                nuevo();
+            case R.id.btnReintentar:
+                reintentar();
                 break;
-            case R.id.btnContinuar:
-                continuar();
-                break;
-            case R.id.btnSalir:
-                dismiss();
         }
     }
 
-    private void nuevo() {
-        PlayerStatus.getInstancia(activity).resetStatus();
-        activity.startActivity(new Intent(activity, Madrid_Main.class));
+    private void reintentar() {
+        activity.recreate();
+        dismiss();
     }
 
-    private void continuar() {
-        Class clase = Madrid_Main.class;
-        int ruta = PlayerStatus.getInstancia(activity).getRuta() - 1;
-        int tramo = PlayerStatus.getInstancia(activity).getTramo() - 1;
-        if(ruta >= 0 && ruta < activities.length){
-            if(tramo >= 0 && tramo < activities[ruta].length) {
-                if(activities[ruta][tramo] != null) {
-                    clase = activities[ruta][tramo];
-                }
-            }
-        }
-        activity.startActivity(new Intent(activity, clase));
-    }
 }

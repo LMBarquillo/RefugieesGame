@@ -118,14 +118,7 @@ public class Juego {
                 getGameView().setFin(true);
                 getGameView().getActivity().runOnUiThread(new Runnable() {
                     public void run() {
-                    /*AlertDialog.Builder dialog = new AlertDialog.Builder(getGameView().getActivity());
-                    dialog.setTitle("You Lost");
-                    dialog.setMessage("You lost because time is up");
-                    dialog.setPositiveButton("Reintentar", null);
-                    dialog.setNegativeButton("Salir", null);
-                    dialog.create();
-                    dialog.show();*/
-                        new Dialogo(getGameView().getActivity(), Dialogo.Tipo.WIN).show();
+                        new WinDialog(getGameView().getActivity()).show();
                     }
                 });
             }

@@ -129,7 +129,7 @@ public class GUI {
                     dialog.setNegativeButton("Salir", null);
                     dialog.create();
                     dialog.show();*/
-                    new Dialogo(getGameView().getActivity(), Dialogo.Tipo.LOSE).show();
+                    new LoseDialog(getGameView().getActivity()).show();
                 }
             });
         }

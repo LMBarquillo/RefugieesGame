@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
 public class SarajevoPasillo extends AppCompatActivity implements View.OnClickListener {
     private ImageView opc1,opc2,opc3,opc4,passport;
@@ -49,7 +50,7 @@ public class SarajevoPasillo extends AppCompatActivity implements View.OnClickLi
         lnOpciones.setBackgroundResource(R.drawable.sarajevopasillo);
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.txt_pasillo);
+        texto.setText(R.string.sarajevo_txt_pasillo);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -88,6 +89,11 @@ public class SarajevoPasillo extends AppCompatActivity implements View.OnClickLi
         descOpc2.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
         descOpc3.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
         descOpc4.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+    }
+
+    @Override
+    public void onBackPressed() {
+        new MenuDialog(this).show();
     }
 
     @Override
@@ -163,7 +169,7 @@ public class SarajevoPasillo extends AppCompatActivity implements View.OnClickLi
     }
 
     public void goBack(){
-        //Activity anterior
+        new MenuDialog(this).show();
     }
 
     public void goNext(){

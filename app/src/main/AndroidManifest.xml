@@ -46,9 +46,6 @@
             android:name=".ruta1.view.view.Madrid_Peso_2"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ruta1.view.view.Madrid_Peso_If"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ruta1.view.view.Madrid_Peso_Else_1"
             android:screenOrientation="portrait" />
         <activity
@@ -68,14 +65,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ruta1.view.view.Madrid_Wait"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ruta1.view.Madrid_Arcade"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ruta1.view.view.Madrid_Fin"
-            android:screenOrientation="portrait" />
-        <activity android:name=".ruta1.view.view.Madrid_Help"
             android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.Milan" />
         <activity
@@ -128,32 +117,25 @@
         <activity android:name=".ruta2.view.juego.milan_juego2" />
         <activity android:name=".ruta5.view.teheran_main2" />
         <activity android:name=".common.view.MainActivity2" />
-        <activity
-            android:name=".ruta3.view.ruta.SarajevoAlojamiento"
+        <activity android:name=".ruta3.view.ruta.SarajevoAlojamiento"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ruta3.view.ruta.SarajevoPasillo"
+        <activity android:name=".ruta3.view.ruta.SarajevoPasillo"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ruta3.view.ruta.SarajevoChino"
+        <activity android:name=".ruta3.view.ruta.SarajevoChino"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ruta3.view.ruta.SarajevoMejicano"
+        <activity android:name=".ruta3.view.ruta.SarajevoMejicano"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ruta3.view.ruta.SarajevoAfricano"
+        <activity android:name=".ruta3.view.ruta.SarajevoAfricano"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ruta3.view.ruta.SarajevoHabitacion"
+        <activity android:name=".ruta3.view.ruta.SarajevoHabitacion"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ruta3.view.ruta.SarajevoBanda"
+        <activity android:name=".ruta3.view.ruta.SarajevoBanda"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
     </application>
