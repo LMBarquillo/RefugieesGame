@@ -65,21 +65,25 @@
     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
     <string name="sarajevo_autores">Alejandro Luna Flores\nJorge Morón García</string>
-    <string name="dialogo_btn_reintentar">Try again</string>
-    <string name="dialogo_btn_continuar">Continue</string>
-    <string name="dialogo_win_titulo">YOU WIN</string>
-    <string name="dialogo_win_mensaje">You have managed to escape and you can continue on your way to Istanbul.</string>
-    <string name="dialogo_lose_titulo">YOU LOSE</string>
-    <string name="dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
-    <string name="txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
-    <string name="txt_hotel">It\'s too expensive</string>
+    <string name="sarajevo_dialogo_btn_si">yes</string>
+    <string name="sarajevo_dialogo_btn_no">no</string>
+    <string name="sarajevo_dialogo_btn_reintentar">Try again</string>
+    <string name="sarajevo_dialogo_btn_continuar">Continue</string>
+    <string name="sarajevo_dialogo_menu_titulo">quit</string>
+    <string name="sarajevo_dialogo_menu_mensaje">Do you really want to go out and return to the menu?</string>
+    <string name="sarajevo_dialogo_win_titulo">YOU WIN</string>
+    <string name="sarajevo_dialogo_win_mensaje">You have managed to escape and you can continue on your way to Istanbul.</string>
+    <string name="sarajevo_dialogo_lose_titulo">YOU LOSE</string>
+    <string name="sarajevo_dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
+    <string name="sarajevo_txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
+    <string name="sarajevo_txt_hotel">It\'s too expensive</string>
     <!--<string name="txt_hostel">Where you have to share your room with people from other nationalities?</string>-->
-    <string name="txt_hostel">Shared rooms</string>
-    <string name="txt_pasillo">Which one do you think it\'s your room?</string>
-    <string name="txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
-    <string name="txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
-    <string name="txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>
-    <string name="txt_habitacion">Finally, you\'have found your room! What a hard day, huh!</string>
+    <string name="sarajevo_txt_hostel">Shared rooms</string>
+    <string name="sarajevo_txt_pasillo">Which one do you think it\'s your room?</string>
+    <string name="sarajevo_txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
+    <string name="sarajevo_txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
+    <string name="sarajevo_txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>
+    <string name="sarajevo_txt_habitacion">Finally, you\'have found your room! What a hard day, huh!</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>

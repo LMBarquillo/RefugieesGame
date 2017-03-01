@@ -1,21 +1,20 @@
 package es.riberadeltajo.refugiadosgame.ruta3.view.arcade;
 
-import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 
+import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
-import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
 
-public class SarajevoArcade extends Activity {
-
-    private GameView gameView;
+public class SarajevoInstrucciones extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //Evita que se apague la pantalla
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -24,8 +23,11 @@ public class SarajevoArcade extends Activity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
-        gameView = new GameView(this);
-        setContentView(gameView);
+        PlayerStatus.getInstancia(this).setRuta(3);
+        PlayerStatus.getInstancia(this).setTramo(8);
+        setContentView(R.layout.activity_sarajevo_instrucciones);
+        Button btnJugar = (Button) findViewById(R.id.btnJugar);
+        btnJugar.setOnClickListener(this);
     }
 
     @Override
@@ -33,11 +35,10 @@ public class SarajevoArcade extends Activity {
         new MenuDialog(this).show();
     }
 
-    public void start() {
-        gameView.start();
-    }
-
-    public void continuar() {
-        startActivity(new Intent(this, Istanbul.class));
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.btnJugar) {
+            startActivity(new Intent(this, SarajevoArcade.class));
+        }
     }
 }

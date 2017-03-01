@@ -1,6 +1,8 @@
 package es.riberadeltajo.refugiadosgame.ruta3.view.arcade;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -8,34 +10,40 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
+import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Main;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAfricano;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoBanda;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoChino;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoHabitacion;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoMejicano;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoPasillo;
+import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
 
 /**
  * Created by Alex on 14/02/2017.
  */
 
-public class Dialogo extends Dialog implements View.OnClickListener {
+public class WinDialog extends Dialog implements View.OnClickListener {
 
-    public enum Tipo {
-        WIN,
-        LOSE
-    }
-
-    private Tipo tipo;
     private SarajevoArcade activity;
 
-    public Dialogo(SarajevoArcade activity, Tipo tipo) {
+    public WinDialog(SarajevoArcade activity) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
-        this.tipo = tipo;
         Display display = activity.getWindowManager().getDefaultDisplay();
         Point size = new Point();
-        display.getSize(size);
-        getWindow().setLayout((int)(size.x * 0.8), (int)(size.y * 0.8));
+        display.getRealSize(size);
+        //getWindow().setLayout((int)(size.x * 0.7), (int)(size.y * 0.5));
+        getWindow().setLayout(size.x, size.y);
         getWindow().getAttributes().windowAnimations = R.style.sarajevoDialogo;
-        getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        //getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#80000000")));
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );
@@ -43,30 +51,15 @@ public class Dialogo extends Dialog implements View.OnClickListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.dialogo_sarajevo);
-        TextView txtTitulo = (TextView) findViewById(R.id.txtTitulo);
-        TextView txtMensaje = (TextView) findViewById(R.id.txtMensaje);
-        Button btnReiniciar = (Button) findViewById(R.id.btnReiniciar);
+        setContentView(R.layout.sarajevo_win_dialog);
         Button btnContinuar = (Button) findViewById(R.id.btnContinuar);
-        btnReiniciar.setOnClickListener(this);
         btnContinuar.setOnClickListener(this);
-        if(tipo == Tipo.WIN) {
-            txtTitulo.setText(R.string.dialogo_win_titulo);
-            txtMensaje.setText(R.string.dialogo_win_mensaje);
-            btnContinuar.setEnabled(true);
-        } else
-        if(tipo == Tipo.LOSE) {
-            txtTitulo.setText(R.string.dialogo_lose_titulo);
-            txtMensaje.setText(R.string.dialogo_lose_mensaje);
-            btnContinuar.setEnabled(false);
-        }
     }
 
     @Override
     public void show() {
         // Set the dialog to not focusable.
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
         //Copiamos la visibilidad de la actividad (Full Screen)
         getWindow().getDecorView().setSystemUiVisibility(activity.getWindow().getDecorView().getSystemUiVisibility());
@@ -79,24 +72,21 @@ public class Dialogo extends Dialog implements View.OnClickListener {
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.btnReiniciar:
-                reiniciar();
-                break;
             case R.id.btnContinuar:
                 continuar();
                 break;
         }
     }
 
-    private void reiniciar() {
-        dismiss();
-        activity.recreate();
+    private void continuar() {
+        activity.startActivity(new Intent(activity, Istanbul.class));
     }
 
-    private void continuar() {
-        dismiss();
-        activity.continuar();
-    }
 }

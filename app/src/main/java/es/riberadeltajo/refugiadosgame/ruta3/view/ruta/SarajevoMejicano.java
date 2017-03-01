@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
 public class SarajevoMejicano extends AppCompatActivity implements View.OnClickListener {
     private ImageView opc1,passport;
@@ -37,7 +38,7 @@ public class SarajevoMejicano extends AppCompatActivity implements View.OnClickL
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.txt_mejicano);
+        texto.setText(R.string.sarajevo_txt_mejicano);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -60,6 +61,11 @@ public class SarajevoMejicano extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    public void onBackPressed() {
+        new MenuDialog(this).show();
+    }
+
+    @Override
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnBack:
@@ -72,7 +78,7 @@ public class SarajevoMejicano extends AppCompatActivity implements View.OnClickL
     }
 
     public void goBack(){
-        //Activity anterior
+        new MenuDialog(this).show();
     }
 
     public void goNext(){
