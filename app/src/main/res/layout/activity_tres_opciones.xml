@@ -137,7 +137,7 @@
                             android:id="@+id/txtOpc1Descr"
                             android:textStyle="normal|bold"
                             android:textAlignment="center"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textColor="@android:color/background_dark"
                             android:background="@drawable/menu1" />
                     </LinearLayout>
@@ -172,7 +172,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.1"
                             android:id="@+id/txtOpc2Descr"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textColor="@android:color/background_dark"
                             android:textStyle="normal|bold"
                             android:textAlignment="center"
@@ -209,7 +209,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0.1"
                             android:id="@+id/txtOpc3Descr"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textStyle="normal|bold"
                             android:textAlignment="center"
                             android:textColor="@android:color/background_dark"
