@@ -17,7 +17,6 @@ public class Disparo extends Sprite {
     public Disparo(GameView gameView, Bitmap bmp, int vida, float ran,int puntos) {
         super(gameView, bmp, vida);
         setPuntos(puntos);
-        Random rn=new Random();
         this.bmp=bmp;
         setPintar(true);
         if(ran==1){
@@ -47,20 +46,16 @@ public class Disparo extends Sprite {
     private void update(){
         float newposx=getCorx()+getxSpeed();
         float newposy=getCory()+getySpeed();
-
         setCorx(newposx);
         setCory(newposy);
-
     }
 
     public void draw(Canvas canvas){
-
         if(isPintar()) {
             update();
-
         }
         int corx=Math.round(getCorx());
-        int cory=Math.round( getCory());
+        int cory=Math.round(getCory());
 
         Rect src=new Rect(0,0,bmp.getWidth(),bmp.getHeight());
         Rect dst=new Rect(corx,cory,corx+bmp.getWidth(),cory+bmp.getHeight());

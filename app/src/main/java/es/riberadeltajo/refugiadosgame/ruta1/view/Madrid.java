@@ -11,6 +11,7 @@ import android.os.Process;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Fin;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Main;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Maletas;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Trans;
@@ -97,11 +98,6 @@ public class Madrid extends AppCompatActivity {
     public void onDestroy(){
         super.onDestroy();
         Process.killProcess(Process.myPid());
-    }
-
-    @Override
-    public void onBackPressed () {
-        new DialogSalirSiNo(gameView.getContexto()).show();
     }
 
     public MediaPlayer getMusica() {

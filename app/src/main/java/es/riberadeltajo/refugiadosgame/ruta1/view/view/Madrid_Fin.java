@@ -7,18 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 import es.riberadeltajo.refugiadosgame.ruta1.view.GameView;
+import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid_Arcade;
 
-public class Madrid_Milan_3 extends AppCompatActivity implements View.OnClickListener{
-    private ImageView opc1,passport;
-    private TextView texto,dinero,objeto,descOpc1;
+public class Madrid_Fin extends AppCompatActivity implements View.OnClickListener{
+    private TextView texto;
     private Button btnAtras, btnSig;
+    private GameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,32 +31,28 @@ public class Madrid_Milan_3 extends AppCompatActivity implements View.OnClickLis
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_una_opcion);
+        setContentView(R.layout.activity_inicio_fin);
         getWindow().getDecorView().setBackgroundResource(R.drawable.madrid_history_fondo); //Pon un fondo de la ciudad de tu ruta
-        opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.madrid_milan3);
-        dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
-        objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
-        dinero.setTypeface(font);
-        objeto.setTypeface(font);
-        dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
-        objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
-        descOpc1=(TextView) findViewById(R.id.txtOpcDesc); //TextView para descripción de la opción 1
-        descOpc1.setTypeface(font);
-        descOpc1.setText("Descripción");
-        opc1.setImageResource(R.drawable.madrid_frontera_coche); //Imagen para la opción 1
+        if(PlayerStatus.getInstancia(this).getDinero()==350) {
+            texto.setText(R.string.madrid_fin_easy);
+        }
+        else if(PlayerStatus.getInstancia(this).getDinero()==250) {
+            texto.setText(R.string.madrid_fin_medium);
+        }
+        else if(PlayerStatus.getInstancia(this).getDinero()==150) {
+            texto.setText(R.string.madrid_fin_hard);
+        }
+        else if(PlayerStatus.getInstancia(this).getDinero()==50) {
+            texto.setText(R.string.madrid_fin_extreme);
+        }
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
+        btnSig.setText(R.string.madrid_jugar);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
-        passport=(ImageView) findViewById(R.id.imgObject);
-        passport.setImageResource(R.drawable.madrid_passport);
-        passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
-        objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
-        descOpc1.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
     }
 
     @Override
@@ -66,18 +62,16 @@ public class Madrid_Milan_3 extends AppCompatActivity implements View.OnClickLis
                 goBack();
                 break;
             case R.id.btnNext:
-                goNext();
+                goNext(v);
                 break;
         }
     }
 
     public void goBack(){
         startActivity(new Intent(this, MainActivity.class));
-        finish();
     }
 
-    public void goNext(){
-        startActivity(new Intent(this, Madrid_Fin.class));
-        finish();
+    public void goNext(View v){
+        startActivity(new Intent(this, Madrid_Help.class));
     }
 }

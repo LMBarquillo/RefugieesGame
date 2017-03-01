@@ -193,7 +193,7 @@
                     android:background="@drawable/menu1"
                     android:textAlignment="center"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:gravity="center_vertical|fill_horizontal"
                     android:layout_height="150dp" />
 

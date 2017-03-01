@@ -43,16 +43,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="22dp" />
 
-                <TextView
+                <VideoView
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
+                    android:layout_weight="1"
+                    android:id="@+id/madInstrucc" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
                     android:id="@+id/txtMens1"
                     android:background="@drawable/menu1"
                     android:textAlignment="center"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:gravity="center_vertical|center_horizontal"
-                    android:layout_weight="1" />
+                    android:layout_weight="0.05"
+                    android:layout_height="75dp" />
 
                 <Space
                     android:layout_width="match_parent"

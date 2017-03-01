@@ -32,11 +32,11 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     }
 
     private Tipo tipo;
-    private Madrid activity;
+    private Madrid_Arcade activity;
     private ImageView ganaPierde,reintentar,irMenu,sigNiv;
     private Typeface font;
 
-    public DialogFin(Madrid activity, Tipo tipo) {
+    public DialogFin(Madrid_Arcade activity, Tipo tipo) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
         this.tipo = tipo;
@@ -77,7 +77,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
                 }
                 else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
                     reintentar.setImageResource(R.drawable.madrid_tryagain);
-                    reset(view);
+                    reset();
                 }
                 return true;
             }
@@ -140,7 +140,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.imgTryAgain:
-                reset(v);
+                reset();
                 break;
             case R.id.imgMenu:
                 goToMenu();
@@ -151,8 +151,8 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         }
     }
 
-    private void reset(View v) {
-        activity.jugar(v);
+    private void reset() {
+        activity.start();
         dismiss();
     }
 
@@ -162,7 +162,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     }
 
     private void goToNextLevel() {
-        activity.goToNextLevel();
+        activity.continuar();
         dismiss();
     }
 }

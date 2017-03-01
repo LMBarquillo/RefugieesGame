@@ -18,6 +18,7 @@
     <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
     <string name="madrid_lose_mensaje">You do not acquired the ticket. Try again?</string>
     <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
+    <string name="madrid_jugar">PLAY</string>
 
     <string name="madrid_maletas_desc1">SUITCASE A</string>
     <string name="madrid_maletas_desc2">SUITCASE B</string>
@@ -47,12 +48,16 @@
     <string name="madrid_rueda1">Oh no, you have a flat tire! What do you want to do?</string>
     <string name="madrid_rueda2">Do you want to continue on foot or do you prefer to wait till someone shows up?</string>
     <string name="madrid_pie">You have met some people on the way. Do you want to talk with them?</string>
-    <string name="madrid_pie2">After a few days, you have met some people on the way and this time you decide to go with them, but do you have your passport?</string>
+    <string name="madrid_pie2">After a few days, you have met some people on the way and this time you decide to go with them.</string>
     <string name="madrid_passport">They want to help you but they do not trust in people without passport. Do you have your passport?</string>
     <string name="madrid_milan2">Congratulations! You can continue the journey.</string>
     <string name="madrid_wait">Some people stop to help you.</string>
     <string name="madrid_milan3">You have to spend 100€ to buy a fake one. Congratulations! You can continue the journey.</string>
-
+    <string name="madrid_fin_easy">You have just arrived in Milan, but you do not have enough money to buy one of the last coveted train tickets you need to travel to the next country. You need to get 150€ more to access the next level. Easy, right? So... do you want to play to get it?</string>
+    <string name="madrid_fin_medium">You have just arrived in Milan, but you do not have enough money to buy one of the last coveted train tickets you need to travel to the next country. You need to get 250€ more to access the next level because some decisions have made you lose some money. So... do you want to play to get it?</string>
+    <string name="madrid_fin_hard">You have just arrived in Milan, but you do not have enough money to buy one of the last coveted train tickets you need to travel to the next country. You need to get 350€ more to access the next level because some decisions have made you lose a lot of money. So... do you want to play to get it?</string>
+    <string name="madrid_fin_extreme">You have just arrived in Milan, but you do not have enough money to buy one of the last coveted train tickets you need to travel to the next country. You need to get 450€ more to access the next level because some decisions have made you lose more money than expected. So... do you want to play to get it?</string>
+    <string name="madrid_instrucc">Mueve al personaje con tu dedo tocando la parte de la pantalla donde quieras ir. Trata de coger las monedas que se piden evitando los misiles y disparos.</string>
     <!-- Milán-Sarajevo -->
     <string name="route2">Milan-Sarajevo</string>
     <string name="milan_autores">Roberto Ramos Rodríguez\nSergio Jimenez Gomez</string>

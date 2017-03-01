@@ -13,9 +13,8 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
-import es.riberadeltajo.refugiadosgame.ruta1.view.GameView;
 
-public class Madrid_Milan_3 extends AppCompatActivity implements View.OnClickListener{
+public class Madrid_Peso_If extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
     private TextView texto,dinero,objeto,descOpc1;
     private Button btnAtras, btnSig;
@@ -37,7 +36,7 @@ public class Madrid_Milan_3 extends AppCompatActivity implements View.OnClickLis
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.madrid_milan3);
+        texto.setText(R.string.madrid_peso_else1);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -47,7 +46,7 @@ public class Madrid_Milan_3 extends AppCompatActivity implements View.OnClickLis
         descOpc1=(TextView) findViewById(R.id.txtOpcDesc); //TextView para descripción de la opción 1
         descOpc1.setTypeface(font);
         descOpc1.setText("Descripción");
-        opc1.setImageResource(R.drawable.madrid_frontera_coche); //Imagen para la opción 1
+        opc1.setImageResource(R.drawable.madrid_recuerdos); //Imagen para la opción 1
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
@@ -77,7 +76,7 @@ public class Madrid_Milan_3 extends AppCompatActivity implements View.OnClickLis
     }
 
     public void goNext(){
-        startActivity(new Intent(this, Madrid_Fin.class));
+        startActivity(new Intent(this, Madrid_Milan_1.class));
         finish();
     }
 }

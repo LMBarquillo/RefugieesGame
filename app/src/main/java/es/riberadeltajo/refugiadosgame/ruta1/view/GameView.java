@@ -52,7 +52,7 @@ public class GameView extends SurfaceView {
     private int puntuacion;
     private long crono,inicio;
     private Sprite jug;
-    private Madrid contexto;
+    private Madrid_Arcade contexto;
     private int vidas;
     private Typeface font;
     private int ran;
@@ -64,7 +64,7 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context){
         super(context);
-        setContexto((Madrid)context);
+        setContexto((Madrid_Arcade)context);
         loop=new GameLoop(this);
         setCorx(0);
         setCory(0);
@@ -147,11 +147,11 @@ public class GameView extends SurfaceView {
         this.puntuacion = puntuacion;
     }
 
-    public Madrid getContexto() {
+    public Madrid_Arcade getContexto() {
         return contexto;
     }
 
-    public void setContexto(Madrid contexto) {
+    public void setContexto(Madrid_Arcade contexto) {
         this.contexto = contexto;
     }
 

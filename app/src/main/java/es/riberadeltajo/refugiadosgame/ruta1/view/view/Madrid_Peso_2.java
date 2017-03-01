@@ -143,7 +143,7 @@ public class Madrid_Peso_2 extends AppCompatActivity implements View.OnClickList
             finish();
         }
         else if(cont==OPCION_C){
-            startActivity(new Intent(this, Madrid_Milan_1.class));
+            startActivity(new Intent(this, Madrid_Peso_If.class));
             finish();
         }
     }

@@ -77,7 +77,7 @@ public class Madrid_Milan_2 extends AppCompatActivity implements View.OnClickLis
     }
 
     public void goNext(){
-        GameView gameView=new GameView(this);
-        setContentView(gameView);
+        startActivity(new Intent(this, Madrid_Fin.class));
+        finish();
     }
 }

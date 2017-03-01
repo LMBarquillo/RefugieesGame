@@ -55,7 +55,7 @@ public class Madrid_Peso_Else_1 extends AppCompatActivity implements View.OnClic
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
-        descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+        descOpc1.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
     }
 
     @Override

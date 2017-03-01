@@ -35,8 +35,8 @@ public class Ticket {
         setxSpeed(5);
         setySpeed(5);
         setCurrentFrame(0);
-        setCorx((int) (Math.random()*(gameView.getWidth()-(2*getWidth()+(gameview.getWidth()*0.1))))+(int)(gameview.getWidth()*0.1));
-        setCory((int) (Math.random()*(gameView.getHeight()-(2*getHeight()+(gameview.getHeight()*0.1))))+(int)(gameview.getHeight()*0.1));
+        setCorx((int) (Math.random()*(getGameView().getWidth()-(2*getWidth()+(getGameView().getWidth()*0.1))))+(int)(getGameView().getWidth()*0.1));
+        setCory((int) (Math.random()*(getGameView().getHeight()-(2*getHeight()+(getGameView().getHeight()*0.1))))+(int)(getGameView().getHeight()*0.1));
     }
 
     private int getDireccion(){
@@ -132,8 +132,8 @@ public class Ticket {
     public void draw(Canvas canvas){
         update();
         if(--life<1){
-            setCorx((int) (Math.random()*(getGameView().getWidth()-getWidth())));
-            setCory((int) (Math.random()*(getGameView().getHeight()-getHeight())));
+            setCorx((int) (Math.random()*(getGameView().getWidth()-(2*getWidth()+(getGameView().getWidth()*0.1))))+(int)(getGameView().getWidth()*0.1));
+            setCory((int) (Math.random()*(getGameView().getHeight()-(2*getHeight()+(getGameView().getHeight()*0.1))))+(int)(getGameView().getHeight()*0.1));
             life=100;
         }
         else{
