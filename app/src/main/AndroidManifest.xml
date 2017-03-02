@@ -73,6 +73,9 @@
             android:name=".ruta1.view.Madrid_Arcade"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ruta1.view.view.Madrid_Fin"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ruta1.view.view.Madrid_Help"
             android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.Milan" />

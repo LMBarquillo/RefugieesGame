@@ -51,8 +51,8 @@ public class Madrid_Rueda_2 extends AppCompatActivity implements View.OnClickLis
         descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
-        descOpc1.setText("Continue walking");
-        descOpc2.setText("Wait help");
+        descOpc1.setText(R.string.madrid_rueda2_desc1);
+        descOpc2.setText(R.string.madrid_rueda2_desc2);
         opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
         opc1.setOnClickListener(this);

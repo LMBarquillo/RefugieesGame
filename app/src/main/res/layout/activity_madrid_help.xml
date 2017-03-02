@@ -43,11 +43,61 @@
                     android:layout_width="match_parent"
                     android:layout_height="22dp" />
 
-                <VideoView
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_weight="0.9"
+                    android:background="@drawable/menu1"
+                    android:layout_height="300dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textStyle="normal|bold"
+                        android:textSize="24sp"
+                        android:textColor="@android:color/background_dark"
+                        android:id="@+id/txtGoal" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:srcCompat="@drawable/madrid_ticket"
+                        android:id="@+id/imageView2"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:id="@+id/madInstrucc" />
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/menu1"
+                        android:id="@+id/imgInstrucc" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0" />
+
+                    <VideoView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/madInstrucc" />
+                </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"
@@ -62,7 +112,7 @@
                     android:textSize="18sp"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_weight="0.05"
-                    android:layout_height="75dp" />
+                    android:layout_height="100dp" />
 
                 <Space
                     android:layout_width="match_parent"
