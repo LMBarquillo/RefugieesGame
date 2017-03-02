@@ -42,7 +42,7 @@ public class Madrid_Help extends AppCompatActivity implements View.OnClickListen
         goal.setTypeface(font);
         goal.setText(R.string.madrid_help_goal);
         videoView=(VideoView) findViewById(R.id.madInstrucc);
-        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.madrid_help); //do not add any extension
+        Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.madrid_help_video); //do not add any extension
         videoView.setVideoURI(video);
         videoView.start();
         videoView.setOnTouchListener(new View.OnTouchListener(){
