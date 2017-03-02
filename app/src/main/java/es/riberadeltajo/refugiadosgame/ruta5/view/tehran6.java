@@ -16,7 +16,7 @@ import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 
 public class tehran6 extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
-    private TextView texto,dinero,objeto;
+    private TextView texto,dinero,objeto,descripcion1, descripcion2;
     private Button btnAtras, btnSig;
     private final int OPCION_A=1;
     private final int OPCION_B=2;
@@ -34,10 +34,16 @@ public class tehran6 extends AppCompatActivity implements View.OnClickListener{
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dos_opciones);
+        PlayerStatus.getInstancia(this).setRuta(5);
+        PlayerStatus.getInstancia(this).setTramo(6);
         getWindow().getDecorView().setBackgroundResource(R.drawable.fondoteheran); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
+        descripcion1=(TextView) findViewById(R.id.txtOpc1Desc);
+        descripcion1.setVisibility(View.INVISIBLE);
+        descripcion2=(TextView) findViewById(R.id.txtOpc2Desc);
+        descripcion2.setVisibility(View.INVISIBLE);
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
         texto.setText(getString(R.string.tehran_text4_3));

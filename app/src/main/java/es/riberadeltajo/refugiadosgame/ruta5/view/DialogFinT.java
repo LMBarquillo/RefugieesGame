@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta5.view;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 
 /**
  * Created by Alex on 14/02/2017.
@@ -153,7 +155,8 @@ public class DialogFinT extends Dialog implements View.OnClickListener {
     }
 
     private void goToMenu(){
-        activity.onPause();
+        activity.menuPrincipal();
+        activity.onDestroy();
         dismiss();
     }
 
