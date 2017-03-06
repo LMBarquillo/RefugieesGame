@@ -25,7 +25,7 @@ public class Madrid_Arcade extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
         PlayerStatus.getInstancia(this).setRuta(1);
-        PlayerStatus.getInstancia(this).setTramo(0);
+        PlayerStatus.getInstancia(this).setTramo(20);
         gameView = new GameView(this);
         setContentView(gameView);
     }

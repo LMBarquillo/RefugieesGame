@@ -1,7 +1,6 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;

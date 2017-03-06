@@ -2,8 +2,6 @@ package es.riberadeltajo.refugiadosgame.ruta1.view;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
@@ -284,6 +282,7 @@ public class Sprite {
                 velY=0;
             }
         }
+        //Velocidad escalada según resolución de dispositivo
         x=velX/1080;
         y=velY/1920;
         vx=getGameView().getWidth()*x;
@@ -304,16 +303,6 @@ public class Sprite {
         Rect src=new Rect(srcx,srcy,srcx+getWidth(),srcy+getHeight());
         RectF dst=new RectF(getCorx(),getCory(),getCorx()+getWidth(),getCory()+getHeight());
         canvas.drawBitmap(getBmp(),src,dst,null);
-
-        //Temporal para ver la velocidad y la pos en pantalla
-        /*Paint paint = new Paint();
-        paint.setColor(Color.YELLOW);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setTextSize(80);
-        canvas.drawText(String.format("posX: %.2f\tposY: %.2f",getPosX(),getPosY()),(float)(getWidth()*0.8),(float)(getHeight()*1.2),paint);
-        canvas.drawText(String.format("corX: %.2f\tcorY: %.2f",getCorx(),getCory()),(float)(getWidth()*0.8),(float)(getHeight()*1.7),paint);
-        canvas.drawText(String.format("xSpeed: %.2f\tySpeed: %.2f",getxSpeed(),getySpeed()),(float)(getWidth()*0.5),(float)(getHeight()*2.2),paint);
-        canvas.drawText(String.format("coins: %d\t",getGameView().getMonedas().size()),(float)(getWidth()*0.8),(float)(getHeight()*2.7),paint);*/
     }
 
     //Devuelvo la posición donde quiero que se mueva el personaje al hacer touch desde GameView

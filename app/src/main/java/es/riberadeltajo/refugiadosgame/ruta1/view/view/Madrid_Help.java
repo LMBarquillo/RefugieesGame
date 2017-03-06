@@ -36,6 +36,8 @@ public class Madrid_Help extends AppCompatActivity implements View.OnClickListen
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_madrid_help);
+        PlayerStatus.getInstancia(this).setRuta(1);
+        PlayerStatus.getInstancia(this).setTramo(19);
         getWindow().getDecorView().setBackgroundResource(R.drawable.madrid_history_fondo); //Pon un fondo de la ciudad de tu ruta
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         goal=(TextView) findViewById(R.id.txtGoal);
