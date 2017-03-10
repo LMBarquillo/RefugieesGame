@@ -93,7 +93,8 @@ public class GameView extends SurfaceView {
             }
 
             @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            }
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
@@ -188,6 +189,14 @@ public class GameView extends SurfaceView {
 
     public void setVidas(int vidas) {
         this.vidas = vidas;
+    }
+
+    public GameLoop getLoop() {
+        return loop;
+    }
+
+    public void setLoop(GameLoop loop) {
+        this.loop = loop;
     }
 
     //Creo el Sprite y le hago un setJug() para pasarle después la posición en el onTouchEvent

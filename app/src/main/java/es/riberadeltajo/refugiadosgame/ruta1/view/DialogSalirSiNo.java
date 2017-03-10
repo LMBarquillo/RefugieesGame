@@ -17,7 +17,7 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 
 /**
- * Created by Alex on 14/02/2017.
+ * Created by Adri on 14/02/2017.
  */
 
 public class DialogSalirSiNo extends Dialog implements View.OnClickListener {

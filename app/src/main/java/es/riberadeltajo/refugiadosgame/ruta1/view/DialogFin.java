@@ -1,5 +1,6 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,7 +20,7 @@ import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 
 /**
- * Created by Alex on 14/02/2017.
+ * Created by Adri on 14/02/2017.
  */
 
 public class DialogFin extends Dialog implements View.OnClickListener {
@@ -155,7 +156,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     }
 
     private void goToMenu(){
-        activity.startActivity(new Intent(activity.getApplicationContext(), MainActivity.class));
+        activity.goMenu();
         dismiss();
     }
 

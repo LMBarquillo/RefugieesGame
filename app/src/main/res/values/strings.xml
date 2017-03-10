@@ -19,6 +19,7 @@
     <string name="madrid_lose_mensaje">You do not acquired the ticket. Try again?</string>
     <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
     <string name="madrid_jugar">PLAY</string>
+    <string name="toastSiguiente">You have to choose and option before continue</string>
 
     <string name="madrid_maletas_desc1">SUITCASE A</string>
     <string name="madrid_maletas_desc2">SUITCASE B</string>
@@ -43,7 +44,8 @@
 
     <string name="madrid_main">The World War III has taken place in Europe. You have to flee in order to save your life.\n\n Hurry up! Try to be wise!</string>
     <string name="madrid_maletas">The enemies are about to arrive. What will you take with you?</string>
-    <string name="madrid_trans">Very good. Now it is time to leave. Do you want to pay for a means of transport or steal a car?</string>
+    <string name="madrid_trans_a">Very good. Now you have 450€, foods, blankets and memories.\n\n Now it is time to leave. Do you want to pay for a means of transport or steal a car?</string>
+    <string name="madrid_trans_b">Very good. Now you have 250€, a passport, foods, blankets and memories.\n\n Now it is time to leave. Do you want to pay for a means of transport or steal a car?</string>
     <string name="madrid_peso1">You have spent 300€, but you can travel by lorry.</string>
     <string name="madrid_peso2">Oh, no! There is too much weight! What do you want to get rid of?</string>
     <string name="madrid_peso_else1">You are hungry and thirsty. You have to spend 100€</string>
