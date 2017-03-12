@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -35,16 +36,7 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
     public static final int PLACE_AZADI = 1;
     public static final int PLACE_GOLESTAN = 2;
     public static final int PLACE_ABDOL = 3;
-
-    public MediaPlayer getMusicaFondo() {
-        return musicaFondo;
-    }
-
-    public void setMusicaFondo(MediaPlayer musicaFondo) {
-        this.musicaFondo = musicaFondo;
-    }
-
-
+    private static final String TAG = "OptionsView";
 
     public enum Fase {INICIO,TEMA,CREDITOS,DIFICULTAD,LUGAR,INSTRUCCIONES};   // Las fases por las que pasará el menú
 
@@ -54,7 +46,6 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
     private Bitmap fondo,logo;
     private Typeface tipografia;
     private Fase fase;
-    private MediaPlayer musicaFondo;
     private SoundPool chord;
     private int idChord,idButton;
     // Destinos de los botones
@@ -63,12 +54,11 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
 
     public OptionsView(Context context) {
         super(context);
+
         this.menu = (GameMenu)context;
         fase = Fase.INICIO;
-        loop=new GameLoopThread(this,20);
         fondo = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.streetguitarfondo);
         logo = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.streetguitarlogo);
-        setMusicaFondo(new MediaPlayer().create(context,R.raw.kindoflight));
         tipografia = Typeface.createFromAsset(context.getAssets(),"tipografias/aaaiight.ttf");
         chord = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         idChord = chord.load(context, R.raw.selectchord, 0);
@@ -84,9 +74,9 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        loop=new GameLoopThread(this,20);
         loop.setRunning(true);
         loop.start();
-        getMusicaFondo().start();
     }
 
     @Override
@@ -98,10 +88,7 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
     public void surfaceDestroyed(SurfaceHolder holder) {
         boolean volver = false;
         loop.setRunning(false);
-        if(getMusicaFondo() != null) {
-            getMusicaFondo().stop();
-            getMusicaFondo().release();
-        }
+
         while(volver){
             try{
                 loop.join();
@@ -266,6 +253,7 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
                         // Quit
                         if(event.getX() >= threeof3Dst.left && event.getX() <= threeof3Dst.right && event.getY() >= threeof3Dst.top && event.getY() <= threeof3Dst.bottom) {
                             chord.play(idChord, 1, 1, 1, 0, 1);
+                            getLoop().setRunning(false);
                             menu.onBackPressed();
                         }
                         break;
@@ -351,7 +339,7 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
                         break;
                     case INSTRUCCIONES:
                         // LET'S PLAY !!
-                        if(event.getX() >= letsrockDst.left && event.getX() <= letsrockDst.right && event.getY() >= letsrockDst.top && event.getY() <= letsrockDst.bottom) {
+                        if(letsrockDst != null && event.getX() >= letsrockDst.left && event.getX() <= letsrockDst.right && event.getY() >= letsrockDst.top && event.getY() <= letsrockDst.bottom) {
                             chord.play(idChord, 1, 1, 1, 0, 1);
                             this.menu.jugar(selectedSong,selectedDifficulty,selectedPlace);
                         }

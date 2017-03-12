@@ -40,7 +40,14 @@ public class StreetGuitar extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        // Detenemos todos los hilos
         gameView.getLoop().setRunning(false);
+        gameView.getGenerador().setRunning(false);
+
+        if(gameView.getMusica() != null) {
+            if(gameView.getMusica().isPlaying()) gameView.getMusica().stop();
+            gameView.getMusica().release();
+        }
         /*Intent i = new Intent();
         setResult(RESULT_CANCELED,i);*/
         finish();

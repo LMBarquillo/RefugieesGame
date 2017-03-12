@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -27,6 +28,7 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteXplosion;
  * Gameview.
  */
 public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.Callback, MediaPlayer.OnCompletionListener {
+    private static final String TAG = "GameView";
     private StreetGuitar contexto;
     private final int FPS = 60;
     private NoteGenerator generador;
@@ -52,7 +54,6 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
 
         getMusica().setOnCompletionListener(this);
 
-        setLoop(new GameLoopThread(this,FPS));  // Instancia el gameloop
         setNotas(new ArrayList<SpriteNotas>());
         setExplosiones(new ArrayList<SpriteXplosion>());
 
@@ -73,6 +74,7 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        setLoop(new GameLoopThread(this,FPS));  // Instancia el gameloop
         generador.setRunning(true);
         loop.setRunning(true);
         generador.start();  // Este se encargará de ir añadiendo las notas al arraylist
@@ -89,8 +91,9 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
         boolean volver=true;
         loop.setRunning(false);
         generador.setRunning(false);
+
         if(getMusica() != null) {
-            musica.stop();
+            //musica.stop();
             musica.release();
         }
 
@@ -165,13 +168,14 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
 
     private void controlMusic() {
         int retrasoCancion = 450;
-
-        // cuando la primera nota pasa por el traste, arrancamos la música
-        if(!getMusica().isPlaying() && getNotas().size() > 0) {
-            if(getNotas().get(0).getAltura() >= dstPickups.top - retrasoCancion) {
-                getMusica().start();
+        try {
+            // cuando la primera nota pasa por el traste, arrancamos la música
+            if(getMusica() != null && !getMusica().isPlaying() && getNotas().size() > 0) {
+                if(getNotas().get(0).getAltura() >= dstPickups.top - retrasoCancion) {
+                    getMusica().start();
+                }
             }
-        }
+        } catch(IllegalStateException ex) {}
     }
 
     // Si cogemos varias notas seguidas, conseguimos más puntos y un mensaje de ánimo

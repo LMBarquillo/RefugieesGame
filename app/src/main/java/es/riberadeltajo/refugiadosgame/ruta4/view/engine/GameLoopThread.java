@@ -18,30 +18,6 @@ public class GameLoopThread extends Thread {
         setFps(fps);
     }
 
-    public void setGameSurface(GameSurface gameSurface) {
-        this.gameSurface = gameSurface;
-    }
-
-    public void setRunning(boolean running) {
-        this.running = running;
-    }
-
-    public int getFps() {
-        return fps;
-    }
-
-    public void setFps(int fps) {
-        this.fps = fps;
-    }
-
-    public GameSurface getGameSurface() {
-        return gameSurface;
-    }
-
-    public boolean isRunning() {
-        return running;
-    }
-
     public void run(){
         long tick=1000/getFps();
         long startTime;
@@ -69,5 +45,29 @@ public class GameLoopThread extends Thread {
                     sleep(10);
             }catch(InterruptedException ie){}
         }
+    }
+
+    public void setGameSurface(GameSurface gameSurface) {
+        this.gameSurface = gameSurface;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public int getFps() {
+        return fps;
+    }
+
+    public void setFps(int fps) {
+        this.fps = fps;
+    }
+
+    public GameSurface getGameSurface() {
+        return gameSurface;
+    }
+
+    public boolean isRunning() {
+        return running;
     }
 }
