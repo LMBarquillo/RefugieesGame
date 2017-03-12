@@ -75,6 +75,7 @@ public class Madrid_Main extends AppCompatActivity implements View.OnClickListen
 
     public void goNext(){
         PlayerStatus.getInstancia(this).setDinero(0);
+        PlayerStatus.getInstancia(this).setObjeto(0);
         startActivity(new Intent(this, Madrid_Maletas.class));
         finish();
     }

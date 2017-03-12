@@ -55,7 +55,7 @@ public class GameView extends SurfaceView {
     private MediaPlayer musica;
     private SoundPool soundPool;
     private int idDisparoBomba,idDisparoMisil,idGrito,idCaeMoneda,
-            idCoin1,idCoin2,idCoin5,idCoin10,idGameOver,idWin;
+            idCoin1,idCoin2,idCoin5,idCoin10;
 
     public GameView(Context context){
         super(context);
@@ -83,8 +83,6 @@ public class GameView extends SurfaceView {
         idCoin2 = soundPool.load(context, R.raw.madrid_coin2_effect, 1);
         idCoin5 = soundPool.load(context, R.raw.madrid_coin5_effect, 1);
         idCoin10 = soundPool.load(context, R.raw.madrid_coin10_effect, 1);
-        idWin = soundPool.load(context, R.raw.madrid_win_effect, 0);
-        idGameOver = soundPool.load(context, R.raw.madrid_gameover_effect, 0);
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -627,7 +625,6 @@ public class GameView extends SurfaceView {
                     for (int i = 0; i < tickets.size(); i++) {
                         tickets.get(i).draw(canvas);
                         if (tickets.get(i).isCollition(getJug())) {
-                            //oundPool.play(idWin,(float)0.5,(float)0.5,0,0,1);
                             tickets.remove(tickets.get(i));
                             conseguido = true;
                         }

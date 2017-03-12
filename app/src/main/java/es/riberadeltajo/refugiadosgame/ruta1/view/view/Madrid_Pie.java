@@ -57,10 +57,10 @@ public class Madrid_Pie extends AppCompatActivity implements View.OnClickListene
         descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
-        descOpc1.setText("Descripción");
-        descOpc2.setText("Descripción");
-        opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
-        opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
+        descOpc1.setText(R.string.madrid_pie_desc1);
+        descOpc2.setText(R.string.madrid_pie_desc2);
+        opc1.setImageResource(R.drawable.madrid_history_yes); //Imagen para la opción 1
+        opc2.setImageResource(R.drawable.madrid_history_no); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
         btnAtras=(Button) findViewById(R.id.btnBack);

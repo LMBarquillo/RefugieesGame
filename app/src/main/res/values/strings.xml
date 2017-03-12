@@ -16,54 +16,57 @@
     <string name="route1">Madrid-Milan</string>
     <string name="madrid_autores">Adrián Portela Ortiz\nJosé Carlos Sánchez Pérez</string>
     <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
-    <string name="madrid_lose_mensaje">You do not acquired the ticket. Try again?</string>
+    <string name="madrid_lose_mensaje">You don\'t acquired the ticket. Try again?</string>
     <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
     <string name="madrid_jugar">PLAY</string>
-    <string name="toastSiguiente">You have to choose and option before continue</string>
+    <string name="toastSiguiente">You\'ve to choose and option before continue</string>
 
     <string name="madrid_maletas_desc1">SUITCASE A</string>
     <string name="madrid_maletas_desc2">SUITCASE B</string>
 
     <string name="madrid_trans_desc1">LORRY: PAY 300€</string>
     <string name="madrid_trans_desc2">STEAL A CAR</string>
-    <string name="madrid_trans_toast">You do not have enough money to choose this transport</string>
+    <string name="madrid_trans_toast">You don\'t have enough money to choose this transport</string>
 
     <string name="madrid_peso2_desc1">FOODS</string>
     <string name="madrid_peso2_desc2">BLANKETS</string>
     <string name="madrid_peso2_desc3">MEMORIES</string>
+
+    <string name="madrid_pie_desc1">I\'LL DO IT</string>
+    <string name="madrid_pie_desc2">I\'M AFRAID</string>
 
     <string name="madrid_rueda2_desc1">KEEP WALKING</string>
     <string name="madrid_rueda2_desc2">WAIT HELP</string>
 
     <string name="madrid_passport_desc1">YOU HAVE ONE</string>
     <string name="madrid_passport_desc2">FAKE ONE: 100€</string>
-    <string name="madrid_passport_toast1">You do not have a passport</string>
+    <string name="madrid_passport_toast1">You don\'t have a passport</string>
     <string name="madrid_passport_toast2">You already have a passport!</string>
 
     <string name="madrid_help_goal">GOAL:</string>
 
-    <string name="madrid_main">The World War III has taken place in Europe. You have to flee in order to save your life.\n\n Hurry up! Try to be wise!</string>
+    <string name="madrid_main">The World War III has taken place in Europe. You\'ve to flee in order to save your life.\n\n Hurry up! Try to be wise!</string>
     <string name="madrid_maletas">The enemies are about to arrive. What will you take with you?</string>
-    <string name="madrid_trans_a">Very good. Now you have 450€, foods, blankets and memories.\n\n Now it is time to leave. Do you want to pay for a means of transport or steal a car?</string>
-    <string name="madrid_trans_b">Very good. Now you have 250€, a passport, foods, blankets and memories.\n\n Now it is time to leave. Do you want to pay for a means of transport or steal a car?</string>
-    <string name="madrid_peso1">You have spent 300€, but you can travel by lorry.</string>
+    <string name="madrid_trans_a">Very good. Now you have 450€, foods, blankets and memories.\n\n Now it\'s time to leave. Do you want to pay for a means of transport or steal a car?</string>
+    <string name="madrid_trans_b">Very good. Now you have 250€, a passport, foods, blankets and memories.\n\n Now it\'s time to leave. Do you want to pay for a means of transport or steal a car?</string>
+    <string name="madrid_peso1">You\'ve spent 300€, but you can travel by lorry.</string>
     <string name="madrid_peso2">Oh, no! There is too much weight! What do you want to get rid of?</string>
-    <string name="madrid_peso_else1">You are hungry and thirsty. You have to spend 100€</string>
-    <string name="madrid_peso_else2">You are freezing. It is very cold. You have to spend 100€ to be warm.</string>
-    <string name="madrid_peso_if">Good! They are not really necessary.</string>
+    <string name="madrid_peso_else1">You are hungry and thirsty. You\'ve to spend 100€</string>
+    <string name="madrid_peso_else2">You are freezing. It\'s very cold. You\'ve to spend 100€ to be warm.</string>
+    <string name="madrid_peso_if">Good! They aren\'t really necessary.</string>
     <string name="madrid_milan1">Congratulations! You can continue the journey.</string>
     <string name="madrid_rueda1">Oh no, you have a flat tire! What do you want to do?</string>
     <string name="madrid_rueda2">Do you want to continue on foot or do you prefer to wait till someone shows up?</string>
-    <string name="madrid_pie">You have met some people on the way. Do you want to talk with them?</string>
+    <string name="madrid_pie">You\'ve met some people on the way. Do you want to talk with them?</string>
     <string name="madrid_pie2">After a few days, you have met some people on the way and this time you decide to go with them.</string>
     <string name="madrid_passport">They want to help you but they do not trust in people without passport. Do you have your passport?</string>
     <string name="madrid_milan2">Congratulations! You can continue the journey.</string>
     <string name="madrid_wait">Some people stop to help you.</string>
     <string name="madrid_milan3">You have to spend 100€ to buy a fake one. Congratulations! You can continue the journey.</string>
-    <string name="madrid_fin_easy">GOAL: 150€ / LEVEL EASY\n\n\nYou have just arrived in Milan, but you do not have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 150€ more to access the next level.\n\n Easy, right? So… do you want to play to get it?</string>
-    <string name="madrid_fin_medium">GOAL: 250€ / LEVEL MEDIUM\n\n\nYou have just arrived in Milan, but you do not have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 250€ more to access the next level because some decisions have made you lose some money.\n\n So… do you want to play to get it?</string>
-    <string name="madrid_fin_hard">GOAL: 350€ / LEVEL HARD\n\n\nYou have just arrived in Milan, but you do not have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 350€ more to access the next level because some decisions have made you lose a lot of money.\n\n So… do you want to play to get it?</string>
-    <string name="madrid_fin_extreme">GOAL: 450€ / LEVEL EXTREME\n\n\nYou have just arrived in Milan, but you do not have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 450€ more to access the next level because some decisions have made you lose more money than expected.\n\n So… do you want to play to get it?</string>
+    <string name="madrid_fin_easy">GOAL: 150€ / LEVEL EASY\n\n\nYou\'ve just arrived in Milan, but you don\'t have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 150€ more to access the next level.\n\n Easy, right? So… do you want to play to get it?</string>
+    <string name="madrid_fin_medium">GOAL: 250€ / LEVEL MEDIUM\n\n\nYou\'ve just arrived in Milan, but you don\'t have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 250€ more to access the next level because some decisions have made you lose some money.\n\n So… do you want to play to get it?</string>
+    <string name="madrid_fin_hard">GOAL: 350€ / LEVEL HARD\n\n\nYou\'ve just arrived in Milan, but you don\'t have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 350€ more to access the next level because some decisions have made you lose a lot of money.\n\n So… do you want to play to get it?</string>
+    <string name="madrid_fin_extreme">GOAL: 450€ / LEVEL EXTREME\n\n\nYou\'ve just arrived in Milan, but you don\'t have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 450€ more to access the next level because some decisions have made you lose more money than expected.\n\n So… do you want to play to get it?</string>
     <string name="madrid_instrucc">Touch the screen to move the character. Collect the required amount of coins and the TRAIN TICKET while you avoid missiles and shots.</string>
 
     <!-- Milán-Sarajevo -->

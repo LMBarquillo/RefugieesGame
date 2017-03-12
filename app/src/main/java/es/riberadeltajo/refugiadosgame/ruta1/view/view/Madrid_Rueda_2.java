@@ -59,8 +59,8 @@ public class Madrid_Rueda_2 extends AppCompatActivity implements View.OnClickLis
         descOpc2.setTypeface(font);
         descOpc1.setText(R.string.madrid_rueda2_desc1);
         descOpc2.setText(R.string.madrid_rueda2_desc2);
-        opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
-        opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
+        opc1.setImageResource(R.drawable.madrid_keepwalking); //Imagen para la opción 1
+        opc2.setImageResource(R.drawable.madrid_waithelp); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
         btnAtras=(Button) findViewById(R.id.btnBack);
@@ -71,8 +71,8 @@ public class Madrid_Rueda_2 extends AppCompatActivity implements View.OnClickLis
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
-        descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
-        descOpc2.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+        descOpc1.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+        descOpc2.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
     }
 
     @Override
