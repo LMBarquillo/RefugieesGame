@@ -1,7 +1,6 @@
 package es.riberadeltajo.refugiadosgame.ruta4.view.engine;
 
 import android.graphics.Canvas;
-import android.view.SurfaceView;
 
 /**
  * Game Loop Thread
@@ -10,23 +9,17 @@ import android.view.SurfaceView;
 
 public class GameLoopThread extends Thread {
     private int fps;
-    private SurfaceView gameView;
+    private GameSurface gameSurface;
     private boolean running;
 
-    public GameLoopThread(GameView gameView){
-        setGameView(gameView);
+    public GameLoopThread(GameSurface gameSurface, int fps){
+        setGameSurface(gameSurface);
         setRunning(false);
-        setFps(gameView.getFPS());  // Nos traemos los FPS del GameView. Los tenemos ahí porque los necesitaremos en otras clases para conseguir el sincronismo de la música.
+        setFps(fps);
     }
 
-    public GameLoopThread(OptionsView gameView){
-        setGameView(gameView);
-        setRunning(false);
-        setFps(20); // Aquí no necesitamos tanto
-    }
-
-    public void setGameView(SurfaceView gameView) {
-        this.gameView = gameView;
+    public void setGameSurface(GameSurface gameSurface) {
+        this.gameSurface = gameSurface;
     }
 
     public void setRunning(boolean running) {
@@ -41,8 +34,8 @@ public class GameLoopThread extends Thread {
         this.fps = fps;
     }
 
-    public SurfaceView getGameView() {
-        return gameView;
+    public GameSurface getGameSurface() {
+        return gameSurface;
     }
 
     public boolean isRunning() {
@@ -58,13 +51,14 @@ public class GameLoopThread extends Thread {
             Canvas canvas=null;
             startTime=System.currentTimeMillis();
             try{
-                canvas=getGameView().getHolder().lockCanvas();
-                synchronized(getGameView()){
-                    getGameView().draw(canvas);
+                canvas= getGameSurface().getHolder().lockCanvas();
+                synchronized(getGameSurface()){
+                    getGameSurface().actualizar();
+                    getGameSurface().dibujar(canvas);
                 }
             }finally{
                 if(canvas!=null){
-                    getGameView().getHolder().unlockCanvasAndPost(canvas);
+                    getGameSurface().getHolder().unlockCanvasAndPost(canvas);
                 }
             }
             sleepTime=tick-(System.currentTimeMillis()-startTime);

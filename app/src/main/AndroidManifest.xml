@@ -129,27 +129,37 @@
         <activity android:name=".ruta2.view.juego.milan_juego2" />
         <activity android:name=".ruta5.view.teheran_main2" />
         <activity android:name=".common.view.MainActivity2" />
-        <activity android:name=".ruta3.view.ruta.SarajevoAlojamiento"
+        <activity
+            android:name=".ruta3.view.ruta.SarajevoAlojamiento"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta3.view.ruta.SarajevoPasillo"
+        <activity
+            android:name=".ruta3.view.ruta.SarajevoPasillo"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta3.view.ruta.SarajevoChino"
+        <activity
+            android:name=".ruta3.view.ruta.SarajevoChino"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta3.view.ruta.SarajevoMejicano"
+        <activity
+            android:name=".ruta3.view.ruta.SarajevoMejicano"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta3.view.ruta.SarajevoAfricano"
+        <activity
+            android:name=".ruta3.view.ruta.SarajevoAfricano"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta3.view.ruta.SarajevoHabitacion"
+        <activity
+            android:name=".ruta3.view.ruta.SarajevoHabitacion"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta3.view.ruta.SarajevoBanda"
+        <activity
+            android:name=".ruta3.view.ruta.SarajevoBanda"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
+        <activity android:name=".ruta4.view.GameMenu" />
+        <activity android:name=".ruta4.view.StreetGuitar" />
+        <activity android:name=".ruta4.view.EndGame"></activity>
     </application>
 
 </manifest>

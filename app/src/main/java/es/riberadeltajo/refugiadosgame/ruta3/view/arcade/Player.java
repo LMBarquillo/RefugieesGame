@@ -192,7 +192,7 @@ public class Player {
             getGameView().setFin(true);
             getGameView().getActivity().runOnUiThread(new Runnable() {
                 public void run() {
-                    /*AlertDialog.Builder dialog = new AlertDialog.Builder(getGameView().getActivity());
+                    /*AlertDialog.Builder dialog = new AlertDialog.Builder(getGameSurface().getActivity());
                     dialog.setTitle("You Lost");
                     dialog.setMessage("You lost because time is up");
                     dialog.setPositiveButton("Reintentar", null);

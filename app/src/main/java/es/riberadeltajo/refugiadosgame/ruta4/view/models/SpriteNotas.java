@@ -36,29 +36,19 @@ public class SpriteNotas {
         setDuracion(duracion);
         setAltura(-getSizeNota());
         setDificultad(dificultad);
-        // avance = tamaño traste / FPS * trastes por segundo * modificador dificultad (separación de notas)
         setAvance((int)(getSizeNota() / 60 * getGameView().getTPS() * getDificultad()));
     }
 
     private void update(){
-        setAltura(getAltura() + avance );
-        if(getAltura() >= getGameView().getHeight()) {
-            //getGameView().deleteFirstNote();    // La nota se ha salido por debajo y la eliminamos del arraylist
-        }
+        setAltura(getAltura() + avance);
    }
 
-    public void draw(Canvas canvas){
+    public void dibujar(Canvas canvas){
         update();
 
         Rect src = new Rect(0,0,getBmp().getWidth(),getBmp().getHeight());
         Rect dst = new Rect(getPosx(),getAltura(),getSizeNota()+getPosx(),getSizeNota()+getAltura());
         canvas.drawBitmap(getBmp(),src,dst,null);
-
-        // Monitores y/o contadores
-        Paint paint = new Paint();
-        paint.setColor(Color.YELLOW);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setTextSize(60);
     }
 
     public boolean isCollition(float x, float y) {

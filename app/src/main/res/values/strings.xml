@@ -113,6 +113,11 @@
     <string name="selectsong">Select the song you wanna play</string>
     <string name="selectdiff">Select your desired difficulty</string>
     <string name="selectplace">Which place you wanna play at?</string>
+    <string name="istanbul_earned">You have earned</string>
+    <string name="istanbul_coins">coins</string>
+    <string name="istanbul_next_route">Go to next route</string>
+    <string name="istanbul_play_again">Play again</string>
+    <string name="istanbul_main_menu">Go to main menu</string>
 
     <!-- Teherán-Bombai -->
     <string name="route5">Tehran-Mumbai</string>

@@ -36,7 +36,7 @@ public class NoteGenerator extends Thread {
         setGameview(gameview);
         setCancion(cancion);
         setDificultad(dificultad);
-        setRunning(true);
+        setRunning(false);
         crearNotas();
     }
 
@@ -46,9 +46,11 @@ public class NoteGenerator extends Thread {
             InputStreamReader is = new InputStreamReader(getContext().getAssets().open(getCancion()));
             BufferedReader reader = new BufferedReader(is);
 
-            line = reader.readLine();   // La primera línea marca los TPS
+            // La primera línea marca los TPS
+            line = reader.readLine();
             setTps(Double.parseDouble(line));
 
+            // A partir de ahí, ya son todas notas
             while((line = reader.readLine()) != null) {
                 String splitted[] = line.split(" ");
                 getNotas().add(new Nota(Float.parseFloat(splitted[0]),Integer.parseInt(splitted[1]),Float.parseFloat(splitted[2])));
@@ -65,16 +67,16 @@ public class NoteGenerator extends Thread {
         int nota = 0;
         Bitmap bmp;
 
-        while(isRunning()) {
-            Nota n;
+        while(isRunning() && getNotas().size() > nota) {
+            Nota n = new Nota(0,0,0);
 
             try {
                 // Esperamos 1 traste (1 segundo / trastes por segundo)
                 Thread.sleep((long) (1000/getTps()));
                 traste++;
 
-                if(getNotas().size() > nota) {      // Toca hasta que se acaban las notas
-                    do {
+                do {
+                    if(isRunning()) {
                         n = getNotas().get(nota);
 
                         if (traste == n.getTraste()) {
@@ -94,9 +96,11 @@ public class NoteGenerator extends Thread {
                             }
                             getGameview().getNotas().add(new SpriteNotas(getGameview(), bmp, n.getPosicion(), n.getDuracion(), getDificultad()));
                             nota++;
+                            // Si llega la ultima nota, termina
+                            if (nota >= getNotas().size()) setRunning(false);
                         }
-                    } while (traste == n.getTraste());
-                }
+                    }
+                } while (traste == n.getTraste());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/streetguitarfondo"
+    tools:context="es.riberadeltajo.refugiadosgame.ruta4.view.EndGame">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="@android:dimen/app_icon_size"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_weight="0.05"
+                        app:srcCompat="@drawable/streetguitarlogo" />
+
+                    <TextView
+                        android:id="@+id/textEarned"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.06"
+                        android:background="@color/SemiTransparente"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:shadowColor="@android:color/black"
+                        android:text="@string/istanbul_earned"
+                        android:textColor="@android:color/black"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/textQuantity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:background="@color/SemiTransparente"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:shadowColor="@android:color/black"
+                        android:text="0"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="70dp"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/textCoins"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:background="@color/SemiTransparente"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:shadowColor="@android:color/black"
+                        android:text="@string/istanbul_coins"
+                        android:textColor="@android:color/black"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:typeface="normal" />
+
+                    <Button
+                        android:id="@+id/button8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:onClick="playAgain"
+                        android:text="@string/istanbul_play_again" />
+
+                    <Button
+                        android:id="@+id/button9"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:onClick="nextRoute"
+                        android:text="@string/istanbul_next_route" />
+
+                    <Button
+                        android:id="@+id/button10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.05"
+                        android:onClick="mainMenu"
+                        android:text="@string/istanbul_main_menu" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@android:dimen/app_icon_size"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"></LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.widget.RelativeLayout>
