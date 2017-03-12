@@ -40,6 +40,19 @@ public class StreetGuitar extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        gameEnd(0,RESULT_CANCELED);
+    }
+
+    public void gameEnd(int puntos, int result) {
+        detenerTodo();
+
+        Intent i = new Intent();
+        i.putExtra("puntos",puntos);
+        setResult(result,i);
+        finish();
+    }
+
+    public void detenerTodo() {
         // Detenemos todos los hilos
         gameView.getLoop().setRunning(false);
         gameView.getGenerador().setRunning(false);
@@ -48,16 +61,5 @@ public class StreetGuitar extends AppCompatActivity {
             if(gameView.getMusica().isPlaying()) gameView.getMusica().stop();
             gameView.getMusica().release();
         }
-        /*Intent i = new Intent();
-        setResult(RESULT_CANCELED,i);*/
-        finish();
-    }
-
-    public void gameEnd(int puntos, int result) {
-        gameView.getLoop().setRunning(false);
-
-        Intent i = new Intent(this,EndGame.class);
-        i.putExtra("puntos",puntos);
-        startActivity(i);
     }
 }

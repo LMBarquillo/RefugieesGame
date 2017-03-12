@@ -41,13 +41,8 @@ public class EndGame extends AppCompatActivity {
     }
 
     protected void playAgain(View view) {
-        Intent i = new Intent(this,StreetGuitar.class);
-        startActivity(i);
-    }
-
-    protected void mainMenu(View view) {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        Intent i = new Intent();
+        setResult(RESULT_OK,i);
         finish();
     }
 

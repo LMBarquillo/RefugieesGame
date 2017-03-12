@@ -32,7 +32,7 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
     public static final int SONG_TEST = 3;  // La canción de test es para probar el final
     public static final int DIF_EASY = 3;
     public static final int DIF_MEDIUM = 5;
-    public static final int DIF_HARD = 8;
+    public static final int DIF_HARD = 7;
     public static final int PLACE_AZADI = 1;
     public static final int PLACE_GOLESTAN = 2;
     public static final int PLACE_ABDOL = 3;

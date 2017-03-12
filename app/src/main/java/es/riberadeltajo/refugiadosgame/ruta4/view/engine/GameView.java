@@ -416,7 +416,6 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
     @Override
     public void onCompletion(MediaPlayer mp) {
         // Se ejecuta cuando termina la canción
-        //getContexto().onBackPressed();
         getContexto().gameEnd(getPuntuacion(),Activity.RESULT_OK);
     }
 }

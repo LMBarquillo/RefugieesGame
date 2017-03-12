@@ -103,14 +103,6 @@
                         android:onClick="nextRoute"
                         android:text="@string/istanbul_next_route" />
 
-                    <Button
-                        android:id="@+id/button10"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.05"
-                        android:onClick="mainMenu"
-                        android:text="@string/istanbul_main_menu" />
-
                 </LinearLayout>
             </LinearLayout>
 
