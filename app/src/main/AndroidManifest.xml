@@ -159,7 +159,17 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ruta4.view.GameMenu" />
         <activity android:name=".ruta4.view.StreetGuitar" />
-        <activity android:name=".ruta4.view.EndGame"></activity>
+        <activity android:name=".ruta4.view.EndGame" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Main" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_1" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_TicketStealed" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_SinkingShip" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_Policeman" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_NoWayOut" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_ArabSaved" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_YouMadeIt" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_GotLost" />
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_NeedMoney"></activity>
     </application>
 
 </manifest>

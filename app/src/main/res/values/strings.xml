@@ -128,6 +128,23 @@
     <string name="istanbul_coins">coins</string>
     <string name="istanbul_next_route">Go to next route</string>
     <string name="istanbul_play_again">Play again</string>
+    <string name="istanbul_route_begins">Your route between Istanbul and Tehran begins.</string>
+    <string name="istanbul_route_ship">This time you will have to travel by ship. Will you buy the ticket or will you steal it?</string>
+    <string name="istanbul_route_stealit">Steal it</string>
+    <string name="istanbul_route_buyit">Buy it</string>
+    <string name="istanbul_route_notenoughmoney">You don\'t have enough money.</string>
+    <string name="istanbul_route_wannasellit">Now you have your "free" ticket.\n\nDo you want to sell it or use it?</string>
+    <string name="istanbul_route_sellit">Sell it</string>
+    <string name="istanbul_route_useit">Use it</string>
+    <string name="istanbul_route_policeman">A policeman saw you and you are caught and fined.\nYou have to pay 100€.\nTry to be wiser!!</string>
+    <string name="istanbul_route_sinking">Oh,no! The ship is sinking! Everybody is running away.\nSuddenly, you realise your arab friend didn\'t follow you.\nDo you want to go back to save him?</string>
+    <string name="istanbul_route_yes">yes</string>
+    <string name="istanbul_route_no">no</string>
+    <string name="istanbul_route_nowayout">You are trying to escape, but there is no way out.</string>
+    <string name="istanbul_route_arabfriend">He thanks you. Later, he will help you because you nearly drown. He also offers you some help to cross the border, but you don\'t know if that is a good idea.\nDo you want to go with him?</string>
+    <string name="istanbul_route_wrong">You walked in the wrong direction and got lost. You had to pay 50€ to get some information. Nobody wanted to help you.</string>
+    <string name="istanbul_route_youmadeit">Good! Both of you made it!</string>
+    <string name="istanbul_route_needmoney">Now that you are at Tehran, you need some money. You have met a group of street musicians that want you to play with them.\nShow them how good you are with the guitar!!!!</string>
 
     <!-- Teherán-Bombai -->
     <string name="route5">Tehran-Mumbai</string>
