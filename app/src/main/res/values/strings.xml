@@ -96,14 +96,25 @@
     <string name="sarajevo_dialogo_lose_titulo">YOU LOSE</string>
     <string name="sarajevo_dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
     <string name="sarajevo_txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
+    <string name="sarajevo_name_hotel">Hotel</string>
     <string name="sarajevo_txt_hotel">It\'s too expensive</string>
-    <!--<string name="txt_hostel">Where you have to share your room with people from other nationalities?</string>-->
-    <string name="sarajevo_txt_hostel">Shared rooms</string>
+    <string name="sarajevo_name_hostel">Hostel</string>
+    <string name="sarajevo_txt_hostel">Where you have to share your room with people from other nationalities?</string>
+    <!--<string name="sarajevo_txt_hostel">Shared rooms</string>-->
+    <string name="sarajevo_room_1">Room 1</string>
+    <string name="sarajevo_room_2">Room 2</string>
+    <string name="sarajevo_room_3">Room 3</string>
+    <string name="sarajevo_room_4">Room 4</string>
     <string name="sarajevo_txt_pasillo">Which one do you think it\'s your room?</string>
     <string name="sarajevo_txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
     <string name="sarajevo_txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
     <string name="sarajevo_txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>
     <string name="sarajevo_txt_habitacion">Finally, you\'have found your room! What a hard day, huh!</string>
+    <string name="sarajevo_txt_banda">The next day, as you are walking down the street, a racist gang attacks you. What will you do?</string>
+    <string name="sarajevo_txt_huir">Run away?</string>
+    <string name="sarajevo_txt_policia">Call the police?</string>
+    <string name="sarajevo_toast_huir">They chase you, the police see something strange going on and think you are one of them. Run!</string>
+    <string name="sarajevo_toast_policia">Remember, you don\'t have visa to enter the country. You are an illegal immigrant. They will arrest you. Run!</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>
@@ -117,6 +128,27 @@
     <string name="selectsong">Select the song you wanna play</string>
     <string name="selectdiff">Select your desired difficulty</string>
     <string name="selectplace">Which place you wanna play at?</string>
+    <string name="istanbul_earned">You have earned</string>
+    <string name="istanbul_coins">coins</string>
+    <string name="istanbul_next_route">Go to next route</string>
+    <string name="istanbul_play_again">Play again</string>
+    <string name="istanbul_route_begins">Your route between Istanbul and Tehran begins.</string>
+    <string name="istanbul_route_ship">This time you will have to travel by ship. Will you buy the ticket or will you steal it?</string>
+    <string name="istanbul_route_stealit">Steal it</string>
+    <string name="istanbul_route_buyit">Buy it</string>
+    <string name="istanbul_route_notenoughmoney">You don\'t have enough money.</string>
+    <string name="istanbul_route_wannasellit">Now you have your "free" ticket.\n\nDo you want to sell it or use it?</string>
+    <string name="istanbul_route_sellit">Sell it</string>
+    <string name="istanbul_route_useit">Use it</string>
+    <string name="istanbul_route_policeman">A policeman saw you and you are caught and fined.\nYou have to pay 100€.\nTry to be wiser!!</string>
+    <string name="istanbul_route_sinking">Oh,no! The ship is sinking! Everybody is running away.\nSuddenly, you realise your arab friend didn\'t follow you.\nDo you want to go back to save him?</string>
+    <string name="istanbul_route_yes">yes</string>
+    <string name="istanbul_route_no">no</string>
+    <string name="istanbul_route_nowayout">You are trying to escape, but there is no way out.</string>
+    <string name="istanbul_route_arabfriend">He thanks you. Later, he will help you because you nearly drown. He also offers you some help to cross the border, but you don\'t know if that is a good idea.\nDo you want to go with him?</string>
+    <string name="istanbul_route_wrong">You walked in the wrong direction and got lost. You had to pay 50€ to get some information. Nobody wanted to help you.</string>
+    <string name="istanbul_route_youmadeit">Good! Both of you made it!</string>
+    <string name="istanbul_route_needmoney">Now that you are at Tehran, you need some money. You have met a group of street musicians that want you to play with them.\nShow them how good you are with the guitar!!!!</string>
 
     <!-- Teherán-Bombai -->
     <string name="route5">Tehran-Mumbai</string>

@@ -13,52 +13,52 @@ import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 
 import es.riberadeltajo.refugiadosgame.R;
-import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
-import es.riberadeltajo.refugiadosgame.ruta4.view.models.Distribuidor;
+import es.riberadeltajo.refugiadosgame.ruta4.view.GameMenu;
 
 /**
  * Gameview.
  */
-public class OptionsView extends SurfaceView {
+public class OptionsView extends SurfaceView implements GameSurface, SurfaceHolder.Callback {
     // Constantes
     public static final int SONG_SOTW = 1;
     public static final int SONG_SCOM = 2;
+    public static final int SONG_TEST = 3;  // La canción de test es para probar el final
     public static final int DIF_EASY = 3;
-    public static final int DIF_MEDIUM = 6;
-    public static final int DIF_HARD = 10;
+    public static final int DIF_MEDIUM = 5;
+    public static final int DIF_HARD = 7;
     public static final int PLACE_AZADI = 1;
     public static final int PLACE_GOLESTAN = 2;
     public static final int PLACE_ABDOL = 3;
+    private static final String TAG = "OptionsView";
 
-    private enum Fase {INICIO,TEMA,CREDITOS,DIFICULTAD,LUGAR,INSTRUCCIONES};   // Las fases por las que pasará el menú
+    public enum Fase {INICIO,TEMA,CREDITOS,DIFICULTAD,LUGAR,INSTRUCCIONES};   // Las fases por las que pasará el menú
 
-    private Distribuidor distribuidor;
+    private GameMenu menu;
     private GameLoopThread loop;
     private SurfaceHolder holder;
     private Bitmap fondo,logo;
     private Typeface tipografia;
     private Fase fase;
-    private MediaPlayer musicaFondo;
     private SoundPool chord;
     private int idChord,idButton;
     // Destinos de los botones
     private RectF oneof3Dst, twoof3Dst, threeof3Dst, nextDst, backDst, letsrockDst;
     private int selectedSong, selectedDifficulty, selectedPlace;
 
-    public OptionsView(Context context, Distribuidor distribuidor) {
+    public OptionsView(Context context) {
         super(context);
-        this.distribuidor = distribuidor;
+
+        this.menu = (GameMenu)context;
         fase = Fase.INICIO;
-        loop=new GameLoopThread(this);
         fondo = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.streetguitarfondo);
         logo = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.streetguitarlogo);
-        musicaFondo = new MediaPlayer().create(context,R.raw.kindoflight);
         tipografia = Typeface.createFromAsset(context.getAssets(),"tipografias/aaaiight.ttf");
         chord = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         idChord = chord.load(context, R.raw.selectchord, 0);
@@ -69,37 +69,39 @@ public class OptionsView extends SurfaceView {
         selectedPlace = PLACE_AZADI;
 
         holder=getHolder();
-        holder.addCallback(new SurfaceHolder.Callback() {
-            @SuppressLint("WrongCall")
-            @Override
-            public void surfaceCreated(SurfaceHolder holder) {
-                loop.setRunning(true);
-                loop.start();
-                musicaFondo.start();
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder holder) {
-                boolean volver = false;
-                loop.setRunning(false);
-                musicaFondo.stop();
-                musicaFondo.release();
-                while(volver){
-                    try{
-                        loop.join();
-                        volver=false;
-                    }catch(InterruptedException ie){}
-                }
-            }
-        });
+        holder.addCallback(this);
     }
 
-    public void draw(Canvas canvas){
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        loop=new GameLoopThread(this,20);
+        loop.setRunning(true);
+        loop.start();
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        boolean volver = false;
+        loop.setRunning(false);
+
+        while(volver){
+            try{
+                loop.join();
+                volver=false;
+            }catch(InterruptedException ie){}
+        }
+    }
+
+    public void actualizar() {
+
+    }
+
+    public void dibujar(Canvas canvas){
         Bitmap bback, bnext;
         int pc3 = (int) (canvas.getWidth()*0.03);
         int pc10 = (int) (canvas.getWidth()*0.1);
@@ -214,9 +216,7 @@ public class OptionsView extends SurfaceView {
                 bletsrock = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.buttonletsrock);
                 demoScreen = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.streetguitarinstructions);
 
-                //float lrw = bletsrock.getWidth() * (backDst.bottom-backDst.top) / bletsrock.getHeight();
                 Rect instSrc = new Rect(0,0,bletsrock.getWidth(),bletsrock.getHeight());
-                //letsrockDst = new RectF(canvas.getWidth() - (canvas.getWidth()/16) - (lrw), backDst.top, canvas.getWidth() - (canvas.getWidth()/16) ,backDst.bottom);
                 letsrockDst = new RectF(pc15, canvas.getHeight()-buttonHeight-pc10, canvas.getWidth()-pc15, canvas.getHeight()-pc10);
                 RectF demoScreenDST = new RectF(pc15,pc10,canvas.getWidth()-pc15, letsrockDst.top - pc10);
 
@@ -226,6 +226,12 @@ public class OptionsView extends SurfaceView {
                 canvas.drawBitmap(bback,new Rect(0,0,bback.getWidth(),bback.getHeight()),backDst,null);
                 break;
         }
+    }
+
+    @Override
+    public void detener() {
+        // En teoría no hace falta, porque ya se detiene en el holder destroyed
+        getLoop().setRunning(false);
     }
 
     @Override
@@ -247,7 +253,8 @@ public class OptionsView extends SurfaceView {
                         // Quit
                         if(event.getX() >= threeof3Dst.left && event.getX() <= threeof3Dst.right && event.getY() >= threeof3Dst.top && event.getY() <= threeof3Dst.bottom) {
                             chord.play(idChord, 1, 1, 1, 0, 1);
-                            distribuidor.finalizar();
+                            getLoop().setRunning(false);
+                            menu.onBackPressed();
                         }
                         break;
                     case TEMA:
@@ -332,10 +339,9 @@ public class OptionsView extends SurfaceView {
                         break;
                     case INSTRUCCIONES:
                         // LET'S PLAY !!
-                        if(event.getX() >= letsrockDst.left && event.getX() <= letsrockDst.right && event.getY() >= letsrockDst.top && event.getY() <= letsrockDst.bottom) {
+                        if(letsrockDst != null && event.getX() >= letsrockDst.left && event.getX() <= letsrockDst.right && event.getY() >= letsrockDst.top && event.getY() <= letsrockDst.bottom) {
                             chord.play(idChord, 1, 1, 1, 0, 1);
-                            distribuidor.setOpciones(selectedSong,selectedDifficulty,selectedPlace);
-                            distribuidor.cambiarFase(Istanbul.JUEGO);
+                            this.menu.jugar(selectedSong,selectedDifficulty,selectedPlace);
                         }
                         // BACK
                         if(event.getX() >= backDst.left && event.getX() <= backDst.right && event.getY() >= backDst.top && event.getY() <= backDst.bottom) {
@@ -370,7 +376,19 @@ public class OptionsView extends SurfaceView {
         canvas.drawText(texto,x,y,paint);
     }
 
-    private void finish() {
-        loop.setRunning(false);
+    public GameLoopThread getLoop() {
+        return loop;
+    }
+
+    public void setLoop(GameLoopThread loop) {
+        this.loop = loop;
+    }
+
+    public Fase getFase() {
+        return fase;
+    }
+
+    public void setFase(Fase fase) {
+        this.fase = fase;
     }
 }

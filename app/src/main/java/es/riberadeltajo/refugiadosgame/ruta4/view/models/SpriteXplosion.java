@@ -38,7 +38,7 @@ public class SpriteXplosion {
         setFinished(false);
     }
 
-    public void draw(Canvas canvas){
+    public synchronized void draw(Canvas canvas){
         update();
         canvas.drawBitmap(bmp,src,dst,null);
     }
