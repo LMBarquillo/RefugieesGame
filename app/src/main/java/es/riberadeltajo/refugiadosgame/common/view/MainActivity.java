@@ -9,6 +9,7 @@ import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
+import es.riberadeltajo.refugiadosgame.ruta4.view.GameMenu;
 import es.riberadeltajo.refugiadosgame.ruta4.view.ruta.Istanbul_Main;
 import es.riberadeltajo.refugiadosgame.ruta5.view.tehran1;
 
@@ -38,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ruta4(View view) {
-        Intent i = new Intent(this, Istanbul_Main.class);
-        //Intent i = new Intent(this,GameMenu.class);
+        //Intent i = new Intent(this, Istanbul_Main.class);
+        Intent i = new Intent(this, GameMenu.class);
         startActivity(i);
     }
 

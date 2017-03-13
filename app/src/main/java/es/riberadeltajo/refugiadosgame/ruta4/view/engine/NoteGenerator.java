@@ -18,6 +18,17 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteNotas;
 /**
  * Esta clase recibe el nombre del archivo con la canción, lo lee, lo descompone y va
  * añadiendo las notas al arraylist de sprites a su debido momento.
+ *
+ * Esta fue la primera idea, y no es mala, pero no se consigue un sincronismo bueno con la canción
+ * porque debido a los cambios de ritmos y al uso del procesador, que unas veces es mayor que otras,
+ * a veces se desincroniza.
+ *
+ * Si tuviera que volver a hacerlo, sincronizaría utilizando el método .currentPosition() del objeto
+ * MediaPlayer, y escribiendo en el archivo las notas según la posición real de la canción.
+ * Evidentemente esto lleva mucho más trabajo, así que, por falta de tiempo, esta vez no podrá ser.
+ *
+ * Pero, quién sabe... quizá en un futuro haya un Street Guitar mejorado en el Google Play :)
+ *
  * Created by Luismi on 29/01/2017.
  */
 
