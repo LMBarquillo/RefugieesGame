@@ -1,6 +1,7 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import org.w3c.dom.Text;
+
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
@@ -20,7 +23,7 @@ import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid_Arcade;
 
 public class Madrid_Help extends AppCompatActivity implements View.OnClickListener{
-    private TextView goal,texto;
+    private TextView goal,texto,nivel;
     private Button btnAtras, btnSig;
     private VideoView videoView;
     private ImageView instrucc;
@@ -44,6 +47,8 @@ public class Madrid_Help extends AppCompatActivity implements View.OnClickListen
         goal=(TextView) findViewById(R.id.txtGoal);
         goal.setTypeface(font);
         goal.setText(R.string.madrid_help_goal);
+        nivel=(TextView) findViewById(R.id.txtNivel);
+        nivel.setTypeface(font);
         videoView=(VideoView) findViewById(R.id.madInstrucc);
         Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.madrid_help_video); //do not add any extension
         videoView.setVideoURI(video);
@@ -60,21 +65,30 @@ public class Madrid_Help extends AppCompatActivity implements View.OnClickListen
         instrucc=(ImageView) findViewById(R.id.imgInstrucc);
         if(PlayerStatus.getInstancia(this).getDinero()==350) {
             instrucc.setImageResource(R.drawable.madrid_instrucc_easy);
+            nivel.setText(R.string.madrid_help_easy);
+            nivel.setTextColor(Color.argb(255,0,105,7));
         }
         else if(PlayerStatus.getInstancia(this).getDinero()==250) {
             instrucc.setImageResource(R.drawable.madrid_instrucc_medium);
+            nivel.setText(R.string.madrid_help_medium);
+            nivel.setTextColor(Color.argb(255,178,101,0));
         }
         else if(PlayerStatus.getInstancia(this).getDinero()==150) {
             instrucc.setImageResource(R.drawable.madrid_instrucc_hard);
+            nivel.setText(R.string.madrid_help_hard);
+            nivel.setTextColor(Color.argb(255,210,0,0));
         }
         else if(PlayerStatus.getInstancia(this).getDinero()==50) {
             instrucc.setImageResource(R.drawable.madrid_instrucc_extreme);
+            nivel.setText(R.string.madrid_help_extreme);
+            nivel.setTextColor(Color.argb(255,107,0,0));
         }
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         texto.setTypeface(font);
         texto.setText(R.string.madrid_instrucc);
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
+        btnSig.setText(R.string.madrid_jugar);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
     }

@@ -53,7 +53,6 @@ public class Madrid_Fin extends AppCompatActivity implements View.OnClickListene
         }
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
-        btnSig.setText(R.string.madrid_jugar);
         btnAtras.setOnClickListener(this);
         btnSig.setOnClickListener(this);
     }

@@ -74,15 +74,17 @@ public class GameView extends SurfaceView {
         monedas=new ArrayList<Monedas>();
         tickets=new ArrayList<Ticket>();
         font = Typeface.createFromAsset(context.getAssets(),"tipografias/madrid_font.ttf");
-        soundPool = new SoundPool(32, AudioManager.STREAM_MUSIC , 0);
-        idDisparoBomba = soundPool.load(context, R.raw.madrid_misil, 4);
-        idDisparoMisil = soundPool.load(context, R.raw.madrid_shot, 4);
-        idGrito = soundPool.load(context, R.raw.madrid_pain_loud, 2);
-        idCaeMoneda = soundPool.load(context, R.raw.madrid_coins_falling, 3);
-        idCoin1 = soundPool.load(context, R.raw.madrid_coin1_effect, 1);
-        idCoin2 = soundPool.load(context, R.raw.madrid_coin2_effect, 1);
-        idCoin5 = soundPool.load(context, R.raw.madrid_coin5_effect, 1);
-        idCoin10 = soundPool.load(context, R.raw.madrid_coin10_effect, 1);
+        if (soundPool == null) {
+            soundPool = new SoundPool(32, AudioManager.STREAM_MUSIC, 0);
+            idDisparoBomba = soundPool.load(context, R.raw.madrid_misil, 4);
+            idDisparoMisil = soundPool.load(context, R.raw.madrid_shot, 4);
+            idGrito = soundPool.load(context, R.raw.madrid_pain_loud, 2);
+            idCaeMoneda = soundPool.load(context, R.raw.madrid_coins_falling, 3);
+            idCoin1 = soundPool.load(context, R.raw.madrid_coin1_effect, 1);
+            idCoin2 = soundPool.load(context, R.raw.madrid_coin2_effect, 1);
+            idCoin5 = soundPool.load(context, R.raw.madrid_coin5_effect, 1);
+            idCoin10 = soundPool.load(context, R.raw.madrid_coin10_effect, 1);
+        }
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -829,6 +831,10 @@ public class GameView extends SurfaceView {
         loop.setRunning(false);
         musica.stop();
         musica.release();
+        if (soundPool != null) {
+            soundPool.release();
+            soundPool = null;
+        }
     }
 
     private void sumarPuntos(int puntos){
