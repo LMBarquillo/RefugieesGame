@@ -36,7 +36,6 @@ public class OptionsView extends SurfaceView implements GameSurface, SurfaceHold
     public static final int PLACE_AZADI = 1;
     public static final int PLACE_GOLESTAN = 2;
     public static final int PLACE_ABDOL = 3;
-    private static final String TAG = "OptionsView";
 
     public enum Fase {INICIO,TEMA,CREDITOS,DIFICULTAD,LUGAR,INSTRUCCIONES};   // Las fases por las que pasará el menú
 

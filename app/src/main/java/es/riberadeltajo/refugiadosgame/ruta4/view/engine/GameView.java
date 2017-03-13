@@ -10,8 +10,9 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.util.Log;
+import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta4.view.StreetGuitar;
+import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteCoin;
 import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteMensajes;
 import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteNotas;
 import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteXplosion;
@@ -28,16 +30,18 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteXplosion;
  * Gameview.
  */
 public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.Callback, MediaPlayer.OnCompletionListener {
-    private static final String TAG = "GameView";
     private StreetGuitar contexto;
     private final int FPS = 60;
     private NoteGenerator generador;
     private ArrayList<SpriteNotas> notas;
     private ArrayList<SpriteXplosion> explosiones;
     private SpriteMensajes mensaje;
+    private SpriteCoin moneda;
     private GameLoopThread loop;
     private SurfaceHolder holder;
-    private MediaPlayer musica, error;
+    private MediaPlayer musica;
+    private SoundPool chord;
+    private int idChord;
     private Bitmap fondo, pickups, cuerda;
     private Typeface tipoPuntos;
     private int puntuacion, seguidas;
@@ -61,12 +65,14 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
         pickups = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.pickupbolas);
         cuerda = BitmapFactory.decodeResource(getContext().getResources(),R.drawable.guitarstring);
 
+        // Efectos de sonido
+        chord = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        idChord = chord.load(context, R.raw.guitarerror, 0);
+
         // Fuentes
         tipoPuntos = Typeface.createFromAsset(context.getAssets(),"tipografias/aaaiight.ttf");
         setPuntuacion(0);
         setSeguidas(0);
-
-        setError(new MediaPlayer().create(context,R.raw.guitarerror));
 
         holder=getHolder();
         holder.addCallback(this);
@@ -74,6 +80,7 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        setMoneda(new SpriteCoin(this,new Rect(0,0,getWidth()/6,getWidth()/6)));
         setLoop(new GameLoopThread(this,FPS));  // Instancia el gameloop
         generador.setRunning(true);
         loop.setRunning(true);
@@ -138,11 +145,11 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
         if(getMensaje() != null) getMensaje().draw(canvas);
 
         // Monitores y/o contadores
-        escribeTexto(canvas,String.valueOf(puntuacion),50,100,canvas.getWidth()/10,Color.YELLOW,Color.BLACK,tipoPuntos);
+        getMoneda().draw(canvas);
+        escribeTexto(canvas,String.valueOf(puntuacion), getMoneda().getDst().right,((getMoneda().getDst().bottom- getMoneda().getDst().top) /5*4),canvas.getWidth()/8,Color.YELLOW,Color.BLACK,tipoPuntos);
 
         // TESTS
-        //escribeTexto(canvas,String.valueOf(getMusica().getCurrentPosition()),50,200,canvas.getWidth()/10,Color.YELLOW,Color.BLACK,tipoPuntos);
-        //escribeTexto(canvas,String.valueOf(getMusica().getDuration()),50,300,canvas.getWidth()/10,Color.YELLOW,Color.BLACK,tipoPuntos);
+        //escribeTexto(canvas,String.valueOf(moneda.getCutx()),50,400,canvas.getWidth()/10,Color.YELLOW,Color.BLACK,tipoPuntos);
 
         // Eliminamos las notas que salieron fuera
         deleteOutNotes();
@@ -160,10 +167,7 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
     }
 
     private void deleteFinishedExplosions() {
-        int finished = 0;
-        for(SpriteXplosion x : getExplosiones())
-            if(x.isFinished()) finished++;
-        for(int i=0; i<finished; i++) getExplosiones().remove(0);
+        for(int i = getExplosiones().size()-1; i >= 0; i--) if(getExplosiones().get(i).isFinished()) getExplosiones().remove(i);
     }
 
     private void controlMusic() {
@@ -243,31 +247,33 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // Para una próxima versión prometo hacerlo con multitouch. Esta vez no me dio tiempo.
+
         if(event.getAction()==MotionEvent.ACTION_DOWN){
-            synchronized(getHolder()){
-                for(SpriteNotas n : getNotas()){
-                    // Si pulsamos una nota...
-                    if(n.isCollition(event.getX(),event.getY())) {
-                        // Comprobamos si está dentro del traste
-                        if(event.getY() > dstPickups.top && event.getY() < dstPickups.bottom) {
-                            // Está dentro (mola). Lo primero es subir la puntuación
-                            setPuntuacion(getPuntuacion()+1);
-                            // Ahora nos cargamos la nota
-                            getNotas().remove(n);
-                            // Aumentamos nuestro contador de notas seguidas
-                            setSeguidas(getSeguidas()+1);
-                            // Y mostramos un bonito efecto visual
-                            getExplosiones().add(new SpriteXplosion(this,new Rect(n.getPosx(),n.getAltura(),n.getPosx()+n.getSizeNota(),n.getAltura()+n.getSizeNota())));
-                        } else {
-                            // Está fuera (la cagaste). Reiniciamos el contador de notas seguidas
-                            setSeguidas(0);
-                            // Y escuchamos un desagradable sonido de guitarra desafinando.
-                            getError().start();
-                        }
-                        break;
+            //synchronized(getHolder()){
+            for(SpriteNotas n : getNotas()){
+                // Si pulsamos una nota...
+                if(n.isCollition(event.getX(),event.getY())) {
+                    // Comprobamos si está dentro del traste
+                    if(event.getY() > dstPickups.top && event.getY() < dstPickups.bottom) {
+                        // Está dentro (mola). Lo primero es subir la puntuación
+                        setPuntuacion(getPuntuacion()+1);
+                        // Ahora nos cargamos la nota
+                        getNotas().remove(n);
+                        // Aumentamos nuestro contador de notas seguidas
+                        setSeguidas(getSeguidas()+1);
+                        // Y mostramos un bonito efecto visual
+                        getExplosiones().add(new SpriteXplosion(this,new Rect(n.getPosx(),n.getAltura(),n.getPosx()+n.getSizeNota(),n.getAltura()+n.getSizeNota())));
+                    } else {
+                        // Está fuera (la cagaste). Reiniciamos el contador de notas seguidas
+                        setSeguidas(0);
+                        // Y escuchamos un desagradable sonido de guitarra desafinando.
+                        chord.play(idChord, 1, 1, 1, 0, 1);
                     }
+                    break;
                 }
             }
+            //}
         }
         return true;
     }
@@ -333,14 +339,6 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
 
     public void setMusica(MediaPlayer musica) {
         this.musica = musica;
-    }
-
-    public MediaPlayer getError() {
-        return error;
-    }
-
-    public void setError(MediaPlayer error) {
-        this.error = error;
     }
 
     public SpriteMensajes getMensaje() {
@@ -434,5 +432,13 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
     public void onCompletion(MediaPlayer mp) {
         // Se ejecuta cuando termina la canción
         getContexto().gameEnd(getPuntuacion(),Activity.RESULT_OK);
+    }
+
+    public SpriteCoin getMoneda() {
+        return moneda;
+    }
+
+    public void setMoneda(SpriteCoin moneda) {
+        this.moneda = moneda;
     }
 }
