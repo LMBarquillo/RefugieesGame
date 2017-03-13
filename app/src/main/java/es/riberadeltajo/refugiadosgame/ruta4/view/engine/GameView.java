@@ -167,11 +167,28 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
     }
 
     private void controlMusic() {
-        int retrasoCancion = 450;
+        /**
+         * La canción tiene un pequeño retraso desde que se inicia hasta que suena la primera nota
+         * Este retraso se compensa con la caída de las notas, a una cantidad variable dependiendo
+         * de la dificultad (velocidad) de la caída.
+         */
+        double retrasoCancion = 0;
+
+        switch(getDificultad()) {
+            case OptionsView.DIF_EASY:
+                retrasoCancion=5.10;
+                break;
+            case OptionsView.DIF_MEDIUM:
+                retrasoCancion=2.84;
+                break;
+            case OptionsView.DIF_HARD:
+                retrasoCancion=1.97;
+                break;
+        }
         try {
             // cuando la primera nota pasa por el traste, arrancamos la música
             if(getMusica() != null && !getMusica().isPlaying() && getNotas().size() > 0) {
-                if(getNotas().get(0).getAltura() >= dstPickups.top - retrasoCancion) {
+                if(getNotas().get(0).getAltura() >= dstPickups.top - (getWidth()/retrasoCancion)) {
                     getMusica().start();
                 }
             }

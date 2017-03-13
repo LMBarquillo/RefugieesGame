@@ -61,8 +61,8 @@ public class Istanbul_Tehran_TicketStealed extends AppCompatActivity implements 
         descOpc2.setTypeface(font);
         descOpc1.setText(R.string.istanbul_route_useit);
         descOpc2.setText(R.string.istanbul_route_sellit);
-        //opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
-        //opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
+        opc1.setImageResource(R.drawable.istanbulticketbarco); //Imagen para la opción 1
+        opc2.setImageResource(R.drawable.istanbulticketbarco); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
 

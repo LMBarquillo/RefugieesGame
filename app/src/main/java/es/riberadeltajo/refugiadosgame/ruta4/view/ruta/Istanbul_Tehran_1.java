@@ -61,8 +61,8 @@ public class Istanbul_Tehran_1 extends AppCompatActivity implements View.OnClick
         descOpc2.setTypeface(font);
         descOpc1.setText(R.string.istanbul_route_buyit);
         descOpc2.setText(R.string.istanbul_route_stealit);
-        //opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
-        //opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
+        opc1.setImageResource(R.drawable.istanbulbarcoentero); //Imagen para la opción 1
+        opc2.setImageResource(R.drawable.istanbulticketbarco); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
 

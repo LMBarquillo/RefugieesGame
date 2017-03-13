@@ -49,7 +49,7 @@ public class Istanbul_Tehran_Policeman extends AppCompatActivity implements View
         descOpc1=(TextView) findViewById(R.id.txtOpcDesc); //TextView para descripción de la opción 1
         descOpc1.setTypeface(font);
         descOpc1.setText("descripcion");
-        //opc1.setImageResource(R.drawable.madrid_frontera_coche); //Imagen para la opción 1
+        opc1.setImageResource(R.drawable.istanbulticketbarco); //Imagen para la opción 1
 
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
