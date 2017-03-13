@@ -92,14 +92,25 @@
     <string name="sarajevo_dialogo_lose_titulo">YOU LOSE</string>
     <string name="sarajevo_dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
     <string name="sarajevo_txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
+    <string name="sarajevo_name_hotel">Hotel</string>
     <string name="sarajevo_txt_hotel">It\'s too expensive</string>
-    <!--<string name="txt_hostel">Where you have to share your room with people from other nationalities?</string>-->
-    <string name="sarajevo_txt_hostel">Shared rooms</string>
+    <string name="sarajevo_name_hostel">Hostel</string>
+    <string name="sarajevo_txt_hostel">Where you have to share your room with people from other nationalities?</string>
+    <!--<string name="sarajevo_txt_hostel">Shared rooms</string>-->
+    <string name="sarajevo_room_1">Room 1</string>
+    <string name="sarajevo_room_2">Room 2</string>
+    <string name="sarajevo_room_3">Room 3</string>
+    <string name="sarajevo_room_4">Room 4</string>
     <string name="sarajevo_txt_pasillo">Which one do you think it\'s your room?</string>
     <string name="sarajevo_txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
     <string name="sarajevo_txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
     <string name="sarajevo_txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>
     <string name="sarajevo_txt_habitacion">Finally, you\'have found your room! What a hard day, huh!</string>
+    <string name="sarajevo_txt_banda">The next day, as you are walking down the street, a racist gang attacks you. What will you do?</string>
+    <string name="sarajevo_txt_huir">Run away?</string>
+    <string name="sarajevo_txt_policia">Call the police?</string>
+    <string name="sarajevo_toast_huir">They chase you, the police see something strange going on and think you are one of them. Run!</string>
+    <string name="sarajevo_toast_policia">Remember, you don\'t have visa to enter the country. You are an illegal immigrant. They will arrest you. Run!</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>

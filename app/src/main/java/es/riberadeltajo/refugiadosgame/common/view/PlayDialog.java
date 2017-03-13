@@ -16,6 +16,7 @@ import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Main;
 import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.SarajevoArcade;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.SarajevoInstrucciones;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAfricano;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoBanda;
@@ -33,7 +34,7 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
     private final Class[][] activities = {
         {null},
         {null},
-        {SarajevoAlojamiento.class, SarajevoPasillo.class, SarajevoChino.class, SarajevoMejicano.class, SarajevoAfricano.class, SarajevoHabitacion.class, SarajevoBanda.class, SarajevoArcade.class},
+        {SarajevoAlojamiento.class, SarajevoPasillo.class, SarajevoChino.class, SarajevoMejicano.class, SarajevoAfricano.class, SarajevoHabitacion.class, SarajevoBanda.class, SarajevoInstrucciones.class},
         {null},
         {null}
     };

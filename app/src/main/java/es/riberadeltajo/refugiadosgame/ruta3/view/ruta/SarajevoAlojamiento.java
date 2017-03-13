@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
@@ -54,8 +57,8 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
         descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
-        descOpc1.setText(R.string.sarajevo_txt_hotel);
-        descOpc2.setText(R.string.sarajevo_txt_hostel);
+        descOpc1.setText(R.string.sarajevo_name_hotel);
+        descOpc2.setText(R.string.sarajevo_name_hostel);
         opc1.setImageResource(R.drawable.sarajevohotel); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.sarajevopension); //Imagen para la opción 2
         opc1.setOnClickListener(this);
@@ -70,6 +73,18 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
         objeto.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
         descOpc2.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+    }
+
+    protected void onResume() {
+        super.onResume();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //Evita que se apague la pantalla
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     @Override
@@ -101,6 +116,16 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
         descOpc1.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         descOpc2.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=1;
+        Toast toast = new Toast(this);
+        Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+        View toast_layout=getLayoutInflater().inflate(R.layout.msg_toast, (ViewGroup) findViewById(R.id.toastlayout));
+        toast.setView(toast_layout);
+        TextView msgtoast = (TextView) toast_layout.findViewById(R.id.txtMsgToast);
+        msgtoast.setTypeface(font);
+        msgtoast.setText(R.string.sarajevo_txt_hotel);
+        toast.setGravity(Gravity.CENTER,toast_layout.getWidth()/2,toast_layout.getHeight()/2);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void opcion2(){
@@ -109,6 +134,16 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
         descOpc2.setBackgroundResource(R.drawable.menu2); //Cambio de .xml para resaltar la opción seleccionada
         descOpc1.setBackgroundResource(R.drawable.menu1); //Hago lo contrario para que no pueda haber 2 seleccionadas
         cont=2;
+        Toast toast = new Toast(this);
+        Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+        View toast_layout=getLayoutInflater().inflate(R.layout.msg_toast, (ViewGroup) findViewById(R.id.toastlayout));
+        toast.setView(toast_layout);
+        TextView msgtoast = (TextView) toast_layout.findViewById(R.id.txtMsgToast);
+        msgtoast.setTypeface(font);
+        msgtoast.setText(R.string.sarajevo_txt_hostel);
+        toast.setGravity(Gravity.CENTER,toast_layout.getWidth()/2,toast_layout.getHeight()/2);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     public void goBack(){
@@ -117,10 +152,31 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
 
     public void goNext(){
         if(cont==OPCION_A){
-            //Activity siguiente si se cumple opcion A
+            Toast toast = new Toast(this);
+            Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+            View toast_layout=getLayoutInflater().inflate(R.layout.msg_toast, (ViewGroup) findViewById(R.id.toastlayout));
+            toast.setView(toast_layout);
+            TextView msgtoast = (TextView) toast_layout.findViewById(R.id.txtMsgToast);
+            msgtoast.setTypeface(font);
+            msgtoast.setText(R.string.sarajevo_txt_hotel);
+            toast.setGravity(Gravity.CENTER,toast_layout.getWidth()/2,toast_layout.getHeight()/2);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.show();
         }
         else if(cont==OPCION_B){
             startActivity(new Intent(this, SarajevoPasillo.class));
+        }
+        else{
+            Toast toast = new Toast(this);
+            Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+            View toast_layout=getLayoutInflater().inflate(R.layout.msg_toast, (ViewGroup) findViewById(R.id.toastlayout));
+            toast.setView(toast_layout);
+            TextView msgtoast = (TextView) toast_layout.findViewById(R.id.txtMsgToast);
+            msgtoast.setTypeface(font);
+            msgtoast.setText(R.string.toastSiguiente);
+            toast.setGravity(Gravity.CENTER,toast_layout.getWidth()/2,toast_layout.getHeight()/2);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.show();
         }
     }
 }
