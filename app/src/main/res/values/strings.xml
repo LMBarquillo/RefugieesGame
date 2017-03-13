@@ -44,6 +44,10 @@
     <string name="madrid_passport_toast2">You already have a passport!</string>
 
     <string name="madrid_help_goal">GOAL:</string>
+    <string name="madrid_help_easy">EASY</string>
+    <string name="madrid_help_medium">MEDIUM</string>
+    <string name="madrid_help_hard">HARD</string>
+    <string name="madrid_help_extreme">EXTREME</string>
 
     <string name="madrid_main">The World War III has taken place in Europe. You\'ve to flee in order to save your life.\n\n Hurry up! Try to be wise!</string>
     <string name="madrid_maletas">The enemies are about to arrive. What will you take with you?</string>
