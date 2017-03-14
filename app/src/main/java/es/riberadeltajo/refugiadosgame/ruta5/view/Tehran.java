@@ -70,6 +70,12 @@ public class Tehran extends Activity {
         finish();
     }
 
+    public void menuPrincipal(){
+        Intent i = new Intent(this,MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
     public void fin(){
         //ABRIR PAGINA DE FIN JUEGO/CREDITOS
         onDestroy();

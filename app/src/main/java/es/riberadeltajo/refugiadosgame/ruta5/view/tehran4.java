@@ -12,10 +12,11 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 
 public class tehran4 extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
-    private TextView texto,dinero,objeto;
+    private TextView texto,dinero,objeto, descripcion;
     private Button btnAtras, btnSig;
 
     @Override
@@ -35,6 +36,8 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
         getWindow().getDecorView().setBackgroundResource(R.drawable.fondoteheran); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
+        descripcion=(TextView) findViewById(R.id.txtOpcDesc);
+        descripcion.setVisibility(View.INVISIBLE);
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
         //texto.setText("Historia");
@@ -67,7 +70,7 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void goBack(){
-        Intent i = new Intent(this,tehran3.class);
+        Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
         finish();
     }

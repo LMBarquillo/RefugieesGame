@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sarajevoinstrucciones">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8.5" />
+
+    <Button
+        android:text="@string/btn_jugar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/btnJugar"
+        android:layout_weight="1.5"
+        android:background="@drawable/menu_btn"
+        android:fontFamily="sans-serif-medium"
+        android:typeface="monospace"
+        android:textSize="20dp"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/white" />
+</LinearLayout>

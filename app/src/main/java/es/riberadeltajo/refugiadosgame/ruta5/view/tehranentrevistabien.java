@@ -15,7 +15,7 @@ import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 
 public class tehranentrevistabien extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
-    private TextView texto,dinero,objeto;
+    private TextView texto,dinero,objeto, descripcion;
     private Button btnAtras, btnSig;
     private int activity;
 
@@ -35,6 +35,8 @@ public class tehranentrevistabien extends AppCompatActivity implements View.OnCl
         setActivity(getIntent().getIntExtra("activity",0));
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
+        descripcion=(TextView) findViewById(R.id.txtOpcDesc);
+        descripcion.setVisibility(View.INVISIBLE);
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
         texto.setText(getString(R.string.tehran_text_bien));

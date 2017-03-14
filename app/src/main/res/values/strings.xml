@@ -16,42 +16,62 @@
     <string name="route1">Madrid-Milan</string>
     <string name="madrid_autores">Adrián Portela Ortiz\nJosé Carlos Sánchez Pérez</string>
     <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
-    <string name="madrid_lose_mensaje">You do not acquired the ticket. Try again?</string>
+    <string name="madrid_lose_mensaje">You don\'t acquired the ticket. Try again?</string>
     <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
+    <string name="madrid_jugar">PLAY</string>
+    <string name="toastSiguiente">You\'ve to choose and option before continue</string>
 
     <string name="madrid_maletas_desc1">SUITCASE A</string>
     <string name="madrid_maletas_desc2">SUITCASE B</string>
 
     <string name="madrid_trans_desc1">LORRY: PAY 300€</string>
     <string name="madrid_trans_desc2">STEAL A CAR</string>
-    <string name="madrid_trans_toast">You do not have enough money to choose this transport</string>
+    <string name="madrid_trans_toast">You don\'t have enough money to choose this transport</string>
 
-    <string name="madrid_peso2_desc1">WATER AND FOOD</string>
-    <string name="madrid_peso2_desc2">A BLANKET</string>
-    <string name="madrid_peso2_desc3">OBJECTS WITH SENTIMENTAL VALUE</string>
+    <string name="madrid_peso2_desc1">FOODS</string>
+    <string name="madrid_peso2_desc2">BLANKETS</string>
+    <string name="madrid_peso2_desc3">MEMORIES</string>
+
+    <string name="madrid_pie_desc1">I\'LL DO IT</string>
+    <string name="madrid_pie_desc2">I\'M AFRAID</string>
+
+    <string name="madrid_rueda2_desc1">KEEP WALKING</string>
+    <string name="madrid_rueda2_desc2">WAIT HELP</string>
 
     <string name="madrid_passport_desc1">YOU HAVE ONE</string>
-    <string name="madrid_passport_desc2">YOU PAY 100€ TO BUY A FAKE ONE</string>
-    <string name="madrid_passport_toast1">You do not have a passport</string>
+    <string name="madrid_passport_desc2">FAKE ONE: 100€</string>
+    <string name="madrid_passport_toast1">You don\'t have a passport</string>
     <string name="madrid_passport_toast2">You already have a passport!</string>
 
-    <string name="madrid_main">The Third World War has taken place in Europe. You have to flee in order to save your life. Hurry up! Try to be wise!</string>
+    <string name="madrid_help_goal">GOAL:</string>
+    <string name="madrid_help_easy">EASY</string>
+    <string name="madrid_help_medium">MEDIUM</string>
+    <string name="madrid_help_hard">HARD</string>
+    <string name="madrid_help_extreme">EXTREME</string>
+
+    <string name="madrid_main">The World War III has taken place in Europe. You\'ve to flee in order to save your life.\n\n Hurry up! Try to be wise!</string>
     <string name="madrid_maletas">The enemies are about to arrive. What will you take with you?</string>
-    <string name="madrid_trans">Very good. Now it is time to leave. Do you want to pay for a means of transport or steal a car?</string>
-    <string name="madrid_peso1">You have spent 300 €, but you can travel by lorry.</string>
+    <string name="madrid_trans_a">Very good. Now you have 450€, foods, blankets and memories.\n\n Now it\'s time to leave. Do you want to pay for a means of transport or steal a car?</string>
+    <string name="madrid_trans_b">Very good. Now you have 250€, a passport, foods, blankets and memories.\n\n Now it\'s time to leave. Do you want to pay for a means of transport or steal a car?</string>
+    <string name="madrid_peso1">You\'ve spent 300€, but you can travel by lorry.</string>
     <string name="madrid_peso2">Oh, no! There is too much weight! What do you want to get rid of?</string>
-    <string name="madrid_peso_else1">You are hungry and thirsty. You have to spend 100€</string>
-    <string name="madrid_peso_else2">You are freezing. It is very cold. You have to spend 100€ to be warm.</string>
-    <string name="madrid_peso_if">Good! They are not really necessary.</string>
+    <string name="madrid_peso_else1">You are hungry and thirsty. You\'ve to spend 100€</string>
+    <string name="madrid_peso_else2">You are freezing. It\'s very cold. You\'ve to spend 100€ to be warm.</string>
+    <string name="madrid_peso_if">Good! They aren\'t really necessary.</string>
     <string name="madrid_milan1">Congratulations! You can continue the journey.</string>
     <string name="madrid_rueda1">Oh no, you have a flat tire! What do you want to do?</string>
     <string name="madrid_rueda2">Do you want to continue on foot or do you prefer to wait till someone shows up?</string>
-    <string name="madrid_pie">You have met some people on the way. Do you want to talk with them?</string>
-    <string name="madrid_pie2">After a few days, you have met some people on the way and this time you decide to go with them, but do you have your passport?</string>
+    <string name="madrid_pie">You\'ve met some people on the way. Do you want to talk with them?</string>
+    <string name="madrid_pie2">After a few days, you have met some people on the way and this time you decide to go with them.</string>
     <string name="madrid_passport">They want to help you but they do not trust in people without passport. Do you have your passport?</string>
     <string name="madrid_milan2">Congratulations! You can continue the journey.</string>
     <string name="madrid_wait">Some people stop to help you.</string>
     <string name="madrid_milan3">You have to spend 100€ to buy a fake one. Congratulations! You can continue the journey.</string>
+    <string name="madrid_fin_easy">GOAL: 150€ / LEVEL EASY\n\n\nYou\'ve just arrived in Milan, but you don\'t have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 150€ more to access the next level.\n\n Easy, right? So… do you want to play to get it?</string>
+    <string name="madrid_fin_medium">GOAL: 250€ / LEVEL MEDIUM\n\n\nYou\'ve just arrived in Milan, but you don\'t have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 250€ more to access the next level because some decisions have made you lose some money.\n\n So… do you want to play to get it?</string>
+    <string name="madrid_fin_hard">GOAL: 350€ / LEVEL HARD\n\n\nYou\'ve just arrived in Milan, but you don\'t have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 350€ more to access the next level because some decisions have made you lose a lot of money.\n\n So… do you want to play to get it?</string>
+    <string name="madrid_fin_extreme">GOAL: 450€ / LEVEL EXTREME\n\n\nYou\'ve just arrived in Milan, but you don\'t have enough money to buy one of the last coveted train tickets you need to travel to the next country.\n\n You need to get 450€ more to access the next level because some decisions have made you lose more money than expected.\n\n So… do you want to play to get it?</string>
+    <string name="madrid_instrucc">Touch the screen to move the character. Collect the required amount of coins and the TRAIN TICKET while you avoid missiles and shots.</string>
 
     <!-- Milán-Sarajevo -->
     <string name="route2">Milan-Sarajevo</string>
@@ -65,20 +85,36 @@
     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
     <string name="sarajevo_autores">Alejandro Luna Flores\nJorge Morón García</string>
-    <string name="dialogo_btn_reintentar">Try again</string>
-    <string name="dialogo_btn_continuar">Continue</string>
-    <string name="dialogo_win_titulo">YOU WIN</string>
-    <string name="dialogo_win_mensaje">You have managed to escape and you can continue on your way to Istanbul.</string>
-    <string name="dialogo_lose_titulo">YOU LOSE</string>
-    <string name="dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
-    <string name="txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
-    <string name="txt_hotel">It\'s too expensive</string>
-    <string name="txt_hostel">Where you have to share your room with people from other nationalities?</string>
-    <string name="txt_pasillo">Which one do you think it\'s your room?</string>
-    <string name="txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
-    <string name="txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
-    <string name="txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>
-    <string name="txt_habitacion">Finally, you\'have found your room! What a hard day, huh!</string>
+    <string name="sarajevo_dialogo_btn_si">yes</string>
+    <string name="sarajevo_dialogo_btn_no">no</string>
+    <string name="sarajevo_dialogo_btn_reintentar">Try again</string>
+    <string name="sarajevo_dialogo_btn_continuar">Continue</string>
+    <string name="sarajevo_dialogo_menu_titulo">quit</string>
+    <string name="sarajevo_dialogo_menu_mensaje">Do you really want to go out and return to the menu?</string>
+    <string name="sarajevo_dialogo_win_titulo">YOU WIN</string>
+    <string name="sarajevo_dialogo_win_mensaje">You have managed to escape and you can continue on your way to Istanbul.</string>
+    <string name="sarajevo_dialogo_lose_titulo">YOU LOSE</string>
+    <string name="sarajevo_dialogo_lose_mensaje">You have not been able to flee. You will have to try again.</string>
+    <string name="sarajevo_txt_alojamiento">It is time to rest. Where do you wantt to stay?</string>
+    <string name="sarajevo_name_hotel">Hotel</string>
+    <string name="sarajevo_txt_hotel">It\'s too expensive</string>
+    <string name="sarajevo_name_hostel">Hostel</string>
+    <string name="sarajevo_txt_hostel">Where you have to share your room with people from other nationalities?</string>
+    <!--<string name="sarajevo_txt_hostel">Shared rooms</string>-->
+    <string name="sarajevo_room_1">Room 1</string>
+    <string name="sarajevo_room_2">Room 2</string>
+    <string name="sarajevo_room_3">Room 3</string>
+    <string name="sarajevo_room_4">Room 4</string>
+    <string name="sarajevo_txt_pasillo">Which one do you think it\'s your room?</string>
+    <string name="sarajevo_txt_chino">Sorry! it isn\'t your room, but now you know more about Chinese people form other cultures. Try again!</string>
+    <string name="sarajevo_txt_mejicano">Sorry! it isn\'t your room, but now you know more about Mexican people form other cultures. Try again!</string>
+    <string name="sarajevo_txt_africano">Sorry! it isn\'t your room, but now you know more about African people form other cultures. Try again!</string>
+    <string name="sarajevo_txt_habitacion">Finally, you\'have found your room! What a hard day, huh!</string>
+    <string name="sarajevo_txt_banda">The next day, as you are walking down the street, a racist gang attacks you. What will you do?</string>
+    <string name="sarajevo_txt_huir">Run away?</string>
+    <string name="sarajevo_txt_policia">Call the police?</string>
+    <string name="sarajevo_toast_huir">They chase you, the police see something strange going on and think you are one of them. Run!</string>
+    <string name="sarajevo_toast_policia">Remember, you don\'t have visa to enter the country. You are an illegal immigrant. They will arrest you. Run!</string>
 
     <!-- Estambul-Teherán -->
     <string name="route4">Istanbul-Tehran</string>
@@ -92,6 +128,27 @@
     <string name="selectsong">Select the song you wanna play</string>
     <string name="selectdiff">Select your desired difficulty</string>
     <string name="selectplace">Which place you wanna play at?</string>
+    <string name="istanbul_earned">You have earned</string>
+    <string name="istanbul_coins">coins</string>
+    <string name="istanbul_next_route">Go to next route</string>
+    <string name="istanbul_play_again">Play again</string>
+    <string name="istanbul_route_begins">Your route between Istanbul and Tehran begins.</string>
+    <string name="istanbul_route_ship">This time you will have to travel by ship. Will you buy the ticket or will you steal it?</string>
+    <string name="istanbul_route_stealit">Steal it</string>
+    <string name="istanbul_route_buyit">Buy it</string>
+    <string name="istanbul_route_notenoughmoney">You don\'t have enough money.</string>
+    <string name="istanbul_route_wannasellit">Now you have your "free" ticket.\n\nDo you want to sell it or use it?</string>
+    <string name="istanbul_route_sellit">Sell it</string>
+    <string name="istanbul_route_useit">Use it</string>
+    <string name="istanbul_route_policeman">A policeman saw you and you are caught and fined.\nYou have to pay 100€.\nTry to be wiser!!</string>
+    <string name="istanbul_route_sinking">Oh,no! The ship is sinking! Everybody is running away.\nSuddenly, you realise your arab friend didn\'t follow you.\nDo you want to go back to save him?</string>
+    <string name="istanbul_route_yes">yes</string>
+    <string name="istanbul_route_no">no</string>
+    <string name="istanbul_route_nowayout">You are trying to escape, but there is no way out.</string>
+    <string name="istanbul_route_arabfriend">He thanks you. Later, he will help you because you nearly drown. He also offers you some help to cross the border, but you don\'t know if that is a good idea.\nDo you want to go with him?</string>
+    <string name="istanbul_route_wrong">You walked in the wrong direction and got lost. You had to pay 50€ to get some information. Nobody wanted to help you.</string>
+    <string name="istanbul_route_youmadeit">Good! Both of you made it!</string>
+    <string name="istanbul_route_needmoney">Now that you are at Tehran, you need some money. You have met a group of street musicians that want you to play with them.\nShow them how good you are with the guitar!!!!</string>
 
     <!-- Teherán-Bombai -->
     <string name="route5">Tehran-Mumbai</string>

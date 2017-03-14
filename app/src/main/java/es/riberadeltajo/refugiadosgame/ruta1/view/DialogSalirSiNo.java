@@ -1,7 +1,6 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
@@ -18,16 +17,16 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 
 /**
- * Created by Alex on 14/02/2017.
+ * Created by Adri on 14/02/2017.
  */
 
 public class DialogSalirSiNo extends Dialog implements View.OnClickListener {
 
-    private Madrid activity;
+    private Madrid_Arcade activity;
     private ImageView si,no;
     private Typeface font;
 
-    public DialogSalirSiNo(Madrid activity) {
+    public DialogSalirSiNo(Madrid_Arcade activity) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
         Display display = activity.getWindowManager().getDefaultDisplay();
@@ -113,7 +112,7 @@ public class DialogSalirSiNo extends Dialog implements View.OnClickListener {
     }
 
     private void salir() {
-        activity.recreate();
+        activity.goMenu();
         dismiss();
     }
 

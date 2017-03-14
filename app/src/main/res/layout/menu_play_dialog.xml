@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/menu_dialog_background">
+    android:layout_height="match_parent">
 
     <Space
         android:layout_width="0dp"
@@ -13,7 +14,7 @@
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="8">
+        android:layout_weight="6">
 
         <Space
             android:layout_width="match_parent"
@@ -24,57 +25,95 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8">
+            android:layout_weight="6"
+            android:background="@drawable/menu_dialog_background"
+            android:weightSum="10">
 
             <TextView
                 android:text="@string/btn_jugar"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:id="@+id/txtTitulo"
-                android:layout_weight="0.79"
                 android:background="@drawable/menu_dialog_titulo_backgroud"
-                android:textStyle="normal|bold"
-                android:textColor="@android:color/holo_green_light"
-                android:textAllCaps="true"
                 android:gravity="center_vertical|center_horizontal"
-                android:textSize="30dp" />
+                android:textSize="25dp"
+                android:fontFamily="sans-serif"
+                android:typeface="monospace"
+                android:textStyle="normal|bold"
+                android:textAllCaps="true"
+                android:textColor="@android:color/holo_green_light"
+                android:layout_weight="1.5" />
 
-            <TextView
-                android:text="@string/dialog_play_mensaje"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/txtMensaje"
-                android:layout_weight="6"
-                android:gravity="center_vertical|center_horizontal"
-                android:textStyle="normal|bold"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:textSize="12dp" />
+                android:layout_weight="5.5">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:srcCompat="@drawable/bandera_madrid"
+                    android:id="@+id/imgBandera"
+                    android:layout_weight="8" />
+
+                <TextView
+                    android:text="@string/dialog_play_mensaje"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/textView3"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:textColor="@android:color/white"
+                    android:textStyle="normal|bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5">
+
+                <Button
+                    android:text="@string/btn_continuar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnContinuar"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:typeface="monospace"
+                    android:textSize="20dp"
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/menu_btn" />
+
+                <Button
+                    android:text="@string/btn_nueva"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnNuevo"
+                    android:layout_weight="1"
+                    android:typeface="monospace"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="20dp"
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/menu_btn" />
+            </LinearLayout>
 
             <Button
-                android:text="@string/btn_continuar"
+                android:text="@string/btn_salir"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnContinuar"
+                android:layout_height="0dp"
+                android:id="@+id/btnSalir"
+                android:layout_weight="1.5"
                 android:background="@drawable/menu_btn"
-                android:textSize="25dp"
+                android:fontFamily="sans-serif-medium"
+                android:typeface="monospace"
+                android:textSize="20dp"
                 android:textStyle="normal|bold"
                 android:textColor="@android:color/white" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.2" />
-
-            <Button
-                android:text="@string/btn_nueva"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnNuevo"
-                android:background="@drawable/menu_btn"
-                android:textStyle="normal|bold"
-                android:textColor="@android:color/white"
-                android:textSize="25dp" />
         </LinearLayout>
 
         <Space

@@ -1,5 +1,6 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -12,16 +13,14 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
-import es.riberadeltajo.refugiadosgame.ruta5.view.Tehran;
 
 /**
- * Created by Alex on 14/02/2017.
+ * Created by Adri on 14/02/2017.
  */
 
 public class DialogFin extends Dialog implements View.OnClickListener {
@@ -32,11 +31,11 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     }
 
     private Tipo tipo;
-    private Madrid activity;
+    private Madrid_Arcade activity;
     private ImageView ganaPierde,reintentar,irMenu,sigNiv;
     private Typeface font;
 
-    public DialogFin(Madrid activity, Tipo tipo) {
+    public DialogFin(Madrid_Arcade activity, Tipo tipo) {
         super(activity, R.style.AppTheme);
         this.activity = activity;
         this.tipo = tipo;
@@ -77,7 +76,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
                 }
                 else if(motionEvent.getAction() == MotionEvent.ACTION_UP){
                     reintentar.setImageResource(R.drawable.madrid_tryagain);
-                    reset(view);
+                    reset();
                 }
                 return true;
             }
@@ -140,7 +139,7 @@ public class DialogFin extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.imgTryAgain:
-                reset(v);
+                reset();
                 break;
             case R.id.imgMenu:
                 goToMenu();
@@ -151,18 +150,18 @@ public class DialogFin extends Dialog implements View.OnClickListener {
         }
     }
 
-    private void reset(View v) {
-        activity.jugar(v);
+    private void reset() {
+        activity.start();
         dismiss();
     }
 
     private void goToMenu(){
-        activity.startActivity(new Intent(activity.getApplicationContext(), MainActivity.class));
+        activity.goMenu();
         dismiss();
     }
 
     private void goToNextLevel() {
-        activity.goToNextLevel();
+        activity.continuar();
         dismiss();
     }
 }

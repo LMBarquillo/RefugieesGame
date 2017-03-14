@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="6">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:background="@drawable/menu_dialog_background"
+            android:weightSum="10">
+
+            <TextView
+                android:text="@string/sarajevo_dialogo_menu_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/txtTitulo"
+                android:background="@drawable/menu_dialog_titulo_backgroud"
+                android:gravity="center_vertical|center_horizontal"
+                android:textSize="25dp"
+                android:fontFamily="sans-serif"
+                android:typeface="monospace"
+                android:textStyle="normal|bold"
+                android:textAllCaps="true"
+                android:textColor="@android:color/holo_green_light"
+                android:layout_weight="1.5" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="7">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5" />
+
+                <TextView
+                    android:text="@string/sarajevo_dialogo_menu_mensaje"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txtMensaje"
+                    android:layout_weight="9"
+                    android:fontFamily="sans-serif"
+                    android:typeface="monospace"
+                    android:textStyle="normal|bold"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:gravity="center_vertical|center_horizontal" />
+
+                <Space
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_width="0dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5">
+
+                <Button
+                    android:text="@string/sarajevo_dialogo_btn_si"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnSi"
+                    android:layout_weight="1"
+                    android:background="@drawable/menu_btn"
+                    android:fontFamily="sans-serif-medium"
+                    android:typeface="monospace"
+                    android:textSize="20dp"
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:text="@string/sarajevo_dialogo_btn_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnNo"
+                    android:layout_weight="1"
+                    android:background="@drawable/menu_btn"
+                    android:fontFamily="sans-serif-medium"
+                    android:typeface="monospace"
+                    android:textSize="20dp"
+                    android:textStyle="normal|bold"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+</LinearLayout>

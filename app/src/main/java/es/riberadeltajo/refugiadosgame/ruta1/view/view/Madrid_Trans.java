@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 import es.riberadeltajo.refugiadosgame.ruta1.view.GameView;
 import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
 
@@ -38,13 +41,20 @@ public class Madrid_Trans extends AppCompatActivity implements View.OnClickListe
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dos_opciones);
+        PlayerStatus.getInstancia(this).setRuta(1);
+        PlayerStatus.getInstancia(this).setTramo(3);
         getWindow().getDecorView().setBackgroundResource(R.drawable.madrid_history_fondo); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.madrid_trans);
+        if(PlayerStatus.getInstancia(this).getObjeto()==0) {
+            texto.setText(R.string.madrid_trans_a);
+        }
+        else if(PlayerStatus.getInstancia(this).getObjeto()==1){
+            texto.setText(R.string.madrid_trans_b);
+        }
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -74,6 +84,19 @@ public class Madrid_Trans extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //Evita que se apague la pantalla
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
+
+    @Override
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.opcion1:
@@ -100,7 +123,16 @@ public class Madrid_Trans extends AppCompatActivity implements View.OnClickListe
             cont = 1;
         }
         else{
-            Toast.makeText(this, R.string.madrid_trans_toast, Toast.LENGTH_LONG).show();
+            Toast toast = new Toast(this);
+            Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+            View toast_layout=getLayoutInflater().inflate(R.layout.msg_toast, (ViewGroup) findViewById(R.id.toastlayout));
+            toast.setView(toast_layout);
+            TextView msgtoast = (TextView) toast_layout.findViewById(R.id.txtMsgToast);
+            msgtoast.setTypeface(font);
+            msgtoast.setText(R.string.madrid_trans_toast);
+            toast.setGravity(Gravity.CENTER,toast_layout.getWidth()/2,toast_layout.getHeight()/2);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 
@@ -113,7 +145,7 @@ public class Madrid_Trans extends AppCompatActivity implements View.OnClickListe
     }
 
     public void goBack(){
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainActivity2.class));
         finish();
     }
 
@@ -126,6 +158,18 @@ public class Madrid_Trans extends AppCompatActivity implements View.OnClickListe
         else if(cont==OPCION_B){
             startActivity(new Intent(this, Madrid_Rueda_1.class));
             finish();
+        }
+        else{
+            Toast toast = new Toast(this);
+            Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+            View toast_layout=getLayoutInflater().inflate(R.layout.msg_toast, (ViewGroup) findViewById(R.id.toastlayout));
+            toast.setView(toast_layout);
+            TextView msgtoast = (TextView) toast_layout.findViewById(R.id.txtMsgToast);
+            msgtoast.setTypeface(font);
+            msgtoast.setText(R.string.toastSiguiente);
+            toast.setGravity(Gravity.CENTER,toast_layout.getWidth()/2,toast_layout.getHeight()/2);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 }

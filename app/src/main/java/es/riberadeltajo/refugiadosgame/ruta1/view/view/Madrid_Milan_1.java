@@ -13,6 +13,7 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 import es.riberadeltajo.refugiadosgame.ruta1.view.GameView;
 
 public class Madrid_Milan_1 extends AppCompatActivity implements View.OnClickListener{
@@ -32,6 +33,8 @@ public class Madrid_Milan_1 extends AppCompatActivity implements View.OnClickLis
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_una_opcion);
+        PlayerStatus.getInstancia(this).setRuta(1);
+        PlayerStatus.getInstancia(this).setTramo(7);
         getWindow().getDecorView().setBackgroundResource(R.drawable.madrid_history_fondo); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
@@ -47,7 +50,7 @@ public class Madrid_Milan_1 extends AppCompatActivity implements View.OnClickLis
         descOpc1=(TextView) findViewById(R.id.txtOpcDesc); //TextView para descripción de la opción 1
         descOpc1.setTypeface(font);
         descOpc1.setText("Descripción");
-        opc1.setImageResource(R.drawable.madrid_frontera_coche); //Imagen para la opción 1
+        opc1.setImageResource(R.drawable.madrid_frontera_camion); //Imagen para la opción 1
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
@@ -57,6 +60,19 @@ public class Madrid_Milan_1 extends AppCompatActivity implements View.OnClickLis
         passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         descOpc1.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //Evita que se apague la pantalla
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     @Override
@@ -72,12 +88,12 @@ public class Madrid_Milan_1 extends AppCompatActivity implements View.OnClickLis
     }
 
     public void goBack(){
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainActivity2.class));
         finish();
     }
 
     public void goNext(){
-        GameView gameView=new GameView(this);
-        setContentView(gameView);
+        startActivity(new Intent(this, Madrid_Fin.class));
+        finish();
     }
 }

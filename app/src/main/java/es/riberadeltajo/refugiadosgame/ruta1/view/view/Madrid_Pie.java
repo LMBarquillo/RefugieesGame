@@ -4,15 +4,19 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 
 public class Madrid_Pie extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
@@ -34,6 +38,8 @@ public class Madrid_Pie extends AppCompatActivity implements View.OnClickListene
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dos_opciones);
+        PlayerStatus.getInstancia(this).setRuta(1);
+        PlayerStatus.getInstancia(this).setTramo(12);
         getWindow().getDecorView().setBackgroundResource(R.drawable.madrid_history_fondo); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
@@ -51,10 +57,10 @@ public class Madrid_Pie extends AppCompatActivity implements View.OnClickListene
         descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
-        descOpc1.setText("Descripción");
-        descOpc2.setText("Descripción");
-        opc1.setImageResource(R.drawable.madrid_dibujo_camion); //Imagen para la opción 1
-        opc2.setImageResource(R.drawable.madrid_dibujo_coche); //Imagen para la opción 2
+        descOpc1.setText(R.string.madrid_pie_desc1);
+        descOpc2.setText(R.string.madrid_pie_desc2);
+        opc1.setImageResource(R.drawable.madrid_history_yes); //Imagen para la opción 1
+        opc2.setImageResource(R.drawable.madrid_history_no); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
         btnAtras=(Button) findViewById(R.id.btnBack);
@@ -67,6 +73,19 @@ public class Madrid_Pie extends AppCompatActivity implements View.OnClickListene
         objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
         descOpc2.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //Evita que se apague la pantalla
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     @Override
@@ -104,7 +123,7 @@ public class Madrid_Pie extends AppCompatActivity implements View.OnClickListene
     }
 
     public void goBack(){
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, MainActivity2.class));
         finish();
     }
 
@@ -117,6 +136,18 @@ public class Madrid_Pie extends AppCompatActivity implements View.OnClickListene
             PlayerStatus.getInstancia(this).setDinero(PlayerStatus.getInstancia(this).getDinero()-200);
             startActivity(new Intent(this, Madrid_Pie_2.class));
             finish();
+        }
+        else{
+            Toast toast = new Toast(this);
+            Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
+            View toast_layout=getLayoutInflater().inflate(R.layout.msg_toast, (ViewGroup) findViewById(R.id.toastlayout));
+            toast.setView(toast_layout);
+            TextView msgtoast = (TextView) toast_layout.findViewById(R.id.txtMsgToast);
+            msgtoast.setTypeface(font);
+            msgtoast.setText(R.string.toastSiguiente);
+            toast.setGravity(Gravity.CENTER,toast_layout.getWidth()/2,toast_layout.getHeight()/2);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 }

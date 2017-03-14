@@ -1,7 +1,6 @@
 package es.riberadeltajo.refugiadosgame.ruta1.view;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -11,16 +10,12 @@ import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
@@ -52,7 +47,7 @@ public class GameView extends SurfaceView {
     private int puntuacion;
     private long crono,inicio;
     private Sprite jug;
-    private Madrid contexto;
+    private Madrid_Arcade contexto;
     private int vidas;
     private Typeface font;
     private int ran;
@@ -60,11 +55,11 @@ public class GameView extends SurfaceView {
     private MediaPlayer musica;
     private SoundPool soundPool;
     private int idDisparoBomba,idDisparoMisil,idGrito,idCaeMoneda,
-            idCoin1,idCoin2,idCoin5,idCoin10,idGameOver,idWin;
+            idCoin1,idCoin2,idCoin5,idCoin10;
 
     public GameView(Context context){
         super(context);
-        setContexto((Madrid)context);
+        setContexto((Madrid_Arcade)context);
         loop=new GameLoop(this);
         setCorx(0);
         setCory(0);
@@ -79,17 +74,17 @@ public class GameView extends SurfaceView {
         monedas=new ArrayList<Monedas>();
         tickets=new ArrayList<Ticket>();
         font = Typeface.createFromAsset(context.getAssets(),"tipografias/madrid_font.ttf");
-        soundPool = new SoundPool(32, AudioManager.STREAM_MUSIC , 0);
-        idDisparoBomba = soundPool.load(context, R.raw.madrid_misil, 4);
-        idDisparoMisil = soundPool.load(context, R.raw.madrid_shot, 4);
-        idGrito = soundPool.load(context, R.raw.madrid_pain_loud, 2);
-        idCaeMoneda = soundPool.load(context, R.raw.madrid_coins_falling, 3);
-        idCoin1 = soundPool.load(context, R.raw.madrid_coin1_effect, 1);
-        idCoin2 = soundPool.load(context, R.raw.madrid_coin2_effect, 1);
-        idCoin5 = soundPool.load(context, R.raw.madrid_coin5_effect, 1);
-        idCoin10 = soundPool.load(context, R.raw.madrid_coin10_effect, 1);
-        idWin = soundPool.load(context, R.raw.madrid_win_effect, 0);
-        idGameOver = soundPool.load(context, R.raw.madrid_gameover_effect, 0);
+        if (soundPool == null) {
+            soundPool = new SoundPool(32, AudioManager.STREAM_MUSIC, 0);
+            idDisparoBomba = soundPool.load(context, R.raw.madrid_misil, 4);
+            idDisparoMisil = soundPool.load(context, R.raw.madrid_shot, 4);
+            idGrito = soundPool.load(context, R.raw.madrid_pain_loud, 2);
+            idCaeMoneda = soundPool.load(context, R.raw.madrid_coins_falling, 3);
+            idCoin1 = soundPool.load(context, R.raw.madrid_coin1_effect, 1);
+            idCoin2 = soundPool.load(context, R.raw.madrid_coin2_effect, 1);
+            idCoin5 = soundPool.load(context, R.raw.madrid_coin5_effect, 1);
+            idCoin10 = soundPool.load(context, R.raw.madrid_coin10_effect, 1);
+        }
         holder=getHolder();
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -98,7 +93,8 @@ public class GameView extends SurfaceView {
             }
 
             @Override
-            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {}
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+            }
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
@@ -147,11 +143,11 @@ public class GameView extends SurfaceView {
         this.puntuacion = puntuacion;
     }
 
-    public Madrid getContexto() {
+    public Madrid_Arcade getContexto() {
         return contexto;
     }
 
-    public void setContexto(Madrid contexto) {
+    public void setContexto(Madrid_Arcade contexto) {
         this.contexto = contexto;
     }
 
@@ -195,6 +191,14 @@ public class GameView extends SurfaceView {
         this.vidas = vidas;
     }
 
+    public GameLoop getLoop() {
+        return loop;
+    }
+
+    public void setLoop(GameLoop loop) {
+        this.loop = loop;
+    }
+
     //Creo el Sprite y le hago un setJug() para pasarle después la posición en el onTouchEvent
     //Creo las monedas de distinto valor y las barajeo para que se pinten posteriormente de forma aleatoria
     //Creo el ticket que aparecerá cuando obtenga la puntuación requerida
@@ -227,20 +231,10 @@ public class GameView extends SurfaceView {
         fuegoIzqda = Bitmap.createScaledBitmap(fuegoIzqda, (int)(getWidth()*0.06), (int)(getHeight()*0.01), false);
         ticket = BitmapFactory.decodeResource(getResources(), R.drawable.madrid_ticket);
         ticket = Bitmap.createScaledBitmap(ticket, (int)(getWidth()*0.15), (int)(getHeight()*0.05), false);
-        //player=getBitmapFromAssets(getContext(),"madrid_resources/madrid_sprite.png");
-        //coin1=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin1.png");
-        //coin2=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin2.png");
-        //coin5=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin5.png");
-        //coin10=getBitmapFromAssets(getContext(),"madrid_resources/madrid_coin10.png");
-        //bombaArriba=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_up.png");
-        //bombaAbajo=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_down.png");
-        //bombaDrcha=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_right.png");
-        //bombaIzqda=getBitmapFromAssets(getContext(),"madrid_resources/madrid_bomba_left.png");
         setJug(new Sprite(this,player,getVidas()));
         sprites.add(getJug());
         crearMonedasYDisparosPorDificultad();
         Collections.shuffle(getMonedas());
-        //ticket=getBitmapFromAssets(getContext(),"madrid_resources/madrid_ticket.png");
         tickets.add(new Ticket(tickets, this, ticket));
     }
 
@@ -317,7 +311,7 @@ public class GameView extends SurfaceView {
             musica.setVolume(0.5f,0.5f);
             musica.setLooping(true);
             musica.start();
-            for(int i=0;i<7;i++){
+            for(int i=0;i<8;i++){
                 disparos.add(getDisparos());
             }
             for(int i=0;i<88;i++) {
@@ -333,20 +327,6 @@ public class GameView extends SurfaceView {
                 monedas.add(new Monedas(monedas, this, coin10, 10));
             }
         }
-    }
-
-    //Obtener bitmap escalado para distintos dispositivos
-    public static Bitmap getBitmapFromAssets(Context context, String filePath) {
-        AssetManager assetManager = context.getAssets();
-
-        InputStream inStream;
-        Bitmap bitmap = null;
-        try {
-            inStream = assetManager.open(filePath);
-            bitmap = BitmapFactory.decodeStream(inStream);
-        } catch (IOException e) {}
-
-        return bitmap;
     }
 
     private Disparo getDisparos() {
@@ -376,29 +356,29 @@ public class GameView extends SurfaceView {
                 }
                 //NIVEL EXTREMO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
-                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setxSpeed((int)(disp.getxSpeed()*2));
+                    disp.setySpeed((int)(disp.getySpeed()*2));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
             }else {
                 disp = new Disparo(this, fuegoIzqda, 1, ran, 5);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*-2.2));
+                    disp.setxSpeed((int)(disp.getxSpeed()*2.2));
                 }
                 //NIVEL MEDIO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*-2.5));
+                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
                     disp.setPuntos((int)(disp.getPuntos()*1.2));
                 }
                 //NIVEL DIFICIL
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*-4));
+                    disp.setxSpeed((int)(disp.getxSpeed()*4));
                     disp.setPuntos((int)(disp.getPuntos()*1.5));
                 }
                 //NIVEL EXTREMO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*-5));
+                    disp.setxSpeed((int)(disp.getxSpeed()*4));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
                 soundPool.play(idDisparoMisil,0,(float)0.09,4,0,1);
@@ -426,8 +406,8 @@ public class GameView extends SurfaceView {
                 }
                 //NIVEL EXTREMO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
-                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setxSpeed((int)(disp.getxSpeed()*2));
+                    disp.setySpeed((int)(disp.getySpeed()*2));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
             }else {
@@ -448,7 +428,7 @@ public class GameView extends SurfaceView {
                 }
                 //NIVEL EXTREMO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                    disp.setySpeed((int)(disp.getySpeed()*5));
+                    disp.setySpeed((int)(disp.getySpeed()*4));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
                 soundPool.play(idDisparoMisil,(float)0.07,(float)0.07,4,0,1);
@@ -476,8 +456,8 @@ public class GameView extends SurfaceView {
                 }
                 //NIVEL EXTREMO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
-                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setxSpeed((int)(disp.getxSpeed()*2));
+                    disp.setySpeed((int)(disp.getySpeed()*2));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
             }else {
@@ -498,7 +478,7 @@ public class GameView extends SurfaceView {
                 }
                 //NIVEL EXTREMO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*5));
+                    disp.setxSpeed((int)(disp.getxSpeed()*4));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
                 soundPool.play(idDisparoMisil,(float)0.09,0,4,0,1);
@@ -526,29 +506,29 @@ public class GameView extends SurfaceView {
                 }
                 //NIVEL EXTREMO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                    disp.setxSpeed((int)(disp.getxSpeed()*2.5));
-                    disp.setySpeed((int)(disp.getySpeed()*2.5));
+                    disp.setxSpeed((int)(disp.getxSpeed()*2));
+                    disp.setySpeed((int)(disp.getySpeed()*2));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
             }else {
                 disp = new Disparo(this, fuegoAbajo, 1, ran, 5);
                 //NIVEL FÁCIL
                 if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
-                    disp.setySpeed((int)(disp.getySpeed()*-2.2));
+                    disp.setySpeed((int)(disp.getySpeed()*2.2));
                 }
                 //NIVEL MEDIO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
-                    disp.setySpeed((int)(disp.getySpeed()*-2.5));
+                    disp.setySpeed((int)(disp.getySpeed()*2.5));
                     disp.setPuntos((int)(disp.getPuntos()*1.2));
                 }
                 //NIVEL DIFICIL
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
-                    disp.setySpeed((int)(disp.getySpeed()*-4));
+                    disp.setySpeed((int)(disp.getySpeed()*4));
                     disp.setPuntos((int)(disp.getPuntos()*1.5));
                 }
                 //NIVEL EXTREMO
                 else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                    disp.setySpeed((int)(disp.getySpeed()*-5));
+                    disp.setySpeed((int)(disp.getySpeed()*4));
                     disp.setPuntos(disp.getPuntos()*2);
                 }
                 soundPool.play(idDisparoMisil,(float)0.07,(float)0.07,4,0,1);
@@ -563,183 +543,181 @@ public class GameView extends SurfaceView {
     public void draw(Canvas canvas){
         long actual;
         boolean conseguido=false, finalizar=false;
-        canvas.drawBitmap(fondo, 0, 0, null);
-        Paint paint=new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth((float)((getWidth()*0.1)/12));
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setTextSize((float) (getWidth() * 0.08));
-        paint.setTypeface(font);
-        paint.setTextAlign(Paint.Align.LEFT);
-        canvas.drawBitmap(sandClock,(float)(getWidth()*0.05),(float)(getHeight()*0.035),null);
-        //NIVEL FÁCIL
-        if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
-            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_EASY-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
-        }
-        //NIVEL MEDIO
-        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
-            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_MEDIUM-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
-        }
-        //NIVEL DIFICIL
-        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
-            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_HARD-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
-        }
-        //NIVEL EXTREMO
-        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-            canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_EXTREME-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.45),(float)(getHeight()*0.084),paint);
-        }
-        canvas.drawBitmap(life1,(float)(getWidth()*0.3),(float)(getHeight()*0.045),null);
-        canvas.drawBitmap(life2,(float)(getWidth()*0.3+life1.getWidth()*1.05),(float)(getHeight()*0.045),null);
-        canvas.drawBitmap(life3,(float)(getWidth()*0.3+life1.getWidth()*1.05+life2.getWidth()*1.05),(float)(getHeight()*0.045),null);
-        paint.setTextAlign(Paint.Align.RIGHT);
-        canvas.drawBitmap(moneyBag,(float)(getWidth()*0.57),(float)(getHeight()*0.035),null);
-        //NIVEL FÁCIL
-        if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
-            canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_EASY), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.4), (float) (getHeight() * 0.084), paint);
-        }
-        //NIVEL MEDIO
-        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
-            canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_MEDIUM), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.4), (float) (getHeight() * 0.084), paint);
-        }
-        //NIVEL DIFICIL
-        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
-            canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_HARD), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.4), (float) (getHeight() * 0.084), paint);
-        }
-        //NIVEL EXTREMO
-        else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-            canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_EXTREME), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.4), (float) (getHeight() * 0.084), paint);
-        }
-        paint.setColor(Color.rgb(255,255,0));
-        paint.setStyle(Paint.Style.FILL);
-
-        if((sprites.size()!=0) && getVidas()>0 && ((getCrono()<TIEMPO_MAX_EASY && PlayerStatus.getInstancia(getContexto()).getDinero()==350)
-                || (getCrono()<TIEMPO_MAX_MEDIUM && PlayerStatus.getInstancia(getContexto()).getDinero()==250)
-                || (getCrono()<TIEMPO_MAX_HARD&& PlayerStatus.getInstancia(getContexto()).getDinero()==150)
-                || (getCrono()<TIEMPO_MAX_EXTREME && PlayerStatus.getInstancia(getContexto()).getDinero()==50))) {
-            actual=System.currentTimeMillis();
-            for (Sprite miSprite : sprites) {
-                miSprite.draw(canvas);
+        if(canvas!=null) {
+            canvas.drawBitmap(fondo, 0, 0, null);
+            Paint paint = new Paint();
+            paint.setColor(Color.BLACK);
+            paint.setStrokeWidth((float) ((getWidth() * 0.1) / 12));
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setTextSize((float) (getWidth() * 0.08));
+            paint.setTypeface(font);
+            paint.setTextAlign(Paint.Align.LEFT);
+            canvas.drawBitmap(sandClock, (float) (getWidth() * 0.05), (float) (getHeight() * 0.035), null);
+            //NIVEL FÁCIL
+            if (PlayerStatus.getInstancia(getContexto()).getDinero() == 350) {
+                canvas.drawText(String.format("%s", pasarSeg(TIEMPO_MAX_EASY - getCrono())), (float) (getWidth() * 0.05 + sandClock.getWidth() * 1.45), (float) (getHeight() * 0.084), paint);
             }
-            if((getPuntuacion()<MAX_POINTS_EASY && PlayerStatus.getInstancia(getContexto()).getDinero()==350)
-                    || (getPuntuacion()<MAX_POINTS_MEDIUM && PlayerStatus.getInstancia(getContexto()).getDinero()==250)
-                    || (getPuntuacion()<MAX_POINTS_HARD && PlayerStatus.getInstancia(getContexto()).getDinero()==150)
-                    || (getPuntuacion()<MAX_POINTS_EXTREME && PlayerStatus.getInstancia(getContexto()).getDinero()==50)) {
-                for (int i = 0; i < monedas.size(); i++) {
-                    if (i < 5) {
-                        monedas.get(i).draw(canvas);
-                        if (monedas.get(i).isCollition(getJug())) {
-                            sumarPuntos(monedas.get(i).getPuntos());
-                            if(monedas.get(i).getPuntos()==1){
-                                soundPool.play(idCoin1,(float)0.4,(float)0.4,1,0,1);
+            //NIVEL MEDIO
+            else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 250) {
+                canvas.drawText(String.format("%s", pasarSeg(TIEMPO_MAX_MEDIUM - getCrono())), (float) (getWidth() * 0.05 + sandClock.getWidth() * 1.45), (float) (getHeight() * 0.084), paint);
+            }
+            //NIVEL DIFICIL
+            else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 150) {
+                canvas.drawText(String.format("%s", pasarSeg(TIEMPO_MAX_HARD - getCrono())), (float) (getWidth() * 0.05 + sandClock.getWidth() * 1.45), (float) (getHeight() * 0.084), paint);
+            }
+            //NIVEL EXTREMO
+            else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 50) {
+                canvas.drawText(String.format("%s", pasarSeg(TIEMPO_MAX_EXTREME - getCrono())), (float) (getWidth() * 0.05 + sandClock.getWidth() * 1.45), (float) (getHeight() * 0.084), paint);
+            }
+            canvas.drawBitmap(life1, (float) (getWidth() * 0.3), (float) (getHeight() * 0.045), null);
+            canvas.drawBitmap(life2, (float) (getWidth() * 0.3 + life1.getWidth() * 1.05), (float) (getHeight() * 0.045), null);
+            canvas.drawBitmap(life3, (float) (getWidth() * 0.3 + life1.getWidth() * 1.05 + life2.getWidth() * 1.05), (float) (getHeight() * 0.045), null);
+            paint.setTextAlign(Paint.Align.RIGHT);
+            canvas.drawBitmap(moneyBag, (float) (getWidth() * 0.57), (float) (getHeight() * 0.035), null);
+            //NIVEL FÁCIL
+            if (PlayerStatus.getInstancia(getContexto()).getDinero() == 350) {
+                canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_EASY), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.4), (float) (getHeight() * 0.084), paint);
+            }
+            //NIVEL MEDIO
+            else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 250) {
+                canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_MEDIUM), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.4), (float) (getHeight() * 0.084), paint);
+            }
+            //NIVEL DIFICIL
+            else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 150) {
+                canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_HARD), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.4), (float) (getHeight() * 0.084), paint);
+            }
+            //NIVEL EXTREMO
+            else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 50) {
+                canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_EXTREME), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.4), (float) (getHeight() * 0.084), paint);
+            }
+            paint.setColor(Color.rgb(255, 255, 0));
+            paint.setStyle(Paint.Style.FILL);
+
+            if ((sprites.size() != 0) && getVidas() > 0 && ((getCrono() < TIEMPO_MAX_EASY && PlayerStatus.getInstancia(getContexto()).getDinero() == 350)
+                    || (getCrono() < TIEMPO_MAX_MEDIUM && PlayerStatus.getInstancia(getContexto()).getDinero() == 250)
+                    || (getCrono() < TIEMPO_MAX_HARD && PlayerStatus.getInstancia(getContexto()).getDinero() == 150)
+                    || (getCrono() < TIEMPO_MAX_EXTREME && PlayerStatus.getInstancia(getContexto()).getDinero() == 50))) {
+                actual = System.currentTimeMillis();
+                for (Sprite miSprite : sprites) {
+                    miSprite.draw(canvas);
+                }
+                if ((getPuntuacion() < MAX_POINTS_EASY && PlayerStatus.getInstancia(getContexto()).getDinero() == 350)
+                        || (getPuntuacion() < MAX_POINTS_MEDIUM && PlayerStatus.getInstancia(getContexto()).getDinero() == 250)
+                        || (getPuntuacion() < MAX_POINTS_HARD && PlayerStatus.getInstancia(getContexto()).getDinero() == 150)
+                        || (getPuntuacion() < MAX_POINTS_EXTREME && PlayerStatus.getInstancia(getContexto()).getDinero() == 50)) {
+                    for (int i = 0; i < monedas.size(); i++) {
+                        if (i < 5) {
+                            monedas.get(i).draw(canvas);
+                            if (monedas.get(i).isCollition(getJug())) {
+                                sumarPuntos(monedas.get(i).getPuntos());
+                                if (monedas.get(i).getPuntos() == 1) {
+                                    soundPool.play(idCoin1, (float) 0.4, (float) 0.4, 1, 0, 1);
+                                } else if (monedas.get(i).getPuntos() == 2) {
+                                    soundPool.play(idCoin2, (float) 0.4, (float) 0.4, 1, 0, 1);
+                                } else if (monedas.get(i).getPuntos() == 5) {
+                                    soundPool.play(idCoin5, 1, 1, 1, 0, 1);
+                                } else if (monedas.get(i).getPuntos() == 10) {
+                                    soundPool.play(idCoin10, 1, 1, 1, 0, 1);
+                                }
+                                monedas.remove(monedas.get(i));
                             }
-                            else if(monedas.get(i).getPuntos()==2){
-                                soundPool.play(idCoin2,(float)0.4,(float)0.4,1,0,1);
-                            }
-                            else if(monedas.get(i).getPuntos()==5){
-                                soundPool.play(idCoin5,1,1,1,0,1);
-                            }
-                            else if(monedas.get(i).getPuntos()==10){
-                                soundPool.play(idCoin10,1,1,1,0,1);
-                            }
-                            monedas.remove(monedas.get(i));
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < tickets.size(); i++) {
+                        tickets.get(i).draw(canvas);
+                        if (tickets.get(i).isCollition(getJug())) {
+                            tickets.remove(tickets.get(i));
+                            conseguido = true;
                         }
                     }
                 }
-            }else{
-                for(int i=0;i<tickets.size();i++){
-                    tickets.get(i).draw(canvas);
-                    if(tickets.get(i).isCollition(getJug())) {
-                        soundPool.play(idWin,(float)0.5,(float)0.5,0,0,1);
-                        tickets.remove(tickets.get(i));
-                        conseguido=true;
-                    }
-                }
-            }
-            for (int i = 0; i < disparos.size(); i++) {
+                for (int i = 0; i < disparos.size(); i++) {
                     disparos.get(i).draw(canvas);
                     if (disparos.get(i).isCollition(getJug())) {
-                        soundPool.play(idCaeMoneda,(float)0.4,(float)0.4,2,0,1);
-                        soundPool.play(idGrito,(float)0.5,(float)0.5,1,0,1);
+                        soundPool.play(idCaeMoneda, (float) 0.4, (float) 0.4, 2, 0, 1);
+                        soundPool.play(idGrito, (float) 0.5, (float) 0.5, 1, 0, 1);
                         restarVida(disparos.get(i).getVida());
                         restaPuntos(disparos.get(i).getPuntos());
                         disparos.remove(disparos.get(i));
                         disparos.add(getDisparos());
-                    }
-                    else if(disparos.get(i).getCorx()<=0){
+                    } else if (disparos.get(i).getCorx() <= 0) {
+                        disparos.remove(disparos.get(i));
+                        disparos.add(getDisparos());
+                    } else if (disparos.get(i).getCory() >= getHeight()) {
+                        disparos.remove(disparos.get(i));
+                        disparos.add(getDisparos());
+                    } else if (disparos.get(i).getCorx() >= getWidth()) {
+                        disparos.remove(disparos.get(i));
+                        disparos.add(getDisparos());
+                    } else if (disparos.get(i).getCory() <= 0) {
                         disparos.remove(disparos.get(i));
                         disparos.add(getDisparos());
                     }
-                    else if(disparos.get(i).getCory()>=getHeight()){
-                        disparos.remove(disparos.get(i));
-                        disparos.add(getDisparos());
-                    }
-                    else if(disparos.get(i).getCorx()>=getWidth()){
-                        disparos.remove(disparos.get(i));
-                        disparos.add(getDisparos());
-                    }
-                    else if(disparos.get(i).getCory()<=0){
-                        disparos.remove(disparos.get(i));
-                        disparos.add(getDisparos());
-                    }
-            }
-            if (sprites.size() > 0) {
-                setCrono((actual - inicio) / 1000);
-            }
-            paint.setTextAlign(Paint.Align.LEFT);
-            //NIVEL FÁCIL
-            if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
-                canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_EASY-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
-            }
-            //NIVEL MEDIO
-            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
-                canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_MEDIUM-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
-            }
-            //NIVEL DIFICIL
-            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
-                canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_HARD-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
-            }
-            //NIVEL EXTREMO
-            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                canvas.drawText(String.format("%s",pasarSeg(TIEMPO_MAX_EXTREME-getCrono())),(float)(getWidth()*0.05+sandClock.getWidth()*1.25),(float)(getHeight()*0.08),paint);
-            }
-            paint.setTextAlign(Paint.Align.RIGHT);
-            //NIVEL FÁCIL
-            if(PlayerStatus.getInstancia(getContexto()).getDinero()==350) {
-                canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_EASY), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.2), (float) (getHeight() * 0.08), paint);
-            }
-            //NIVEL MEDIO
-            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==250) {
-                canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_MEDIUM), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.2), (float) (getHeight() * 0.08), paint);
-            }
-            //NIVEL DIFICIL
-            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==150) {
-                canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_HARD), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.2), (float) (getHeight() * 0.08), paint);
-            }
-            //NIVEL EXTREMO
-            else if(PlayerStatus.getInstancia(getContexto()).getDinero()==50) {
-                canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_EXTREME), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.2), (float) (getHeight() * 0.08), paint);
-            }
-        }
-        else{
-            conseguido=false;
-            finalizar=true;
-            soundPool.play(idGameOver,1,1,0,0,1);
-        }
-        if(conseguido){
-            getContexto().runOnUiThread(new Runnable() {
-                public void run() {
-                    new DialogFin(getContexto(), DialogFin.Tipo.WIN).show();
                 }
-            });
-            stop();
-        }
-        else if(!conseguido && finalizar) {
-            getContexto().runOnUiThread(new Runnable() {
-                public void run() {
-                    new DialogFin(getContexto(), DialogFin.Tipo.LOSE).show();
+                if (sprites.size() > 0) {
+                    setCrono((actual - inicio) / 1000);
                 }
-            });
-            stop();
+                paint.setTextAlign(Paint.Align.LEFT);
+                //NIVEL FÁCIL
+                if (PlayerStatus.getInstancia(getContexto()).getDinero() == 350) {
+                    canvas.drawText(String.format("%s", pasarSeg(TIEMPO_MAX_EASY - getCrono())), (float) (getWidth() * 0.05 + sandClock.getWidth() * 1.25), (float) (getHeight() * 0.08), paint);
+                }
+                //NIVEL MEDIO
+                else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 250) {
+                    canvas.drawText(String.format("%s", pasarSeg(TIEMPO_MAX_MEDIUM - getCrono())), (float) (getWidth() * 0.05 + sandClock.getWidth() * 1.25), (float) (getHeight() * 0.08), paint);
+                }
+                //NIVEL DIFICIL
+                else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 150) {
+                    canvas.drawText(String.format("%s", pasarSeg(TIEMPO_MAX_HARD - getCrono())), (float) (getWidth() * 0.05 + sandClock.getWidth() * 1.25), (float) (getHeight() * 0.08), paint);
+                }
+                //NIVEL EXTREMO
+                else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 50) {
+                    canvas.drawText(String.format("%s", pasarSeg(TIEMPO_MAX_EXTREME - getCrono())), (float) (getWidth() * 0.05 + sandClock.getWidth() * 1.25), (float) (getHeight() * 0.08), paint);
+                }
+                paint.setTextAlign(Paint.Align.RIGHT);
+                //NIVEL FÁCIL
+                if (PlayerStatus.getInstancia(getContexto()).getDinero() == 350) {
+                    canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_EASY), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.2), (float) (getHeight() * 0.08), paint);
+                }
+                //NIVEL MEDIO
+                else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 250) {
+                    canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_MEDIUM), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.2), (float) (getHeight() * 0.08), paint);
+                }
+                //NIVEL DIFICIL
+                else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 150) {
+                    canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_HARD), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.2), (float) (getHeight() * 0.08), paint);
+                }
+                //NIVEL EXTREMO
+                else if (PlayerStatus.getInstancia(getContexto()).getDinero() == 50) {
+                    canvas.drawText(String.format("%03d/%03d", getPuntuacion(), MAX_POINTS_EXTREME), (float) (getWidth() - (getWidth() * 0.05) + moneyBag.getWidth() * 0.2), (float) (getHeight() * 0.08), paint);
+                }
+            } else {
+                conseguido = false;
+                finalizar = true;
+                //soundPool.play(idGameOver,1,1,0,0,1);
+            }
+            if (conseguido) {
+                stop();
+                musica = MediaPlayer.create(getContexto(), R.raw.madrid_win_effect);
+                musica.setLooping(false);
+                musica.start();
+                getContexto().runOnUiThread(new Runnable() {
+                    public void run() {
+                        new DialogFin(getContexto(), DialogFin.Tipo.WIN).show();
+                    }
+                });
+            } else if (!conseguido && finalizar) {
+                stop();
+                musica = MediaPlayer.create(getContexto(), R.raw.madrid_gameover_effect);
+                musica.setLooping(false);
+                musica.start();
+                getContexto().runOnUiThread(new Runnable() {
+                    public void run() {
+                        new DialogFin(getContexto(), DialogFin.Tipo.LOSE).show();
+                    }
+                });
+            }
         }
     }
 
@@ -853,6 +831,10 @@ public class GameView extends SurfaceView {
         loop.setRunning(false);
         musica.stop();
         musica.release();
+        if (soundPool != null) {
+            soundPool.release();
+            soundPool = null;
+        }
     }
 
     private void sumarPuntos(int puntos){

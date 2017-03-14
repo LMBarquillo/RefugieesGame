@@ -181,12 +181,12 @@ public class Sprite {
     }
 
     private void update() {
-        /*if(getPosX() >= getGameView().getWidth() - getWidth() - getSpeedX() || getPosX() + getSpeedX() <= 0) {
+        /*if(getPosX() >= getGameSurface().getWidth() - getWidth() - getSpeedX() || getPosX() + getSpeedX() <= 0) {
             setSpeedX(-getSpeedX());
         } else {
             setPosX(getPosX() + getSpeedX());
         }
-        if(getPosY() >= getGameView().getHeight() - getHeight() - getSpeedY() || getPosY() + getSpeedY() <= 0) {
+        if(getPosY() >= getGameSurface().getHeight() - getHeight() - getSpeedY() || getPosY() + getSpeedY() <= 0) {
             setSpeedY(-getSpeedY());
         } else {
             setPosY(getPosY() + getSpeedY());

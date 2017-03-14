@@ -27,7 +27,7 @@ public class CreditsDialog extends Dialog implements View.OnClickListener {
         this.activity = activity;
         Display display = activity.getWindowManager().getDefaultDisplay();
         Point size = new Point();
-        display.getSize(size);
+        display.getRealSize(size);
         //getWindow().setLayout((int)(size.x * 0.7), (int)(size.y * 0.5));
         getWindow().setLayout(size.x, size.y);
         getWindow().getAttributes().windowAnimations = R.style.sarajevoDialogo;

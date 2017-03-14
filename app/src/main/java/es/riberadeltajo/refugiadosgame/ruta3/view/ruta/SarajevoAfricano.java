@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
 public class SarajevoAfricano extends AppCompatActivity implements View.OnClickListener {
     private ImageView opc1,passport;
@@ -29,13 +30,15 @@ public class SarajevoAfricano extends AppCompatActivity implements View.OnClickL
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+        PlayerStatus.getInstancia(this).setRuta(3);
+        PlayerStatus.getInstancia(this).setTramo(5);
         setContentView(R.layout.activity_una_opcion);
         getWindow().getDecorView().setBackgroundResource(R.drawable.sarajevofondohistoria); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.txt_africano);
+        texto.setText(R.string.sarajevo_txt_africano);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -52,9 +55,26 @@ public class SarajevoAfricano extends AppCompatActivity implements View.OnClickL
         btnSig.setOnClickListener(this);
         passport=(ImageView) findViewById(R.id.imgObject);
         passport.setImageResource(R.drawable.madrid_passport);
-        passport.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
-        objeto.setVisibility(View.VISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
-        descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+        passport.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        objeto.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+        descOpc1.setVisibility(View.INVISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+    }
+
+    @Override
+    public void onBackPressed() {
+        new MenuDialog(this).show();
+    }
+
+    protected void onResume() {
+        super.onResume();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); //Evita que se apague la pantalla
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     @Override
@@ -70,10 +90,11 @@ public class SarajevoAfricano extends AppCompatActivity implements View.OnClickL
     }
 
     public void goBack(){
-        //Activity anterior
+        new MenuDialog(this).show();
     }
 
     public void goNext(){
         startActivity(new Intent(this, SarajevoPasillo.class));
     }
 }
+
