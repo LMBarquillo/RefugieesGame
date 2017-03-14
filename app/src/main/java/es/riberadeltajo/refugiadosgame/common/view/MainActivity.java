@@ -8,6 +8,7 @@ import android.view.View;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta1.view.Madrid;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
+import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanTren;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
 import es.riberadeltajo.refugiadosgame.ruta4.view.GameMenu;
 import es.riberadeltajo.refugiadosgame.ruta4.view.ruta.Istanbul_Main;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ruta2(View view) {
-        Intent i = new Intent(this,Milan.class);
+        Intent i = new Intent(this,MilanTren.class);
         startActivity(i);
     }
 

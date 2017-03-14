@@ -1,4 +1,4 @@
-<resources>
+ <resources>
     <!-- RECORDATORIO: LOS TEXTOS VAN EN INGLÉS -->
     <string name="app_name">RefugeeGame</string>
 
@@ -81,6 +81,9 @@
     <string name="milan_help">You have 45 seconds </string>
     <string name="milan_help2">to get 15 coins,</string>
     <string name="milan_help3">will you be able to?</string>
+     <string name="txtMensajeHablarMoro"> Ill stay with you</string>
+     <string name="txtCambioVagon">bye bye!</string>
+     <string name="historiaTren">Aqui va la historia del tren</string>
 
     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
