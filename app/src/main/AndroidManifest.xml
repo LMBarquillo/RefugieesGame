@@ -80,10 +80,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".ruta2.view.Milan" />
         <activity
-            android:name=".ruta3.view.arcade.SarajevoArcade"
-            android:configChanges="keyboardHidden"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".ruta4.view.Istanbul"
             android:screenOrientation="portrait" />
         <activity
@@ -129,6 +125,14 @@
         <activity android:name=".ruta2.view.juego.milan_juego2" />
         <activity android:name=".ruta5.view.teheran_main2" />
         <activity android:name=".common.view.MainActivity2" />
+        <activity
+            android:name=".ruta3.view.arcade.SarajevoInstrucciones"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ruta3.view.arcade.SarajevoArcade"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ruta3.view.ruta.SarajevoAlojamiento"
             android:configChanges="keyboardHidden"

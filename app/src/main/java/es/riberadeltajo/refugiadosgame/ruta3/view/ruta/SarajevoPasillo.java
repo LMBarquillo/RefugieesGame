@@ -190,10 +190,10 @@ public class SarajevoPasillo extends AppCompatActivity implements View.OnClickLi
 
     public void goNext(){
         if(cont==OPCION_A){
-            startActivity(new Intent(this, SarajevoMejicano.class));
+            startActivity(new Intent(this, SarajevoChino.class));
         }
         else if(cont==OPCION_B){
-            startActivity(new Intent(this, SarajevoChino.class));
+            startActivity(new Intent(this, SarajevoMejicano.class));
         }
         else if(cont==OPCION_C){
             startActivity(new Intent(this, SarajevoAfricano.class));
