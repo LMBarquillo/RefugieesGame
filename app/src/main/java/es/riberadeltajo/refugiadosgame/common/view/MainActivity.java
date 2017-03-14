@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public void ruta2(View view) {
         Intent i = new Intent(this,MilanTren.class);
         startActivity(i);
+
     }
 
     public void ruta3(View view) {

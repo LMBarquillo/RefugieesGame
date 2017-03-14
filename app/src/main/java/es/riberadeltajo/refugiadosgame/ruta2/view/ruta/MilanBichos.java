@@ -5,4 +5,5 @@ package es.riberadeltajo.refugiadosgame.ruta2.view.ruta;
  */
 
 public class MilanBichos {
+
 }
