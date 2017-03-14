@@ -24,7 +24,6 @@ import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 public class MilanPersonaAyuda extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,opc2,passport;
     private TextView texto,dinero,objeto,descOpc1,descOpc2;
-
     private Button btnAtras, btnSig;
     private final int OPCION_A=1;
     private final int OPCION_B=2;

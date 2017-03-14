@@ -127,6 +127,7 @@ public class MilanBichos extends AppCompatActivity implements View.OnClickListen
     public void goBack(){
         startActivity(new Intent(this, MainActivity2.class));
         finish();
+
     }
 
     public void goNext(){
