@@ -35,5 +35,10 @@ public class milan_juego2 extends Activity {
         pantalla.finalizar();
         super.onDestroy();
     }
+
+    @Override
+    public void onBackPressed() {
+        pantalla.finalizar();
+    }
 }
 
