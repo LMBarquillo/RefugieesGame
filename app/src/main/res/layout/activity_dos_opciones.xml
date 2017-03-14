@@ -25,79 +25,86 @@
             android:layout_height="10dp" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:background="@drawable/menu1"
-            android:layout_height="38dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_weight="2"
+            android:background="@drawable/menu1"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="25dp"
-                    app:srcCompat="@drawable/madrid_money"
                     android:id="@+id/imgMoney"
-                    android:cropToPadding="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.14"
                     android:adjustViewBounds="true"
+                    android:cropToPadding="true"
+                    android:scaleType="centerInside"
+                    app:srcCompat="@drawable/madrid_money" />
+
+                <TextView
+                    android:id="@+id/txtMoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="26sp"
+                    android:textStyle="normal|bold" />
+
+                <ImageView
+                    android:id="@+id/imgObject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.14"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="true"
                     android:scaleType="centerInside" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtMoney"
-                    android:textAlignment="viewStart"
-                    android:textStyle="normal|bold"
-                    android:textSize="23sp"
-                    android:textColor="@android:color/background_dark"
-                    android:textAllCaps="false"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif" />
-
-                <ImageView
-                    android:layout_width="43dp"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imgObject"
-                    android:cropToPadding="true"
-                    android:scaleType="centerInside"
-                    android:adjustViewBounds="true" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/txtObjeto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:textSize="23sp"
-                    android:textStyle="normal|bold"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:textAlignment="viewStart"
                     android:textColor="@android:color/background_dark"
-                    android:fontFamily="sans-serif" />
+                    android:textSize="26sp"
+                    android:textStyle="normal|bold" />
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:layout_weight="0.2"
+            android:orientation="horizontal">
 
             <Space
-                android:layout_height="match_parent"
-                android:layout_width="15dp" />
+                android:layout_width="15dp"
+                android:layout_height="match_parent" />
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:layout_weight="1">
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <Space
                     android:layout_width="match_parent"
@@ -123,7 +130,7 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
                             android:adjustViewBounds="true"
                             android:background="@drawable/menu1"
                             android:clickable="true"
@@ -134,9 +141,10 @@
                         <TextView
                             android:id="@+id/txtOpc1Desc"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.1"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
                             android:background="@drawable/menu1"
+                            android:gravity="center"
                             android:textAlignment="center"
                             android:textColor="@android:color/background_dark"
                             android:textSize="18sp"
@@ -161,7 +169,7 @@
                             android:layout_height="match_parent"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
-                            android:layout_weight="1"
+                            android:layout_weight="1.5"
                             android:adjustViewBounds="true"
                             android:background="@drawable/menu1"
                             android:clickable="true"
@@ -172,9 +180,10 @@
                         <TextView
                             android:id="@+id/txtOpc2Desc"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.1"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
                             android:background="@drawable/menu1"
+                            android:gravity="center"
                             android:textAlignment="center"
                             android:textColor="@android:color/background_dark"
                             android:textSize="18sp"
@@ -185,37 +194,37 @@
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" />
+                    android:layout_height="22dp" />
 
                 <TextView
-                    android:layout_width="match_parent"
                     android:id="@+id/txtMens2"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_weight="0.5"
                     android:background="@drawable/menu1"
+                    android:gravity="center_vertical|fill_horizontal"
                     android:textAlignment="center"
                     android:textColor="@android:color/background_dark"
-                    android:textSize="22sp"
-                    android:gravity="center_vertical|fill_horizontal"
-                    android:layout_height="150dp" />
+                    android:textSize="22sp" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="35dp" />
+                    android:layout_height="22dp" />
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <Button
-                        android:text="Menu"
-                        android:layout_height="wrap_content"
                         android:id="@+id/btnBack"
-                        android:background="@drawable/menu_btn"
-                        android:textColor="@android:color/black"
-                        android:textStyle="normal|bold"
                         android:layout_width="100dp"
-                        android:onClick="goBack" />
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/menu_btn"
+                        android:onClick="goBack"
+                        android:text="Menu"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -223,14 +232,14 @@
                         android:layout_weight="4.49" />
 
                     <Button
-                        android:text="Next"
-                        android:layout_height="wrap_content"
                         android:id="@+id/btnNext"
-                        android:background="@drawable/menu_btn"
-                        android:textColor="@android:color/black"
-                        android:textStyle="normal|bold"
                         android:layout_width="100dp"
-                        android:onClick="goNext" />
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/menu_btn"
+                        android:onClick="goNext"
+                        android:text="Next"
+                        android:textColor="@android:color/black"
+                        android:textStyle="normal|bold" />
                 </LinearLayout>
 
                 <Space
@@ -239,8 +248,9 @@
 
             </LinearLayout>
 
-            <Space android:layout_height="match_parent"
-                android:layout_width="15dp" />
+            <Space
+                android:layout_width="15dp"
+                android:layout_height="match_parent" />
         </LinearLayout>
 
     </LinearLayout>

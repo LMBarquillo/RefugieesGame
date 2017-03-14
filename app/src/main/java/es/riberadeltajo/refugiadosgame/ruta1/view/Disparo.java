@@ -12,6 +12,7 @@ import android.graphics.Rect;
 public class Disparo extends Sprite {
     private Bitmap bmp;
     private int puntos;
+    float velX,velY,x,y,vx,vy;
     
     public Disparo(GameView gameView, Bitmap bmp, int vida, float ran,int puntos) {
         super(gameView, bmp, vida);
@@ -21,23 +22,35 @@ public class Disparo extends Sprite {
         if(ran==1){
             setCorx(gameView.getWidth());
             setCory((int) (Math.random()*(gameView.getHeight()-(4*getHeight()+(gameView.getHeight()*0.1))))+(int)(gameView.getHeight()*0.1));
-            setxSpeed(-6);
+            velX=-6;
+            x=velX/1080;
+            vx=getGameView().getWidth()*x;
+            setxSpeed(vx);
             setySpeed(0);
         }else if(ran==2){
             setCorx((int) (Math.random()*(gameView.getWidth()-(4*getWidth()+(gameView.getWidth()*0.1))))+(int)(gameView.getWidth()*0.1));
             setCory(0);
+            velY=6;
+            y=velY/1920;
+            vy=getGameView().getHeight()*y;
             setxSpeed(0);
-            setySpeed(6);
+            setySpeed(vy);
         }else if(ran==3){
             setCorx(0);
             setCory((int) (Math.random()*(gameView.getHeight()-(4*getHeight()+(gameView.getHeight()*0.1))))+(int)(gameView.getHeight()*0.1));
-            setxSpeed(6);
+            velX=6;
+            x=velX/1080;
+            vx=getGameView().getWidth()*x;
+            setxSpeed(vx);
             setySpeed(0);
         }else if(ran==4){
             setCorx((int) (Math.random()*(gameView.getWidth()-(4*getWidth()+(gameView.getWidth()*0.1))))+(int)(gameView.getWidth()*0.1));
             setCory(gameView.getHeight());
+            velY=-6;
+            y=velY/1920;
+            vy=getGameView().getHeight()*y;
             setxSpeed(0);
-            setySpeed(-6);
+            setySpeed(vy);
         }
 
     }

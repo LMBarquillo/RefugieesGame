@@ -17,15 +17,16 @@
         android:padding="10dp">
 
         <TextView
-            android:text="TextView"
+            android:id="@+id/txtMsgToast"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/txtMsgToast"
+            android:background="@drawable/toast1"
             android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="normal|bold"
+            android:padding="15dp"
+            android:text="TextView"
             android:textColor="@android:color/background_dark"
-            android:background="@drawable/toast1" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </FrameLayout>
 
     <Space
