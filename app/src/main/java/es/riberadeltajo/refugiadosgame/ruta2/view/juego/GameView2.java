@@ -22,7 +22,7 @@ import es.riberadeltajo.refugiadosgame.R;
 public class GameView2 extends SurfaceView implements View.OnTouchListener {
 
     private final int MARGENES=20;
-    private final int TIEMPO_MAX = 45;
+    private final int TIEMPO_MAX = 50;
     private final int NUM_MONEDAS=15;
     private Bitmap player;
     private SurfaceHolder holder;
@@ -378,7 +378,7 @@ public class GameView2 extends SurfaceView implements View.OnTouchListener {
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         int action= event.getAction() & MotionEvent.ACTION_MASK;
-        int pointerIndex=(event.getAction()&MotionEvent.ACTION_POINTER_INDEX_MASK)>>MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+        int pointerIndex=(event.getAction()& MotionEvent.ACTION_POINTER_INDEX_MASK)>>MotionEvent.ACTION_POINTER_INDEX_SHIFT;
 
         switch(action){
             case MotionEvent.ACTION_DOWN:
