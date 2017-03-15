@@ -34,6 +34,10 @@ import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Rueda_1;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Rueda_2;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Trans;
 import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Wait;
+import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanBichos;
+import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanIncendio;
+import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanPersonaAyuda;
+import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanTren;
 import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.SarajevoArcade;
 import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.SarajevoInstrucciones;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAfricano;
@@ -72,7 +76,7 @@ public class PlayDialog extends Dialog implements View.OnClickListener {
 
     private final Class[][] activities = {
         {Madrid_Main.class, Madrid_Maletas.class, Madrid_Trans.class, Madrid_Peso_1.class, Madrid_Peso_2.class, Madrid_Peso_If.class, Madrid_Milan_1.class, Madrid_Peso_Else_1.class, Madrid_Peso_Else_2.class, Madrid_Rueda_1.class, Madrid_Rueda_2.class, Madrid_Pie.class, Madrid_Passport.class, Madrid_Milan_2.class, Madrid_Milan_3.class, Madrid_Pie_2.class, Madrid_Wait.class, Madrid_Fin.class, Madrid_Help.class, Madrid_Arcade.class},
-        {null},
+        {MilanTren.class, MilanIncendio.class, MilanPersonaAyuda.class, MilanBichos.class},
         {SarajevoAlojamiento.class, SarajevoPasillo.class, SarajevoChino.class, SarajevoMejicano.class, SarajevoAfricano.class, SarajevoHabitacion.class, SarajevoBanda.class, SarajevoInstrucciones.class},
         {Istanbul_Main.class, Istanbul_Tehran_1.class, Istanbul_Tehran_TicketStealed.class, Istanbul_Tehran_Policeman.class, Istanbul_Tehran_SinkingShip.class, Istanbul_Tehran_NoWayOut.class, Istanbul_Tehran_ArabSaved.class, Istanbul_Tehran_YouMadeIt.class, Istanbul_Tehran_GotLost.class, Istanbul_Tehran_NeedMoney.class},
         {tehran1.class, tehran2.class, tehran3.class, tehran4.class, tehran5.class, tehran6.class, tehran7.class, tehran8.class, tehran9.class, tehran10.class}
