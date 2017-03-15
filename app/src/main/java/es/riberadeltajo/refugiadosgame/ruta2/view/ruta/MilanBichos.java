@@ -16,6 +16,7 @@ import android.widget.Toast;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
+import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
 
 /**
  * Created by Usuario on 14/03/2017.
@@ -132,7 +133,7 @@ public class MilanBichos extends AppCompatActivity implements View.OnClickListen
 
     public void goNext(){
         if(cont==OPCION_A){
-            startActivity(new Intent(this, MilanPersonaAyuda.class)); // aqui me manda hacia delante
+            startActivity(new Intent(this, Milan.class)); // aqui me manda hacia delante
         }
         else if(cont==OPCION_B){
             startActivity(new Intent(this, MilanIncendio.class)); // aqui salta el game over

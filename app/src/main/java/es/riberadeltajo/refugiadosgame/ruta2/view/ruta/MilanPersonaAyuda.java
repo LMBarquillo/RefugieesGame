@@ -130,7 +130,7 @@ public class MilanPersonaAyuda extends AppCompatActivity implements View.OnClick
 
     public void goNext(){
         if(cont==OPCION_A){
-            startActivity(new Intent(this, MilanPersonaAyuda.class)); // aqui me manda hacia delante
+            startActivity(new Intent(this, MilanBichos.class)); // aqui me manda hacia delante
         }
         else if(cont==OPCION_B){
             startActivity(new Intent(this, MilanIncendio.class)); // aqui salta el game over

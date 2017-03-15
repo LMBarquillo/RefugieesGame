@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta2.view.juego.milan_juego;
+import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanBichos;
+import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
 
 public class Milan extends AppCompatActivity {
     private int reques_code=1;
@@ -27,7 +29,9 @@ public class Milan extends AppCompatActivity {
                 Bundle bundle=data.getExtras();
                 boolean resultado=bundle.getBoolean("resultado");
                 texto.setText("Devuelto el juego "+resultado);
-
+                if(resultado){
+                    startActivity(new Intent(this, SarajevoAlojamiento.class)); // aqui me manda hacia delante
+                }
             }
         }
     }
