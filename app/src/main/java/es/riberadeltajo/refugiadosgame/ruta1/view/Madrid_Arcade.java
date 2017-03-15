@@ -10,6 +10,7 @@ import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
+import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanTren;
 
 public class Madrid_Arcade extends AppCompatActivity {
     private GameView gameView;
@@ -51,7 +52,7 @@ public class Madrid_Arcade extends AppCompatActivity {
     }
 
     public void continuar() {
-        startActivity(new Intent(this, Milan.class));
+        startActivity(new Intent(this, MilanTren.class));
         finish();
     }
 

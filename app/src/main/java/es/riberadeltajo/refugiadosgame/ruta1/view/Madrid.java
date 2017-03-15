@@ -18,10 +18,8 @@ import es.riberadeltajo.refugiadosgame.ruta1.view.view.Madrid_Trans;
 import es.riberadeltajo.refugiadosgame.ruta2.view.Milan;
 
 public class Madrid extends AppCompatActivity {
-    private GameView gameView;
     private Button btnPlay, btnExit, btnMaletas;
     private Button easy,med,hard,ex;
-    private MediaPlayer musica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +32,6 @@ public class Madrid extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
-        //reset(); //Temporal
         setContentView(R.layout.activity_madrid);
         btnPlay=(Button) findViewById(R.id.btnJugar);
         btnPlay=(Button) findViewById(R.id.btnSalir);
@@ -46,21 +43,11 @@ public class Madrid extends AppCompatActivity {
     }
 
     public void jugar(View v){
-        if(musica!=null) {
-            musica.stop();
-            musica.release();
-        }
-        gameView=new GameView(this);
-        setContentView(gameView);
+        startActivity(new Intent(this, Madrid_Arcade.class));
     }
 
     public void reset(){
-        if(musica!=null){
-            musica.stop();
-            musica.release();
-        }
-        gameView=new GameView(this);
-        setContentView(gameView);
+        startActivity(new Intent(this, Madrid_Arcade.class));
     }
 
     public void salir(View v){
@@ -77,17 +64,10 @@ public class Madrid extends AppCompatActivity {
 
     public void onResume(){
         super.onResume();
-        musica=MediaPlayer.create(this,R.raw.madrid_historia);
-        musica.setLooping(true);
-        musica.start();
     }
 
     public void onPause(){
         super.onPause();
-        if(musica!=null){
-            musica.stop();
-            musica.release();
-        }
         onStop();
     }
 
@@ -95,18 +75,6 @@ public class Madrid extends AppCompatActivity {
         super.onStop();
     }
 
-    public void onDestroy(){
-        super.onDestroy();
-        Process.killProcess(Process.myPid());
-    }
-
-    public MediaPlayer getMusica() {
-        return musica;
-    }
-
-    public void setMusica(MediaPlayer musica) {
-        this.musica = musica;
-    }
 
     public void modoFacil(View v){
         PlayerStatus.getInstancia(this).setDinero(350);
