@@ -10,6 +10,7 @@ import android.view.View;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
 public class Tehran extends Activity {
 
@@ -74,6 +75,11 @@ public class Tehran extends Activity {
         Intent i = new Intent(this,MainActivity.class);
         startActivity(i);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new MenuDialog(this).show();
     }
 
     public void fin(){

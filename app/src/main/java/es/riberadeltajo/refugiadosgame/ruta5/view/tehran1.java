@@ -13,6 +13,8 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
 public class tehran1 extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
@@ -40,10 +42,13 @@ public class tehran1 extends AppCompatActivity implements View.OnClickListener{
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         descripcion=(TextView) findViewById(R.id.txtOpcDesc);
-        descripcion.setVisibility(View.INVISIBLE);
+        descripcion.setVisibility(View.VISIBLE);
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
         texto.setTextSize(22);
+        descripcion.setTextSize(22);
+        descripcion.setTypeface(font);
+        descripcion.setText(getString(R.string.tehran_llegar));
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
@@ -61,6 +66,11 @@ public class tehran1 extends AppCompatActivity implements View.OnClickListener{
     }
 
     @Override
+    public void onBackPressed() {
+        new MenuDialog(this).show();
+    }
+
+    @Override
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnBack:
@@ -73,7 +83,7 @@ public class tehran1 extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void goBack(){
-        Intent i = new Intent(this,MainActivity.class);
+        Intent i = new Intent(this,MainActivity2.class);
         startActivity(i);
         finish();
     }

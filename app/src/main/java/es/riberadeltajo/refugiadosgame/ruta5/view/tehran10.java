@@ -13,6 +13,8 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
 import es.riberadeltajo.refugiadosgame.common.view.MainActivity;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
 public class tehran10 extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
@@ -60,6 +62,11 @@ public class tehran10 extends AppCompatActivity implements View.OnClickListener{
     }
 
     @Override
+    public void onBackPressed() {
+        new MenuDialog(this).show();
+    }
+
+    @Override
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnBack:
@@ -72,13 +79,13 @@ public class tehran10 extends AppCompatActivity implements View.OnClickListener{
     }
 
     public void goBack(){
-        Intent i = new Intent(this,MainActivity.class);
+        Intent i = new Intent(this,MainActivity2.class);
         startActivity(i);
         finish();
     }
 
     public void goNext(){
-        Intent i = new Intent(this,Tehran.class);
+        Intent i = new Intent(this,tehraninstrucciones.class);
         startActivity(i);
         finish();
     }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
 public class tehranentrevistamal extends AppCompatActivity implements View.OnClickListener{
     private ImageView opc1,passport;
@@ -56,6 +57,11 @@ public class tehranentrevistamal extends AppCompatActivity implements View.OnCli
         passport.setImageResource(R.drawable.madrid_passport);
         passport.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
         objeto.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
+    }
+
+    @Override
+    public void onBackPressed() {
+        new MenuDialog(this).show();
     }
 
     @Override

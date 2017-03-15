@@ -125,6 +125,9 @@
             android:name=".ruta5.view.tehran10"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ruta5.view.tehraninstrucciones"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ruta2.view.juego.milan_juego"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
