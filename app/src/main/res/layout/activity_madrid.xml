@@ -18,14 +18,15 @@
         android:layout_alignParentStart="true">
 
         <Button
-            android:text="Play"
+            android:id="@+id/btnJugar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="51dp"
-            android:id="@+id/btnJugar"
-            android:onClick="jugar"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="51dp"
+            android:enabled="false"
+            android:onClick="jugar"
+            android:text="Choose the level:" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -73,14 +74,14 @@
         </LinearLayout>
 
         <Button
-            android:text="Maletas"
+            android:id="@+id/btnMaletas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/btnSalir"
             android:layout_alignStart="@+id/btnSalir"
             android:layout_marginBottom="148dp"
-            android:id="@+id/btnMaletas"
-            android:onClick="irMaletas" />
+            android:onClick="irMaletas"
+            android:text="History" />
 
         <Button
             android:text="Exit"
