@@ -55,6 +55,7 @@
                         android:fontFamily="sans-serif"
                         android:gravity="center_vertical|center_horizontal"
                         android:text="@string/idea"
+                        android:textColor="@android:color/white"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -65,102 +66,113 @@
                         android:fontFamily="sans-serif"
                         android:gravity="center_vertical|center_horizontal"
                         android:text="@string/script"
-                        android:textSize="14dp" />
+                        android:textColor="@android:color/white"
+                        android:textSize="12dp" />
 
                     <TextView
-                        android:text="@string/route1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:id="@+id/txtMadridTitulo"
-                        android:textSize="18dp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="bold"
-                        android:gravity="center_vertical|center_horizontal" />
-
-                    <TextView
-                        android:text="@string/madrid_autores"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/route1"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
                         android:id="@+id/txtMadridAutores"
-                        android:textSize="14dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:fontFamily="sans-serif" />
-
-                    <TextView
-                        android:text="@string/route2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/madrid_autores"
+                        android:textColor="@android:color/white"
+                        android:textSize="12dp" />
+
+                    <TextView
                         android:id="@+id/txtMilanTitulo"
-                        android:textSize="18dp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="bold"
-                        android:gravity="center_vertical|center_horizontal" />
-
-                    <TextView
-                        android:text="@string/milan_autores"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/route2"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
                         android:id="@+id/txtMilanAutores"
-                        android:textSize="14dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:fontFamily="sans-serif" />
-
-                    <TextView
-                        android:text="@string/route3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/milan_autores"
+                        android:textColor="@android:color/white"
+                        android:textSize="12dp" />
+
+                    <TextView
                         android:id="@+id/txtSarajevoTitulo"
-                        android:fontFamily="sans-serif"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:gravity="center_vertical|center_horizontal" />
-
-                    <TextView
-                        android:text="@string/sarajevo_autores"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/route3"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
                         android:id="@+id/txtSarajevoAutores"
-                        android:textSize="14dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:fontFamily="sans-serif" />
-
-                    <TextView
-                        android:text="@string/route4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/sarajevo_autores"
+                        android:textColor="@android:color/white"
+                        android:textSize="12dp" />
+
+                    <TextView
                         android:id="@+id/txtEstambulTitulo"
-                        android:textSize="18dp"
-                        android:fontFamily="sans-serif"
-                        android:textStyle="bold"
-                        android:gravity="center_vertical|center_horizontal" />
-
-                    <TextView
-                        android:text="@string/estambul_autores"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/route4"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
                         android:id="@+id/txtEstambulAutores"
-                        android:textSize="14dp"
-                        android:gravity="center_vertical|center_horizontal"
-                        android:fontFamily="sans-serif" />
-
-                    <TextView
-                        android:text="@string/route5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txtTeheranTitulo"
-                        android:textSize="18dp"
                         android:fontFamily="sans-serif"
-                        android:textStyle="bold"
-                        android:gravity="center_vertical|center_horizontal" />
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/estambul_autores"
+                        android:textColor="@android:color/white"
+                        android:textSize="12dp" />
 
                     <TextView
-                        android:text="@string/teheran_autores"
+                        android:id="@+id/txtTeheranTitulo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/txtTeheranAutores"
-                        android:textSize="14dp"
+                        android:fontFamily="sans-serif"
                         android:gravity="center_vertical|center_horizontal"
-                        android:fontFamily="sans-serif" />
+                        android:text="@string/route5"
+                        android:textColor="@android:color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtTeheranAutores"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:text="@string/teheran_autores"
+                        android:textColor="@android:color/white"
+                        android:textSize="12dp" />
 
                 </LinearLayout>
             </ScrollView>
