@@ -1,6 +1,6 @@
 <resources>
     <!-- RECORDATORIO: LOS TEXTOS VAN EN INGLÉS -->
-    <string name="app_name">RefugeeGame</string>
+    <string name="app_name">Refugee</string>
 
     <!-- Menú Principal -->
     <string name="btn_jugar">Play</string>

@@ -250,30 +250,34 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
         // Para una próxima versión prometo hacerlo con multitouch. Esta vez no me dio tiempo.
 
         if(event.getAction()==MotionEvent.ACTION_DOWN){
-            //synchronized(getHolder()){
-            for(SpriteNotas n : getNotas()){
-                // Si pulsamos una nota...
-                if(n.isCollition(event.getX(),event.getY())) {
-                    // Comprobamos si está dentro del traste
-                    if(event.getY() > dstPickups.top && event.getY() < dstPickups.bottom) {
-                        // Está dentro (mola). Lo primero es subir la puntuación
-                        setPuntuacion(getPuntuacion()+1);
-                        // Ahora nos cargamos la nota
-                        getNotas().remove(n);
-                        // Aumentamos nuestro contador de notas seguidas
-                        setSeguidas(getSeguidas()+1);
-                        // Y mostramos un bonito efecto visual
-                        getExplosiones().add(new SpriteXplosion(this,new Rect(n.getPosx(),n.getAltura(),n.getPosx()+n.getSizeNota(),n.getAltura()+n.getSizeNota())));
-                    } else {
-                        // Está fuera (la cagaste). Reiniciamos el contador de notas seguidas
-                        setSeguidas(0);
-                        // Y escuchamos un desagradable sonido de guitarra desafinando.
-                        chord.play(idChord, 1, 1, 1, 0, 1);
+            synchronized(getHolder()){
+                for(SpriteNotas n : getNotas()){
+                    // Si pulsamos una nota...
+                    if(n.isCollition(event.getX(),event.getY())) {
+                        // Comprobamos si está dentro del traste
+                        if(event.getY() > dstPickups.top && event.getY() < dstPickups.bottom) {
+                            try {
+                                // Está dentro (mola). Lo primero es subir la puntuación
+                                setPuntuacion(getPuntuacion()+1);
+                                // Ahora nos cargamos la nota
+                                getNotas().remove(n);
+                                // Aumentamos nuestro contador de notas seguidas
+                                setSeguidas(getSeguidas()+1);
+                                // Y mostramos un bonito efecto visual
+                                getExplosiones().add(new SpriteXplosion(this,new Rect(n.getPosx(),n.getAltura(),n.getPosx()+n.getSizeNota(),n.getAltura()+n.getSizeNota())));
+                            } catch(Exception ex) {
+                                // Nothing to do here
+                            }
+                        } else {
+                            // Está fuera (la cagaste). Reiniciamos el contador de notas seguidas
+                            setSeguidas(0);
+                            // Y escuchamos un desagradable sonido de guitarra desafinando.
+                            chord.play(idChord, 1, 1, 1, 0, 1);
+                        }
+                        break;
                     }
-                    break;
                 }
             }
-            //}
         }
         return true;
     }
@@ -291,10 +295,6 @@ public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.
         paint.setStyle(Paint.Style.FILL);
         canvas.drawText(texto,x,y,paint);
 
-    }
-
-    public synchronized void deleteFirstNote() {
-        getNotas().remove(0);
     }
 
     public void finish() {
