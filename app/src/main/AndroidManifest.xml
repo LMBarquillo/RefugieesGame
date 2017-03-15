@@ -78,7 +78,9 @@
         <activity
             android:name=".ruta1.view.view.Madrid_Help"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta2.view.Milan" />
+        <activity android:name=".ruta2.view.Milan"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ruta4.view.Istanbul"
             android:screenOrientation="portrait" />
@@ -121,8 +123,12 @@
         <activity
             android:name=".ruta5.view.tehran10"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta2.view.juego.milan_juego" />
-        <activity android:name=".ruta2.view.juego.milan_juego2" />
+        <activity android:name=".ruta2.view.juego.milan_juego"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta2.view.juego.milan_juego2"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity android:name=".ruta5.view.teheran_main2" />
         <activity android:name=".common.view.MainActivity2" />
         <activity
@@ -174,6 +180,15 @@
         <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_YouMadeIt" />
         <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_GotLost" />
         <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_NeedMoney"></activity>
+        <activity android:name=".ruta2.view.ruta.MilanTren"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta2.view.ruta.MilanIncendio"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ruta2.view.ruta.MilanPersonaAyuda"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
