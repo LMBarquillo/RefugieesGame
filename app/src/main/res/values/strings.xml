@@ -12,9 +12,21 @@
     <string name="dialog_play_mensaje">Do you want to continue or start a new game?</string>
     <string name="btn_prueba">Prueba del menu</string>
 
+    <!-- Credits -->
+    <string name="idea">Original script</string>
+    <string name="script">Bianca Radu\nMaría Moreno\nChema Prior\nDaniel Cabras</string>
+    <string name="route1">Madrid-Milan coding</string>
+    <string name="madrid_autores">Adrián Portela \nJosé Carlos Sánchez</string>
+    <string name="route2">Milan-Sarajevo coding</string>
+    <string name="milan_autores">Roberto Ramos\nSergio Jimenez</string>
+    <string name="route3">Sarajevo-Istanbul coding</string>
+    <string name="sarajevo_autores">Alejandro Luna\nJorge Morón</string>
+    <string name="route4">Istanbul-Tehran coding</string>
+    <string name="estambul_autores">Luís M. Barquillo\nMiguel del Puerto</string>
+    <string name="route5">Tehran-Mumbai coding</string>
+    <string name="teheran_autores">Raúl Fernandez\nRoberto Calvo</string>
+
     <!-- Madrid-Milán -->
-    <string name="route1">Madrid-Milan</string>
-    <string name="madrid_autores">Adrián Portela Ortiz\nJosé Carlos Sánchez Pérez</string>
     <string name="madrid_win_mensaje">Now you can travel to Sarajevo.</string>
     <string name="madrid_lose_mensaje">You don\'t acquired the ticket. Try again?</string>
     <string name="madrid_salirJuego">Are you sure do you want to quit the game?</string>
@@ -74,8 +86,6 @@
     <string name="madrid_instrucc">Touch the screen to move the character. Collect the required amount of coins and the TRAIN TICKET while you avoid missiles and shots.</string>
 
     <!-- Milán-Sarajevo -->
-    <string name="route2">Milan-Sarajevo</string>
-    <string name="milan_autores">Roberto Ramos Rodríguez\nSergio Jimenez Gomez</string>
     <string name="milan_ganado">You Win!!</string>
     <string name="milan_perdido">You Lost!!</string>
     <string name="milan_help">You have 45 seconds </string>
@@ -97,8 +107,6 @@
 
 
     <!-- Sarajevo-Estambul -->
-    <string name="route3">Sarajevo-Istanbul</string>
-    <string name="sarajevo_autores">Alejandro Luna Flores\nJorge Morón García</string>
     <string name="sarajevo_dialogo_btn_si">yes</string>
     <string name="sarajevo_dialogo_btn_no">no</string>
     <string name="sarajevo_dialogo_btn_reintentar">Try again</string>
@@ -131,8 +139,6 @@
     <string name="sarajevo_toast_policia">Remember, you don\'t have visa to enter the country. You are an illegal immigrant. They will arrest you. Run!</string>
 
     <!-- Estambul-Teherán -->
-    <string name="route4">Istanbul-Tehran</string>
-    <string name="estambul_autores">Luís M. Barquillo Romero\nMiguel del Puerto Melchor</string>
     <string name="notes10">Good!</string>
     <string name="notes20">Oh Yeah!</string>
     <string name="notes30">Nice baby!</string>
@@ -165,8 +171,6 @@
     <string name="istanbul_route_needmoney">Now that you are at Tehran, you need some money. You have met a group of street musicians that want you to play with them.\nShow them how good you are with the guitar!!!!</string>
 
     <!-- Teherán-Bombai -->
-    <string name="route5">Tehran-Mumbai</string>
-    <string name="teheran_autores">Raúl Fernandez del Cerro\nRoberto Calvo García</string>
     <string name="select_work">Select Work</string>
     <string name="congratulations_tehran">Congratulations!</string>
     <string name="game_over_tehran">Game Over</string>
