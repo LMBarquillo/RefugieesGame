@@ -45,6 +45,8 @@ public class tehran4 extends AppCompatActivity implements View.OnClickListener{
         //texto.setText("Historia");
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
+        dinero.setTypeface(font);
+        objeto.setTypeface(font);
         dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
         objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
         opc1.setImageResource(R.drawable.tehranentrevista1); //Imagen para la opción 1
