@@ -25,6 +25,7 @@ public class Milan extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if(requestCode==reques_code){
             if(resultCode==RESULT_OK){
                 Bundle bundle=data.getExtras();
