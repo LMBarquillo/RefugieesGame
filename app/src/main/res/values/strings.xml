@@ -88,7 +88,7 @@
     <!-- Milán-Sarajevo -->
     <string name="milan_ganado">You Win!!</string>
     <string name="milan_perdido">You Lost!!</string>
-    <string name="milan_help">You have 45 seconds </string>
+    <string name="milan_help">You have 50 seconds </string>
     <string name="milan_help2">to get 15 coins,</string>
     <string name="milan_help3">will you be able to?</string>
     <string name="txtMensajeHablarMoro"> Ill stay with you</string>
