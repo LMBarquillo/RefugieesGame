@@ -156,12 +156,12 @@ public class DialogFinT extends Dialog implements View.OnClickListener {
 
     private void goToMenu(){
         activity.menuPrincipal();
-        activity.onDestroy();
+        //activity.onDestroy();
         dismiss();
     }
 
     private void goToNextLevel() {
         dismiss();
-        //activity.goToNextLevel();
+        activity.goToNextLevel();
     }
 }

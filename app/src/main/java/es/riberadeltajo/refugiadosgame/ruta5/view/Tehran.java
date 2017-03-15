@@ -45,13 +45,13 @@ public class Tehran extends Activity {
 
     public void onStop(){
         super.onStop();
-        android.os.Process.killProcess(android.os.Process.myPid());
+        //android.os.Process.killProcess(android.os.Process.myPid());
     }
 
-    public void onDestroy(){
+    /*public void onDestroy(){
         super.onDestroy();
         //releaseInstance();
-    }
+    }*/
 
     public void stopMusic(){
         musica.stop();
@@ -66,7 +66,7 @@ public class Tehran extends Activity {
     }
 
     public void goToNextLevel() {
-        Intent i = new Intent(this,MainActivity.class);
+        Intent i = new Intent(this,tehran11.class);
         startActivity(i);
         finish();
     }

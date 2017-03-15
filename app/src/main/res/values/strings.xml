@@ -210,5 +210,6 @@
     <string name="tehran_text_instructions_main">Instructions to work</string>
     <string name="tehran_text_instructions">You must move the player sideways and pick up the objects from the right corner. You must pass the rest of objects.</string>
     <string name="tehran_llegar">You have arrived to tehran.</string>
+    <string name="tehran_fin_juego">Congratulations!! Finally, You have come to a country where you can live, and you have got a job. Maybe, someday you can go back to your home country.</string>
 
 </resources>

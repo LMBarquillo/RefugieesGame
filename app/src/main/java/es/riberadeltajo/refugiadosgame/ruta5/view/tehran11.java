@@ -7,16 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 import es.riberadeltajo.refugiadosgame.ruta3.view.arcade.MenuDialog;
 
-public class tehraninstrucciones extends AppCompatActivity implements View.OnClickListener{
-    private ImageView opc1,passport;
-    private TextView texto,dinero,objeto,descOpc1;
+public class tehran11 extends AppCompatActivity implements View.OnClickListener{
+    private TextView texto;
     private Button btnAtras, btnSig;
 
     @Override
@@ -30,34 +29,20 @@ public class tehraninstrucciones extends AppCompatActivity implements View.OnCli
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_una_opcion);
-        getWindow().getDecorView().setBackgroundResource(R.drawable.fondoteheran); //Pon un fondo de la ciudad de tu ruta
-        opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
+        PlayerStatus.getInstancia(this).setRuta(5);
+        PlayerStatus.getInstancia(this).setTramo(11);
+        setContentView(R.layout.activity_inicio_fin);
+        getWindow().getDecorView().setBackgroundResource(R.drawable.refugee); //Pon un fondo de la ciudad de tu ruta
         texto=(TextView) findViewById(R.id.txtMens1); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(getString(R.string.tehran_text_instructions));
-        dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
-        objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
-        dinero.setTypeface(font);
-        objeto.setTypeface(font);
-        dinero.setText(String.valueOf(PlayerStatus.getInstancia(this).getDinero())); //Cojo el dinero del PlayerStatus
-        objeto.setText(String.valueOf(PlayerStatus.getInstancia(this).getObjeto())); //Cojo el objeto del PlayerStatus
-        descOpc1=(TextView) findViewById(R.id.txtOpcDesc); //TextView para descripción de la opción 1
-        descOpc1.setTypeface(font);
-        descOpc1.setTextSize(22);
-        descOpc1.setText(getString(R.string.tehran_text_instructions_main));
-        opc1.setImageResource(R.drawable.tehraninstrucciones); //Imagen para la opción 1
+        texto.setTextSize(34);
+        texto.setText(getString(R.string.tehran_fin_juego));
         btnAtras=(Button) findViewById(R.id.btnBack);
         btnSig=(Button) findViewById(R.id.btnNext);
         btnAtras.setOnClickListener(this);
-        btnAtras.setVisibility(View.INVISIBLE);
         btnSig.setOnClickListener(this);
-        passport=(ImageView) findViewById(R.id.imgObject);
-        passport.setImageResource(R.drawable.madrid_passport);
-        passport.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
-        objeto.setVisibility(View.INVISIBLE); //Si en tu historia no vas a usar ningún otro objeto, cambiar a INVISIBLE
-        descOpc1.setVisibility(View.VISIBLE); //Si en tu historia no vas describir la imagen, cambiar a INVISIBLE
+        btnSig.setVisibility(View.INVISIBLE);
     }
 
     protected void onResume() {
@@ -90,12 +75,11 @@ public class tehraninstrucciones extends AppCompatActivity implements View.OnCli
     }
 
     public void goBack(){
-        //Activity anterior
+        startActivity(new Intent(this, MainActivity2.class));
+        finish();
     }
 
     public void goNext(){
-        Intent i = new Intent(this,Tehran.class);
-        startActivity(i);
-        finish();
+        //Activity siguiente
     }
 }

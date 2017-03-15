@@ -288,7 +288,7 @@ public class GameView extends SurfaceView implements Observer {
             getWin().stop();
             getWin().release();
         }
-        principal.fin();
+        //principal.fin();
     }
 
 
