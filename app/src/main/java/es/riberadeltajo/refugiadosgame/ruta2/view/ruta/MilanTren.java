@@ -50,7 +50,7 @@ public class MilanTren extends AppCompatActivity implements View.OnClickListener
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
         Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "tipografias/madrid_dialog_font.ttf");
         texto.setTypeface(font);
-        texto.setText(R.string.historiaTren);
+        texto.setText(R.string.txthistoriaTren);
         dinero=(TextView) findViewById(R.id.txtMoney); //TextView del dinero
         objeto=(TextView) findViewById(R.id.txtObjeto); //TextView del objeto en caso de que tu historia lo tenga
         dinero.setTypeface(font);
@@ -61,8 +61,8 @@ public class MilanTren extends AppCompatActivity implements View.OnClickListener
         descOpc2=(TextView) findViewById(R.id.txtOpc2Desc); //TextView para descripción de la opción 2
         descOpc1.setTypeface(font);
         descOpc2.setTypeface(font);
-        descOpc1.setText("Stay with him");
-        descOpc2.setText("Changing wagon");
+        descOpc1.setText(R.string.txtMensajeHablarMoro);
+        descOpc2.setText(R.string.txtCambioVagon);
         opc1.setImageResource(R.drawable.imgmoro); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.imgirte); //Imagen para la opción 2
         opc1.setOnClickListener(this);
