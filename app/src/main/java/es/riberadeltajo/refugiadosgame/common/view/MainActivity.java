@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ruta4(View view) {
-        //Intent i = new Intent(this, Istanbul_Main.class);
-        Intent i = new Intent(this, GameMenu.class);
+        Intent i = new Intent(this, Istanbul_Main.class);
+        //Intent i = new Intent(this, GameMenu.class);
         startActivity(i);
     }
 
