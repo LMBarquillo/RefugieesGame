@@ -42,8 +42,10 @@ public class MilanIncendio extends AppCompatActivity implements View.OnClickList
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+        PlayerStatus.getInstancia(this).setRuta(2);
+        PlayerStatus.getInstancia(this).setTramo(2);
         setContentView(R.layout.activity_dos_opciones);
-        getWindow().getDecorView().setBackgroundResource(R.drawable.milanfondohistoria); //Pon un fondo de la ciudad de tu ruta
+        getWindow().getDecorView().setBackgroundResource(R.drawable.trenllamas); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
@@ -132,10 +134,10 @@ public class MilanIncendio extends AppCompatActivity implements View.OnClickList
     public void goNext(){
         if(cont==OPCION_A){
 
-            startActivity(new Intent(this, MilanPersonaAyuda.class)); // aqui me manda hacia delante
+            startActivity(new Intent(this, MilanGameOver.class)); // aqui me manda hacia delante
         }
         else if(cont==OPCION_B){
-            startActivity(new Intent(this, MilanIncendio.class)); // aqui salta el game over
+            startActivity(new Intent(this, MilanPersonaAyuda.class)); // aqui salta el game over
         }
         else{
             Toast toast = new Toast(this);

@@ -1,4 +1,4 @@
- <resources>
+<resources>
     <!-- RECORDATORIO: LOS TEXTOS VAN EN INGLÉS -->
     <string name="app_name">RefugeeGame</string>
 
@@ -81,22 +81,22 @@
     <string name="milan_help">You have 45 seconds </string>
     <string name="milan_help2">to get 15 coins,</string>
     <string name="milan_help3">will you be able to?</string>
-     <string name="txtMensajeHablarMoro"> Ill stay with you</string>
-     <string name="txtCambioVagon">bye bye!</string>
-     <string name="txthistoriaTren">You enter the train, and there is a Moorish boy in the wagon, you sit with him or you change wagon</string>
-     <string name="txtCogesMaleta">You take the suitcase</string>
-     <string name="txtDejasMaleta">You dont take the suitcase</string>
-     <string name="txtHistoriaIncendio">There is a fire in the train, you take the suitcase or you leave it?</string>
-     <string name="txtSiguesAyudante">You follow the helper</string>
-     <string name="txtNoSiguesAyudante">You dont follow the helper</string>
-     <string name="txtHistoriaAyudante">You did not take the suitcase, and a train assistant appears, do you follow him or do not follow him?</string>
-     <string name="txtBol">Bug dish</string>
-     <string name="txtHamburguesa">Hamburguer</string>
-     <string name="txtHistoriaComida">The train assistant offers you bugs, you eat them, or do you want to spend money and buy food</string>
+    <string name="txtMensajeHablarMoro"> Ill stay with you</string>
+    <string name="txtCambioVagon">bye bye!</string>
+    <string name="txthistoriaTren">You enter the train, and there is a Moorish boy in the wagon, you sit with him or you change wagon</string>
+    <string name="txtCogesMaleta">You take the suitcase</string>
+    <string name="txtDejasMaleta">You dont take the suitcase</string>
+    <string name="txtHistoriaIncendio">There is a fire in the train, you take the suitcase or you leave it?</string>
+    <string name="txtSiguesAyudante">You follow the helper, he knows a way to scape</string>
+    <string name="txtNoSiguesAyudante">You dont follow the helper</string>
+    <string name="txtHistoriaAyudante">You did not take the suitcase, and a train assistant appears, do you follow him or do not follow him?</string>
+    <string name="txtBol">Bug dish</string>
+    <string name="txtHamburguesa">Hamburguer</string>
+    <string name="txtHistoriaComida">The train assistant offers you bugs, you eat them, or do you want to spend money and buy food</string>
+    <string name="txtIntentar">Try Again</string>
 
 
-
-     <!-- Sarajevo-Estambul -->
+    <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
     <string name="sarajevo_autores">Alejandro Luna Flores\nJorge Morón García</string>
     <string name="sarajevo_dialogo_btn_si">yes</string>

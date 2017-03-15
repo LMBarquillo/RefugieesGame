@@ -43,8 +43,10 @@ public class MilanBichos extends AppCompatActivity implements View.OnClickListen
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+        PlayerStatus.getInstancia(this).setRuta(2);
+        PlayerStatus.getInstancia(this).setTramo(4);
         setContentView(R.layout.activity_dos_opciones);
-        getWindow().getDecorView().setBackgroundResource(R.drawable.milanfondohistoria); //Pon un fondo de la ciudad de tu ruta
+        getWindow().getDecorView().setBackgroundResource(R.drawable.mercadomoro); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
@@ -64,7 +66,7 @@ public class MilanBichos extends AppCompatActivity implements View.OnClickListen
         descOpc1.setText(R.string.txtBol);
         descOpc2.setText(R.string.txtHamburguesa);
         opc1.setImageResource(R.drawable.madrid_maleta1); //Imagen para la opción 1
-        opc2.setImageResource(R.drawable.madrid_maleta2); //Imagen para la opción 2
+        opc2.setImageResource(R.drawable.hamburguesa); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
         btnAtras=(Button) findViewById(R.id.btnBack);

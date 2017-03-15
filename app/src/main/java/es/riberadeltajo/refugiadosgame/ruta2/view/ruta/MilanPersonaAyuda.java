@@ -41,8 +41,10 @@ public class MilanPersonaAyuda extends AppCompatActivity implements View.OnClick
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         super.onCreate(savedInstanceState);
+        PlayerStatus.getInstancia(this).setRuta(2);
+        PlayerStatus.getInstancia(this).setTramo(3);
         setContentView(R.layout.activity_dos_opciones);
-        getWindow().getDecorView().setBackgroundResource(R.drawable.milanfondohistoria); //Pon un fondo de la ciudad de tu ruta
+        getWindow().getDecorView().setBackgroundResource(R.drawable.caminobosque); //Pon un fondo de la ciudad de tu ruta
         opc1=(ImageView) findViewById(R.id.opcion1); //ImageView de la opción 1
         opc2=(ImageView) findViewById(R.id.opcion2); //ImageView de la opción 2
         texto=(TextView) findViewById(R.id.txtMens2); //TextView de la historia
@@ -61,8 +63,8 @@ public class MilanPersonaAyuda extends AppCompatActivity implements View.OnClick
         descOpc2.setTypeface(font);
         descOpc1.setText(R.string.txtSiguesAyudante);
         descOpc2.setText(R.string.txtNoSiguesAyudante);
-        opc1.setImageResource(R.drawable.madrid_maleta1); //Imagen para la opción 1
-        opc2.setImageResource(R.drawable.madrid_maleta2); //Imagen para la opción 2
+        opc1.setImageResource(R.drawable.arabeconelquetevas); //Imagen para la opción 1
+        opc2.setImageResource(R.drawable.personasconlasquetevas); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
         btnAtras=(Button) findViewById(R.id.btnBack);
@@ -133,7 +135,7 @@ public class MilanPersonaAyuda extends AppCompatActivity implements View.OnClick
             startActivity(new Intent(this, MilanBichos.class)); // aqui me manda hacia delante
         }
         else if(cont==OPCION_B){
-            startActivity(new Intent(this, MilanIncendio.class)); // aqui salta el game over
+            startActivity(new Intent(this, MilanGameOver.class)); // aqui salta el game over
         }
         else{
             Toast toast = new Toast(this);

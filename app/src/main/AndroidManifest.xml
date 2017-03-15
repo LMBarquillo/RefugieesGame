@@ -78,7 +78,8 @@
         <activity
             android:name=".ruta1.view.view.Madrid_Help"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta2.view.Milan"
+        <activity
+            android:name=".ruta2.view.Milan"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
@@ -123,10 +124,12 @@
         <activity
             android:name=".ruta5.view.tehran10"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta2.view.juego.milan_juego"
+        <activity
+            android:name=".ruta2.view.juego.milan_juego"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta2.view.juego.milan_juego2"
+        <activity
+            android:name=".ruta2.view.juego.milan_juego2"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
         <activity android:name=".ruta5.view.teheran_main2" />
@@ -179,19 +182,24 @@
         <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_ArabSaved" />
         <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_YouMadeIt" />
         <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_GotLost" />
-        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_NeedMoney"></activity>
-        <activity android:name=".ruta2.view.ruta.MilanTren"
+        <activity android:name=".ruta4.view.ruta.Istanbul_Tehran_NeedMoney" />
+        <activity
+            android:name=".ruta2.view.ruta.MilanTren"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta2.view.ruta.MilanIncendio"
+        <activity
+            android:name=".ruta2.view.ruta.MilanIncendio"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta2.view.ruta.MilanPersonaAyuda"
+        <activity
+            android:name=".ruta2.view.ruta.MilanPersonaAyuda"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
-        <activity android:name=".ruta2.view.ruta.MilanBichos"
+        <activity
+            android:name=".ruta2.view.ruta.MilanBichos"
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
+        <activity android:name=".ruta2.view.ruta.MilanGameOver"></activity>
     </application>
 
 </manifest>
