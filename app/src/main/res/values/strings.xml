@@ -83,9 +83,20 @@
     <string name="milan_help3">will you be able to?</string>
      <string name="txtMensajeHablarMoro"> Ill stay with you</string>
      <string name="txtCambioVagon">bye bye!</string>
-     <string name="historiaTren">Aqui va la historia del tren</string>
+     <string name="historiaTren">You enter the train, and there is a Moorish boy in the wagon, you sit with him or you change wagon</string>
+     <string name="txtCogesMaleta"></string>
+     <string name="txtDejasMaleta"></string>
+     <string name="txtHistoriaIncendio"></string>
+     <string name="txtSiguesAyudante"></string>
+     <string name="txtNoSiguesAyudante"></string>
+     <string name="txtHistoriaAyudante"></string>
+     <string name="txtBol"></string>
+     <string name="txtHamburguesa"></string>
+     <string name="txtComida"></string>
 
-    <!-- Sarajevo-Estambul -->
+
+
+     <!-- Sarajevo-Estambul -->
     <string name="route3">Sarajevo-Istanbul</string>
     <string name="sarajevo_autores">Alejandro Luna Flores\nJorge Morón García</string>
     <string name="sarajevo_dialogo_btn_si">yes</string>

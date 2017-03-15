@@ -8,6 +8,7 @@ import android.widget.TextView;
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.ruta2.view.juego.milan_juego;
 import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanBichos;
+import es.riberadeltajo.refugiadosgame.ruta2.view.ruta.MilanTren;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoAlojamiento;
 
 public class Milan extends AppCompatActivity {
@@ -31,7 +32,10 @@ public class Milan extends AppCompatActivity {
                 texto.setText("Devuelto el juego "+resultado);
                 if(resultado){
                     startActivity(new Intent(this, SarajevoAlojamiento.class)); // aqui me manda hacia delante
+                }else{
+                    startActivity(new Intent(this, MilanTren.class)); // aqui me manda hacia delante
                 }
+
             }
         }
     }
