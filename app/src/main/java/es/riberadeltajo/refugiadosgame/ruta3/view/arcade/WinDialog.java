@@ -24,6 +24,7 @@ import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoHabitacion;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoMejicano;
 import es.riberadeltajo.refugiadosgame.ruta3.view.ruta.SarajevoPasillo;
 import es.riberadeltajo.refugiadosgame.ruta4.view.Istanbul;
+import es.riberadeltajo.refugiadosgame.ruta4.view.ruta.Istanbul_Main;
 
 /**
  * Created by Alex on 14/02/2017.
@@ -86,7 +87,7 @@ public class WinDialog extends Dialog implements View.OnClickListener {
     }
 
     private void continuar() {
-        activity.startActivity(new Intent(activity, Istanbul.class));
+        activity.startActivity(new Intent(activity, Istanbul_Main.class));
     }
 
 }
