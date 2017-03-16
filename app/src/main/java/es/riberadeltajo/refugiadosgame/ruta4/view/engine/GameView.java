@@ -31,7 +31,7 @@ import es.riberadeltajo.refugiadosgame.ruta4.view.models.SpriteXplosion;
  */
 public class GameView extends SurfaceView implements GameSurface, SurfaceHolder.Callback, MediaPlayer.OnCompletionListener {
     private StreetGuitar contexto;
-    private final int FPS = 60;
+    private final int FPS = 25;
     private NoteGenerator generador;
     private ArrayList<SpriteNotas> notas;
     private ArrayList<SpriteXplosion> explosiones;
