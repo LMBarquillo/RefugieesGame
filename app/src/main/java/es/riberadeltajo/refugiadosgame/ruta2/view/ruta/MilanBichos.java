@@ -65,7 +65,7 @@ public class MilanBichos extends AppCompatActivity implements View.OnClickListen
         descOpc2.setTypeface(font);
         descOpc1.setText(R.string.txtBol);
         descOpc2.setText(R.string.txtHamburguesa);
-        opc1.setImageResource(R.drawable.madrid_maleta1); //Imagen para la opción 1
+        opc1.setImageResource(R.drawable.bolbichosdef); //Imagen para la opción 1
         opc2.setImageResource(R.drawable.hamburguesa); //Imagen para la opción 2
         opc1.setOnClickListener(this);
         opc2.setOnClickListener(this);
