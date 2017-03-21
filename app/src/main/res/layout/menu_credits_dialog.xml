@@ -15,28 +15,33 @@
         android:layout_height="match_parent"
         android:layout_weight="6">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="6"
             android:background="@drawable/menu_dialog_background"
+            android:orientation="vertical"
             android:weightSum="10">
 
             <TextView
-                android:text="@string/btn_creditos"
+                android:id="@+id/txtTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/txtTitulo"
+                android:layout_weight="1.5"
                 android:background="@drawable/menu_dialog_titulo_backgroud"
-                android:gravity="center_vertical|center_horizontal"
-                android:textSize="25dp"
                 android:fontFamily="sans-serif"
-                android:typeface="monospace"
-                android:textStyle="normal|bold"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/btn_creditos"
                 android:textAllCaps="true"
                 android:textColor="@android:color/holo_green_light"
-                android:layout_weight="1.5" />
+                android:textSize="25dp"
+                android:textStyle="normal|bold"
+                android:typeface="monospace" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -46,7 +51,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/txtDiseno"
@@ -178,19 +183,24 @@
             </ScrollView>
 
             <Button
-                android:text="@string/btn_salir"
+                android:id="@+id/btnSalir"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:id="@+id/btnSalir"
                 android:layout_weight="1.5"
                 android:background="@drawable/menu_btn"
                 android:fontFamily="sans-serif-medium"
-                android:typeface="monospace"
+                android:text="@string/btn_cerrar"
+                android:textColor="@android:color/white"
                 android:textSize="20dp"
                 android:textStyle="normal|bold"
-                android:textColor="@android:color/white" />
+                android:typeface="monospace" />
 
         </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
 
     </LinearLayout>
 

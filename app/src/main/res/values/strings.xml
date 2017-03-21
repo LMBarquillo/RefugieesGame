@@ -9,6 +9,7 @@
     <string name="btn_nueva">New game</string>
     <string name="btn_creditos">Credits</string>
     <string name="btn_salir">Exit</string>
+    <string name="btn_cerrar">Close</string>
     <string name="dialog_play_mensaje">Do you want to continue or start a new game?</string>
     <string name="btn_prueba">Prueba del menu</string>
 

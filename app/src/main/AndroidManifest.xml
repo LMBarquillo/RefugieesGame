@@ -8,13 +8,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".common.view.MainActivity">
+        <activity android:name=".common.view.MainActivity"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".common.view.MainActivity2"
+            android:configChanges="keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ruta1.view.Madrid"
             android:screenOrientation="portrait" />
@@ -139,7 +144,6 @@
             android:configChanges="keyboardHidden"
             android:screenOrientation="portrait" />
         <activity android:name=".ruta5.view.teheran_main2" />
-        <activity android:name=".common.view.MainActivity2" />
         <activity
             android:name=".ruta3.view.arcade.SarajevoInstrucciones"
             android:configChanges="keyboardHidden"
