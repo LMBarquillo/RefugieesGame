@@ -141,7 +141,7 @@ public class Istanbul_Tehran_1 extends AppCompatActivity implements View.OnClick
     }
 
     public void goBack(){
-        finish();
+        startActivity(new Intent(this, MainActivity2.class));
     }
 
     public void goNext(){

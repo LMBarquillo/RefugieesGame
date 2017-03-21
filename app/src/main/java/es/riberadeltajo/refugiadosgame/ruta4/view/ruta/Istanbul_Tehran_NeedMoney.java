@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 import es.riberadeltajo.refugiadosgame.ruta4.view.GameMenu;
 
 public class Istanbul_Tehran_NeedMoney extends AppCompatActivity implements View.OnClickListener{
@@ -69,7 +70,7 @@ public class Istanbul_Tehran_NeedMoney extends AppCompatActivity implements View
     }
 
     public void goBack(){
-        finish();
+        startActivity(new Intent(this, MainActivity2.class));
     }
 
     public void goNext(){

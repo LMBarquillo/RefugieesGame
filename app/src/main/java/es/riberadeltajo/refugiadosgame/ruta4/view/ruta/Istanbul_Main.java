@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import es.riberadeltajo.refugiadosgame.R;
 import es.riberadeltajo.refugiadosgame.common.models.PlayerStatus;
+import es.riberadeltajo.refugiadosgame.common.view.MainActivity2;
 
 public class Istanbul_Main extends AppCompatActivity implements View.OnClickListener{
     private TextView texto;
@@ -68,7 +69,7 @@ public class Istanbul_Main extends AppCompatActivity implements View.OnClickList
     }
 
     public void goBack(){
-        finish();
+        startActivity(new Intent(this, MainActivity2.class));
     }
 
     public void goNext(){

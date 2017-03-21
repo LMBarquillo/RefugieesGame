@@ -163,7 +163,7 @@ public class SarajevoAlojamiento extends AppCompatActivity implements View.OnCli
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.show();
         }
-        else if(cont==OPCION_B){
+        else if(cont==OPCION_B) {
             startActivity(new Intent(this, SarajevoPasillo.class));
         }
         else{
